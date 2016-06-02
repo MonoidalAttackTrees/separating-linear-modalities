@@ -2,7 +2,7 @@ PDFLATEX = pdflatex
 BIBTEX = bibtex
 OTT = ott
 OTT_FLAGS := -tex_wrap false -tex_show_meta true -picky_multiple_parses false
-# SKIM = skim_revert.sh
+SKIM = skim_revert.sh
 
 all: pdf
   # This is for my private machine.  It forces my PDF reader to reload.
