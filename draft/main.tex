@@ -76,6 +76,7 @@
 \newcommand{\n}[1]{\mathsf{n}_{#1}}
 \newcommand{\b}[1]{\mathsf{b}_{#1}}
 \newcommand{\d}[1]{\mathsf{d}_{#1}}
+\newcommand{\e}[1]{\mathsf{e}_{#1}}
 \newcommand{\h}[1]{\mathsf{h}_{#1}}
 \newcommand{\p}[1]{\mathsf{p}_{#1}}
 \newcommand{\q}[1]{\mathsf{q}_{#1}}
@@ -416,7 +417,7 @@ TODO \cite{Benton:1994}
 \begin{definition}
   \label{def:MCNAT}
   Suppose $(\cat{M}_1,\top_1,\otimes_1)$ and $(\cat{M}_2,\top_2,\otimes_2)$
-  are SMCs, and $(F,m)$ and $(G,n)$ are monoidal functors
+  are monoidal categories, and $(F,m)$ and $(G,n)$ are monoidal functors
   between $\cat{M}_1$ and $\cat{M}_2$.  Then a \textbf{
     monoidal natural transformation} is a natural transformation,
   $f : F \mto G$, subject to the following coherence diagrams:
@@ -808,6 +809,253 @@ TODO \cite{Benton:1994}
   \end{mathpar}
 \end{definition}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{LNL Model}
+
+\begin{definition}
+  \label{def:LNL}
+  A \textbf{linear/non-linear (LNL) model} $(\cat{C},\cat{L},F,G)$ consists of
+  \begin{itemize}
+  \item a cartesian closed category $(\cat{C},1,\times,\mto)$
+  \item a symmetric monoidal closed category
+  	$(\cat{L},I,\otimes,\limp)$,
+  \item a pair of symmetric monoidal functors
+  	$(G,n):\cat{L}\mto\cat{C}$ and
+	$(F,m):\cat{C}\mto\cat{L}$ that form a symmetric monoidal
+	adjunction $\cat{C}:F\dashv G:\cat{L}$, subject to the
+	following coherence conditions, where $\eta$ and $\varepsilon$
+	are the unit and counit of the adjunction and
+	$A,B\in Ob(\cat{L})$, $X,Y\in Ob(\cat{C})$.
+  \end{itemize}
+  \begin{mathpar}
+    \bfig
+    \Vtriangle|amm|/->`=`->/<600,600>[
+      GA`
+      GFGA`
+      GA;
+      \eta_{GA}`
+      `
+      G\varepsilon_A]
+    \efig    
+    \and
+    \bfig
+    \Vtriangle|amm|/->`=`->/<600,600>[
+      FX`
+      FGFX`
+      FX;
+      F\eta_X`
+      `
+      \varepsilon_{FX}]
+    \efig
+  \end{mathpar}
+  \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`<-/<1000,500>[
+      X\times Y`
+      GFX\times GFY`
+      GF(X\times Y)`
+      G(FX\otimes GY);
+      \eta_X\times\eta_Y`
+      \eta_{X\times Y}`
+      \eta_{FX,FY}`
+      G\m{X,Y}]
+    \efig
+    \and
+    \bfig
+    \square|amma|/->`->`->`<-/<1000,500>[
+      FGA\otimes FGB`
+      F(GA\times GB)`
+      A\otimes B`
+      FG(A\otimes B);
+      \m{GA,GB}`
+      \varepsilon_A\otimes\varepsilon_B`
+      F\n{A,B}`
+      \eta_{A\otimes B}]
+    \efig
+  \end{mathpar}
+  \begin{mathpar}
+    \bfig
+    \Vtriangle|amm|/->`=`->/<600,600>[
+      1`
+      GF(1)`
+      1;
+      \eta_1`
+      `
+      G\m{\top_1}\circ\n{I}]
+    \efig    
+    \and
+    \bfig
+    \Vtriangle|amm|/->`->`=/<600,600>[
+      FG(I)`
+      I`
+      I;
+      \varepsilon_I`
+      F\n{I}\circ\m{1}`]
+    \efig
+  \end{mathpar}
+\end{definition}
+
+
+\begin{lemma}
+  \label{lem:m-p-iso}
+  Given a LNL model $(\cat{C},\cat{L},F,G)$, define
+  $\p{X,Y}:F(X\times Y)\mto FX\otimes FY$ as the composition
+  $\varepsilon_{FX\otimes FY}\circ F\eta_{FX,FY}\circ F(\eta_X\times\eta_Y)$,
+  and $\p{I}:F1\mto I$ as the composition
+  $\varepsilon_I\circ F\n{I}$. Then for $F\dashv G$,
+  $\m{X,Y}$ are components of a natural isomorphism with inverses
+  $\p{X,Y}$, and $\m{1}$ is an isomorphism with inverse $\p{I}$, i.e.
+  $F(X)\otimes F(Y)\cong F(X\times Y)$, and $I\cong F(1)$.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:comonad}
+  Given a LNL model $(\cat{C},\cat{L},F,G)$, the adjunction
+  $F\dashv G$ induces a symmetric monoidal comonad
+  $(!,\varepsilon,\delta)$ on $\cat{L}$, where $!$ represents $FG$,
+  $\varepsilon:FG\mto 1$ is the counit of the adjunction, and
+  $\delta:FG\mto FGFG$, i.e. $!$ is a symmetric monoidal functor
+  and $\varepsilon,\delta$ are monoidal natural transformations.
+\end{lemma}
+
+\begin{lemma}
+  \label{def:strong-functor}
+  Given a LNL model $(\cat{C},\cat{L},F,G)$, $F$ is a strong functor,
+  i.e. $F$ preserves the monoidal structure up to an isomorphism. And
+  a strong functor induces a unique monoidal structure.
+\end{lemma}
+
+
+
+\begin{definition}
+  \label{def:linear-category}
+  A \textbf{linear category} is specified by
+  \begin{itemize}
+  \item a symmetric monoidal closed category
+  	$(\cat{L},I,\otimes,\limp)$,
+  \item a symmetric monoidal comonad $(!,\epsilon,\delta)$ on $\cat{L}$,
+    with $\q{A,B}:!A\otimes !A\mto !(A\otimes B)$ and $\q{I}:I\mto !I$;
+  \item monoidal natural transformations on $\cat{L}$ with components
+    $\e{A}:!A\mto I$ and\\
+    $\d{A}:!A\mto !A\otimes !A$, s.t.
+
+    \begin{itemize}
+    \item each $(!A,\e{A},\d{A})$ is a commutative comonoid, i.e.
+      the following diagrams commute and $\beta\circ\d{A}=\d{A}$ where
+      $\beta_{B,C}:B\otimes C\mto C\otimes B$ is the symmetry natural
+      transformation of $\cat{L}$;
+      \begin{mathpar}
+        \bfig
+	\square|amab|/->`->``/<1050,600>[
+	  !A`
+	  !A\otimes !A`
+	  !A\otimes !A`;
+	  \d{A}`
+	  \d{A}``]
+        \square(1050,0)|ammb|/->``->`/<1050,600>[
+	  !A\otimes !A`
+	  !A\otimes(!A\otimes !A)``
+	  (!A\otimes !A)\otimes !A;
+	  id_{!A}\otimes\d{A}``
+	  \alpha_{!A,!A,!A}`]
+          \morphism(0,0)<2100,0>[!A\otimes !A`(!A\otimes !A)\otimes !A;\d{A}\otimes id_{!A}]
+	\efig
+      \end{mathpar}
+      \begin{mathpar}
+      \bfig
+      \Atrianglepair/<-`->`<-`<-`->/<600,600>[
+        !A`
+	I\otimes !A`
+	!A\otimes !A`
+	!A\otimes I;
+	\lambda`
+	\d{A}`
+	\rho`
+	\e{A}\otimes id_{!A}`
+	id_{!A}\otimes\e{A}]
+      \efig
+      \end{mathpar}
+
+    \item $\e{A}$ and $\d{A}$ are coalgebra morphisms, i.e. the
+      following diagrams commute;
+      \begin{mathpar}
+      \bfig
+        \square|amma|/->`->`->`<-/<1000,500>[
+	!A`
+	I`
+	!!A`
+	!I;
+	\e{A}`
+	\delta{A}`
+	\q{I}`
+	!\e{A}]
+      \efig
+      \end{mathpar}
+      \begin{mathpar}
+      \bfig
+	\square|amab|/->`->``/<1050,600>[
+	  !A`
+	  !A\otimes !A`
+	  !!A`;
+	  \d{A}`
+	  \delta_A``]
+        \square(1050,0)|ammb|/->``->`/<1050,600>[
+	  !A\otimes !A`
+	  !!A\otimes !!A``
+	  !(!A\otimes !A);
+	  \delta_!A\otimes\delta_A``
+	  \q{!A,!A}`]
+          \morphism(0,0)<2100,0>[!!A`!(!A\otimes !A);!\d{A}]
+      \efig
+      \end{mathpar}
+
+    \item any coalgebra morphism $f:(!A,\delta_A)\mto (!B,\delta_B)$
+      between free coalgebras preserve the comonoid structure given
+      by $\e{}$ and $\d{}$, i.e. the following diagrams commute.
+      \begin{mathpar}
+      \bfig
+        \Vtriangle|amm|/->`->`->/<600,500>[
+          !A`
+          !B`
+          I;
+	  f`
+	  \e{A}`
+	  \e{B}]
+      \efig
+      \and
+      \bfig
+        \square|amma|/->`->`->`->/<1000,500>[
+	!A`
+	!A\otimes !A`
+	!B`
+	!B\otimes !B;
+	\d{A}`
+	f`
+	f\otimes f`
+	\d{B}]
+      \efig
+      \end{mathpar}
+
+    \end{itemize}
+  \end{itemize}
+\end{definition}
+
+
+
+\begin{theorem}
+  \label{thm:lnl-linearCat}
+  Any LNL model is a linear category.
+\end{theorem}
+
+\begin{theorem}
+  \label{thm:linearCat-lnl}
+  Any linear category gives rise to an LNL model, though it is not
+  in general unique.
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Related Work}
 \label{sec:related_work}
 TODO
