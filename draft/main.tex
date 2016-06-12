@@ -935,7 +935,7 @@ TODO \cite{Benton:1994}
   \begin{itemize}
   \item a symmetric monoidal closed category
   	$(\cat{L},I,\otimes,\limp)$,
-  \item a symmetric monoidal comonad $(!,\epsilon,\delta)$ on $\cat{L}$,
+  \item a symmetric monoidal comonad $(!,\varepsilon,\delta)$ on $\cat{L}$,
     with $\q{A,B}:!A\otimes !A\mto !(A\otimes B)$ and $\q{I}:I\mto !I$;
   \item monoidal natural transformations on $\cat{L}$ with components
     $\e{A}:!A\mto I$ and\\
@@ -1042,7 +1042,12 @@ TODO \cite{Benton:1994}
   \end{itemize}
 \end{definition}
 
-
+\begin{theorem}
+  \label{thm:linear}
+  $(!,\varepsilon,\delta)$ induces a symmetric monoidal adjunction
+  $(\cat{L}^!,\otimes,I):F\dashv G:(\cat{L},\otimes,I)$, where
+  $\cat{L}$ is the category of Eilenberg-Moore coalgebras.
+\end{theorem}
 
 \begin{theorem}
   \label{thm:lnl-linearCat}
@@ -1054,6 +1059,85 @@ TODO \cite{Benton:1994}
   Any linear category gives rise to an LNL model, though it is not
   in general unique.
 \end{theorem}
+
+
+
+\begin{definition}
+  \label{def:lafont}
+  A \textbf{Lafont Category} is a SMCC $(\cat{L},\otimes,I)$ in which
+  for every object $A$ of $\cat{L}$, there exists a commutative
+  comonoid $(!A,\d{A},\e{A})$ and a morphism $\varepsilon:!A\mto A$
+  s.t. for all commutative comonoid $(X,d,e)$ and for all
+  $f:X\mto A$, there exists a unique comonoid morphism
+  $f^+:(X,d,e)\mto(!A,\d{A},\e{A})$ s.t. the following diagram
+  commutes:
+  \begin{mathpar}
+  \bfig
+    \Vtriangle|amm|/->`<-`<-/<600,500>[
+      !A`
+      A`
+      X;
+      \varepsilon_A`
+      f^+`
+      f]
+  \efig
+  \end{mathpar}
+  \textbf{Alternative definition}: a SMCC $(\cat{L},\otimes,I)$
+  in which the forgetful functor
+  $U:Comon(\cat{L},\otimes,I)\mto\cat{L}$ has a right adjoint $!$,
+  where $Comon(\cat{L},\otimes,I)$ is the category of commutative
+  comonoids in $\cat{L}$.
+\end{definition}
+
+\begin{theorem}
+  \label{thm:lafont}
+  $Comon(\cat{L},\otimes,I)$ is cartesion. hence, every Lafont
+  category defines a LNL model.
+\end{theorem}
+
+
+
+\begin{definition}
+  \label{def:seely}
+  A \textbf{Seely Category} is a SMCC $(\cat{L},\otimes,I)$ with
+  products ($\&$) and a terminal object $\top$, together with
+  \begin{itemize}
+  \item a comonad $(!,\delta,\varepsilon)$, where
+    $\delta_A:!A\mto !!A$ and $\varepsilon_A:!A\mto A$, and
+    \item two natural isomorphisms
+    $\m{A,B}:!A\otimes !B\cong !(A\&B)$ and
+    $\m{\top}:I\cong !T$ making
+    $(!,m):(\cat{L},\&,\top)\mto(\cat{L},\otimes,I)$ a symmetric
+    monoidal functor s.t. the following diagram commutes:
+    \begin{mathpar}
+      \bfig
+	\square|amab|/->`->``/<1050,600>[
+	  !A\otimes !A`
+	  !(A\&B)`
+	  !!A\otimes !!B`;
+	  \m{A,B}`
+	  \delta_A\otimes\delta_B``]
+        \square(1050,0)|ammb|/->``->`/<1050,600>[
+	  !(A\&B)`
+	  !!(A\&B)``
+	  !(!A\&!B);
+	  \delta_{A\otimes B}``
+	  !(!\pi_1,!\pi_2)`]
+          \morphism(0,0)<2100,0>[!!A\otimes !!B`!(!A\&!B);\m{!A,!B}]
+      \efig
+    \end{mathpar}
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  \label{thm:seely}
+  The comonad $(!,\delta,\varepsilon)$ on $\cat{L}$ generates an
+  adjunction $\cat{L}_!:L\dashv M:\cat{L}$ between $\cat{L}$ and the
+  (co-)Kleisli category $\cat{L}_!$ associated to the comonad. Thus,
+  a Seely category defines a LNL model.
+\end{theorem}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Related Work}
