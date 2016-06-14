@@ -812,122 +812,7 @@ TODO \cite{Benton:1994}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{LNL Model}
-
-\begin{definition}
-  \label{def:LNL}
-  A \textbf{linear/non-linear (LNL) model} $(\cat{C},\cat{L},F,G)$ consists of
-  \begin{itemize}
-  \item a cartesian closed category $(\cat{C},1,\times,\mto)$
-  \item a symmetric monoidal closed category
-  	$(\cat{L},I,\otimes,\limp)$,
-  \item a pair of symmetric monoidal functors
-  	$(G,n):\cat{L}\mto\cat{C}$ and
-	$(F,m):\cat{C}\mto\cat{L}$ that form a symmetric monoidal
-	adjunction $\cat{C}:F\dashv G:\cat{L}$, subject to the
-	following coherence conditions, where $\eta$ and $\varepsilon$
-	are the unit and counit of the adjunction and
-	$A,B\in Ob(\cat{L})$, $X,Y\in Ob(\cat{C})$.
-  \end{itemize}
-  \begin{mathpar}
-    \bfig
-    \Vtriangle|amm|/->`=`->/<600,600>[
-      GA`
-      GFGA`
-      GA;
-      \eta_{GA}`
-      `
-      G\varepsilon_A]
-    \efig    
-    \and
-    \bfig
-    \Vtriangle|amm|/->`=`->/<600,600>[
-      FX`
-      FGFX`
-      FX;
-      F\eta_X`
-      `
-      \varepsilon_{FX}]
-    \efig
-  \end{mathpar}
-  \begin{mathpar}
-    \bfig
-    \square|amma|/->`->`->`<-/<1000,500>[
-      X\times Y`
-      GFX\times GFY`
-      GF(X\times Y)`
-      G(FX\otimes GY);
-      \eta_X\times\eta_Y`
-      \eta_{X\times Y}`
-      \eta_{FX,FY}`
-      G\m{X,Y}]
-    \efig
-    \and
-    \bfig
-    \square|amma|/->`->`->`<-/<1000,500>[
-      FGA\otimes FGB`
-      F(GA\times GB)`
-      A\otimes B`
-      FG(A\otimes B);
-      \m{GA,GB}`
-      \varepsilon_A\otimes\varepsilon_B`
-      F\n{A,B}`
-      \eta_{A\otimes B}]
-    \efig
-  \end{mathpar}
-  \begin{mathpar}
-    \bfig
-    \Vtriangle|amm|/->`=`->/<600,600>[
-      1`
-      GF(1)`
-      1;
-      \eta_1`
-      `
-      G\m{\top_1}\circ\n{I}]
-    \efig    
-    \and
-    \bfig
-    \Vtriangle|amm|/->`->`=/<600,600>[
-      FG(I)`
-      I`
-      I;
-      \varepsilon_I`
-      F\n{I}\circ\m{1}`]
-    \efig
-  \end{mathpar}
-\end{definition}
-
-
-\begin{lemma}
-  \label{lem:m-p-iso}
-  Given a LNL model $(\cat{C},\cat{L},F,G)$, define
-  $\p{X,Y}:F(X\times Y)\mto FX\otimes FY$ as the composition
-  $\varepsilon_{FX\otimes FY}\circ F\eta_{FX,FY}\circ F(\eta_X\times\eta_Y)$,
-  and $\p{I}:F1\mto I$ as the composition
-  $\varepsilon_I\circ F\n{I}$. Then for $F\dashv G$,
-  $\m{X,Y}$ are components of a natural isomorphism with inverses
-  $\p{X,Y}$, and $\m{1}$ is an isomorphism with inverse $\p{I}$, i.e.
-  $F(X)\otimes F(Y)\cong F(X\times Y)$, and $I\cong F(1)$.
-\end{lemma}
-
-\begin{lemma}
-  \label{lem:comonad}
-  Given a LNL model $(\cat{C},\cat{L},F,G)$, the adjunction
-  $F\dashv G$ induces a symmetric monoidal comonad
-  $(!,\varepsilon,\delta)$ on $\cat{L}$, where $!$ represents $FG$,
-  $\varepsilon:FG\mto 1$ is the counit of the adjunction, and
-  $\delta:FG\mto FGFG$, i.e. $!$ is a symmetric monoidal functor
-  and $\varepsilon,\delta$ are monoidal natural transformations.
-\end{lemma}
-
-\begin{lemma}
-  \label{def:strong-functor}
-  Given a LNL model $(\cat{C},\cat{L},F,G)$, $F$ is a strong functor,
-  i.e. $F$ preserves the monoidal structure up to an isomorphism. And
-  a strong functor induces a unique monoidal structure.
-\end{lemma}
-
-
+\subsection{Linear Category}
 
 \begin{definition}
   \label{def:linear-category}
@@ -936,7 +821,7 @@ TODO \cite{Benton:1994}
   \item a symmetric monoidal closed category
   	$(\cat{L},I,\otimes,\limp)$,
   \item a symmetric monoidal comonad $(!,\varepsilon,\delta)$ on $\cat{L}$,
-    with $\q{A,B}:!A\otimes !A\mto !(A\otimes B)$ and $\q{I}:I\mto !I$;
+    with $\q{A,B}:!A\otimes !B\mto !(A\otimes B)$ and $\q{I}:I\mto !I$;
   \item monoidal natural transformations on $\cat{L}$ with components
     $\e{A}:!A\mto I$ and\\
     $\d{A}:!A\mto !A\otimes !A$, s.t.
@@ -1042,101 +927,91 @@ TODO \cite{Benton:1994}
   \end{itemize}
 \end{definition}
 
-\begin{theorem}
-  \label{thm:linear}
-  $(!,\varepsilon,\delta)$ induces a symmetric monoidal adjunction
-  $(\cat{L}^!,\otimes,I):F\dashv G:(\cat{L},\otimes,I)$, where
-  $\cat{L}$ is the category of Eilenberg-Moore coalgebras.
-\end{theorem}
-
-\begin{theorem}
-  \label{thm:lnl-linearCat}
-  Any LNL model is a linear category.
-\end{theorem}
-
-\begin{theorem}
-  \label{thm:linearCat-lnl}
-  Any linear category gives rise to an LNL model, though it is not
-  in general unique.
-\end{theorem}
-
 
 
 \begin{definition}
-  \label{def:lafont}
-  A \textbf{Lafont Category} is a SMCC $(\cat{L},\otimes,I)$ in which
-  for every object $A$ of $\cat{L}$, there exists a commutative
-  comonoid $(!A,\d{A},\e{A})$ and a morphism $\varepsilon:!A\mto A$
-  s.t. for all commutative comonoid $(X,d,e)$ and for all
-  $f:X\mto A$, there exists a unique comonoid morphism
-  $f^+:(X,d,e)\mto(!A,\d{A},\e{A})$ s.t. the following diagram
-  commutes:
-  \begin{mathpar}
-  \bfig
-    \Vtriangle|amm|/->`<-`<-/<600,500>[
-      !A`
-      A`
-      X;
-      \varepsilon_A`
-      f^+`
-      f]
-  \efig
-  \end{mathpar}
-  \textbf{Alternative definition}: a SMCC $(\cat{L},\otimes,I)$
-  in which the forgetful functor
-  $U:Comon(\cat{L},\otimes,I)\mto\cat{L}$ has a right adjoint $!$,
-  where $Comon(\cat{L},\otimes,I)$ is the category of commutative
-  comonoids in $\cat{L}$.
-\end{definition}
-
-\begin{theorem}
-  \label{thm:lafont}
-  $Comon(\cat{L},\otimes,I)$ is cartesion. hence, every Lafont
-  category defines a LNL model.
-\end{theorem}
-
-
-
-\begin{definition}
-  \label{def:seely}
-  A \textbf{Seely Category} is a SMCC $(\cat{L},\otimes,I)$ with
-  products ($\&$) and a terminal object $\top$, together with
+  \label{def:weakening}
+  A \textbf{(modified) linear category with weakening} is specified by
   \begin{itemize}
-  \item a comonad $(!,\delta,\varepsilon)$, where
-    $\delta_A:!A\mto !!A$ and $\varepsilon_A:!A\mto A$, and
-    \item two natural isomorphisms
-    $\m{A,B}:!A\otimes !B\cong !(A\&B)$ and
-    $\m{\top}:I\cong !T$ making
-    $(!,m):(\cat{L},\&,\top)\mto(\cat{L},\otimes,I)$ a symmetric
-    monoidal functor s.t. the following diagram commutes:
-    \begin{mathpar}
-      \bfig
-	\square|amab|/->`->``/<1050,600>[
-	  !A\otimes !A`
-	  !(A\&B)`
-	  !!A\otimes !!B`;
-	  \m{A,B}`
-	  \delta_A\otimes\delta_B``]
-        \square(1050,0)|ammb|/->``->`/<1050,600>[
-	  !(A\&B)`
-	  !!(A\&B)``
-	  !(!A\&!B);
-	  \delta_{A\otimes B}``
-	  !(!\pi_1,!\pi_2)`]
-          \morphism(0,0)<2100,0>[!!A\otimes !!B`!(!A\&!B);\m{!A,!B}]
-      \efig
-    \end{mathpar}
+  \item a monoidal closed category $(\cat{L},I,\otimes)$,
+  \item a monoidal comonad $(w,\varepsilon,\delta)$ on $\cat{L}$ with
+    $\q{A,B}:wA\otimes wB\mto w(A\otimes B)$ and $\q{I}:I\mto wI$, and
+  \item a monoidal natural transformation $\e{}$ on $\cat{L}$ with
+    components $\e{A}:wA\mto 1$ s.t. the following diagrams commute:
   \end{itemize}
+  \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      wA\otimes wA`
+      I\otimes wA`
+      wI\otimes I`
+      wA;
+      \e{A}\otimes wA`
+      wA\otimes\e{A}`
+      \lambda_A`
+      \rho_A]
+    \efig
+    \and
+    \bfig
+    \square|amma|/->`->`->`<-/<1000,500>[
+      wA`
+      I`
+      wA`
+      wI;
+      \e{A}`
+      \delta{A}`
+      \q{I}`
+      w\e{A}]
+    \efig
+    \and
+    \bfig
+    \Vtriangle|amm|/->`->`->/<600,500>[
+      wA`
+      wB`
+      I;
+      f`
+      \e{A}`
+      \e{B}]
+    \efig
+  \end{mathpar}
 \end{definition}
 
-\begin{theorem}
-  \label{thm:seely}
-  The comonad $(!,\delta,\varepsilon)$ on $\cat{L}$ generates an
-  adjunction $\cat{L}_!:L\dashv M:\cat{L}$ between $\cat{L}$ and the
-  (co-)Kleisli category $\cat{L}_!$ associated to the comonad. Thus,
-  a Seely category defines a LNL model.
-\end{theorem}
-
+\begin{definition}
+  \label{def:contraction}
+  A \textbf{(modified) linear category with contraction} is specified by
+  \begin{itemize}
+  \item a monoidal closed category $(\cat{L},I,\otimes)$,
+  \item a monoidal comonad $(c,\varepsilon,\delta)$ on $\cat{L}$ with
+    $\q{A,B}:cA\otimes cB\mto c(A\otimes B)$ and $\q{I}:I\mto cI$, and
+  \item a monoidal natural transformation $\e{}$ on $\cat{L}$ with
+    components $\e{A}:cA\mto 1$ s.t. the following diagrams commute:
+  \end{itemize}
+  \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      cA\otimes B`
+      ccA\otimes B`
+      cA\otimes B\otimes cA`
+      ccA\otimes B\otimes ccA;
+      \delta_A\otimes id_B`
+      \d{A,B}^1`
+      \d{cA,B}^1`
+      \delta_A\otimes id_B\otimes\delta_A]
+    \efig
+    \and
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      B\otimes cA`
+      B\otimes ccA`
+      cA\otimes B\otimes cA`
+      ccA\otimes B\otimes ccA;
+      id_B\otimes\delta_A`
+      \d{A,B}^2`
+      \d{cA,B}^2`
+      \delta_A\otimes id_B\otimes\delta_A]
+    \efig
+  \end{mathpar}
+\end{definition}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
