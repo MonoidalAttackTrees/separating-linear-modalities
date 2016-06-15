@@ -941,22 +941,10 @@ TODO \cite{Benton:1994}
   \end{itemize}
   \begin{mathpar}
     \bfig
-    \square|amma|/->`->`->`->/<1000,500>[
-      wA\otimes wA`
-      I\otimes wA`
-      wI\otimes I`
-      wA;
-      \e{A}\otimes wA`
-      wA\otimes\e{A}`
-      \lambda_A`
-      \rho_A]
-    \efig
-    \and
-    \bfig
     \square|amma|/->`->`->`<-/<1000,500>[
       wA`
       I`
-      wA`
+      wwA`
       wI;
       \e{A}`
       \delta{A}`
@@ -983,9 +971,10 @@ TODO \cite{Benton:1994}
   \item a monoidal closed category $(\cat{L},I,\otimes)$,
   \item a monoidal comonad $(c,\varepsilon,\delta)$ on $\cat{L}$ with
     $\q{A,B}:cA\otimes cB\mto c(A\otimes B)$ and $\q{I}:I\mto cI$, and
-  \item a monoidal natural transformation $\e{}$ on $\cat{L}$ with
-    components $\e{A}:cA\mto 1$ s.t. the following diagrams commute:
-  \end{itemize}
+  \item monoidal natural transformations $\d{}^1$ and $\d{}^2$ on $\cat{L}$
+    with components $\d{A,B}^1:cA\otimes B\mto cA\otimes B\otimes cA$ and 
+    $\d{A,B}^2:B\otimes cA\mto cA\otimes B\otimes cA$.
+  \item (May need the following diagrams commute:)
   \begin{mathpar}
     \bfig
     \square|amma|/->`->`->`->/<1000,500>[
@@ -1011,6 +1000,7 @@ TODO \cite{Benton:1994}
       \delta_A\otimes id_B\otimes\delta_A]
     \efig
   \end{mathpar}
+  \end{itemize}
 \end{definition}
 
 
