@@ -1,0 +1,496 @@
+\documentclass{article}
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{cmll}
+\usepackage{txfonts}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{todonotes}
+\usepackage{mathpartir}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage[barr]{xy}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+%% This renames Barr's \to to \mto.  This allows us to use \to for imp
+%% and \mto for a inline morphism.
+\let\mto\to
+\let\to\relax
+\newcommand{\to}{\rightarrow}
+\newcommand{\ndto}[1]{\to_{#1}}
+\newcommand{\ndwedge}[1]{\wedge_{#1}}
+
+% Commands that are useful for writing about type theory and programming language design.
+%% \newcommand{\case}[4]{\text{case}\ #1\ \text{of}\ #2\text{.}#3\text{,}#2\text{.}#4}
+\newcommand{\interp}[1]{\llbracket #1 \rrbracket}
+\newcommand{\normto}[0]{\rightsquigarrow^{!}}
+\newcommand{\join}[0]{\downarrow}
+\newcommand{\redto}[0]{\rightsquigarrow}
+\newcommand{\nat}[0]{\mathbb{N}}
+\newcommand{\fun}[2]{\lambda #1.#2}
+\newcommand{\CRI}[0]{\text{CR-Norm}}
+\newcommand{\CRII}[0]{\text{CR-Pres}}
+\newcommand{\CRIII}[0]{\text{CR-Prog}}
+\newcommand{\subexp}[0]{\sqsubseteq}
+%% Must include \usepackage{mathrsfs} for this to work.
+
+\date{}
+
+\let\b\relax
+\let\d\relax
+\let\t\relax
+\let\r\relax
+\let\c\relax
+\let\j\relax
+\let\wn\relax
+\let\H\relax
+
+% Cat commands.
+\newcommand{\powerset}[1]{\mathcal{P}(#1)}
+\newcommand{\cat}[1]{\mathcal{#1}}
+\newcommand{\func}[1]{\mathsf{#1}}
+\newcommand{\iso}[0]{\mathsf{iso}}
+\newcommand{\H}[0]{\func{H}}
+\newcommand{\J}[0]{\func{J}}
+\newcommand{\catop}[1]{\cat{#1}^{\mathsf{op}}}
+\newcommand{\Hom}[3]{\mathsf{Hom}_{\cat{#1}}(#2,#3)}
+\newcommand{\limp}[0]{\multimap}
+\newcommand{\colimp}[0]{\multimapdotinv}
+\newcommand{\dial}[1]{\mathsf{Dial_{#1}}(\mathsf{Sets^{op}})}
+\newcommand{\dialSets}[1]{\mathsf{Dial_{#1}}(\mathsf{Sets})}
+\newcommand{\dcSets}[1]{\mathsf{DC_{#1}}(\mathsf{Sets})}
+\newcommand{\sets}[0]{\mathsf{Sets}}
+\newcommand{\obj}[1]{\mathsf{Obj}(#1)}
+\newcommand{\mor}[1]{\mathsf{Mor(#1)}}
+\newcommand{\id}[0]{\mathsf{id}}
+\newcommand{\lett}[0]{\mathsf{let}\,}
+\newcommand{\inn}[0]{\,\mathsf{in}\,}
+\newcommand{\cur}[1]{\mathsf{cur}(#1)}
+\newcommand{\curi}[1]{\mathsf{cur}^{-1}(#1)}
+\newcommand{\m}[1]{\mathsf{m}_{#1}}
+\newcommand{\n}[1]{\mathsf{n}_{#1}}
+\newcommand{\b}[1]{\mathsf{b}_{#1}}
+\newcommand{\d}[1]{\mathsf{d}_{#1}}
+\newcommand{\e}[1]{\mathsf{e}_{#1}}
+\newcommand{\h}[1]{\mathsf{h}_{#1}}
+\newcommand{\p}[1]{\mathsf{p}_{#1}}
+\newcommand{\q}[1]{\mathsf{q}_{#1}}
+\newcommand{\t}[0]{\mathsf{t}}
+\newcommand{\r}[1]{\mathsf{r}_{#1}}
+\newcommand{\s}[1]{\mathsf{s}_{#1}}
+\newcommand{\w}[1]{\mathsf{w}_{#1}}
+\newcommand{\c}[1]{\mathsf{c}_{#1}}
+\newcommand{\j}[1]{\mathsf{j}_{#1}}
+\newcommand{\jinv}[1]{\mathsf{j}^{-1}_{#1}}
+\newcommand{\wn}[0]{\mathop{?}}
+\newcommand{\codiag}[1]{\bigtriangledown_{#1}}
+
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#1}%
+    \setlength{\rightmargin}{#2}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+
+\newenvironment{diagram}{
+  \begin{center}
+    \begin{math}
+      \bfig
+}{
+      \efig
+    \end{math}
+  \end{center}
+}
+
+%% %% Ott
+%% \input{BiLNL-inc}
+
+\urldef{\mailsa}\path|{heades}@augusta.edu|
+
+\begin{document}
+
+\title{Composing Monads and Comonads}
+\author{Jiaming Jiang and Harley Eades III}
+\date{}
+
+\maketitle 
+
+\begin{abstract}
+
+  TODO
+
+\end{abstract}
+
+\section{Compose Monads}
+\label{sec:monads}
+
+\begin{definition}
+  \label{def:monad}
+  A \textbf{monad} on a category $\cat{C}$ is a triple $(T,\eta,\mu)$, where
+  \begin{itemize}
+  \item $T$ is an endofunctor on $\cat{C}$ that associates to each
+    morphism $A\mto B$ in $\cat{C}$ to a morphism $T(A)\mto T(B)$ in $\cat{C}$
+    s.t. $T(id_A)=id_{TA}$ and $T(f)\circ T(g)=T(f\circ g)$
+  \item $\eta$ is a natural transformation, i.e. $\eta\circ f=T(f)\circ\eta$,
+    or the diagram commutes:
+    \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      A`
+      B`
+      TA`
+      TB;
+      f`
+      \eta_A`
+      \eta_B`
+      T(f)]
+    \efig
+    \end{mathpar}
+  \item $\mu$ is a natural transformation, i.e. $\mu\circ T^2(f)=T(f)\circ\mu$,
+    or the diagram commutes:
+    \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      T^2A`
+      T^2B`
+      TA`
+      TB;
+      T^2(f)`
+      \mu_A`
+      \mu_B`
+      T(f)]
+    \efig
+    \end{mathpar}
+  \item $\mu\circ T\mu=\mu\circ\mu T$, i.e. the following diagram commutes:
+    \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      T^3`
+      T^2`
+      T^2`
+      T;
+      T\mu`
+      \mu T`
+      \mu`
+      T]
+    \efig
+    \end{mathpar}
+  \item $\mu\circ\eta T=\mu\circ T\eta=id_T$, i.e. the following diagrams
+    commute:
+    \begin{mathpar}
+    \bfig
+    \Vtriangle/=`->`<-/[
+      T`
+      T`
+      T^2;
+      `
+      T\eta`
+      \mu]
+    \efig
+    \and
+    \bfig
+    \Vtriangle/=`->`<-/[
+      T`
+      T`
+      T^2;
+      `
+      \eta T`
+      \mu]
+    \efig
+    \end{mathpar}
+  \end{itemize}
+\end{definition}
+
+
+
+\begin{definition}
+  \label{def:swap}
+  \cite{jones1993composing}
+  Given two monads $(M,\eta^M,\mu^M)$ and $(N,\eta^N,\mu^N)$ on a category
+  $\cat{C}$, the \textbf{swap} morphism $\s{}$ associates to $NMA$ for each
+  object $A$ in $\cat{C}$ an object $MNA$, i.e. $\s{A}: NMA\mto MNA$, subject
+  to the following conditions:
+  \begin{itemize}
+  \item $\s{}\circ NM(f)=MN(f0\circ\s{}$, i.e.
+    \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      NMA`
+      NMB`
+      MNA`
+      MNB;
+      NM(f)`
+      \s{A}`
+      \s{B}`
+      MN(f)]
+    \efig
+    \end{mathpar}
+  \item $\s{}\circ\eta^N M=M\eta^N$, i.e.
+    \begin{mathpar}
+    \bfig
+    \Vtriangle/->`->`->/[
+      MA`
+      NMA`
+      MNA;
+      (\eta^NM)_A`
+      M\eta^N_A`
+      \s{A}]
+    \efig
+    \end{mathpar}
+  \item $\s{}\circ N\eta^M=M\eta^M N$, i.e.
+    \begin{mathpar}
+    \bfig
+    \Vtriangle/->`->`->/[
+      NA`
+      NMA`
+      MNA;
+      N\eta^M_A`
+      (\eta^MN)_A`
+      \s{A}]
+    \efig
+    \end{mathpar}
+  \end{itemize}
+\end{definition}
+
+
+
+\begin{definition}
+  \label{def:composition-monad}
+  Given two monads $(M,\eta^M,\mu^M)$ and $(N,\eta^N,\mu^N)$ on a category
+  $\cat{C}$, the \textbf{composition monad} $(T,\eta,\mu)$ of $M$ and $N$ is
+  defined as follows:
+  \begin{itemize}
+  \item $T$ maps each morphism $f:A\mto B$ in $\cat{C}$ to a morphism
+    $T(f)=MN(f):MNA\mto MNB$.
+  \item $\eta_A:A\mto MNA$ and $\eta=\eta^M\circ\eta^N$.
+  \item $\mu_A:MNMNA\mto MNA$ and $\mu=(M\mu^N)\circ(\mu^MN^2)\circ(M\s{}N)$.
+  \end{itemize}
+\end{definition}
+
+
+\begin{theorem}
+  \label{thm:composition}
+  The composition monad $T$ of $M$ and $N$ defined above is a monad on $\cat{C}$.
+\end{theorem}
+\begin{proof}
+\begin{itemize}
+  \item To show $T(id_A)=id_{TA}$:
+    \begin{align*}
+      T(id_A) &= MN(id_A)   \\
+              &= M(id_{NA}) \\
+              &= id_{MNA}   \\
+              &= id_{TA}
+    \end{align*}
+  \item To show $T(f)\circ T(g)=T(f\circ g)$:
+    \begin{align*}
+      T(f)\circ T(g) &= MN(f)\circ MN(g)    \\
+                     &= M(N(f)\circ N(f))   \\
+                     &= MN(f\circ g))       \\
+                     &= T(f\circ g)
+    \end{align*}
+  \item To show $\eta\circ f=T(f)\circ\eta$:
+    \begin{align*}
+      \eta\circ f &= \eta^M\circ\eta^N\circ f       \\
+                  &= \eta^M\circ N(f)\circ\eta^N    \\
+                  &= MN(f)\circ\eta^M\circ\eta^N    \\
+                  &= T(f)\circ\eta
+    \end{align*}
+  \item To show $\mu\circ T^2(f)=T(f)\circ\mu$:
+    \begin{align*}
+      \mu\circ T^2(f) &= M\mu^N\circ\mu^M N^2\circ M\s{}N\circ MNMN(f)      \\
+                      &= M\mu^N\circ\mu^M N^2\circ M^2N^2(f)\circ M\s{}N    \\
+                      &= M\mu^N\circ MN^2(f)\circ\mu^M N^2\circ M\s{}N      \\
+                      &= MN(f)\circ M\mu^N\circ\mu^M N^2\circ M\s{}N        \\
+                      &= T(f)\circ\mu
+    \end{align*}
+  \item To show $\mu\circ T\mu=\mu\circ\mu T$:
+  \item To show $\mu\circ\eta T=\mu\circ T\eta$:
+\end{itemize}
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Compose Comonads}
+
+\begin{definition}
+  \label{def:comonad}
+  A \textbf{comonad} on a category $\cat{C}$ is a triple
+  $(T,\varepsilon,\delta)$, where
+  \begin{itemize}
+  \item $T$ is an endofunctor on $\cat{C}$ that associates to each
+    morphism $A\mto B$ in $\cat{C}$ to a morphism $T(A)\mto T(B)$ in $\cat{C}$
+    s.t. $T(id_A)=id_{TA}$ and $T(f)\circ T(g)=T(f\circ g)$
+  \item $\varepsilon$ is a natural transformation, i.e.
+    $\varepsilon\circ T(f)=f\circ\varepsilon$, or the diagram commutes:
+    \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      TA`
+      TB`
+      A`
+      B;
+      T(f)`
+      \varepsilon_A`
+      \varepsilon_B`
+      f]
+    \efig
+    \end{mathpar}
+  \item $\delta$ is a natural transformation, i.e.
+    $\delta\circ T(f)=T^2(f)\circ\delta$, or the diagram commutes:
+    \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      TA`
+      TB`
+      T^2A`
+      T^2B;
+      T(f)`
+      \delta_A`
+      \delta_B`
+      T^2(f)]
+    \efig
+    \end{mathpar}
+  \item $\delta T\circ\delta=T\delta\circ\delta$, i.e. the following diagram
+    commutes:
+    \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      T`
+      T^2`
+      T^2`
+      T^3;
+      \delta`
+      \delta`
+      \delta T`
+      T\delta]
+    \efig
+    \end{mathpar}
+  \item $\varepsilon T\circ\delta=T\varepsilon\circ\delta=id_T$, i.e. the following
+    diagrams commute:
+    \begin{mathpar}
+    \bfig
+    \Vtriangle/=`->`<-/[
+      T`
+      T`
+      T^2;
+      `
+      \delta`
+      \varepsilon T]
+    \efig
+    \and
+    \bfig
+    \Vtriangle/=`->`<-/[
+      T`
+      T`
+      T^2;
+      `
+      \delta`
+      T\varepsilon]
+    \efig
+    \end{mathpar}
+  \end{itemize}
+\end{definition}
+
+
+
+\begin{definition}
+  \label{def:coswap}
+  Given two comonads $(M,\eta^M,\mu^M)$ and $(N,\eta^N,\mu^N)$ on a category
+  $\cat{C}$, the \textbf{co-swap} morphism $\s{}'$ associates to $MNA$ for each
+  object $A$ in $\cat{C}$ an object $NMA$, i.e. $\s{A}': MNA\mto NMA$, subject
+  to the following conditions:
+  \begin{itemize}
+  \item $\s{}'\circ MN(f)=NM(f)\circ\s{}'$, i.e.
+    \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      MNA`
+      MNB`
+      NMA`
+      NMB;
+      MN(f)`
+      \s{A}'`
+      \s{B}'`
+      NM(f)]
+    \efig
+    \end{mathpar}
+  \item $N\varepsilon^M\circ\s{}'=\varepsilon^MN$, i.e.
+    \begin{mathpar}
+    \bfig
+    \Vtriangle/<-`<-`<-/[
+      NA`
+      MNA`
+      NMA;
+      (\varepsilon^MN)_A`
+      N\varepsilon^M_A`
+      \s{A}']
+    \efig
+    \end{mathpar}
+  \item $\s{}'\circ\varepsilon^NM=M\varepsilon^N$, i.e.
+    \begin{mathpar}
+    \bfig
+    \Vtriangle/<-`<-`<-/[
+      MA`
+      MNA`
+      NMA;
+      M\varepsilon^N_A`
+      (\varepsilon^NM)_A`
+      \s{A}']
+    \efig
+    \end{mathpar}
+  \end{itemize}
+\end{definition}
+
+
+
+\begin{definition}
+  \label{def:composition-comonad}
+  Given two comonads $(M,\varepsilon^M,\delta^M)$ and
+  $(N,\varepsilon^N,\delta^N)$ on a category $\cat{C}$, the \textbf{composition
+  comonad} $(T,\varepsilon,\delta)$ of $M$ and $N$ is defined as follows:
+  \begin{itemize}
+  \item $T$ maps each morphism $f:A\mto B$ in $\cat{C}$ to a morphism
+    $T(f)=MN(f):MNA\mto MNB$.
+  \item $\varepsilon_A:MNA\mto A$ and
+    $\varepsilon=\varepsilon^N\circ\varepsilon^M$.
+  \item $\delta_A:MNA\mto MNMNA$ and
+    $\delta=(Ms'N)\circ(M^2\delta^N)\circ(\delta^MN)$.
+  \end{itemize}
+\end{definition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{related work}
+\label{sec:related_work}
+todo
+% section related_work (end)
+
+
+\section{conclusion}
+\label{sec:conclusion}
+todo
+% section conclusion (end)
+
+\bibliographystyle{plainurl} \bibliography{ref}
+
+\appendix
+\input{appendix}
+\end{document}
+
+%%% local variables: 
+%%% mode: latex
+%%% tex-master: t
+%%% end: 
+
