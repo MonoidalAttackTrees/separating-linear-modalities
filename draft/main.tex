@@ -319,7 +319,7 @@ TODO \cite{Benton:1994}
     \efig
     \end{mathpar}
 %    \and
-\begin{mathpar}
+  \begin{mathpar}
     \bfig
     \square|amma|/->`->`<-`->/<1000,500>[
       \top_2 \otimes_2 FA`
@@ -343,7 +343,9 @@ TODO \cite{Benton:1994}
       F{\rho_1}_{A}`
       m_{A,\top_1}]
     \efig
-     \end{mathpar}
+    \end{mathpar}
+  Need to notice that the composition of monoidal functors is also monoidal,
+  subject to the above coherence conditions.
 
 \end{definition}
 
@@ -940,11 +942,11 @@ TODO \cite{Benton:1994}
   \item a monoidal comonad $((w,\q{}),\varepsilon,\delta)$ on $\cat{L}$ with
     $\q{A,B}:wA\otimes wB\mto w(A\otimes B)$ and $\q{I}:I\mto wI$, and
   \item a monoidal natural transformation $\e{}$ on $\cat{L}$ with
-    components $\e{A}:wA\mto 1$ s.t. the following diagrams commute:
+    components $\e{A}:wA\mto I$ s.t. the following diagrams commute:
   \end{itemize}
   \begin{mathpar}
     \bfig
-    \square|amma|/->`->`->`<-/<1000,500>[
+    \square|amma|/->`->`->`->/<1000,500>[
       wA`
       I`
       wwA`
@@ -1039,10 +1041,10 @@ TODO \cite{Benton:1994}
 \begin{definition}
   \label{def:dist}
   Given two comonads $(c,\varepsilon^c,\delta^c)$ and
-  $(w,\varepsilon^w,\delta^w)$ on a category $\cat{L}$, define a natural
-  transformation $dist$ with components $dist_A:cwA\mto wcA$, subject to
-  the \\
-  following coherence diagrams:
+  $(w,\varepsilon^w,\delta^w)$ on a category $\cat{L}$, \textbf{a
+  distributive law} of $c$ over $w$ is a natural transformation
+  with components $dist_A:cwA\mto wcA$, subject to the following
+  coherence diagrams:
   \begin{mathpar}
     \bfig
       \square/->`->`->`->/<600,600>[
@@ -1085,72 +1087,26 @@ TODO \cite{Benton:1994}
 \end{definition}
 
 
-\begin{definition}
-  \label{def:composition-cw}
-  Given a (modified) linear category with weakening $(\cat{L},w,\e{}^w)$
-  and a (modified) linear category with contraction
-  $(\cat{L},c,\d{}^{c1},\d{}^{c2})$ on the same monoidal closed category
-  $(\cat{L},I,\otimes)$, where $((w,\q{}^w),\varepsilon^w,\delta^w)$ and
-  $((c,\q{}^c),\varepsilon^c,\delta^c)$ are corresponding comonads on
-  $\cat{L}$, the composition of $c$ and $w$ is a comonad
-  $((cw,\q{}),\varepsilon,\delta)$ on $\cat{L}$, where:
+
+\begin{lemma}
+  \label{lem:compose-cw}
+  Let $(c,\varepsilon^c,\delta^c)$ and $(w,\varepsilon^w,\delta^w)$
+  be two monoidal comonads and on a monoidal closed category
+  $(\cat{L},I,\otimes)$ such that $(\cat{L},w,\e{}^w)$ is a
+  (modified) linear category with weakening and
+  $(\cat{L},c,\d{}^{c1},\d{}^{c2})$ is a (modified) linear
+  category with contraction. Then the composition of $c$ and $w$
+  using the distributive law $dist_A:cwA\mto wcA$ for any object
+  $A$ in $\cat{L}$ is a monoidal comonad $(cw,\varepsilon,\delta)$
+  on $\cat{L}$, where for any objects $A,B$ in $\cat{L}$:
   \begin{itemize}
-    \item $\q{A,B}:cwA\otimes cwB\mto cw(A\otimes B)$ is defined as
-      \begin{align*}
-        \q{A,B} &= c\q{A,B}^w\circ\q{wA,wB}^c \\
-                &= dist_{A\otimes B}^{-1}\circ w\q{A,B}^c\circ\q{cA,cB}^w\circ(dist_A\otimes dist_B)
-      \end{align*}
-      i.e. the following diagram commutes by the naturality of $\q{A,B}^c$
-      and $\q{A,B}^w$:
-      \begin{mathpar}
-      \bfig
-	\square|amab|/->`->``->/<1050,600>[
-	  cwA\otimes cwB`
-	  c(wA\otimes wB)`
-	  wcA\otimes wcB`
-          w(cA\otimes cB);
-	  \q{wA,wB}^c`
-	  dist_A\otimes dist_B``
-          \q{cA,cB}^w]
-        \square(1050,0)|ammb|/->``<-`->/<1050,600>[
-	  c(wA\otimes wB)`
-	  cw(A\otimes B)`
-          w(cA\otimes cB)`
-	  wc(A\otimes B);
-	  c\q{A,B}^w``
-	  dist_{A\otimes B}^{-1}`
-          w\q{A,B}^c]
-      \efig
-      \end{mathpar}
-    
-    \item $\q{I}:I\mto cwI$ is defined as
-      \begin{align*}
-        \q{I} &= \q{wI}^c\circ\q{I}^w \\
-              &= c\q{I}^w\circ\q{I}^c
-      \end{align*}
-      i.e.
-      \begin{mathpar}
-      \bfig
-      \Atrianglepair/->`<-`->`->`<-/<600,600>[
-        I`
-	wI`
-	cwI`
-	cI;
-	\q{I}^w`
-        \e{I}`
-        \q{I}^c`
-	\q{wI}^c`
-	c\q{I}^w]
-      \efig
-      \end{mathpar}
-    
-    \item $\varepsilon_A:cwA\mto A$ is defined as:
-      \begin{align*}
-        \varepsilon_A &= \varepsilon_{wA}^c\circ\varepsilon_A^w \\
-                      &= \varepsilon_A^c\circ c\varepsilon_A^w
-      \end{align*}
-      i.e. the following diagram commutes by the naturality of
-      $\varepsilon^c$:
+    \item $\q{A,B}:cwA\otimes cwB\mto cw(A\otimes B)$ is defined
+      as: $\q{A,B} = c\q{A,B}^w\circ\q{wA,wB}^c$, and
+      $\q{I}:I\mto cwI$ is defined as:
+      $\q{I} = c\q{I}^w\circ\q{I}^c$.
+
+    \item $\varepsilon_A:cwA\mto A$ is defined as in the diagram
+      below, which commutes by the naturality of $\varepsilon^c$.
       \begin{mathpar}
         \bfig
         \square(1050,0)|ammb|/->`->`->`->/<1050,600>[
@@ -1165,13 +1121,7 @@ TODO \cite{Benton:1994}
         \efig
       \end{mathpar}
 
-    \item $\delta_A:cwA\mto cwcwA$ is defined as:
-      \begin{align*}
-        \delta_A &= cdist_{wA}\circ c^2\delta_A^w\circ\delta_{wA}^c \\
-                 &= cdist_{wA}\circ\delta_{w^2A}^c\circ c\delta_A^w
-      \end{align*}
-      i.e. the following diagram commutes by the naturality of $\delta^c$
-      and equality:
+    \item $\delta_A:cwA\mto cwcwA$ is defined as in the diagram:
       \begin{mathpar}
       \bfig
 	\square|amab|/->`->`->`->/<1050,600>[
@@ -1193,17 +1143,13 @@ TODO \cite{Benton:1994}
           cdist_{wA}]
       \efig
       \end{mathpar}
+      The left part of the diagram commutes by the naturality
+      of $\delta^c$ and the right part commutes by equality.
 
-    \item $\e{A}: cwA\mto I$ is defined as:
-      \begin{align*}
-        \e{A} &= \e{cA}^w\circ dist_A \\
-              &= \e{A}^w\circ\varepsilon_{wA}^c
-      \end{align*}
-      i.e. the following diagram commutes by the definitions of $dist$ and
-      $\e{}^w$:
+    \item $\e{A}:cwA\mto I$ is defined as in
       \begin{mathpar}
       \bfig
-      \Atrianglepair/->`->`->`->`->/<600,600>[
+      \Atrianglepair/<-`->`->`->`->/<600,600>[
         wcA`
 	cwA`
 	wA`
@@ -1215,14 +1161,11 @@ TODO \cite{Benton:1994}
         \e{A}^w]
       \efig
       \end{mathpar}
+      The left triangle commutes by the definition of $dist$
+      and the right triangle commutes by the definition of
+      $\e{}^w$.
 
-    \item $\d{A}:cwA\mto cwA\otimes cwA$ is defined as
-      \begin{align*}
-        \d{A} &= (\rho_{cwA}\otimes id_{cwA})\circ\d{wA,I}^{c1}\circ\rho_{cwA}^{-1} \\
-              &= (id_{cwA}\otimes\lambda_{cwA})\circ\d{wA,I}^{c2}\circ\lambda_{cwA}^{-1}
-      \end{align*}
-      i.e. the following diagram commutes by the definitions of $\d{}^{c1}$
-      and $\d{}^{c2}$:
+    \item $\d{A}:cwA\mto cwA\otimes cwA$ is defined as in
       \begin{mathpar}
         \bfig
         \square/->`->``->/<1050,600>[
@@ -1247,223 +1190,222 @@ TODO \cite{Benton:1994}
           id_{cwA}\otimes\lambda_{cwA}]
         \efig
       \end{mathpar}
+      The left part of the diagram commutes by the definitions of
+      $\d{}^{c1}$ and of $\d{}^{c2}$, and the right part commutes because
+      $\cat{L}$ is monoidal.
 
-
-
-\begin{theorem}
-  \label{thm:composition-cw}
-  The composition $cw$ of comonads $c$ and $w$ on $\cat{L}$ defined in
-  Definition~\ref{def:composition-cw} is a comonad on $\cat{L}$.
-\end{theorem}
-
-\begin{proof}
-  \begin{itemize}
-    \item $cw$ is an endofunctor on $\cat{L}$, i.e. it preserves the
-      identity $I$ and compositions of morphisms:
-      \begin{align*}
-        cw id_A &= c id_{wA} \\
-                &= id_{cwA}
-      \end{align*}
-      For any morphisms $f:A\mto B$ and $g:B\mto C$ in $\cat{L}$,
-      \begin{align*}
-        cw(f\circ g) &= c(wf\circ wg) \\
-                     &= cwf\circ cwg
-      \end{align*}
-
-    \item $\q{A,B}:cwA\otimes cwB\mto cw(A\otimes B)$ is natural by the
-      naturality of $\q{A,B}^c$ and $\q{A,B}^w$:
+    \item The comonad law
+      $cw\delta_A\circ\delta_A=\delta_{cwA}\circ\delta_A$, expressed in
+      the diagram below,
       \begin{mathpar}
         \bfig
-          \square/->`->`->`->/<1050,600>[
-            cwA\otimes cwB`
-            c(wA\otimes wB)`
-            cwA'\otimes cwB'`
-            c(wA'\otimes wB');
-            \q{wA,wB}^c`
-            cwf\otimes cwg`
-            c(wf\otimes wg)`
-            \q{wA',wB'}^c]
-          \square(1050,0)/->``->`->/<1050,600>[
-            c(wA\otimes wB)`
-            cw(A\otimes B)`
-            c(wA'\otimes wB')`
-            cw(A'\otimes B');
-            c\q{A,B}^w``
-            cw(f\otimes g)`
-            c\q{A',B'}^w]
+        \square/->`->`->`->/<1050,600>[
+          cwA`
+          cwcwA`
+          cwcwA`
+          cwcwcwA;
+          \delta_A`
+          \delta_A`
+          cw\delta_A`
+          \delta_{cwA}]
         \efig
       \end{mathpar}
-      
-    \item $\q{I}:I\mto cwI$ is natural by definition;
-
-    \item $\varepsilon_A:cwA\mto A$ is natural by the naturality of
-      $\varepsilon^c$ and of $\varepsilon^w$:
-      \begin{mathpar}
-        \bfig
-          \square/->`->`->`->/<600,600>[
-            cwA`
-            wA`
-            cwB`
-            wB;
-            c\varepsilon_{wA}^c`
-            cwf`
-            wf`
-            c\varepsilon_{wB}^c]
-          \square(600,0)/->``->`->/<600,600>[
-            wA`
-            A`
-            wB`
-            B;
-            \varepsilon_A^w``
-            f`
-            \varepsilon_B^w]
-        \efig
-      \end{mathpar}
-
-    \item $\delta_A:cwA\mto cwcwA$ is natural by the naturality of
-      $\delta^c$ and of $\delta^w$ and the definition of $dist$:
-      \begin{mathpar}
-        \bfig
-          \square/->`->`->`->/<600,600>[
-            cwA`
-            c^2wA`
-            cwB`
-            c^2wB;
-            \delta_{wA}^c`
-            cwf`
-            c^2wf`
-            \delta_{wB}^c]
-          \square(600,0)/->``->`->/<600,600>[
-            c^2wA`
-            c^2w^2A`
-            c^2wB`
-            c^2w^2B;
-            c^2\delta_A^w``
-            c^2w^2f`
-            c^2\delta_A^w]
-          \square(1200,0)/->``->`->/<600,600>[
-            c^2w^2A`
-            cwcwA`
-            c^2w^2B`
-            cwcwB;
-            cdist_{wA}``
-            cwcwf`
-            cdist_{wB}]
-        \efig
-      \end{mathpar}
-
-    \item $cw\delta_A\circ\delta_A=\delta_{cwA}\circ\delta_A$, by
-      the definition of $\delta_A$, the naturality of $\delta^c$,
-      and definition of $dist$.
-      The diagram proves $cw\delta_A=\delta_{cwA}$:
+      is satisfied by the following diagram chasing. (1) and (3) commutes by
+      the naturality of $\delta^c$. (2), (4) and (5) commute by the
+      conditions of $dist$. 
       \begin{mathpar}
       \bfig
-        \Vtriangle/`->`/<400,400>[
+        \Vtriangle|ama|/`->`/<700,400>[
           cwcwA`
           `
           c^2wcwA;
           `
           \delta_{wcwA}^c`
           ]
-        \dtriangle(400,0)/`->`->/<700,400>[
+        \dtriangle(700,0)|amm|/`->`->/<900,400>[
           cwcw^2A`
           c^2wcwA`
           c^2wcw^2A;
           `
           \delta_{wcw^2A}^c`
           c^2wc\delta_A^w]
-        \morphism(0,400)|m|<1100,0>[
+        \morphism(0,400)|a|<1600,0>[
           cwcwA`
           cwcw^2A;
           cwc\delta_A^w]
-        \ptriangle(1100,0)/->``<-/<1100,400>[
+        \ptriangle(1600,0)|amm|/->``<-/<1100,400>[
           cwcw^2A`
           cwc^2w^2A`
           c^2wcw^2A;
           cw\delta_{w^2A}^c`
           `
           cdist_{cw^2A}]
-        \qtriangle(400,-400)/`->`<-/<700,400>[
+        \qtriangle(700,-600)|mmm|/`->`<-/<900,600>[
           c^2wcwA`
           c^2wcw^2A`
           c^2w^2cwA;
           `
           c^2\delta_{cwA}^w`
           c^2wdist_{wA}]
-        \btriangle(0,-400)/->``->/<1100,800>[
+        \btriangle(0,-600)/->``->/<1600,1000>[
           cwcwA`
           cw^2cwA`
           c^2w^2cwA;
           c\delta_{cwA}^w`
           `
           \delta_{w^2cwA}^c]
-        \dtriangle(1100,-400)/`<-`->/<1100,800>[
+        \dtriangle(1600,-600)/`<-`->/<1100,1000>[
           cwc^2w^2A`
           c^2w^2cwA`
           cwcwcwA;
           `
           cwcdist_{wA}`
           cdist_{wcwA}]
+        % To show texts in each subdiagram:
+        \ptriangle(1000,-200)/``/<400,400>[
+          (1)``;
+          ``]
+        \ptriangle(1300,-600)/``/<400,400>[
+          (2)``;
+          ``]
+        \ptriangle(500,-700)/``/<400,400>[
+          (3)``;
+          ``]
+        \ptriangle(1850,-150)/``/<400,400>[
+          (4)``;
+          ``]
+        \ptriangle(2100,-700)/``/<400,400>[
+          (5)``;
+          ``]
+      \efig
+      \end{mathpar}
+    \item The comonad law
+      $cw\varepsilon_A\circ\delta_A=\varepsilon_{cwA}\circ\delta_A=id_{cwA}$,
+      expressed in the diagram below,
+      \begin{mathpar}
+      \bfig
+        \qtriangle/->`=`->/<600,600>[
+          cwA`
+          cwcwA`
+          cwA;
+          \delta_A``
+          cw\varepsilon_A]
+        \btriangle/->``->/<600,600>[
+          cwA`
+          cwcwA`
+          cwA;
+          \delta_A``
+          \varepsilon_{cwA}]
+      \efig
+      \end{mathpar}
+      is satisfied by the following two diagram chasings below.
+
+      The left triangle is expanded in the following diagram chasing. (1)
+      commutes by the comonad law for $w$ with components $\delta_A^w$ and
+      $\varepsilon_{wA}^w$. (2) commutes by the comonad law for $c$ with
+      components $\delta_{w^2A}^c$ and $\varepsilon_{w^2A}^c$. (3), (4), (5)
+      and (6) commute by the definition of $dist$.
+      \begin{mathpar}
+      \bfig
+        \qtriangle|amm|/->`<-`=/<1200,600>[
+          cwA`
+          cw^2A`
+          cw^2A;
+          c\delta_A^w`
+          c\varepsilon_{wA}^w`]
+        \ptriangle(1200,0)|amm|/->``->/<600,600>[
+          cw^2A`
+          c^2w^2A`
+          cw^2A;
+          \delta_{w^2A}^c``
+          c\varepsilon_{w^2A}^c]
+        \btriangle(0,-1200)/=``<-/<600,1800>[
+          cwA`
+          cwA`
+          wcwA;
+          ``\varepsilon_{cwA}^w]
+        \Atriangle(600,-1200)|mmb|/->`->`<-/<600,1200>[
+          cw^2A`
+          wcwA`
+          cwcwA;
+          dist_{wA}`
+          cw\varepsilon_{wA}^c`
+          \varepsilon_{wcwA}^c]
+        \Atriangle(600,-1200)|mmb|/->`->`/<600,600>[
+          wc^2wA`
+          wcwA`
+          cwcwA;
+          w\varepsilon_{cwA}^c=wc\varepsilon_{wA}^c`
+          dist_{cwA}`]
+        \morphism(1800,600)<0,-1800>[c^2w^2A`cwcwA;cdist_{wA}]
+        \ptriangle(800,300)/``/<100,100>[(1)``;``]
+        \ptriangle(1400,300)/``/<100,100>[(2)``;``]
+        \ptriangle(500,-500)/``/<100,100>[(3)``;``]
+        \ptriangle(1200,-500)/``/<100,100>[(4)``;``]
+        \ptriangle(1200,-1100)/``/<100,100>[(5)``;``]
+        \ptriangle(1600,-500)/``/<100,100>[(6)``;``]
       \efig
       \end{mathpar}
 
-    \item $cw\varepsilon_A\circ\delta_A=\varepsilon_{cwA}\circ\delta_A=id_{cwA}$:
+      The right triangle is expanded in the following diagram chasing. (1)
+      commutes by the naturality of $\delta^c$. (2) is the comonad law for
+      $c$ with components $\delta_{wA}^c$ and $\varepsilon_{wA}^c$. (3) is
+      the comonad law for $w$ with components $\delta_A^w$ and
+      $\varepsilon_A^w$. (3) and (4) commute by the definition of $dist$.
       \begin{mathpar}
       \bfig
-        \morphism<600,0>[
+        \qtriangle|amm|/->`->`/<800,400>[
           cwA`
-          cw^2A;
-          c\delta_A^w]
-        \morphism(600,0)<600,0>[
           cw^2A`
-          c^2w^2A;
-          \delta_{w^2A}^c]
-        \morphism(1200,0)<600,0>[
-          c^2w^2A`
-          cwcwA;
-          cdist_{wA}]
-        \morphism(1800,0)<0,-900>[
-          cwcwA`
-          cwcA;
-          cwc\varepsilon_A^w]
-        \morphism(1800,-900)<0,-900>[
-          cwcA`
-          cwA;
-          cw\varepsilon_A^c]
-        \morphism<0,-600>[
-          cwA`
-          cw^2A;
-          c\delta_A^w]
-        \morphism(0,-600)<0,-600>[
-          cw^2A`
-          c^2w^2A;
-          \delta_{w^2A}^c]
-        \morphism(0,-1200)<0,-600>[
-          c^2w^2A`
-          cwcwA;
-          cdist_{wA}]
-        \morphism(0,-1800)<900,0>[
-          cwcwA`
           c^2wA;
-          c\delta_{cwA}^w]
-        \morphism(900,-1800)<900,0>[
-          c^2wA`
-          cwA;
-          \delta_{cwA}^c]
-        \morphism/=/<1800,-1800>[
+          c\delta_A^w`
+          \delta_{wA}^c`]
+        \qtriangle(0,-400)|mmm|/`<-`/<800,800>[
+          cwA``
+          c^2wA;
+          `
+          c\delta_{wA}^c`]
+        \ptriangle(800,0)|amm|/->``<-/<800,400>[
+          cw^2A`
+          c^2w^2A`
+          c^2wA;
+          \delta_{w^2A}^c``
+          c^2\delta_A^w]
+        \ptriangle(800,-400)|mmm|/``->/<800,800>[
+          `
+          c^2w^2A`
+          c^2wA;
+          ``
+          c^2w\varepsilon_A^w]
+        \morphism(800,0)/=/<0,-400>[c^2wA`c^2wA;]
+        \btriangle(0,-800)/=``<-/<800,1200>[
           cwA`
-          cwA;
-          ]
+          cwA`
+          cwcA;
+          ``
+          cw\varepsilon_A^c]
+        \dtriangle(800,-800)/`->`<-/<800,1200>[
+          c^2w^2A`
+          cwcA`
+          cwcwA;
+          `
+          cdist_{wA}`
+          cwc\varepsilon_A^w]
+        \morphism(800,-400)|m|/->/<0,-400>[c^2wA`cwcA;cdist_A]
+        \ptriangle(800,100)/``/<100,100>[(1)``;``]
+        \ptriangle(600,-100)/``/<100,100>[(2)``;``]
+        \ptriangle(1000,-100)/``/<100,100>[(3)``;``]
+        \ptriangle(400,-600)/``/<100,100>[(4)``;``]
+        \ptriangle(1200,-600)/``/<100,100>[(5)``;``]
       \efig
       \end{mathpar}
       
   \end{itemize}
-\end{proof}
+
+\end{lemma}
 
 
 
-  \end{itemize}
-\end{definition}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
