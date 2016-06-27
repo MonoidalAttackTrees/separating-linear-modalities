@@ -10,6 +10,7 @@
 \usepackage{hyperref}
 \usepackage{mdframed}
 \usepackage[barr]{xy}
+\usepackage{comment}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -819,11 +820,13 @@ TODO \cite{Benton:1994}
 
 \begin{definition}
   \label{def:linear-category}
-  A \textbf{linear category}, $(\cat{L},!,\e{},\d{})$, is specified by
+  A \textbf{linear category}, \todo{Let's change $\e{}$ and $\d{}$ to
+    something else, since we will be using $e$ for the exchange
+    modality.} $(\cat{L},!,\e{},\d{})$, is specified by
   \begin{itemize}
   \item a symmetric monoidal closed category
   	$(\cat{L},I,\otimes,\limp)$,
-  \item a symmetric monoidal comonad $((!,\q{}),\varepsilon,\delta)$ on
+  \item a symmetric monoidal comonad \todo{Replace $(!,\q{})$ with just $!$.}$((!,\q{}),\varepsilon,\delta)$ on
     $\cat{L}$, with $\q{A,B}:!A\otimes !B\mto !(A\otimes B)$ and
     $\q{I}:I\mto !I$;
   \item monoidal natural transformations on $\cat{L}$ with components
@@ -935,11 +938,22 @@ TODO \cite{Benton:1994}
 
 \begin{definition}
   \label{def:weakening}
-  A \textbf{(modified) linear category with weakening}, $(\cat{L},w,\e{})$,
-  is specified by
+  A \todo{Remove modified for each of our new linear category
+    definitions.  Also, don't use $\e{}$ make up a different name
+    because we will use $e$ for the exchange
+    modality.}\textbf{(modified) linear category with weakening},
+  $(\cat{L},w,\e{})$, is specified by
   \begin{itemize}
   \item a monoidal closed category $(\cat{L},I,\otimes)$,
-  \item a monoidal comonad $((w,\q{}),\varepsilon,\delta)$ on $\cat{L}$ with
+    \todo[inline]{Because we are non-symmetric closure is going
+    to be different than the usual notion of ``closed'', and so for
+    now, let's remove ``closed'' from the definitions.  For what we
+    are proving at this point being closed does not play an important
+    role.  We will add it back in later.}
+  \item a monoidal comonad \todo{Replace $(w,\q{})$ with $w$, also,
+    don't use $\q{}$ for all of these definitions, because we will need
+    to keep them all straight, and this can cause confusion.}
+    $((w,\q{}),\varepsilon,\delta)$ on $\cat{L}$ with
     $\q{A,B}:wA\otimes wB\mto w(A\otimes B)$ and $\q{I}:I\mto wI$, and
   \item a monoidal natural transformation $\e{}$ on $\cat{L}$ with
     components $\e{A}:wA\mto I$ s.t. the following diagrams commute:
@@ -974,10 +988,12 @@ TODO \cite{Benton:1994}
 \begin{definition}
   \label{def:contraction}
   A \textbf{(modified) linear category with contraction},
+  \todo[inline]{remove ``modified''}
   $(\cat{L},c,\d{}^1,\d{}^2)$, is specified by
+  \todo[inline]{Instead of $\d{}^i$ what do you think of $\mathsf{contraL}$ and $\mathsf{contraR}$?}
   \begin{itemize}
-  \item a monoidal closed category $(\cat{L},I,\otimes)$,
-  \item a monoidal comonad $((c,\q{}),\varepsilon,\delta)$ on $\cat{L}$ with
+  \item a monoidal \todo{remove ``closed''} closed category $(\cat{L},I,\otimes)$,
+  \item a monoidal comonad \todo{replace $(c,\q{})$ with just $c$.} $((c,\q{}),\varepsilon,\delta)$ on $\cat{L}$ with
     $\q{A,B}:cA\otimes cB\mto c(A\otimes B)$ and $\q{I}:I\mto cI$, and
   \item monoidal natural transformations $\d{}^1$ and $\d{}^2$ on $\cat{L}$
     with components \\
@@ -1067,10 +1083,7 @@ TODO \cite{Benton:1994}
         w\varepsilon_A^c`
         dist_A]
     \efig
-
-%%% This diagram is in Jone's paper but has not been used so far
-\iffalse
-    \and
+      \and
     \bfig
       \Vtriangle|amm|/<-`<-`->/<600,500>[
         cA`
@@ -1080,120 +1093,90 @@ TODO \cite{Benton:1994}
         \varepsilon_{cA}^w`
         dist_A]
     \efig
+%%% This diagram is in Jone's paper but has not been used so far
+\iffalse
+
 \fi
 %%%
-
+\todo[inline]{I am willing to bet that we will also need a coherence
+  diagram involving $\delta$.  This should show up in the proof of the
+  comonad laws.}
   \end{mathpar}
 \end{definition}
 
-
-
 \begin{lemma}
   \label{lem:compose-cw}
-  Let $(c,\varepsilon^c,\delta^c)$ and $(w,\varepsilon^w,\delta^w)$
-  be two monoidal comonads and on a monoidal closed category
-  $(\cat{L},I,\otimes)$ such that $(\cat{L},w,\e{}^w)$ is a
-  (modified) linear category with weakening and
-  $(\cat{L},c,\d{}^{c1},\d{}^{c2})$ is a (modified) linear
-  category with contraction. Then the composition of $c$ and $w$
-  using the distributive law $dist_A:cwA\mto wcA$ for any object
-  $A$ in $\cat{L}$ is a monoidal comonad $(cw,\varepsilon,\delta)$
-  on $\cat{L}$, where for any objects $A,B$ in $\cat{L}$:
+  Let $(c,\varepsilon^c,\delta^c)$ and $(w,\varepsilon^w,\delta^w)$ be
+  two monoidal comonads on a linear category with weakening and
+  contraction
+  $(\cat{L},I,\otimes,w,\e{}^w,c,\d{}^{c1},\d{}^{c2})$. Then the
+  composition of $c$ and $w$ using the distributive law
+  $dist_A:cwA\mto wcA$ is a monoidal comonad $(cw,\varepsilon,\delta)$
+  on $\cat{L}$.
+\end{lemma}
+\begin{proof}
+  Suppose $(c,\varepsilon^c,\delta^c)$ and \\
+  $(w,\varepsilon^w,\delta^w)$ are monoidal comonads, and
+  $(\cat{L},I,\otimes,w,\e{}^w,c,\d{}^{c1},\d{}^{c2})$ is a linear
+  category with weakening and contraction.  Since by definition $w,c :
+  \cat{L} \mto \cat{L}$ are monoidal functors we know that their
+  composition $wc : \cat{L} \mto \cat{L}$ is a monoidal functor:
+  \begin{center}
+    \parbox{10cm}{$\q{A,B}:cwA\otimes cwB\mto cw(A\otimes B)$ is defined as:
+    $\q{A,B} = c\q{A,B}^w\circ\q{wA,wB}^c$, and $\q{I}:I\mto cwI$ is
+    defined as: $\q{I} = c\q{I}^w\circ\q{I}^c$}
+  \end{center}
+
+  We must now define both $\varepsilon_A:cwA\mto A$ and
+  $\delta_A:cwA\mto cwcwA$, and then show that they are monoidal
+  natural transformations subject to the comonad laws. Since we are
+  composing two comonads each of $\varepsilon$ and $\delta$ can be
+  given two definitions, but they are equivalent:
   \begin{itemize}
-    \item $\q{A,B}:cwA\otimes cwB\mto cw(A\otimes B)$ is defined
-      as: $\q{A,B} = c\q{A,B}^w\circ\q{wA,wB}^c$, and
-      $\q{I}:I\mto cwI$ is defined as:
-      $\q{I} = c\q{I}^w\circ\q{I}^c$.
-
-    \item $\varepsilon_A:cwA\mto A$ is defined as in the diagram
-      below, which commutes by the naturality of $\varepsilon^c$.
-      \begin{mathpar}
-        \bfig
-        \square(1050,0)|ammb|/->`->`->`->/<1050,600>[
-          cwA`
-          wA`
-          cA`
-          A;
-          \varepsilon_{wA}^c`
-          c\varepsilon_A^w`
-          \varepsilon_A^w`
-          \varepsilon_A^c]
-        \efig
-      \end{mathpar}
-
-    \item $\delta_A:cwA\mto cwcwA$ is defined as in the diagram:
-      \begin{mathpar}
+  \item $\varepsilon_A:cwA\mto A$ is defined as in the diagram
+    below, which commutes by the naturality of $\varepsilon^c$.
+    \begin{mathpar}
       \bfig
-	\square|amab|/->`->`->`->/<1050,600>[
-	  cwA`
-          cw^2A`
-          c^2wA`
-          c^2w^2A;
-	  c\delta_A^w`
-	  \delta_{wA}^c`
-          \delta_{w^2A}^c`
-          c^2\delta_A^w]
-        \square(1050,0)|ammb|/->``->`->/<1050,600>[
-          cw^2A`
-          c^2w^2A`
-          c^2w^2A`
-          cwcwA;
-	  \delta_{w^2A}^c``
-          cdist_{wA}`
-          cdist_{wA}]
-      \efig
-      \end{mathpar}
-      The left part of the diagram commutes by the naturality
-      of $\delta^c$ and the right part commutes by equality.
-
-    \item $\e{A}:cwA\mto I$ is defined as in
-      \begin{mathpar}
-      \bfig
-      \Atrianglepair/<-`->`->`->`->/<600,600>[
-        wcA`
-	cwA`
-	wA`
-	I;
-        dist_A`
-        w\varepsilon_A^c`
-        \e{cA}^w`
+      \square(1050,0)|ammb|/->`->`->`->/<1050,600>[
+        cwA`
+        wA`
+        cA`
+        A;
         \varepsilon_{wA}^c`
-        \e{A}^w]
+        c\varepsilon_A^w`
+        \varepsilon_A^w`
+        \varepsilon_A^c]
       \efig
-      \end{mathpar}
-      The left triangle commutes by the definition of $dist$
-      and the right triangle commutes by the definition of
-      $\e{}^w$.
+    \end{mathpar}
 
-    \item $\d{A}:cwA\mto cwA\otimes cwA$ is defined as in
-      \begin{mathpar}
-        \bfig
-        \square/->`->``->/<1050,600>[
-          cwA`
-          cwA\otimes I`
-          I\otimes cwA`
-          cwA\otimes(I\otimes cwA);
-          \rho_{cwA}^{-1}`
-          \lambda_{cwA}^{-1}``
-          \d{wA,I}^{c2}]
-        \ptriangle(1050,0)/->``/<1050,600>[
-          cwA\otimes I`
-          (cwA\otimes I)\otimes cwA`
-          cwA\otimes(I\otimes cwA);
-          \d{wA,I}^{c1}``]
-        \dtriangle(1050,0)/->`->`->/<1050,600>[
-          (cwA\otimes I)\otimes cwA`
-          cwA\otimes(I\otimes cwA)`
-          cwA\otimes cwA;
-          \alpha_{cwA,I,cwA}`
-          \rho_{cwA}\otimes id_{cwA}`
-          id_{cwA}\otimes\lambda_{cwA}]
-        \efig
-      \end{mathpar}
-      The left part of the diagram commutes by the definitions of
-      $\d{}^{c1}$ and of $\d{}^{c2}$, and the right part commutes because
-      $\cat{L}$ is monoidal.
+  \item $\delta_A:cwA\mto cwcwA$ is defined as in the diagram:
+    \begin{mathpar}
+      \bfig
+      \square|amab|/->`->`->`->/<1050,600>[
+	cwA`
+        cw^2A`
+        c^2wA`
+        c^2w^2A;
+	c\delta_A^w`
+	\delta_{wA}^c`
+        \delta_{w^2A}^c`
+        c^2\delta_A^w]
+      \square(1050,0)|ammb|/->``->`->/<1050,600>[
+        cw^2A`
+        c^2w^2A`
+        c^2w^2A`
+        cwcwA;
+	\delta_{w^2A}^c``
+        cdist_{wA}`
+        cdist_{wA}]
+      \efig
+    \end{mathpar}
+    The left part of the diagram commutes by the naturality
+    of $\delta^c$ and the right part commutes trivially.
+  \end{itemize}
 
+  The remainder of the proof shows that the comonad laws hold.
+  \begin{itemize}     
     \item The comonad law
       $cw\delta_A\circ\delta_A=\delta_{cwA}\circ\delta_A$, expressed in
       the diagram below,
@@ -1279,6 +1262,10 @@ TODO \cite{Benton:1994}
           ``]
       \efig
       \end{mathpar}
+      \todo[inline]{I am not sure how the previous diagram follows
+        from this diagram?  Notice that it is not part of this in
+        anyway.  The way this should be proven is to simply expand the
+        first diagram, and then fill it in with diagrams.}
     \item The comonad law
       $cw\varepsilon_A\circ\delta_A=\varepsilon_{cwA}\circ\delta_A=id_{cwA}$,
       expressed in the diagram below,
@@ -1346,12 +1333,20 @@ TODO \cite{Benton:1994}
         \ptriangle(1600,-500)/``/<100,100>[(6)``;``]
       \efig
       \end{mathpar}
-
-      The right triangle is expanded in the following diagram chasing. (1)
-      commutes by the naturality of $\delta^c$. (2) is the comonad law for
-      $c$ with components $\delta_{wA}^c$ and $\varepsilon_{wA}^c$. (3) is
-      the comonad law for $w$ with components $\delta_A^w$ and
-      $\varepsilon_A^w$. (3) and (4) commute by the definition of $dist$.
+      \todo[inline]{Diagram 4 is not a diagram notice there is no
+        parallel paths, and diagram 3 commutes by a the one from
+        Jone's.  Diagrams 4, 5, and 6 do not commute, and hence need
+        to be fixed.  In fact, the arrow $cw\varepsilon^c_{wA}$ is
+        incorrectly applied, this does not typecheck!  Any diagram
+        that if commutes *defines* $\text{dist}$ will not commute.
+        Also, make this diagram wider so that labels on arrows are not
+        intersecting with other arrows.}  The right triangle is
+      expanded in the following diagram chasing. (1) commutes by the
+      naturality of $\delta^c$. (2) is the comonad law for $c$ with
+      components $\delta_{wA}^c$ and $\varepsilon_{wA}^c$. (3) is the
+      comonad law for $w$ with components $\delta_A^w$ and
+      $\varepsilon_A^w$. (3) and (4) commute by the definition of
+      $dist$.
       \begin{mathpar}
       \bfig
         \qtriangle|amm|/->`->`/<800,400>[
@@ -1401,11 +1396,60 @@ TODO \cite{Benton:1994}
       \end{mathpar}
       
   \end{itemize}
-
-\end{lemma}
-
+\end{proof}
 
 
+\begin{comment}
+  These will go into their own lemma/proof.
+
+\item $\e{A}:cwA\mto I$ is defined as in
+    \begin{mathpar}
+      \bfig
+      \Atrianglepair/<-`->`->`->`->/<600,600>[
+        wcA`
+	cwA`
+	wA`
+	I;
+        dist_A`
+        w\varepsilon_A^c`
+        \e{cA}^w`
+        \varepsilon_{wA}^c`
+        \e{A}^w]
+      \efig
+      \end{mathpar}
+      The left triangle commutes by the definition of $dist$
+      and the right triangle commutes by the definition of
+      $\e{}^w$.
+
+    \item $\d{A}:cwA\mto cwA\otimes cwA$ is defined as in
+      \begin{mathpar}
+        \bfig
+        \square/->`->``->/<1050,600>[
+          cwA`
+          cwA\otimes I`
+          I\otimes cwA`
+          cwA\otimes(I\otimes cwA);
+          \rho_{cwA}^{-1}`
+          \lambda_{cwA}^{-1}``
+          \d{wA,I}^{c2}]
+        \ptriangle(1050,0)/->``/<1050,600>[
+          cwA\otimes I`
+          (cwA\otimes I)\otimes cwA`
+          cwA\otimes(I\otimes cwA);
+          \d{wA,I}^{c1}``]
+        \dtriangle(1050,0)/->`->`->/<1050,600>[
+          (cwA\otimes I)\otimes cwA`
+          cwA\otimes(I\otimes cwA)`
+          cwA\otimes cwA;
+          \alpha_{cwA,I,cwA}`
+          \rho_{cwA}\otimes id_{cwA}`
+          id_{cwA}\otimes\lambda_{cwA}]
+        \efig
+      \end{mathpar}
+      The left part of the diagram commutes by the definitions of
+      $\d{}^{c1}$ and of $\d{}^{c2}$, and the right part commutes because
+      $\cat{L}$ is monoidal.
+\end{comment}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
