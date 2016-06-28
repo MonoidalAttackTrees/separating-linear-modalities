@@ -1,5 +1,4 @@
 \documentclass{article}
-%\usepackage[margin=1in]{geometry}
 \usepackage{amssymb,amsmath}
 \usepackage{amsthm}
 \usepackage{cmll}
@@ -12,6 +11,9 @@
 \usepackage{mdframed}
 \usepackage[barr]{xy}
 \usepackage{comment}
+
+\usepackage{caption}
+\captionsetup[figure]{name=Diagram}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -1593,6 +1595,7 @@ TODO \cite{Benton:1994}
 
     \item $\e{}$ and $\d{}$ are coalgebra morphisms, i.e. the following
       diagrams commute:
+      \begin{figure}[!h]
       \begin{mathpar}
       \bfig
         \square|amma|/->`->`->`->/<1000,500>[
@@ -1606,6 +1609,11 @@ TODO \cite{Benton:1994}
 	cw\e{A}]
       \efig
       \end{mathpar}
+      \caption{Coalgebra Morphism 1}
+      \label{fig:coalgebra-morph-1}
+      \end{figure}
+
+      \begin{figure}[!h]
       \begin{mathpar}
       \bfig
 	\square|amab|/->`->``/<1050,600>[
@@ -1623,12 +1631,16 @@ TODO \cite{Benton:1994}
           \morphism(0,0)<2100,0>[cwcwA`cw(cwA\otimes cwA);cw\d{A}]
       \efig
       \end{mathpar}
+      \caption{Coalgebra Morphism 2}
+      \label{fig:coalgebra-morph-2}
+      \end{figure}
       
-      We show that the first diagram above commutes by the diagram below.
-      (1) commutes by the naturality of $\delta^c$. (2) commutes by the
-      condition of $dist_{wA}$. (3), (5) and (6) commute because $c$ is a
-      monoidal comonad. (4) commutes because $(\cat{L},w,\e{}^w$ is a
-      linear category with weakening. (7) commutes by equality.
+      We show that Diagram~\ref{fig:coalgebra-morph-1} commutes by the
+      diagram below. (1) commutes by the naturality of $\delta^c$. (2)
+      commutes by the condition of $dist_{wA}$. (3), (5) and (6) commute
+      because $c$ is a monoidal comonad. (4) commutes because
+      $(\cat{L},w,\e{}^w$ is a linear category with weakening. (7)
+      commutes by equality.
       \begin{mathpar}
       \bfig
         \square/->`->``/<800,400>[
@@ -1675,6 +1687,249 @@ TODO \cite{Benton:1994}
         \ptriangle(1200,100)/``/<100,100>[(5)``;``]
         \ptriangle(1450,-100)/``/<100,100>[(6)``;``]
         \ptriangle(1450,-500)/``/<100,100>[(7)``;``]
+      \efig
+      \end{mathpar}
+
+      To prove Diagram~\ref{fig:coalgebra-morph-2} commutes, we first
+      expand it, Then we divide it into three parts and prove each part
+      commutes, as shown below.
+      \begin{mathpar}
+      \bfig
+        \square/->`->``/<800,500>[
+          cwA`
+          cwA\otimes I`
+          cw^2A`;
+          \rho_{cwA}^{-1}`
+          c\delta_A^w``]
+        \morphism(800,500)<1000,0>[
+          cwA\otimes I`
+          (cwA\otimes I)\otimes cwA;
+          \d{wA,I}^{c1}]
+        \square(1800,200)/->``->`/<1200,300>[
+          (cwA\otimes I)\otimes cwA`
+          cwA\otimes cwA``
+          c^2wA\otimes c^2wA;
+          \rho_{cwA}\otimes id_{cwA}``
+          \delta_{wA}^c\delta_{wA}^c`]
+        \morphism(3000,200)|r|<0,-300>[
+          c^2wA\otimes c^2wA`
+          c^2w^2A\otimes c^2w^2A;
+          c^2\delta_A^w\otimes c^2\delta_A^w]
+        \morphism(3000,-100)|r|<0,-300>[
+          c^2w^2A\otimes c^2w^2A`
+          cwcwA\otimes cwcwA;
+          cdist_{wA}\otimes cdist_{wA}]
+        \morphism(3000,-400)|r|<0,-300>[
+          cwcwA\otimes cwcwA`
+          c(wcwA\otimes wcwA);
+          \q{wcwA,wcwA}^c]
+        \square(1800,-1000)/``->`->/<1200,300>[
+          `
+          c(wcwA\otimes wcwA)`
+          cw((cwA\otimes I)\otimes cwA)`
+          cw(cwA\otimes cwA);
+          ``
+          c\q{cwA,cwA}^w`
+          cw(\rho_{cwA}\otimes id_{cwA})]
+        \morphism(800,-1000)|b|<1000,0>[
+          cw(cwA\otimes I)`
+          cw((cwA\otimes I)\otimes cwA);
+          cw\d{wA,I}^{c1}]
+        \morphism(0,-1000)|b|<800,0>[
+          cwcwA`
+          cw(cwA\otimes I);
+          cw\rho_{cwA}^{-1}]
+        \morphism<0,-500>[
+          cw^2A`
+          c^2w^2A;
+          \delta_{w^2A}^c]
+        \morphism(0,-500)<0,-500>[
+          c^2w^2A`
+          cwcwA;
+          cdist_{wA}]
+        \morphism(800,-250)|m|<0,750>[
+          w(cwA\otimes I)`
+          cwA\otimes I;
+          \varepsilon_{cwA\otimes I}^w]
+        \morphism(800,-1000)|m|<0,750>[
+          cw(cwA\otimes I)`
+          w(cwA\otimes I);
+          \varepsilon_{w(cwA\otimes I)}^c]
+        \morphism(1800,-250)|m|<1200,750>[
+          w(cwA\otimes cwA)`
+          cwA\otimes cwA;
+          \varepsilon_{cwA\otimes cwA}^w]
+        \morphism(3000,-1000)|m|<-1200,750>[
+          cw(cwA\otimes cwA)`
+          w(cwA\otimes cwA);
+          \varepsilon_{w(cwA\otimes cwA)}^c]
+        \ptriangle(400,-250)/``/<100,100>[(a)``;``]
+        \ptriangle(1300,-250)/``/<100,100>[(b)``;``]
+        \ptriangle(2400,-250)/``/<100,100>[(c)``;``]
+      \efig
+      \end{mathpar}
+      Part (a) commutes by the following diagram chase. (1) is equality.
+      (2) is the comonad law for $w$. (3) is the comonad law for $c$.
+      (4) commutes by the naturality of $\varepsilon^c$. (5) is one of
+      the conditions for $dist_{wA}$. (6) commutes by the naturality of
+      $\varepsilon^w$. And (7) commutes by the naturality of
+      $\varepsilon^c$.
+      \begin{mathpar}
+      \bfig
+        \btriangle|lmm|/->`->`=/<600,600>[
+          cwA`
+          cw^2A`
+          cw^2A;
+          c\delta_A^w`
+          c\delta_A^w`]
+        \morphism(0,600)|m|/=/<1200,-600>[cwA`cwA;]
+        \ptriangle(0,-600)|mlm|/`->`<-/<600,600>[
+          cw^2A`
+          cw^2A`
+          c^2w^2A;
+          `
+          \delta_{w^2A}^c`
+          \varepsilon_{cw^2A}^c]
+        \ptriangle(600,-600)|mmm|/->`->`<-/<600,600>[
+          cw^2A`
+          cwA`
+          wcwA;
+          c\varepsilon_{wA}^w`
+          dist_{wA}`
+          \varepsilon_{cwA}^w]
+        \ptriangle(0,-1000)|mlm|/`->`<-/<600,400>[
+          c^2w^2A`
+          wcwA`
+          cwcwA;
+          `
+          cdist_{wA}`
+          \varepsilon_{wcwA}]
+        \square(0,-600)/->``<-`/<1800,1200>[
+          cwA`
+          cwA\otimes I``
+          w(cwA\otimes I);
+          \rho_{cwA}^{-1}``
+          \varepsilon_{cwA\otimes I}^w`]
+        \square(600,-1000)|mmrm|/->``<-`/<1200,400>[
+          wcwA`
+          w(cwA\otimes I)``
+          cw(cwA\otimes I);
+          w\rho_{cwA}^{-1}``
+          \varepsilon_{w(cwA\otimes I)}^c`]
+        \morphism(0,-1000)|b|<1800,0>[
+          cwcwA`
+          cw(cwA\otimes I);
+          cw\rho_{cwA}^{-1}]
+        \ptriangle(200,100)/``/<100,100>[(1)``;``]
+        \ptriangle(650,50)/``/<100,100>[(2)``;``]
+        \ptriangle(200,-300)/``/<100,100>[(3)``;``]
+        \ptriangle(350,-650)/``/<100,100>[(4)``;``]
+        \ptriangle(800,-300)/``/<100,100>[(5)``;``]
+        \ptriangle(1500,-100)/``/<100,100>[(6)``;``]
+        \ptriangle(1100,-900)/``/<100,100>[(7)``;``]
+      \efig
+      \end{mathpar}
+
+      Part (b) commutes by the following diagram chase. The upper two
+      squares both commute by the naturality of $\varepsilon^w$, and the
+      lower two squares commute by the naturality of $\varepsilon^c$.
+      \begin{mathpar}
+      \bfig
+        \square|almm|/->`<-`<-`->/<1100,400>[
+          cwA\otimes I`
+          (cwA\otimes I)\otimes cwA`
+          w(cwA\otimes I)`
+          w((cwA\otimes I)\otimes cwA);
+          \d{wA,I}^{c1}`
+          \varepsilon_{cwA\otimes I}^w`
+          \varepsilon_{(cwA\otimes I)\otimes cwA}^w`
+          w\d{wA,I}^{c1}]
+        \square(0,-400)|mlmb|/`<-`<-`->/<1100,400>[
+          w(cwA\otimes I)`
+          w((cwA\otimes I)\otimes cwA)`
+          cw(cwA\otimes I)`
+          cw((cwA\otimes I)\otimes cwA);
+          `
+          \varepsilon_{w(cwA\otimes I)}^c`
+          \varepsilon_{w((cwA\otimes I)\otimes A)}^c`
+          cw\d{wA,I}^{c1}]
+        \square(1100,0)|ammm|/->``<-`->/<1400,400>[
+          (cwA\otimes I)\otimes cwA`
+          cwA\otimes cwA`
+          w((cwA\otimes I)\otimes cwA)`
+          w(cwA\otimes cwA);
+          \rho_{cwA}\otimes id_{cwA}``
+          \varepsilon_{cwA\otimes cwA}^w`
+          w(\rho_{cwA}\otimes id_{cwA})]
+        \square(1100,-400)|mmrb|/``<-`->/<1400,400>[
+          w((cwA\otimes I)\otimes cwA)`
+          w(cwA\otimes cwA)`
+          cw((cwA\otimes I)\otimes cwA)`
+          cw(cwA\otimes cwA);
+          ``
+          \varepsilon_{w(cwA\otimes cwA)}^c`
+          cw(\rho_{cwA}\otimes id_{cwA})]
+      \efig
+      \end{mathpar}
+
+      Part (c) commutes by the following diagram. (1) and (2) are
+      the comonad law. (3) commutes by the condition of $dist_{wA}$.
+      (4) and (6) commute by the naturality of $\varepsilon^c$. (5) and
+      (7) commute because $w$ and $c$ are monoidal comonads.
+      \begin{mathpar}
+      \bfig
+        \qtriangle|amm|/->`<-`=/<1300,400>[
+          cwA\otimes cwA`
+          cw^2A\otimes cw^2A`
+          cw^2A\otimes cw^2A;
+          c\delta_A^w\otimes c\delta_A^w`
+          c\varepsilon_{wA}^w\otimes c\varepsilon_{wA}^w`]
+        \ptriangle(1300,0)|amm|/->``->/<1300,400>[
+          cw^2A\otimes cw^2A`
+          c^2w^2A\otimes c^2w^2A`
+          cw^2A\otimes cw^2A;
+          \delta_{w^2A}^c\otimes\delta_{w^2A}^c``
+          \varepsilon_{cw^2A}\otimes\varepsilon_{cw^2A}]
+        \morphism(1300,0)|m|<0,-400>[
+          cw^2A\otimes cw^2A`
+          wcwA\otimes wcwA;
+          dist_{wA}\otimes dist_{wA}]
+        \morphism(0,400)|m|/<-/<1300,-800>[
+          cwA\otimes cwA`
+          wcwA\otimes wcwA;
+          \varepsilon_{cwA}^w\otimes\varepsilon_{cwA}^w]
+        \square(0,-800)|alab|/`<-``<-/<1300,1200>[
+          cwA\otimes cwA``
+          w(cwA\otimes cwA)`
+          cw(cwA\otimes cwA);
+          `
+          \varepsilon_{cwA\otimes cwA}^w``
+          \varepsilon_{w(cwA\otimes cwA)}^c]
+        \Atriangle(0,-800)|mmm|/->`<-`/<1300,400>[
+          wcwA\otimes wcwA`
+          w(cwA\otimes cwA)`
+          c(wcwA\otimes wcwA);
+          \q{cwA,cwA}^w`
+          \varepsilon_{wcwA\otimes wcwA}^c`]
+        \square(1300,-800)|mmrb|/<-``->`<-/<1300,400>[
+          wcwA\otimes wcwA`
+          cwcwA\otimes cwcwA`
+          cw(cwA\otimes cwA)`
+          c(wcwA\otimes wcwA);
+          \varepsilon_{wcwA}^c\otimes\varepsilon_{wcwA}^c``
+          \q{wcwA,wcwA}^c`
+          c\q{cwA,cwA}^w]
+        \morphism(2600,400)|r|<0,-800>[
+          c^2w^2A\otimes c^2w^2A`
+          cwcwA\otimes cwcwA;
+          cdist_{wA}\otimes cdist_{wA}]
+        \ptriangle(1000,150)/``/<100,100>[(1)``;``]
+        \ptriangle(1600,150)/``/<100,100>[(2)``;``]
+        \ptriangle(1000,-200)/``/<100,100>[(3)``;``]
+        \ptriangle(1950,-200)/``/<100,100>[(4)``;``]
+        \ptriangle(500,-400)/``/<100,100>[(5)``;``]
+        \ptriangle(1300,-700)/``/<100,100>[(6)``;``]
+        \ptriangle(2200,-650)/``/<100,100>[(7)``;``]
       \efig
       \end{mathpar}
 
