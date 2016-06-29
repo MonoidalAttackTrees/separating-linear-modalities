@@ -11,6 +11,7 @@
 \usepackage{mdframed}
 \usepackage[barr]{xy}
 \usepackage{comment}
+\usepackage{graphicx}
 
 \usepackage{caption}
 \captionsetup[figure]{name=Diagram}
@@ -77,19 +78,23 @@
 \newcommand{\inn}[0]{\,\mathsf{in}\,}
 \newcommand{\cur}[1]{\mathsf{cur}(#1)}
 \newcommand{\curi}[1]{\mathsf{cur}^{-1}(#1)}
+
+\newcommand{\w}[1]{\mathsf{weak}_{#1}}
+\newcommand{\c}[1]{\mathsf{contra}_{#1}}
+\newcommand{\cL}[1]{\mathsf{contraL}_{#1}}
+\newcommand{\cR}[1]{\mathsf{contraR}_{#1}}
+\newcommand{\e}[1]{\mathsf{ex}_{#1}}
+
 \newcommand{\m}[1]{\mathsf{m}_{#1}}
 \newcommand{\n}[1]{\mathsf{n}_{#1}}
 \newcommand{\b}[1]{\mathsf{b}_{#1}}
 \newcommand{\d}[1]{\mathsf{d}_{#1}}
-\newcommand{\e}[1]{\mathsf{e}_{#1}}
 \newcommand{\h}[1]{\mathsf{h}_{#1}}
 \newcommand{\p}[1]{\mathsf{p}_{#1}}
 \newcommand{\q}[1]{\mathsf{q}_{#1}}
 \newcommand{\t}[0]{\mathsf{t}}
 \newcommand{\r}[1]{\mathsf{r}_{#1}}
 \newcommand{\s}[1]{\mathsf{s}_{#1}}
-\newcommand{\w}[1]{\mathsf{w}_{#1}}
-\newcommand{\c}[1]{\mathsf{c}_{#1}}
 \newcommand{\j}[1]{\mathsf{j}_{#1}}
 \newcommand{\jinv}[1]{\mathsf{j}^{-1}_{#1}}
 \newcommand{\wn}[0]{\mathop{?}}
@@ -823,9 +828,7 @@ TODO \cite{Benton:1994}
 
 \begin{definition}
   \label{def:linear-category}
-  A \textbf{linear category}, \todo{Let's change $\e{}$ and $\d{}$ to
-  something else, since we will be using $e$ for the exchange
-  modality.} $(\cat{L},!,\e{},\d{})$, is specified by
+  A \textbf{linear category}, $(\cat{L},!,\w{},\c{})$, is specified by
   \begin{itemize}
   \item a symmetric monoidal closed category
   	$(\cat{L},I,\otimes,\limp)$,
@@ -833,12 +836,12 @@ TODO \cite{Benton:1994}
     $\cat{L}$, with $\q{A,B}:!A\otimes !B\mto !(A\otimes B)$ and
     $\q{I}:I\mto !I$;
   \item monoidal natural transformations on $\cat{L}$ with components
-    $\e{A}:!A\mto I$ and\\
-    $\d{A}:!A\mto !A\otimes !A$, s.t.
+    $\w{A}:!A\mto I$ and\\
+    $\c{A}:!A\mto !A\otimes !A$, s.t.
 
     \begin{itemize}
-    \item each $(!A,\e{A},\d{A})$ is a commutative comonoid, i.e.
-      the following diagrams commute and $\beta\circ\d{A}=\d{A}$ where
+    \item each $(!A,\w{A},\c{A})$ is a commutative comonoid, i.e.
+      the following diagrams commute and $\beta\circ\c{A}=\c{A}$ where
       $\beta_{B,C}:B\otimes C\mto C\otimes B$ is the symmetry natural
       transformation of $\cat{L}$;
       \begin{mathpar}
@@ -847,33 +850,36 @@ TODO \cite{Benton:1994}
 	  !A`
 	  !A\otimes !A`
 	  !A\otimes !A`;
-	  \d{A}`
-	  \d{A}``]
+	  \c{A}`
+	  \c{A}``]
         \square(1050,0)/->``<-`/<1050,600>[
 	  !A\otimes !A`
 	  !A\otimes(!A\otimes !A)``
 	  (!A\otimes !A)\otimes !A;
-	  id_{!A}\otimes\d{A}``
+	  id_{!A}\otimes\c{A}``
 	  \alpha_{!A,!A,!A}`]
-          \morphism(0,0)|b|<2100,0>[!A\otimes !A`(!A\otimes !A)\otimes !A;\d{A}\otimes id_{!A}]
+          \morphism(0,0)|b|<2100,0>[
+            !A\otimes !A`
+            (!A\otimes !A)\otimes !A;
+            \c{A}\otimes id_{!A}]
 	\efig
       \end{mathpar}
       \begin{mathpar}
       \bfig
-      \Atrianglepair/<-`->`<-`<-`->/<600,600>[
+      \Atrianglepair/<-`->`<-`<-`->/<800,600>[
         !A`
 	I\otimes !A`
 	!A\otimes !A`
 	!A\otimes I;
 	\lambda`
-	\d{A}`
+	\c{A}`
 	\rho`
-	\e{A}\otimes id_{!A}`
-	id_{!A}\otimes\e{A}]
+	\w{A}\otimes id_{!A}`
+	id_{!A}\otimes\w{A}]
       \efig
       \end{mathpar}
 
-    \item $\e{A}$ and $\d{A}$ are coalgebra morphisms, i.e. the
+    \item $\w{A}$ and $\c{A}$ are coalgebra morphisms, i.e. the
       following diagrams commute;
       \begin{mathpar}
       \bfig
@@ -882,10 +888,10 @@ TODO \cite{Benton:1994}
 	I`
 	!!A`
 	!I;
-	\e{A}`
+	\w{A}`
 	\delta{A}`
 	\q{I}`
-	!\e{A}]
+	!\w{A}]
       \efig
       \end{mathpar}
       \begin{mathpar}
@@ -894,7 +900,7 @@ TODO \cite{Benton:1994}
 	  !A`
 	  !A\otimes !A`
 	  !!A`;
-	  \d{A}`
+	  \c{A}`
 	  \delta_A``]
         \square(1050,0)/->``->`/<1050,600>[
 	  !A\otimes !A`
@@ -902,13 +908,13 @@ TODO \cite{Benton:1994}
 	  !(!A\otimes !A);
 	  \delta_A\otimes\delta_A``
 	  \q{!A,!A}`]
-          \morphism(0,0)<2100,0>[!!A`!(!A\otimes !A);!\d{A}]
+          \morphism(0,0)<2100,0>[!!A`!(!A\otimes !A);!\c{A}]
       \efig
       \end{mathpar}
 
     \item any coalgebra morphism $f:(!A,\delta_A)\mto (!B,\delta_B)$
       between free coalgebras preserve the comonoid structure given
-      by $\e{}$ and $\d{}$, i.e. the following diagrams commute.
+      by $\w{}$ and $\c{}$, i.e. the following diagrams commute.
       \begin{mathpar}
       \bfig
         \Vtriangle/->`->`->/<600,500>[
@@ -916,8 +922,8 @@ TODO \cite{Benton:1994}
           !B`
           I;
 	  !f`
-	  \e{A}`
-	  \e{B}]
+	  \w{A}`
+	  \w{B}]
       \efig
       \and
       \bfig
@@ -926,10 +932,10 @@ TODO \cite{Benton:1994}
 	!A\otimes !A`
 	!B`
 	!B\otimes !B;
-	\d{A}`
+	\c{A}`
 	f`
 	f\otimes f`
-	\d{B}]
+	\c{B}]
       \efig
       \end{mathpar}
 
@@ -941,14 +947,14 @@ TODO \cite{Benton:1994}
 
 \begin{definition}
   \label{def:weakening}
-  A \textbf{linear category with weakening}, $(\cat{L},w,\e{})$, is
+  A \textbf{linear category with weakening}, $(\cat{L},w,\w{})$, is
   specified by
   \begin{itemize}
   \item a monoidal category $(\cat{L},I,\otimes)$,
   \item a monoidal comonad $(w,\varepsilon,\delta)$ on $\cat{L}$ with
     $\q{A,B}:wA\otimes wB\mto w(A\otimes B)$ and $\q{I}:I\mto wI$, and
-  \item a monoidal natural transformation $\e{}$ on $\cat{L}$ with
-    components $\e{A}:wA\mto I$ s.t. the following diagrams commute:
+  \item a monoidal natural transformation $\w{}$ on $\cat{L}$ with
+    components $\w{A}:wA\mto I$ s.t. the following diagrams commute:
   \end{itemize}
   \begin{mathpar}
     \bfig
@@ -957,10 +963,10 @@ TODO \cite{Benton:1994}
       I`
       wwA`
       wI;
-      \e{A}`
+      \w{A}`
       \delta{A}`
       \q{I}`
-      w\e{A}]
+      w\w{A}]
     \efig
     \and
     \bfig
@@ -969,8 +975,8 @@ TODO \cite{Benton:1994}
       wB`
       I;
       wf`
-      \e{A}`
-      \e{B}]
+      \w{A}`
+      \w{B}]
     \efig
   \end{mathpar}
 \end{definition}
@@ -979,17 +985,17 @@ TODO \cite{Benton:1994}
 
 \begin{definition}
   \label{def:contraction}
-  A \textbf{linear category with contraction},
-  $(\cat{L},c,\d{}^1,\d{}^2)$, is specified by
-  \todo[inline]{Instead of $\d{}^i$ what do you think of $\mathsf{contraL}$ and $\mathsf{contraR}$?}
+  A \textbf{linear category with contraction}, $(\cat{L},c,\cL{},\cR{})$,
+  is specified by
   \begin{itemize}
   \item a monoidal category $(\cat{L},I,\otimes)$,
   \item a monoidal comonad $(c,\varepsilon,\delta)$ on $\cat{L}$ with
-    $\q{A,B}:cA\otimes cB\mto c(A\otimes B)$ and $\q{I}:I\mto cI$, and
-  \item monoidal natural transformations $\d{}^1$ and $\d{}^2$ on $\cat{L}$
+    $\q{A,B}:cA\otimes cB\mto c(A\otimes B)$ and \\
+    $\q{I}:I\mto cI$, and
+  \item monoidal natural transformations $\cL{}$ and $\cL{}$ on $\cat{L}$
     with components \\
-    $\d{A,B}^1:cA\otimes B\mto (cA\otimes B)\otimes cA$ and 
-    $\d{A,B}^2:B\otimes cA\mto cA\otimes (B\otimes cA)$, s.t. the following
+    $\cL{A,B}:cA\otimes B\mto (cA\otimes B)\otimes cA$ and 
+    $\cR{A,B}:B\otimes cA\mto cA\otimes (B\otimes cA)$, s.t. the following
     diagram commutes:
     \begin{mathpar}
       \bfig
@@ -998,13 +1004,13 @@ TODO \cite{Benton:1994}
         cA`
         (cA\otimes I)\otimes cA`;
 	\rho_{cA}^{-1}`
-	\d{A,I}^1``]
+	\cL{A,I}``]
       \square(1050,0)/->``->`/<1050,600>[
         cA`
         I\otimes cA``
         cA\otimes(I\otimes cA);
         \lambda_{cA}^{-1}``
-	\d{A,I}^2`]
+	\cR{A,I}`]
         \morphism(0,0)<2100,0>[(cA\otimes I)\otimes cA`cA\otimes(I\otimes cA);\alpha_{cA,I,cA}]
       \efig
     \end{mathpar}
@@ -1093,7 +1099,7 @@ TODO \cite{Benton:1994}
         cwc^2A`
         c^2wcA;
         cw\delta_A^c`
-        \delta_{wAc}^c`
+        \delta_{wcA}^c`
         cdist_{cA}]
     \efig
     \and
@@ -1106,9 +1112,6 @@ TODO \cite{Benton:1994}
         \delta_{cwA}^w`
         wdist_{wA}]
     \efig
-    \todo[inline]{I am willing to bet that we will also need a coherence
-    diagram involving $\delta$.  This should show up in the proof of the
-    comonad laws. JJ: Two diagrams for $\delta$ are added.}
   \end{mathpar}
 \end{definition}
 
@@ -1119,7 +1122,7 @@ TODO \cite{Benton:1994}
   Let $(c,\varepsilon^c,\delta^c)$ and $(w,\varepsilon^w,\delta^w)$ be
   two monoidal comonads on a linear category with weakening and
   contraction
-  $(\cat{L},I,\otimes,w,\e{}^w,c,\d{}^{c1},\d{}^{c2})$. Then the
+  $(\cat{L},I,\otimes,w,\w{}^w,c,\cL{}^c,\cR{}^c)$. Then the
   composition of $c$ and $w$ using the distributive law
   $dist_A:cwA\mto wcA$ is a monoidal comonad $(cw,\varepsilon,\delta)$
   on $\cat{L}$.
@@ -1127,7 +1130,7 @@ TODO \cite{Benton:1994}
 \begin{proof}
   Suppose $(c,\varepsilon^c,\delta^c)$ and \\
   $(w,\varepsilon^w,\delta^w)$ are monoidal comonads, and
-  $(\cat{L},I,\otimes,w,\e{}^w,c,\d{}^{c1},\d{}^{c2})$ is a linear
+  $(\cat{L},I,\otimes,w,\w{}^w,c,\cL{}^c,\cR{}^c)$ is a linear
   category with weakening and contraction.  Since by definition $w,c :
   \cat{L} \mto \cat{L}$ are monoidal functors we know that their
   composition $wc : \cat{L} \mto \cat{L}$ is a monoidal functor:
@@ -1204,28 +1207,25 @@ TODO \cite{Benton:1994}
     \efig
     \end{mathpar}
     is satisfied by proving $cw\delta_A=\delta_{cwA}$, as in the following
-    diagram chasing. (1) and (3) commutes by the naturality of $\delta^c$.
-    (2), (4) and (5) commute by the conditions of $dist$.
+    diagram chasing. (1) commutes by equality and we will not expand
+    $\delta_A$ for simplicity. (2) and (4) commutes by the naturality of
+    $\delta^c$. (3), (5) and (6) commute by the conditions of $dist$.
     \begin{mathpar}
     \bfig
-      \Vtriangle|ama|/`->`/<700,400>[
+      \ptriangle/->`->`=/<700,400>[
+        cwA`
         cwcwA`
-        `
-        c^2wcwA;
-        `
-        \delta_{wcwA}^c`
-        ]
-      \dtriangle(700,0)|amm|/`->`->/<900,400>[
+        cwcwA;
+        \delta_A`
+        \delta_A`]
+      \square(700,0)|amm|/->`->`->`/<900,400>[
+        cwcwA`
         cwcw^2A`
         c^2wcwA`
         c^2wcw^2A;
-        `
-        \delta_{wcw^2A}^c`
-        c^2wc\delta_A^w]
-      \morphism(0,400)|a|<1600,0>[
-        cwcwA`
-        cwcw^2A;
-        cwc\delta_A^w]
+        cwc\delta_A^w`
+        \delta_{wcwA}^c`
+        \delta_{wcw^2A}^c`]
       \ptriangle(1600,0)|amm|/->``<-/<1100,400>[
         cwcw^2A`
         cwc^2w^2A`
@@ -1233,21 +1233,21 @@ TODO \cite{Benton:1994}
         cw\delta_{w^2A}^c`
         `
         cdist_{cw^2A}]
-      \qtriangle(700,-600)|mmm|/`->`<-/<900,600>[
+      \qtriangle(700,-600)|mmm|/->`->`<-/<900,600>[
         c^2wcwA`
         c^2wcw^2A`
         c^2w^2cwA;
-        `
+        c^2wc\delta_A^w`
         c^2\delta_{cwA}^w`
         c^2wdist_{wA}]
-      \btriangle(0,-600)/->``->/<1600,1000>[
+      \btriangle(0,-600)/->``->/<1600,600>[
         cwcwA`
         cw^2cwA`
         c^2w^2cwA;
         c\delta_{cwA}^w`
         `
         \delta_{w^2cwA}^c]
-      \dtriangle(1600,-600)/`<-`->/<1100,1000>[
+      \dtriangle(1600,-600)/`->`->/<1100,1000>[
         cwc^2w^2A`
         c^2w^2cwA`
         cwcwcwA;
@@ -1255,18 +1255,14 @@ TODO \cite{Benton:1994}
         cwcdist_{wA}`
         cdist_{wcwA}]
       % To show texts in each subdiagram:
-      \ptriangle(1000,-200)/``/<400,400>[(1)``;``]
-      \ptriangle(1300,-600)/``/<400,400>[(2)``;``]
-      \ptriangle(500,-700)/``/<400,400>[(3)``;``]
-      \ptriangle(1850,-150)/``/<400,400>[(4)``;``]
-      \ptriangle(2100,-700)/``/<400,400>[(5)``;``]
+      \ptriangle(200,-150)/``/<400,400>[(1)``;``]
+      \ptriangle(1000,-200)/``/<400,400>[(2)``;``]
+      \ptriangle(1300,-600)/``/<400,400>[(3)``;``]
+      \ptriangle(500,-700)/``/<400,400>[(4)``;``]
+      \ptriangle(1850,-150)/``/<400,400>[(5)``;``]
+      \ptriangle(2100,-700)/``/<400,400>[(6)``;``]
     \efig
     \end{mathpar}
-    \todo[inline]{I am not sure how the previous diagram follows
-      from this diagram?  Notice that it is not part of this in
-      anyway.  The way this should be proven is to simply expand the
-      first diagram, and then fill it in with diagrams. JJ: Some
-      explanations are added.}
 
     \item The comonad law
       $cw\varepsilon_A\circ\delta_A=\varepsilon_{cwA}\circ\delta_A=id_{cwA}$,
@@ -1292,8 +1288,9 @@ TODO \cite{Benton:1994}
       The left triangle is expanded in the following diagram chasing. (1)
       commutes by the comonad law for $w$ with components $\delta_A^w$ and
       $\varepsilon_{wA}^w$. (2) commutes by the comonad law for $c$ with
-      components $\delta_{w^2A}^c$ and $\varepsilon_{w^2A}^c$. (3), (4),
-      (5) and (6) commute by the definition of $dist$.
+      components $\delta_{w^2A}^c$ and $\varepsilon_{w^2A}^c$. (3), (6)
+      and the combination of (4) and (5) ommute by the definition of
+      $dist$.
       \begin{mathpar}
       \bfig
         \qtriangle|amm|/->`<-`=/<1200,600>[
@@ -1313,36 +1310,29 @@ TODO \cite{Benton:1994}
           cwA`
           wcwA;
           ``\varepsilon_{cwA}^w]
-        \Atriangle(600,-1200)|mmb|/->`->`<-/<600,1200>[
+        \Atriangle(600,-1200)|mmm|/->`<-`<-/<600,1200>[
           cw^2A`
           wcwA`
           cwcwA;
           dist_{wA}`
           cw\varepsilon_{wA}^c`
           \varepsilon_{wcwA}^c]
-        \Atriangle(600,-1200)|mmb|/->`->`/<600,600>[
-          wc^2wA`
+        \Vtriangle(600,-1800)|mbb|/`<-`->/<600,600>[
           wcwA`
-          cwcwA;
+          cwcwA`
+          wc^2wA;
+          `
           w\varepsilon_{cwA}^c=wc\varepsilon_{wA}^c`
-          dist_{cwA}`]
-        \morphism(1800,600)<0,-1800>[c^2w^2A`cwcwA;cdist_{wA}]
+          dist_{cwA}]
+        \morphism(1800,600)|r|<0,-1800>[c^2w^2A`cwcwA;cdist_{wA}]
         \ptriangle(800,300)/``/<100,100>[(1)``;``]
         \ptriangle(1400,300)/``/<100,100>[(2)``;``]
         \ptriangle(500,-500)/``/<100,100>[(3)``;``]
-        \ptriangle(1200,-500)/``/<100,100>[(4)``;``]
-        \ptriangle(1200,-1100)/``/<100,100>[(5)``;``]
-        \ptriangle(1600,-500)/``/<100,100>[(6)``;``]
+        \ptriangle(1200,-800)/``/<100,100>[(4)``;``]
+        \ptriangle(1200,-1600)/``/<100,100>[(5)``;``]
+        \ptriangle(1600,-300)/``/<100,100>[(6)``;``]
       \efig
       \end{mathpar}
-    \todo[inline]{Diagram 4 is not a diagram notice there is no
-      parallel paths, and diagram 3 commutes by a the one from
-      Jone's.  Diagrams 4, 5, and 6 do not commute, and hence need
-      to be fixed.  In fact, the arrow $cw\varepsilon^c_{wA}$ is
-      incorrectly applied, this does not typecheck!  Any diagram
-      that if commutes *defines* $\text{dist}$ will not commute.
-      Also, make this diagram wider so that labels on arrows are not
-      intersecting with other arrows.}
     The right triangle is expanded in the following diagram chasing.
     (1) commutes by the naturality of $\delta^c$. (2) is the comonad law
     for $c$ with components $\delta_{wA}^c$ and $\varepsilon_{wA}^c$. (3)
@@ -1405,28 +1395,27 @@ TODO \cite{Benton:1994}
   Let $(c,\varepsilon^c,\delta^c)$ and $(w,\varepsilon^w,\delta^w)$ be
   two monoidal comonads on a linear category with weakening and
   contraction
-  $(\cat{L},I,\otimes,w,\e{}^w,c,\d{}^{c1},\d{}^{c2})$, and
+  $(\cat{L},I,\otimes,w,\w{}^w,c,\cL{}^c,\cR{}^c)$, and
   $(cw,\varepsilon,\delta)$ be the monoidal comonad on $\cat{L}$ by
   composing $c$ and $w$ using the distributive law
   $dist_A:cwA\mto wcA$. The monoidal natural transformations
-  $\e{}$ and $\d{}$ with components $\e{A}:cwA\mto I$ and
-  $\d{A}:cwA\mto cwA\otimes cwA$ satisfy the following conditions:
+  $\w{}$ and $\c{}$ satisfy the following conditions:
   \begin{itemize}
-    \item Each $(cwA,\e{A},\d{})$ is a commutative comonoid.
-    \item $\e{A}$ and $\d{A}$ are coalgebra morphisms.
+    \item Each $(cwA,\w{A},\c{A})$ is a commutative comonoid.
+    \item $\w{A}$ and $\c{A}$ are coalgebra morphisms.
     \item Any coalgebra morphism $f:(cwA,\delta_A)\mto(cwB,\delta_B)$
       between (free?) coalgebras preserve the comonoid structure given by
-      $\e{}$ and $\d{}$.
+      $\w{}$ and $\c{}$.
   \end{itemize}
 \end{lemma}
 
 \begin{proof}
-  We first define $\e{A}:cwA\mto I$ and $\d{A}:cwA\mto cwA\otimes cwA$.
-  Each of them can also be given two equivalent definitions:
+  We first define $\w{}$ and $\c{}$. Each of them can also be given two
+  equivalent definitions:
   \begin{itemize}
-    \item $\e{A}:cwA\mto I$ is defined as in the diagram below. The left
+    \item $\w{A}:cwA\mto I$ is defined as in the diagram below. The left
       triangle commutes by the definition of $dist$ and the right triangle
-      commutes by the definition of $\e{}^w$.
+      commutes by the definition of $\w{}^w$.
       \begin{mathpar}
       \bfig
       \Atrianglepair/<-`->`->`->`->/<600,600>[
@@ -1436,15 +1425,15 @@ TODO \cite{Benton:1994}
 	I;
         dist_A`
         w\varepsilon_A^c`
-        \e{cA}^w`
+        \w{cA}^w`
         \varepsilon_{wA}^c`
-        \e{A}^w]
+        \w{A}^w]
       \efig
       \end{mathpar}
 
-    \item $\d{A}:cwA\mto cwA\otimes cwA$ is defined as below. The left part
+    \item $\c{A}:cwA\mto cwA\otimes cwA$ is defined as below. The left part
       of the diagram commutes by the definitions of
-      $\d{}^{c1}$ and of $\d{}^{c2}$, and the right part commutes because
+      $\cL{}^c$ and of $\cR{}^c$, and the right part commutes because
       $\cat{L}$ is monoidal.
       \begin{mathpar}
         \bfig
@@ -1455,12 +1444,12 @@ TODO \cite{Benton:1994}
           cwA\otimes(I\otimes cwA);
           \rho_{cwA}^{-1}`
           \lambda_{cwA}^{-1}``
-          \d{wA,I}^{c2}]
+          \cR{wA,I}^c]
         \ptriangle(1050,0)/->``/<1050,600>[
           cwA\otimes I`
           (cwA\otimes I)\otimes cwA`
           cwA\otimes(I\otimes cwA);
-          \d{wA,I}^{c1}``]
+          \cL{wA,I}^c``]
         \dtriangle(1050,0)/->`->`->/<1050,600>[
           (cwA\otimes I)\otimes cwA`
           cwA\otimes(I\otimes cwA)`
@@ -1474,53 +1463,47 @@ TODO \cite{Benton:1994}
 
   Then we show each condition is satisfied.
   \begin{itemize}
-    \item Each $(cwA,\e{A},\d{A})$ is a commutative comonoid, i.e. the
-      following diagrams commute:
+    \item Each $(cwA,\w{A},\c{A})$ is a commutative comonoid, i.e.
+      Diagrams~\ref{fig:commute-comonoid-1} and~\ref{fig:commute-comonoid-2}
+      commute.
 
+      \begin{figure}[!h]
       \begin{mathpar}
         \bfig
-	\square/->`->``/<1050,600>[
-	  cwA`
-	  cwA\otimes cwA`
-	  cwA\otimes cwA`;
-	  \d{A}`
-	  \d{A}``]
-        \square(1050,0)/->``<-`/<1050,600>[
-	  cwA\otimes cwA`
-	  cwA\otimes(cwA\otimes cwA)``
-	  (cwA\otimes cwA)\otimes cwA;
-	  id_{cwA}\otimes\d{A}``
-	  \alpha_{cwA,cwA,cwA}`]
-          \morphism(0,0)|b|<2100,0>[
+        \square/->`->``/<1050,600>[
+          cwA`
+          cwA\otimes cwA`
+          cwA\otimes cwA`;
+          \c{A}`
+          \c{A}``]
+        \square(1050,0)/->``<-`/<1150,600>[
+          cwA\otimes cwA`
+          cwA\otimes(cwA\otimes cwA)``
+          (cwA\otimes cwA)\otimes cwA;
+          id_{cwA}\otimes\c{A}``
+          \alpha_{cwA,cwA,cwA}`]
+          \morphism(0,0)|b|<2200,0>[
             cwA\otimes cwA`
             (cwA\otimes cwA)\otimes cwA;
-            \d{A}\otimes id_{cwA}]
-	\efig
+            \c{A}\otimes id_{cwA}]
+        \efig
       \end{mathpar}
+      \caption{Commutative comonoid 1}
+      \label{fig:commute-comonoid-1}
+      \end{figure}
 
-      \begin{mathpar}
-      \bfig
-      \Atrianglepair/<-`->`<-`<-`->/<800,800>[
-        cwA`
-	I\otimes cwA`
-	cwA\otimes cwA`
-	cwA\otimes I;
-	\lambda`
-	\d{A}`
-	\rho`
-	\e{A}\otimes id_{cwA}`
-	id_{cwA}\otimes\e{A}]
-      \efig
-      \end{mathpar}
+      \newpage
 
-      We show that the first diagram above commutes by the following
+      Diagram~\ref{fig:commute-comonoid-1} commutes by the following
       diagram chasing. (1) and (3) commute because
-      $(\cat{L},c,\d{}^{c1},\d{}^{c2})$ is a linear category with
+      $(\cat{L},c,\cL{}^c,\cR{}^c)$ is a linear category with
       contranction. (2), (4), and (7) commute by the naturality of $\beta$.
       (5) and (6) commute by the coherence conditions of monoidal category.
       % The proof should not use beta, but I haven't figured out to do it
       % yet.
+
       \begin{mathpar}
+      \rotatebox{90}{$
       \bfig
         \qtriangle|amm|/->`->`/<1100,400>[
           cwA\otimes cwA`
@@ -1528,23 +1511,23 @@ TODO \cite{Benton:1994}
           cwA\otimes (I\otimes cwA);
           id_{cwA}\otimes\rho_{cwA}^{-1}`
           id_{cwA}\otimes\lambda_{cwA}^{-1}`]
-        \morphism(2500,0)|m|/<-/<1100,400>[
+        \morphism(2700,0)|m|/<-/<1500,400>[
           cwA\otimes(cwA\otimes(I\otimes cwA))`
           cwA\otimes((cwA\otimes I)\otimes cwA);
           id_{cwA}\otimes\alpha_{cwA,I,cwA}]
-        \morphism(1100,400)|a|<2500,0>[
+        \morphism(1100,400)|a|<3100,0>[
           cwA\otimes (cwA\otimes I)`
           cwA\otimes((cwA\otimes I)\otimes cwA);
-          id_{cwA}\otimes\d{wA,I}^{c1}]
-        \morphism(1100,0)|m|<1400,0>[
+          id_{cwA}\otimes\cL{wA,I}^c]
+        \morphism(1100,0)|m|<1600,0>[
           cwA\otimes (I\otimes cwA)`
           cwA\otimes(cwA\otimes(I\otimes cwA));
-          id_{cwA}\otimes\d{wA,I}^{c2}]
-        \morphism(0,400)|a|<0,-1000>[
+          id_{cwA}\otimes\cR{wA,I}^c]
+        \morphism(0,400)|l|<0,-800>[
           cwA\otimes cwA`
           (cwA\otimes I)\otimes cwA;
           \rho_{cwA}^{-1}\otimes id_{cwA}]
-        \square(1100,-600)|mmmm|/`<-`<-`->/<1400,600>[
+        \square(1100,-600)|mmmm|/`<-`<-`->/<1600,600>[
           cwA\otimes (I\otimes cwA)`
           cwA\otimes(cwA\otimes (I\otimes cwA))`
           (I\otimes cwA)\otimes cwA`
@@ -1552,21 +1535,21 @@ TODO \cite{Benton:1994}
           `
           \beta_{I\otimes cwA,cwA}`
           \beta_{cwA\otimes(I\otimes cwA),cwA}`
-          \d{wA,I}^{c2}\otimes id_{cwA}]
-        \square(0,-1400)|aamb|/`->`->`->/<2500,800>[
+          \cR{wA,I}^c\otimes id_{cwA}]
+        \square(0,-1400)|aamb|/`->`->`->/<2700,800>[
           (cwA\otimes I)\otimes cwA`
           (cwA\otimes(I\otimes cwA))\otimes cwA`
           ((cwA\otimes I)\otimes cwA)\otimes cwA`
           (cwA\otimes cwA)\otimes cwA;
           `
-          \d{wA,I}^{c1}\otimes id_{cwA}`
+          \cL{wA,I}^c\otimes id_{cwA}`
           (id_{cwA}\otimes\lambda_{cwA})\otimes id_{cwA}`
           (\rho_{cwA,I}\otimes id_{cwA})\otimes id_{cwA}]
-        \morphism(0,-1400)|m|<2500,800>[
+        \morphism(0,-1400)|m|<2700,800>[
           ((cwA\otimes I)\otimes cwA)\otimes cwA`
           (cwA\otimes(I\otimes cwA))\otimes cwA;
           \alpha_{cwA,I,cwA}\otimes id_{cwA}]
-        \square(2500,-1400)/``->`->/<1100,1800>[
+        \square(2700,-1400)/``->`->/<1500,1800>[
           `
           cwA\otimes((cwA\otimes I)\otimes cwA)`
           (cwA\otimes cwA)\otimes cwA`
@@ -1578,7 +1561,7 @@ TODO \cite{Benton:1994}
           cwA\otimes cwA`
           (I\otimes cwA)\otimes cwA;
           \lambda_{cwA}^{-1}\otimes id_{cwA}]
-        \morphism(2500,0)|m|<1100,-1400>[
+        \morphism(2700,0)|m|<1500,-1400>[
           cwA\otimes(cwA\otimes(I\otimes cwA))`
           cwA\otimes(cwA\otimes cwA);
           id_{cwA}\otimes(id_{cwA}\otimes\lambda_{cwA})]
@@ -1586,15 +1569,37 @@ TODO \cite{Benton:1994}
         \ptriangle(550,-50)/``/<100,100>[(2)``;``]
         \ptriangle(550,-800)/``/<100,100>[(3)``;``]
         \ptriangle(1800,-400)/``/<100,100>[(4)``;``]
-        \ptriangle(3200,-400)/``/<100,100>[(5)``;``]
+        \ptriangle(3500,-400)/``/<100,100>[(5)``;``]
         \ptriangle(1800,-1300)/``/<100,100>[(6)``;``]
-        \ptriangle(3000,-1200)/``/<100,100>[(7)``;``]
+        \ptriangle(3300,-1200)/``/<100,100>[(7)``;``]
+      \efig
+      $}
+      \end{mathpar}
+  
+      \begin{figure}[!h]
+      \begin{mathpar}
+      \bfig
+      \Atrianglepair/<-`->`<-`<-`->/<1000,800>[
+        cwA`
+        I\otimes cwA`
+        cwA\otimes cwA`
+        cwA\otimes I;
+        \lambda`
+        \c{A}`
+        \rho`
+        \w{A}\otimes id_{cwA}`
+        id_{cwA}\otimes\w{A}]
       \efig
       \end{mathpar}
+      \caption{Commutative Comonoid 2}
+      \label{fig:commute-comonoid-2}
+      \end{figure}
       %TODO: Second diagram above
 
-    \item $\e{}$ and $\d{}$ are coalgebra morphisms, i.e. the following
-      diagrams commute:
+
+    \item $\w{}$ and $\c{}$ are coalgebra morphisms, i.e.
+      Diagrams~\ref{fig:coalgebra-morph-1} and~\ref{fig:coalgebra-morph-2}
+      commute.
       \begin{figure}[!h]
       \begin{mathpar}
       \bfig
@@ -1603,51 +1608,29 @@ TODO \cite{Benton:1994}
 	I`
 	cwcwA`
 	cwI;
-	\e{A}`
+	\w{A}`
 	\delta{A}`
 	\q{I}`
-	cw\e{A}]
+	cw\w{A}]
       \efig
       \end{mathpar}
       \caption{Coalgebra Morphism 1}
       \label{fig:coalgebra-morph-1}
       \end{figure}
 
-      \begin{figure}[!h]
-      \begin{mathpar}
-      \bfig
-	\square|amab|/->`->``/<1050,600>[
-	  cwA`
-	  cwA\otimes cwA`
-	  cwcwA`;
-	  \d{A}`
-	  \delta_A``]
-        \square(1050,0)|ammb|/->``->`/<1050,600>[
-	  cwA\otimes cwA`
-	  cwcwA\otimes cwcwA``
-	  cw(cwA\otimes cwA);
-	  \delta_A\otimes\delta_A``
-	  \q{cwA,cwA}`]
-          \morphism(0,0)<2100,0>[cwcwA`cw(cwA\otimes cwA);cw\d{A}]
-      \efig
-      \end{mathpar}
-      \caption{Coalgebra Morphism 2}
-      \label{fig:coalgebra-morph-2}
-      \end{figure}
-      
       We show that Diagram~\ref{fig:coalgebra-morph-1} commutes by the
       diagram below. (1) commutes by the naturality of $\delta^c$. (2)
       commutes by the condition of $dist_{wA}$. (3), (5) and (6) commute
       because $c$ is a monoidal comonad. (4) commutes because
-      $(\cat{L},w,\e{}^w$ is a linear category with weakening. (7)
-      commutes by equality.
+      $(\cat{L},w,\w{}^w)$ is a linear category with weakening. (7)
+      commutes because $c$ and $w$ are monoidal comonads.
       \begin{mathpar}
       \bfig
         \square/->`->``/<800,400>[
           cwA`
           cI`
           c^2wA`;
-          c\e{A}^w`
+          c\w{A}^w`
           \delta_{wA}^c``]
         \morphism<0,-400>[c^2wA`c^2w^2A;c^2\delta_A^w]
         \morphism(0,400)|m|<800,-800>[cwA`cw^2A;c\delta_A^w]
@@ -1679,7 +1662,7 @@ TODO \cite{Benton:1994}
           cwI;
           `
           c\q{I}^w`
-          cw\e{A}^w]
+          cw\w{A}^w]
         \ptriangle(300,-250)/``/<100,100>[(1)``;``]
         \ptriangle(150,-750)/``/<100,100>[(2)``;``]
         \ptriangle(500,-600)/``/<100,100>[(3)``;``]
@@ -1690,10 +1673,33 @@ TODO \cite{Benton:1994}
       \efig
       \end{mathpar}
 
+      \begin{figure}[!h]
+      \begin{mathpar}
+      \bfig
+	\square|amab|/->`->``/<1050,600>[
+	  cwA`
+	  cwA\otimes cwA`
+	  cwcwA`;
+	  \c{A}`
+	  \delta_A``]
+        \square(1050,0)|ammb|/->``->`/<1050,600>[
+	  cwA\otimes cwA`
+	  cwcwA\otimes cwcwA``
+	  cw(cwA\otimes cwA);
+	  \delta_A\otimes\delta_A``
+	  \q{cwA,cwA}`]
+          \morphism(0,0)<2100,0>[cwcwA`cw(cwA\otimes cwA);cw\c{A}]
+      \efig
+      \end{mathpar}
+      \caption{Coalgebra Morphism 2}
+      \label{fig:coalgebra-morph-2}
+      \end{figure}
+
       To prove Diagram~\ref{fig:coalgebra-morph-2} commutes, we first
       expand it, Then we divide it into three parts and prove each part
       commutes, as shown below.
       \begin{mathpar}
+      \rotatebox{90}{$
       \bfig
         \square/->`->``/<800,500>[
           cwA`
@@ -1701,29 +1707,29 @@ TODO \cite{Benton:1994}
           cw^2A`;
           \rho_{cwA}^{-1}`
           c\delta_A^w``]
-        \morphism(800,500)<1000,0>[
+        \morphism(800,500)<1200,0>[
           cwA\otimes I`
           (cwA\otimes I)\otimes cwA;
-          \d{wA,I}^{c1}]
-        \square(1800,200)/->``->`/<1200,300>[
+          \cL{wA,I}^c]
+        \square(2000,200)/->``->`/<1300,300>[
           (cwA\otimes I)\otimes cwA`
           cwA\otimes cwA``
           c^2wA\otimes c^2wA;
           \rho_{cwA}\otimes id_{cwA}``
           \delta_{wA}^c\delta_{wA}^c`]
-        \morphism(3000,200)|r|<0,-300>[
+        \morphism(3300,200)|r|<0,-300>[
           c^2wA\otimes c^2wA`
           c^2w^2A\otimes c^2w^2A;
           c^2\delta_A^w\otimes c^2\delta_A^w]
-        \morphism(3000,-100)|r|<0,-300>[
+        \morphism(3300,-100)|r|<0,-300>[
           c^2w^2A\otimes c^2w^2A`
           cwcwA\otimes cwcwA;
           cdist_{wA}\otimes cdist_{wA}]
-        \morphism(3000,-400)|r|<0,-300>[
+        \morphism(3300,-400)|r|<0,-300>[
           cwcwA\otimes cwcwA`
           c(wcwA\otimes wcwA);
           \q{wcwA,wcwA}^c]
-        \square(1800,-1000)/``->`->/<1200,300>[
+        \square(2000,-1000)/``->`->/<1300,300>[
           `
           c(wcwA\otimes wcwA)`
           cw((cwA\otimes I)\otimes cwA)`
@@ -1731,10 +1737,10 @@ TODO \cite{Benton:1994}
           ``
           c\q{cwA,cwA}^w`
           cw(\rho_{cwA}\otimes id_{cwA})]
-        \morphism(800,-1000)|b|<1000,0>[
+        \morphism(800,-1000)|b|<1200,0>[
           cw(cwA\otimes I)`
           cw((cwA\otimes I)\otimes cwA);
-          cw\d{wA,I}^{c1}]
+          cw\cL{wA,I}^c]
         \morphism(0,-1000)|b|<800,0>[
           cwcwA`
           cw(cwA\otimes I);
@@ -1755,11 +1761,11 @@ TODO \cite{Benton:1994}
           cw(cwA\otimes I)`
           w(cwA\otimes I);
           \varepsilon_{w(cwA\otimes I)}^c]
-        \morphism(1800,-250)|m|<1200,750>[
+        \morphism(2000,-250)|m|<1300,750>[
           w(cwA\otimes cwA)`
           cwA\otimes cwA;
           \varepsilon_{cwA\otimes cwA}^w]
-        \morphism(3000,-1000)|m|<-1200,750>[
+        \morphism(3300,-1000)|m|<-1300,750>[
           cw(cwA\otimes cwA)`
           w(cwA\otimes cwA);
           \varepsilon_{w(cwA\otimes cwA)}^c]
@@ -1767,6 +1773,7 @@ TODO \cite{Benton:1994}
         \ptriangle(1300,-250)/``/<100,100>[(b)``;``]
         \ptriangle(2400,-250)/``/<100,100>[(c)``;``]
       \efig
+      $}
       \end{mathpar}
       Part (a) commutes by the following diagram chase. (1) is equality.
       (2) is the comonad law for $w$. (3) is the comonad law for $c$.
@@ -1803,7 +1810,7 @@ TODO \cite{Benton:1994}
           cwcwA;
           `
           cdist_{wA}`
-          \varepsilon_{wcwA}]
+          \varepsilon_{wcwA}^c]
         \square(0,-600)/->``<-`/<1800,1200>[
           cwA`
           cwA\otimes I``
@@ -1835,16 +1842,16 @@ TODO \cite{Benton:1994}
       lower two squares commute by the naturality of $\varepsilon^c$.
       \begin{mathpar}
       \bfig
-        \square|almm|/->`<-`<-`->/<1100,400>[
+        \square|almm|/->`<-`<-`->/<1200,400>[
           cwA\otimes I`
           (cwA\otimes I)\otimes cwA`
           w(cwA\otimes I)`
           w((cwA\otimes I)\otimes cwA);
-          \d{wA,I}^{c1}`
+          \cL{wA,I}^c`
           \varepsilon_{cwA\otimes I}^w`
           \varepsilon_{(cwA\otimes I)\otimes cwA}^w`
-          w\d{wA,I}^{c1}]
-        \square(0,-400)|mlmb|/`<-`<-`->/<1100,400>[
+          w\cL{wA,I}^c]
+        \square(0,-400)|mlmb|/`<-`<-`->/<1200,400>[
           w(cwA\otimes I)`
           w((cwA\otimes I)\otimes cwA)`
           cw(cwA\otimes I)`
@@ -1852,8 +1859,8 @@ TODO \cite{Benton:1994}
           `
           \varepsilon_{w(cwA\otimes I)}^c`
           \varepsilon_{w((cwA\otimes I)\otimes A)}^c`
-          cw\d{wA,I}^{c1}]
-        \square(1100,0)|ammm|/->``<-`->/<1400,400>[
+          cw\cL{wA,I}^c]
+        \square(1200,0)|ammm|/->``<-`->/<1350,400>[
           (cwA\otimes I)\otimes cwA`
           cwA\otimes cwA`
           w((cwA\otimes I)\otimes cwA)`
@@ -1861,7 +1868,7 @@ TODO \cite{Benton:1994}
           \rho_{cwA}\otimes id_{cwA}``
           \varepsilon_{cwA\otimes cwA}^w`
           w(\rho_{cwA}\otimes id_{cwA})]
-        \square(1100,-400)|mmrb|/``<-`->/<1400,400>[
+        \square(1200,-400)|mmrb|/``<-`->/<1350,400>[
           w((cwA\otimes I)\otimes cwA)`
           w(cwA\otimes cwA)`
           cw((cwA\otimes I)\otimes cwA)`
@@ -1889,7 +1896,7 @@ TODO \cite{Benton:1994}
           c^2w^2A\otimes c^2w^2A`
           cw^2A\otimes cw^2A;
           \delta_{w^2A}^c\otimes\delta_{w^2A}^c``
-          \varepsilon_{cw^2A}\otimes\varepsilon_{cw^2A}]
+          \varepsilon_{cw^2A}^c\otimes\varepsilon_{cw^2A}^c]
         \morphism(1300,0)|m|<0,-400>[
           cw^2A\otimes cw^2A`
           wcwA\otimes wcwA;
@@ -1934,8 +1941,8 @@ TODO \cite{Benton:1994}
       \end{mathpar}
 
     \item any coalgebra morphism $f:(!A,\delta_A)\mto (!B,\delta_B)$
-      between (free?) coalgebras preserve the comonoid structure given
-      by $\e{}$ and $\d{}$, i.e. the following diagrams commute.
+      between free coalgebras preserve the comonoid structure given
+      by $\w{}$ and $\c{}$, i.e. the following diagrams commute.
       \begin{mathpar}
       \bfig
         \Vtriangle|amm|/->`->`->/<600,500>[
@@ -1943,8 +1950,8 @@ TODO \cite{Benton:1994}
           cwB`
           I;
 	  cwf`
-	  \e{A}`
-	  \e{B}]
+	  \w{A}`
+	  \w{B}]
       \efig
       \and
       \bfig
@@ -1953,10 +1960,10 @@ TODO \cite{Benton:1994}
 	cwA\otimes cwA`
 	cwB`
 	cwB\otimes cwB;
-	\d{A}`
+	\c{A}`
 	f`
 	f\otimes f`
-	\d{B}]
+	\c{B}]
       \efig
       \end{mathpar}
   \end{itemize}
