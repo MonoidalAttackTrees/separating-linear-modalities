@@ -12,7 +12,7 @@
 \usepackage[barr]{xy}
 \usepackage{comment}
 \usepackage{graphicx}
-\usepackage{enumitem}
+\usepackage[inline]{enumitem}
 
 \usepackage{caption}
 \captionsetup[figure]{name=Diagram}
@@ -213,7 +213,7 @@ TODO \cite{Benton:1994}
       \alpha_{A,B,C} : (A \otimes B) \otimes C \mto A \otimes (B \otimes C)\\
     \end{array}
     \]
-  \item A symmetry natural transformation:
+  \item A symmetry natural isomorphism:
     \[
     \beta_{A,B} : A \otimes B \mto B \otimes A
     \]
@@ -1058,7 +1058,6 @@ TODO \cite{Benton:1994}
     \efig
     \end{mathpar}
 
-
   \end{itemize}
 \end{definition}
 
@@ -1067,13 +1066,15 @@ TODO \cite{Benton:1994}
 \begin{definition}
   \label{def:dist}
   Given two comonads $(c,\varepsilon^c,\delta^c)$ and
-  $(w,\varepsilon^w,\delta^w)$ on a category $\cat{L}$, \textbf{the
-  distributive law} of $c$ over $w$ is a natural transformation
-  with components $dist_A:cwA\mto wcA$, subject to the following
-  coherence diagrams:
+  $(w,\varepsilon^w,\delta^w)$ on a category $\cat{L}$ such that
+  $(\cat{L},c,\cL{},\cR{})$ is a Lambek category with contraction and
+  $(\cat{L},w,\w{})$ is a Lambek category with weakening, we define a
+  \textbf{distributive law} of $c$ over $w$ to be a natural
+  transformation with components $dist_A:cwA\mto wcA$, subject to the
+  following coherence diagrams:
   \begin{mathpar}
     \bfig
-      \Vtriangle/<-`<-`->/<600,500>[
+      \Vtriangle/<-`<-`->/<500,400>[
         wA`
         cwA`
         wcA;
@@ -1083,7 +1084,7 @@ TODO \cite{Benton:1994}
     \efig
     \and
     \bfig
-      \Vtriangle/<-`<-`->/<600,500>[
+      \Vtriangle/<-`<-`->/<500,400>[
         cA`
         cwA`
         wcA;
@@ -1092,31 +1093,59 @@ TODO \cite{Benton:1994}
         dist_A]
     \efig
   \end{mathpar}
-  \begin{mathpar}
-    \bfig
-      \Vtriangle/->`->`<-/<600,500>[
-        cwcA`
-        cwc^2A`
-        c^2wcA;
-        cw\delta_A^c`
-        \delta_{wcA}^c`
-        cdist_{cA}]
-    \efig
-    \and
-    \bfig
-      \Vtriangle/->`->`->/<600,500>[
-        wcwA`
-        wcw^2A`
-        w^2cwA;
-        wc\delta_A^w`
-        \delta_{cwA}^w`
-        wdist_{wA}]
-    \efig
-  \end{mathpar}
 \end{definition}
 
+By the definiiton of the distribute law $dist$ and the comonad laws of $c$
+and $w$, the following two diagrams also commute:
+\begin{mathpar}
+\bfig
+  \Vtriangle/->`->`<-/<500,400>[
+    cwcA`
+    cwc^2A`
+    c^2wcA;
+    cw\delta_A^c`
+    \delta_{wcA}^c`
+    cdist_{cA}]
+\efig
+\and
+\bfig
+  \Vtriangle/->`->`->/<500,400>[
+    wcwA`
+    wcw^2A`
+    w^2cwA;
+    wc\delta_A^w`
+    \delta_{cwA}^w`
+    wdist_{wA}]
+\efig
+\end{mathpar}
+shown by the diagram chasings below:
+\begin{mathpar}
+\bfig
+  \Vtriangle|amm|/->`=`->/<800,300>[
+    cwcA`
+    cwc^2A`
+    cwcA;
+    cw\delta_A^c``
+    cw\varepsilon_{cA}^c]
+  \morphism(0,300)|b|<800,-700>[cwcA`c^2wcA;\delta_{wA}^c]
+  \morphism(800,-400)|m|<0,400>[c^2wcA`cwcA;c\varepsilon_{wcA}^c]
+  \morphism(800,-400)|b|<800,700>[c^2wcA`cwc^2A;cdist_{cA}]
+\efig
+\and
+\bfig
+  \Vtriangle|amm|/->`=`->/<800,300>[
+    wcwA`
+    wcw^2A`
+    wcwA;
+    wc\delta_A^w``
+    wc\varepsilon_{wA}^w]
+  \morphism(0,300)|b|<800,-700>[wcwA`w^2cwA;\delta_{cwA}^w]
+  \morphism(800,-400)|m|<0,400>[w^2cwA`wcwA;w\varepsilon_{cwA}^w]
+  \morphism(1600,300)|b|<-800,-700>[wcw^2A`w^2cwA;wdist_{wA}]
+\efig
+\end{mathpar}
 
-
+% Lemma for composing contraction and weakening
 \begin{lemma}
   \label{lem:compose-cw}
   Let $(c,\varepsilon^c,\delta^c)$ and $(w,\varepsilon^w,\delta^w)$ be
@@ -1129,10 +1158,10 @@ TODO \cite{Benton:1994}
 \begin{proof}
   Suppose $(c,\varepsilon^c,\delta^c)$ and $(w,\varepsilon^w,\delta^w)$
   are monoidal comonads, and \\
-  $(\cat{L},I,\otimes,w,\w{}^w,c,\cL{},\cR{})$ is a linear
+  $(\cat{L},I,\otimes,w,\w{}^w,c,\cL{},\cR{})$ is a Lambek
   category with weakening and contraction. Since by definition
-  $w,c :\cat{L} \mto \cat{L}$ are monoidal functors we know that their
-  composition $wc : \cat{L} \mto \cat{L}$ is a monoidal functor:
+  $c,w:\cat{L} \mto \cat{L}$ are monoidal functors we know that their
+  composition $cw:\cat{L} \mto \cat{L}$ is a monoidal functor:
   \begin{center}
   \begin{align*}
     \q{A,B} &: cwA\otimes cwB\mto cw(A\otimes B)   \\
@@ -1400,18 +1429,72 @@ TODO \cite{Benton:1994}
 
   \end{proof}
 
+% Definition: Lambek category with !
+\begin{definition}
+  \label{def:Lambek-!}
+  A \textbf{Lambek category with $!$}, $(\cat{L},!,\w{},\c{})$, is
+  specified by
+  \begin{itemize}
+    \item a monoidal category $(\cat{L},I,\otimes)$;
+    \item a monoidal comonad $(c,\varepsilon^c,\delta^c)$ with monoidal
+      natural transformations $\cL{}$ and $\cR{}$ on $\cat{L}$ s.t.
+      $(\cat{L},c,\cL{},\cR{})$ is a Lambek category with contraction;
+    \item a monoidal comonad $(w,\varepsilon^w,\delta^w)$ with a monoidal
+      natural transformation $\w{}$ on $\cat{L}$ s.t. $(\cat{L},w,\w{}^w)$
+      is a Lambek category with weakening;
+    \item a natural transformation with components $dist_A:cwA\mto wcA$;
+  \end{itemize}
+  where $!$ is the composite monoidal comonad $cw$ defined in the proof of
+  Lemma~\ref{lem:compose-cw}, s.t. the following additional coherence
+  diagrams commute:
+  \begin{mathpar}
+    \bfig
+      \square/->`->`<-`->/<1200,400>[
+        I\otimes cwA`
+        I\otimes (I\otimes cwA)`
+        cwA\otimes(I\otimes cwA)`
+        wA\otimes(I\otimes cwA);
+        \lambda_{I\otimes cwA}^{-1}`
+        \cR{wA,I}`
+        \w{A}^w\otimes id_{I\otimes cwA}`
+        \varepsilon_{wA}^c\otimes id_{I\otimes cwA}]
+    \efig
+    \and
+    \bfig
+      \square/->`->`<-`->/<1200,400>[
+        cwA\otimes I`
+        (cwA\otimes I)\otimes I`
+        (cwA\otimes I)\otimes cwA`
+        (cwA\otimes I)\otimes wA;
+        \rho_{cwA\otimes I}^{-1}`
+        \cL{wA,I}`
+        id_{cwA\otimes I}\otimes\w{A}^w`
+        id_{cwA\otimes I}\otimes\varepsilon_{wA}^c]
+    \efig
+  \end{mathpar}
+  \begin{mathpar}
+  \bfig
+    \Vtriangle/->`->`->/<600,400>[
+      !A`
+      !B`
+      I;
+      f`
+      \w{A}`
+      \w{B}]
+  \efig
+  \end{mathpar}
+  for any coalgebra morphism $f:(!A,\delta_A)\mto(!B,\delta_B)$ between
+  free coalgebras.
+\end{definition}
 
 
+
+% Conditions for weakening and contraction
 \begin{lemma}
   \label{lem:composite-cw-2}
-  Let $(c,\varepsilon^c,\delta^c)$ and $(w,\varepsilon^w,\delta^w)$ be
-  two monoidal comonads on a Lambek category with weakening and
-  contraction
-  $(\cat{L},I,\otimes,w,\w{}^w,c,\cL{},\cR{})$, and
-  $(cw,\varepsilon,\delta)$ be the monoidal comonad on $\cat{L}$ by
-  composing $c$ and $w$ using the distributive law
-  $dist_A:cwA\mto wcA$. The monoidal natural transformations
-  $\w{}$ and $\c{}$ satisfy the following conditions:
+  Let $(\cat{L},!,\w{},\c{})$ be a Lambek category with $!$. Then the
+  monoidal natural transformations $\w{}$ and $\c{}$ satisfy the following
+  three conditions:
   \begin{itemize}
     \item[1.] Each $(cwA,\w{A},\c{A})$ is a comonoid.
     \item[2.] $\w{A}$ and $\c{A}$ are coalgebra morphisms.
@@ -1422,6 +1505,9 @@ TODO \cite{Benton:1994}
 \end{lemma}
 
 \begin{proof}
+  In the proof, we will write $cwA$ instead of $!$ to see the interactions
+  between the comonads $c$ and $w$ more easily. 
+  
   We first define $\w{}$ and $\c{}$. Each of them can also be given two
   equivalent definitions:
   \begin{itemize}
@@ -1444,9 +1530,8 @@ TODO \cite{Benton:1994}
       \end{mathpar}
 
     \item $\c{A}:cwA\mto cwA\otimes cwA$ is defined as below. The left part
-      of the diagram commutes by the definitions of
-      $\cL{}$ and of $\cR{}$, and the right part commutes because
-      $\cat{L}$ is monoidal.
+      of the diagram commutes by the definitions of $\cL{}$ and of $\cR{}$,
+      and the right part commutes because $\cat{L}$ is monoidal.
       \begin{mathpar}
         \bfig
         \square/->`->``->/<1050,600>[
@@ -1481,112 +1566,25 @@ TODO \cite{Benton:1994}
       \begin{itemize}
       \item[] \textbf{Case 1:}
         \begin{mathpar}
-          \bfig
-          \square/->`->``/<1050,600>[
-            cwA`
-            cwA\otimes cwA`
-            cwA\otimes cwA`;
-            \c{A}`
-            \c{A}``]
-          \square(1050,0)/->``<-`/<1150,600>[
-            cwA\otimes cwA`
-            cwA\otimes(cwA\otimes cwA)``
-            (cwA\otimes cwA)\otimes cwA;
-            id_{cwA}\otimes\c{A}``
-            \alpha_{cwA,cwA,cwA}`]
-            \morphism(0,0)|b|<2200,0>[
-              cwA\otimes cwA`
-              (cwA\otimes cwA)\otimes cwA;
-              \c{A}\otimes id_{cwA}]
-          \efig
-        \end{mathpar}
-
-        \newpage
-
-%%% The proof below for Diagram~\ref{fig:commute-comonoid-1} uses beta
-\iffalse
-      Diagram~\ref{fig:commute-comonoid-1} commutes by the following
-      diagram chasing. (1) and (3) commute because
-      $(\cat{L},c,\cL{},\cR{})$ is a Lambek category with
-      contranction. (2), (4), and (7) commute by the naturality of $\beta$.
-      (5) and (6) commute by the coherence conditions of monoidal category.
-      % The proof should not use beta, but I haven't figured out to do it
-      % yet.
-
-      \begin{mathpar}
-%      \rotatebox{90}{$
-      \bfig
-        \qtriangle|amm|/->`->`/<1100,400>[
+        \bfig
+        \square/->`->``/<1050,600>[
+          cwA`
           cwA\otimes cwA`
-          cwA\otimes (cwA\otimes I)`
-          cwA\otimes (I\otimes cwA);
-          id_{cwA}\otimes\rho_{cwA}^{-1}`
-          id_{cwA}\otimes\lambda_{cwA}^{-1}`]
-        \morphism(2700,0)|m|/<-/<1500,400>[
-          cwA\otimes(cwA\otimes(I\otimes cwA))`
-          cwA\otimes((cwA\otimes I)\otimes cwA);
-          id_{cwA}\otimes\alpha_{cwA,I,cwA}]
-        \morphism(1100,400)|a|<3100,0>[
-          cwA\otimes (cwA\otimes I)`
-          cwA\otimes((cwA\otimes I)\otimes cwA);
-          id_{cwA}\otimes\cL{wA,I}]
-        \morphism(1100,0)|m|<1600,0>[
-          cwA\otimes (I\otimes cwA)`
-          cwA\otimes(cwA\otimes(I\otimes cwA));
-          id_{cwA}\otimes\cR{wA,I}]
-        \morphism(0,400)|l|<0,-800>[
+          cwA\otimes cwA`;
+          \c{A}`
+          \c{A}``]
+        \square(1050,0)/->``<-`/<1150,600>[
           cwA\otimes cwA`
-          (cwA\otimes I)\otimes cwA;
-          \rho_{cwA}^{-1}\otimes id_{cwA}]
-        \square(1100,-600)|mmmm|/`<-`<-`->/<1600,600>[
-          cwA\otimes (I\otimes cwA)`
-          cwA\otimes(cwA\otimes (I\otimes cwA))`
-          (I\otimes cwA)\otimes cwA`
-          (cwA\otimes(I\otimes cwA))\otimes cwA;
-          `
-          \beta_{I\otimes cwA,cwA}`
-          \beta_{cwA\otimes(I\otimes cwA),cwA}`
-          \cR{wA,I}\otimes id_{cwA}]
-        \square(0,-1400)|aamb|/`->`->`->/<2700,800>[
-          (cwA\otimes I)\otimes cwA`
-          (cwA\otimes(I\otimes cwA))\otimes cwA`
-          ((cwA\otimes I)\otimes cwA)\otimes cwA`
+          cwA\otimes(cwA\otimes cwA)``
           (cwA\otimes cwA)\otimes cwA;
-          `
-          \cL{wA,I}\otimes id_{cwA}`
-          (id_{cwA}\otimes\lambda_{cwA})\otimes id_{cwA}`
-          (\rho_{cwA,I}\otimes id_{cwA})\otimes id_{cwA}]
-        \morphism(0,-1400)|m|<2700,800>[
-          ((cwA\otimes I)\otimes cwA)\otimes cwA`
-          (cwA\otimes(I\otimes cwA))\otimes cwA;
-          \alpha_{cwA,I,cwA}\otimes id_{cwA}]
-        \square(2700,-1400)/``->`->/<1500,1800>[
-          `
-          cwA\otimes((cwA\otimes I)\otimes cwA)`
-          (cwA\otimes cwA)\otimes cwA`
-          cwA\otimes(cwA\otimes cwA);
-          ``
-          id_{cwA}\otimes(\rho_{cwA}\otimes id_{cwA})`
-          \alpha_{cwA,cwA,cwA}]
-        \morphism(0,400)|m|<1100,-1000>[
-          cwA\otimes cwA`
-          (I\otimes cwA)\otimes cwA;
-          \lambda_{cwA}^{-1}\otimes id_{cwA}]
-        \morphism(2700,0)|m|<1500,-1400>[
-          cwA\otimes(cwA\otimes(I\otimes cwA))`
-          cwA\otimes(cwA\otimes cwA);
-          id_{cwA}\otimes(id_{cwA}\otimes\lambda_{cwA})]
-        \ptriangle(1800,100)/``/<100,100>[(1)``;``]
-        \ptriangle(550,-50)/``/<100,100>[(2)``;``]
-        \ptriangle(550,-800)/``/<100,100>[(3)``;``]
-        \ptriangle(1800,-400)/``/<100,100>[(4)``;``]
-        \ptriangle(3500,-400)/``/<100,100>[(5)``;``]
-        \ptriangle(1800,-1300)/``/<100,100>[(6)``;``]
-        \ptriangle(3300,-1200)/``/<100,100>[(7)``;``]
-      \efig
-%      $}
-      \end{mathpar}
-\fi
+          id_{cwA}\otimes\c{A}``
+          \alpha_{cwA,cwA,cwA}`]
+          \morphism(0,0)|b|<2200,0>[
+            cwA\otimes cwA`
+            (cwA\otimes cwA)\otimes cwA;
+            \c{A}\otimes id_{cwA}]
+        \efig
+        \end{mathpar}
 
         The previous diagram commutes by the following diagram chasing.
 
@@ -1635,14 +1633,12 @@ TODO \cite{Benton:1994}
         \efig
         \end{mathpar}
 
-        (1) commutes trivially and we would not
-        expand $\c{}$ for simplicity. (2) and (4) commute because
-        $(\cat{L},c,\cL{},\cR{})$ is a Lambek category with contraction.
-        (3) commutes because $\cat{L}$ is monoidal.
+        (1) commutes trivially and we would not expand $\c{}$ for
+        simplicity. (2) and (4) commute because $(\cat{L},c,\cL{},\cR{})$
+        is a Lambek category with contraction. (3) commutes because
+        $\cat{L}$ is monoidal.
 
       \item[] \textbf{Case 2:}
-        \todo{I think we may need some extra conditions to prove this, but
-        don't know which to add.}
         \begin{mathpar}
         \bfig
         \Atrianglepair/->`->`->`<-`->/<1000,800>[
@@ -1657,6 +1653,88 @@ TODO \cite{Benton:1994}
           id_{cwA}\otimes\w{A}]
         \efig
         \end{mathpar}
+        The diagram above commutes by the following diagram chasing.
+        \begin{mathpar}
+        \bfig
+          \square/<-`<-`<-`/<2200,1200>[
+            I\otimes cwA`
+            wA\otimes cwA`
+            cwA`
+            cwA\otimes cwA;
+            \w{A}^w\otimes id_{cwA}`
+            \lambda_{cwA}^{-1}`
+            \varepsilon_{wA}^c\otimes cwA`]
+          \square(0,-1200)/`->`->`<-/<2200,1200>[
+            cwA`
+            cwA\otimes cwA`
+            cwA\otimes I`
+            cwA\otimes wA;
+            `
+            \rho_{cwA}^{-1}`
+            id_{cwA}\otimes\varepsilon_{wA}^c`
+            id_{cwA}\otimes\w{A}]
+          \Ctriangle(0,-400)|mmm|/<-``->/<500,400>[
+            I\otimes cwA`
+            cwA`
+            cwA\otimes I;
+            \lambda_{cwA}^{-1}``
+            \rho_{cwA}^{-1}]
+          \morphism(500,800)|m|<-500,400>[
+            I\otimes(I\otimes cwA)`
+            I\otimes cwA;
+            id_I\otimes\lambda_{cwA}]
+          \square(500,400)|mmmm|/<-`<-`<-`->/<1200,400>[
+            I\otimes(I\otimes cwA)`
+            wA\otimes(I\otimes cwA)`
+            I\otimes cwA`
+            cwA\otimes(I\otimes cwA);
+            \w{A}^w\otimes id_{I\otimes cwA}`
+            \lambda_{I\otimes cwA}^{-1}`
+            \varepsilon_{wA}^c\otimes id_{I\otimes cwA}`
+            \cR{wA,I}]
+          \morphism(1700,800)|m|<500,400>[
+            wA\otimes(I\otimes cwA)`
+            wA\otimes cwA;
+            id_{wA}\otimes\lambda_{cwA}]
+          \Dtriangle(1700,-400)|mmm|/`->`<-/<500,400>[
+            cwA\otimes(I\otimes cwA)`
+            cwA\otimes cwA`
+            (cwA\otimes I)\otimes cwA;
+            `
+            id_{cwA}\otimes\lambda_{cwA}`
+            \rho_{cwA}\otimes id_{cwA}]
+          \square(500,-800)|mmmm|/->`->`->`<-/<1200,400>[
+            cwA\otimes I`
+            (cwA\otimes I)\otimes cwA`
+            (cwA\otimes I)\otimes I`
+            (cwA\otimes I)\otimes wA;
+            \cL{wA,I}`
+            \rho_{cwA}^{-1}`
+            id_{cwA\otimes I}\otimes\varepsilon_{wA}^c`
+            id_{cwA\otimes I}\otimes\w{A}^w]
+          \morphism(500,-800)|m|<-500,-400>[
+            (cwA\otimes I)\otimes I`
+            cwA\otimes I;
+            \rho_{cwA}\otimes id_I]
+          \morphism(1700,-800)|m|<500,-400>[
+            (cwA\otimes I)\otimes wA`
+            cwA\otimes wA;
+            \rho_{cwA}\otimes id_{wA}]
+          \ptriangle(200,500)/``/<100,100>[(1)``;``]
+          \ptriangle(1100,900)/``/<100,100>[(2)``;``]
+          \ptriangle(2000,500)/``/<100,100>[(3)``;``]
+          \ptriangle(1100,500)/``/<100,100>[(4)``;``]
+          \ptriangle(1100,-100)/``/<100,100>[(5)``;``]
+          \ptriangle(200,-700)/``/<100,100>[(6)``;``]
+          \ptriangle(1100,-1100)/``/<100,100>[(7)``;``]
+          \ptriangle(2000,-700)/``/<100,100>[(8)``;``]
+          \ptriangle(1100,-700)/``/<100,100>[(9)``;``]
+        \efig
+        \end{mathpar}
+      (1), (2) and (3) commute by the functionality of $\lambda$. (6), (7)
+      and (8) commute by the functionality of $\rho$. (4) and (9) are
+      conditions of the Lambek category with $!$. And (5) is the definition
+      of $\c{}$.
 
       \end{itemize}
     
@@ -1976,13 +2054,13 @@ TODO \cite{Benton:1994}
     
     % Condition 3
     \item Any coalgebra morphism $f:(cwA,\delta_A)\mto (cwB,\delta_B)$
-      between free coalgebras preserve the comonoid structure given
+      between free coalgebras preserves the comonoid structure given
       by $\w{}$ and $\c{}$.
 
       \begin{itemize}
       \item[] \textbf{Case 1:}
-        \todo{Could not figure out how to prove this. I ended using the
-        diagram itself in the proof.}
+        This coherence diagram is given in the definition of the Lambek
+        category with $!$.
         \begin{mathpar}
         \bfig
           \Vtriangle/->`->`->/<600,500>[
@@ -2045,6 +2123,315 @@ TODO \cite{Benton:1994}
       \end{itemize}
   \end{itemize}
 \end{proof}
+
+% Definition: Lambek with exchange
+\begin{definition}
+  \label{def:exchange}
+  A \textbf{Lambek category with exchange}, $(\cat{L},e,\e{})$, is
+  specified by
+  \begin{itemize}
+  \item a monoidal category $(\cat{L},I,\otimes)$,
+  \item a monoidal comonad $(e,\varepsilon,\delta)$ on $\cat{L}$ with
+    $\q{A,B}:eA\otimes eA\mto e(A\otimes B)$ and \\
+    $\q{I}:I\mto eI$, and
+  \item a monoidal natural isomorphism $\e{}$ on $\cat{L}$ with
+    components \\
+    $\e{A,B}:eA\otimes eB\mto eB\otimes eA$,
+  \end{itemize}
+  subject to the following coherence condition:
+  \begin{mathpar}
+  \bfig
+    \Vtriangle/=`->`<-/<600,400>[
+      eA\otimes eB`
+      eA\otimes eB`
+      eB\otimes eA;
+      `
+      \e{A,B}`
+      \e{B,A}]
+  \efig
+  \end{mathpar}
+\end{definition}
+
+
+
+% Definition: distributive law for exchange
+\begin{definition}
+  \label{def:distEx}
+  Given two comonads $(!,\varepsilon^!,\delta^!)$ and
+  $(e,\varepsilon^e,\delta^e)$ on a category $\cat{L}$ such that
+  $(\cat{L},!,\w{},\c{})$ is a Lambek category with $!$ and
+  $(\cat{L},e,\e{})$ is a Lambek category with exchange, we define a
+  \textbf{distributive law for exchange} of $!$ over $e$ to be a natural
+  isomorphism with components $distEx_A:!eA\mto e!A$, subject to the
+  following coherence diagrams:
+  \begin{mathpar}
+    \bfig
+      \Vtriangle/<-`<-`->/<500,400>[
+        eA`
+        !eA`
+        e!A;
+        \varepsilon_{eA}^!`
+        e\varepsilon_A^!`
+        distEx_A]
+    \efig
+    \and
+    \bfig
+      \Vtriangle/<-`<-`->/<500,400>[
+        !A`
+        !eA`
+        e!A;
+        !\varepsilon_A^e`
+        \varepsilon_{!A}^e`
+        distEx_A]
+    \efig
+  \end{mathpar}
+\end{definition}
+Same as the distributive law $dist$, the following digrams also commute:
+\begin{mathpar}
+\bfig
+  \Vtriangle/->`->`<-/<500,400>[
+    !e!A`
+    !e!^2A`
+    !^2e!A;
+    !e\delta_A^!`
+    \delta_{!eA}^!`
+    !distEx_{!A}]
+\efig
+\and
+\bfig
+  \Vtriangle/->`->`->/<500,400>[
+    e!eA`
+    e!e^2A`
+    e^2!eA;
+    e!\delta_A^e`
+    \delta_{!eA}^e`
+    edistEx_{eA}]
+\efig
+\end{mathpar}
+
+Notice the difference between $dist$ of $c$ over $w$ and $distEx$ of $!$
+over $e$. While $dist$ is a natural transformation, $distEx$ is a natural
+isomorphism.
+
+
+% Lemma: !e is a monoidal comonad
+\begin{lemma}
+  \label{lem:compose-!e}
+  let $(!,\varepsilon^!,\delta^!)$ and $(e,\varepsilon^e,\delta^e)$ be two
+  monoidal comonads on a Lambek category with $!$ and exchange
+  $(\cat{L},I,\otimes,!,\w{},\c{},e,\e{})$. Then the composition of $!$
+  and $e$ using the distributive law for exchange $distEx_A:!eA\mto e!A$
+  is a monoidal comonad $(!e,\varepsilon,\delta)$ on $\cat{L}$.
+\end{lemma}
+
+\begin{proof}
+  Suppose $(!,\varepsilon^!,\delta^!)$ and $(e,\varepsilon^e,\delta^e)$
+  are monoidal comonads, and \\
+  $(\cat{L},I,\otimes,!,\w{},\c{},e,\e{})$ is a
+  Lambek category with $!$ and exchange. Since by definition
+  $!,e:\cat{L}\mto\cat{L}$ are monoidal functors, we know that their
+  composition \\
+  $!e:\cat{L}\mto\cat{L}$ is a monoidal functor:
+  \begin{align*}
+    \q{A,B} &: !eA\otimes !eB\mto !e(A\otimes B)  \\
+    \q{A,B} &= !\q{A,B}^e\circ\q{eA,eB}^!       \\
+    \q{I}   &: I\mto !eI                          \\
+    \q{I}   &= !\q{I}^e\circ\q{I}^!
+  \end{align*}
+  Analogous to the proof of Lemma~\ref{lem:compose-cw}, each of
+  $\varepsilon$ and $\delta$ can be given two equivalent definitions:
+  \begin{mathpar}
+  \bfig
+    \square<800,400>[
+      !eA`
+      eA`
+      !A`
+      A;
+      \varepsilon_{eA}^!`
+      !\varepsilon_A^e`
+      \varepsilon_A^e`
+      \varepsilon_A^!]
+  \efig
+  \and
+  \bfig
+    \square|almb|/->`->`->`->/<800,500>[
+      !eA`
+      !e^2A`
+      !^eA`
+      !^2e^2A;
+      !\delta_A^e`
+      \delta_{eA}^!`
+      \delta_{e^2A}^!`
+      !^2\delta_A^e]
+    \square(800,0)|amrb|/->``->`->/<800,500>[
+      !e^2A`
+      !^2e^2A`
+      !^2e^2A`
+      !e!eA;
+      \delta_{e^2A}^!``
+      cdist_{eA}`
+      cdist_{eA}]
+  \efig
+  \end{mathpar}
+  And the comonad laws can be proved similarly, which we will not elaborate
+  for simplicity.
+\end{proof}
+
+
+
+% Definition: split linear category
+\begin{definition}
+  \label{def:split-linear}
+  A \textbf{split linear category} $(\cat{L},!,e)$ is specified
+  by
+  \begin{itemize}
+  \item a monoidal category $(\cat{L},I,\otimes)$;
+  \item a monoidal comonad $(!,\varepsilon^!,\delta^!)$ with monoidal 
+    natural transformations $\w{}$ and $\c{}$ s.t. $(\cat{L},!,\w{},\c{})$
+    is a Lambek category with $!$;
+  \item a monoidal comonad $(e,\varepsilon^e,\delta^e)$ with monoidal
+    natural transformations $\e{}$ s.t. $(\cat{L},e,\e{})$ is a Lambek
+    category with exchange;
+  \item a natural isomorphism with components $distEx_A:!eA\mto e!A$.
+  \end{itemize}
+\end{definition}
+
+
+
+% Lemma: a linear category is embedded in a split linear category
+\begin{lemma}
+  \label{lem:linear-full-sub}
+  Let $(\cat{L},!,e)$ be a split linear category. Define a full subcategory
+  $\cat{L'}$ of $\cat{L}$ with object $eA$'s, $!eA$'s, and the unitor $I$
+  in $\cat{L}$. Then $(\cat{L'},!,\w{},\c{})$ is a linear category.
+\end{lemma}
+
+\begin{proof}
+  We prove the lemma by checking each component in the definition of a
+  linear category (Definition~\ref{def:linear-category}).
+
+  \begin{enumerate}[label=\textbf{\emph{\alph*}})]
+
+  % L' is symmetric monoidal closed
+  \item First, we need to show that $\cat{L'}$ is symmetric monoidal
+    closed. \\
+    Since $I$ is an object $\cat{L'}$, then the natural isomorphisms
+    $\lambda$ and $\rho$ of $\cat{L}$ still hold in $\cat{L'}$. And the
+    tensor product $\otimes$ is associative in $\cat{L'}$ because
+    $$\alpha_{eA,eB,eC}:
+      (eA\otimes eB)\otimes eC\mto eA\otimes(eB\otimes eC)$$
+    Hence, $\cat{L'}$ is monoidal.
+    
+    We define a symmetry natural transformation
+    $\beta_{A,B}':!eA\otimes !eB\mto !eB\otimes !eA$ in $\cat{L'}$ as
+    \begin{mathpar}
+    \bfig
+      \morphism<1000,0>[
+        !eA\otimes !eB`
+        e!A\otimes e!B;
+        distEx_A\otimes distEx_B]
+      \morphism(1000,0)<700,0>[
+        e!A\otimes e!B`
+        e!B\otimes e!A;
+        \e{!A,!B}]
+      \morphism(1700,0)<1000,0>[
+        e!B\otimes e!A`
+        e!A\otimes e!B;
+        distEx_B^{-1}\otimes distEx_A^{-1}]
+    \efig
+    \end{mathpar}
+    
+    $\beta'$ is a natural isomorphism because $distEx$ and $\e{}$ are
+    natural isomorphisms. So $\cat{L}'$ is symmetric.
+
+    \todo{Closed: Not sure how $\cat{L'}$ is closed when $\cat{L}$ is not}
+
+  % the monoidal comonad ! is symmetric on L'
+  \item $(!,\varepsilon^!,\delta^!)$ is a symmetric monoidal comonad
+    on $\cat{L'}$.
+    
+    Lemma~\ref{lem:compose-cw} has proved that $(!,\varepsilon^!,\delta^!)$
+    is a monoidal comonad on $\cat{L}$. Since $\cat{L'}$ is monoidal, then
+    $!$ is also monoidal on $\cat{L'}$. Now we only need to show it is
+    symmetric, i.e. $(!,\q{}^!)$ is a symmetric monoidal endofunctor,
+    and hence $\varepsilon^!$ and $\delta^!$ are symmetric monoidal natural
+    transformations on $\cat{L'}$.
+    
+    $(!,\q{}^!)$ being symmetric on $\cat{L'}$ means the following
+    diagram commutes:
+    \begin{mathpar}
+    \bfig
+      \square<800,400>[
+        !eA\otimes !eB`
+        !eB\otimes !eA`
+        !(eA\otimes eB)`
+        !(eB\otimes eA);
+        \beta_{A,B}'`
+        \q{eA,eB}^!`
+        \q{eB,eA}^!`
+        !\e{A,B}]
+    \efig
+    \end{mathpar}
+    And the diagram does commute by the diagram chasing:
+    \begin{mathpar}
+    \bfig
+      \Vtriangle|amm|<500,500>[  
+        !eA\otimes !eB`
+        e!A\otimes e!B`
+        eA\otimes eB;
+        distEx_A\otimes distEx_B`
+        \varepsilon_{eA}^!\otimes\varepsilon_{eB}^!`
+        e\varepsilon_A^!\otimes e\varepsilon_A^!]
+      \Dtriangle(0,-500)|lmm|/->``<-/<500,500>[
+        !eA\otimes !eB`
+        eA\otimes eB`
+        !(eA\otimes eB);
+        \q{eA,eB}^!``
+        \varepsilon_{eA\otimes eB}^!]
+      \morphism(1000,500)<1100,0>[e!A\otimes e!B`e!B\otimes e!A;\e{!A,!B}]
+      \morphism(500,0)|m|<800,0>[eA\otimes eB`eB\otimes eA;\e{A,B}]
+      \morphism(0,-500)|b|<2100,0>[
+        !(eA\otimes eB)`
+        !(eB\otimes eA);
+        !\e{A,B}]
+      \Ctrianglepair(2100,-500)|mrmmr|/->`->`<-`<-`->/<800,500>[
+        e!B\otimes e!A`
+        eB\otimes eA`
+        !eB\otimes !eA`
+        !(eB\otimes eA);
+        e\varepsilon_B^!\otimes e\varepsilon_A^!`
+        distEx_B^{-1}\otimes distEx_A^{-1}`
+        \varepsilon_{eB}^!\otimes\varepsilon_{eA}^!`
+        \varepsilon_{eB\otimes eA}^!`
+        \q{eB,eA}^!]
+      \ptriangle(200,-100)/``/<100,100>[(1)``;``]
+      \ptriangle(500,200)/``/<100,100>[(2)``;``]
+      \ptriangle(1200,200)/``/<100,100>[(3)``;``]
+      \ptriangle(1000,-350)/``/<100,100>[(4)``;``]
+      \ptriangle(1900,50)/``/<100,100>[(5)``;``]
+      \ptriangle(1900,-250)/``/<100,100>[(6)``;``]
+    \efig
+    \end{mathpar}
+    , where (1) and (6) commute because $!$ is a monoidal comonad on
+    $\cat{L'}$, (2) and (5) are definition of $dist_Ex$, (3) is the
+    naturality of $\varepsilon^!$ and (4) is the naturality of $\e{}$.
+
+    Then $\varepsilon^!$ and $\delta^!$ are also symmetric. 
+    
+  % the three conditions for weak and contraction transformations
+  \item the three conditions of the monoidal natural transformations
+        $\w{}$ and $\c{}$ on are satisfied on $\cat{L'}$.
+
+        Lemma~\ref{lem:composite-cw-2} proves that the three conditions are
+        satisfied on $\cat{L}$, and the result can be easily restricted to
+        $\cat{L'}$ by replacing all object $cwA$ with $!eA$, $cwcwA$ with
+        $!e!eA$, etc. and keeping the unitor $I$.
+
+  \end{enumerate}
+  In conclusion, the full subcategory $\cat{L'}$ forms a linear category.
+
+\end{proof}
+
 
 
 
