@@ -198,6 +198,7 @@ TODO \cite{Benton:1994}
   \end{itemize}
 \end{definition}
 
+% Definition: symmetric monoidal category
 \begin{definition}
   \label{def:sym-monoidal-category}
   A \textbf{symmetric monoidal category (SMC)} is a category, $\cat{M}$,
@@ -287,6 +288,25 @@ TODO \cite{Benton:1994}
   \end{itemize}
 \end{definition}
 
+% Definition: monoidal biclosed category
+\begin{definition}
+  \label{def:monoidal-biclosed-category}
+  A \textbf{monoidal biclosed category} is a monoidal category
+  $(\cat{M},\top,\otimes)$, such that, for any object $B$ of $\cat{M}$,
+  each of the functors $-\otimes B:\cat{M}\mto\cat{M}$ and
+  $B\otimes -:\cat{M}\mto\cat{M}$ has a specified right adjoint. Hence,
+  for any object $A$ and $C$ of $\cat{M}$, there are two objects
+  $C\leftharpoonup B$ and $B\rightharpoonup C$ of $\cat{M}$ and two
+  natural bijections:
+  \begin{align*}
+  \Hom{\cat{M}}{A\otimes B}{C} &\cong
+    \Hom{\cat{M}}{A}{C\leftharpoonup B} \\
+  \Hom{\cat{M}}{B \otimes A}{C} &\cong
+    \Hom{\cat{M}}{A}{B \rightharpoonup C}
+  \end{align*}
+\end{definition}
+
+% Definition: symmetric monoidal closed category
 \begin{definition}
   \label{def:SMCC}
   A \textbf{symmetric monoidal closed category (SMCC)} is a symmetric
@@ -1432,8 +1452,10 @@ shown by the diagram chasings below:
 % Definition: Lambek category with !
 \begin{definition}
   \label{def:Lambek-!}
-  A \textbf{Lambek category with $!$}, $(\cat{L},!,\w{},\c{})$, is
+  A \textbf{Lambek category with $cw$}, $(\cat{L},cw,\w{},\c{})$, is
   specified by
+  \todo{I used $cw$ instead of $!$ so that it won't be confused with 
+    the $!$ in linear category when we talk about the embedding.}
   \begin{itemize}
     \item a monoidal category $(\cat{L},I,\otimes)$;
     \item a monoidal comonad $(c,\varepsilon^c,\delta^c)$ with monoidal
@@ -1444,7 +1466,7 @@ shown by the diagram chasings below:
       is a Lambek category with weakening;
     \item a natural transformation with components $dist_A:cwA\mto wcA$;
   \end{itemize}
-  where $!$ is the composite monoidal comonad $cw$ defined in the proof of
+  where $cw$ is the composite monoidal comonad $cw$ defined in the proof of
   Lemma~\ref{lem:compose-cw}, s.t. the following additional coherence
   diagrams commute:
   \begin{mathpar}
@@ -1475,15 +1497,15 @@ shown by the diagram chasings below:
   \begin{mathpar}
   \bfig
     \Vtriangle/->`->`->/<600,400>[
-      !A`
-      !B`
+      cwA`
+      cwB`
       I;
       f`
       \w{A}`
       \w{B}]
   \efig
   \end{mathpar}
-  for any coalgebra morphism $f:(!A,\delta_A)\mto(!B,\delta_B)$ between
+  for any coalgebra morphism $f:(cwA,\delta_A)\mto(cwB,\delta_B)$ between
   free coalgebras.
 \end{definition}
 
@@ -1492,7 +1514,7 @@ shown by the diagram chasings below:
 % Conditions for weakening and contraction
 \begin{lemma}
   \label{lem:composite-cw-2}
-  Let $(\cat{L},!,\w{},\c{})$ be a Lambek category with $!$. Then the
+  Let $(\cat{L},cw,\w{},\c{})$ be a Lambek category with $!$. Then the
   monoidal natural transformations $\w{}$ and $\c{}$ satisfy the following
   three conditions:
   \begin{itemize}
@@ -1505,9 +1527,6 @@ shown by the diagram chasings below:
 \end{lemma}
 
 \begin{proof}
-  In the proof, we will write $cwA$ instead of $!$ to see the interactions
-  between the comonads $c$ and $w$ more easily. 
-  
   We first define $\w{}$ and $\c{}$. Each of them can also be given two
   equivalent definitions:
   \begin{itemize}
@@ -2157,31 +2176,31 @@ shown by the diagram chasings below:
 % Definition: distributive law for exchange
 \begin{definition}
   \label{def:distEx}
-  Given two comonads $(!,\varepsilon^!,\delta^!)$ and
+  Given two comonads $(cw,\varepsilon^{cw},\delta^{cw})$ and
   $(e,\varepsilon^e,\delta^e)$ on a category $\cat{L}$ such that
-  $(\cat{L},!,\w{},\c{})$ is a Lambek category with $!$ and
+  $(\cat{L},cw,\w{},\c{})$ is a Lambek category with $cw$ and
   $(\cat{L},e,\e{})$ is a Lambek category with exchange, we define a
-  \textbf{distributive law for exchange} of $!$ over $e$ to be a natural
-  isomorphism with components $distEx_A:!eA\mto e!A$, subject to the
+  \textbf{distributive law for exchange} of $cw$ over $e$ to be a natural
+  isomorphism with components $distEx_A:cweA\mto ecwA$, subject to the
   following coherence diagrams:
   \begin{mathpar}
     \bfig
       \Vtriangle/<-`<-`->/<500,400>[
         eA`
-        !eA`
+        cweA`
         e!A;
-        \varepsilon_{eA}^!`
-        e\varepsilon_A^!`
+        \varepsilon_{eA}^{cw}`
+        e\varepsilon_A^{cw}`
         distEx_A]
     \efig
     \and
     \bfig
       \Vtriangle/<-`<-`->/<500,400>[
-        !A`
-        !eA`
-        e!A;
-        !\varepsilon_A^e`
-        \varepsilon_{!A}^e`
+        cwA`
+        cweA`
+        ecwA;
+        cw\varepsilon_A^e`
+        \varepsilon_{cwA}^e`
         distEx_A]
     \efig
   \end{mathpar}
@@ -2190,26 +2209,26 @@ Same as the distributive law $dist$, the following digrams also commute:
 \begin{mathpar}
 \bfig
   \Vtriangle/->`->`<-/<500,400>[
-    !e!A`
-    !e!^2A`
-    !^2e!A;
-    !e\delta_A^!`
-    \delta_{!eA}^!`
-    !distEx_{!A}]
+    cwecwA`
+    cwe(cw)^2A`
+    (cw)^2ecwA;
+    cwe\delta_A^{cw}`
+    \delta_{cweA}^{cw}`
+    cwdistEx_{cwA}]
 \efig
 \and
 \bfig
   \Vtriangle/->`->`->/<500,400>[
-    e!eA`
-    e!e^2A`
-    e^2!eA;
-    e!\delta_A^e`
-    \delta_{!eA}^e`
+    ecweA`
+    ecwe^2A`
+    e^2cweA;
+    ecw\delta_A^e`
+    \delta_{cweA}^e`
     edistEx_{eA}]
 \efig
 \end{mathpar}
 
-Notice the difference between $dist$ of $c$ over $w$ and $distEx$ of $!$
+Notice the difference between $dist$ of $c$ over $w$ and $distEx$ of $cw$
 over $e$. While $dist$ is a natural transformation, $distEx$ is a natural
 isomorphism.
 
@@ -2217,58 +2236,58 @@ isomorphism.
 % Lemma: !e is a monoidal comonad
 \begin{lemma}
   \label{lem:compose-!e}
-  let $(!,\varepsilon^!,\delta^!)$ and $(e,\varepsilon^e,\delta^e)$ be two
-  monoidal comonads on a Lambek category with $!$ and exchange
-  $(\cat{L},I,\otimes,!,\w{},\c{},e,\e{})$. Then the composition of $!$
-  and $e$ using the distributive law for exchange $distEx_A:!eA\mto e!A$
-  is a monoidal comonad $(!e,\varepsilon,\delta)$ on $\cat{L}$.
+  let $(cw,\varepsilon^{cw},\delta^{cw})$ and $(e,\varepsilon^e,\delta^e)$
+  be two monoidal comonads on a Lambek category with $cw$ and exchange
+  $(\cat{L},I,\otimes,cw,\w{},\c{},e,\e{})$. Then the composition of $cw$
+  and $e$ using the distributive law for exchange $distEx_A:cweA\mto ecwA$
+  is a monoidal comonad $(cwe,\varepsilon,\delta)$ on $\cat{L}$.
 \end{lemma}
 
 \begin{proof}
-  Suppose $(!,\varepsilon^!,\delta^!)$ and $(e,\varepsilon^e,\delta^e)$
-  are monoidal comonads, and \\
-  $(\cat{L},I,\otimes,!,\w{},\c{},e,\e{})$ is a
-  Lambek category with $!$ and exchange. Since by definition
-  $!,e:\cat{L}\mto\cat{L}$ are monoidal functors, we know that their
+  Suppose $(cw,\varepsilon^{cw},\delta^{cw})$ and
+  $(e,\varepsilon^e,\delta^e)$ are monoidal comonads, and \\
+  $(\cat{L},I,\otimes,cw,\w{},\c{},e,\e{})$ is a
+  Lambek category with $cw$ and exchange. Since by definition
+  $cw,e:\cat{L}\mto\cat{L}$ are monoidal functors, we know that their
   composition \\
-  $!e:\cat{L}\mto\cat{L}$ is a monoidal functor:
+  $cwe:\cat{L}\mto\cat{L}$ is a monoidal functor:
   \begin{align*}
-    \q{A,B} &: !eA\otimes !eB\mto !e(A\otimes B)  \\
-    \q{A,B} &= !\q{A,B}^e\circ\q{eA,eB}^!       \\
-    \q{I}   &: I\mto !eI                          \\
-    \q{I}   &= !\q{I}^e\circ\q{I}^!
+    \q{A,B} &: cweA\otimes cweB\mto cwe(A\otimes B)   \\
+    \q{A,B} &= cw\q{A,B}^e\circ\q{eA,eB}^{cw}         \\
+    \q{I}   &: I\mto cweI                             \\
+    \q{I}   &= cw\q{I}^e\circ\q{I}^{cw}
   \end{align*}
   Analogous to the proof of Lemma~\ref{lem:compose-cw}, each of
   $\varepsilon$ and $\delta$ can be given two equivalent definitions:
   \begin{mathpar}
   \bfig
     \square<800,400>[
-      !eA`
+      cweA`
       eA`
-      !A`
+      cwA`
       A;
-      \varepsilon_{eA}^!`
-      !\varepsilon_A^e`
+      \varepsilon_{eA}^{cw}`
+      cw\varepsilon_A^e`
       \varepsilon_A^e`
-      \varepsilon_A^!]
+      \varepsilon_A^{cw}]
   \efig
   \and
   \bfig
     \square|almb|/->`->`->`->/<800,500>[
-      !eA`
-      !e^2A`
-      !^eA`
-      !^2e^2A;
-      !\delta_A^e`
-      \delta_{eA}^!`
-      \delta_{e^2A}^!`
-      !^2\delta_A^e]
+      cweA`
+      cwe^2A`
+      (cw)^2eA`
+      (cw)^2e^2A;
+      cw\delta_A^e`
+      \delta_{eA}^{cw}`
+      \delta_{e^2A}^{cw}`
+      (cw)^2\delta_A^e]
     \square(800,0)|amrb|/->``->`->/<800,500>[
-      !e^2A`
-      !^2e^2A`
-      !^2e^2A`
-      !e!eA;
-      \delta_{e^2A}^!``
+      cwe^2A`
+      (cw)^2e^2A`
+      (cw)^2e^2A`
+      cwecweA;
+      \delta_{e^2A}^{cw}``
       cdist_{eA}`
       cdist_{eA}]
   \efig
@@ -2282,28 +2301,56 @@ isomorphism.
 % Definition: split linear category
 \begin{definition}
   \label{def:split-linear}
-  A \textbf{split linear category} $(\cat{L},!,e)$ is specified
-  by
+  A \textbf{split linear category} $(\cat{L},cw,\w{},\c{},e,\e{})$ is
+  specified by
   \begin{itemize}
-  \item a monoidal category $(\cat{L},I,\otimes)$;
-  \item a monoidal comonad $(!,\varepsilon^!,\delta^!)$ with monoidal 
-    natural transformations $\w{}$ and $\c{}$ s.t. $(\cat{L},!,\w{},\c{})$
-    is a Lambek category with $!$;
+  \item a biclosed monoidal category $(\cat{L},I,\otimes)$;
+  \item a monoidal comonad $(cw,\varepsilon^{cw},\delta^{cw})$ with
+    monoidal natural transformations $\w{}$ and $\c{}$ s.t.
+    $(\cat{L},cw,\w{},\c{})$ is a Lambek category with $cw$;
   \item a monoidal comonad $(e,\varepsilon^e,\delta^e)$ with monoidal
     natural transformations $\e{}$ s.t. $(\cat{L},e,\e{})$ is a Lambek
     category with exchange;
-  \item a natural isomorphism with components $distEx_A:!eA\mto e!A$.
+  \item a natural isomorphism with components $distEx_A:cweA\mto ecwA$.
   \end{itemize}
 \end{definition}
 
 
 
-% Lemma: a linear category is embedded in a split linear category
+% Lemma: embedding
+\begin{lemma}
+  \label{lem:embedding}
+  Let $(\cat{L},!,\w{}^L,\c{}^L)$ be a linear category and
+  $(\cat{S},cw,\w{}^S,\c{}^S,e,\e{}^S)$ be a split linear category. Then
+  there is an embedding from $\cat{L}$ to $\cat{S}$, i.e. there is a full
+  and faithful functor $F:\cat{L}\mto\cat{S}$.
+\end{lemma}
+\begin{proof}
+  Suppose $(\cat{L},!,\w{}^L,\c{}^L)$ is a linear category and
+  $(\cat{S},cw,\w{}^S,\c{}^S,e,\e{}^S)$ is a split linear category.
+  Let $F:\cat{L}\mto\cat{S}$ be a functor from $\cat{L}$ to $\cat{S}$
+  defined as follows:
+  \begin{itemize}
+  \item $F(I_L)=I_S$, where $I_L$ is the identity object for $\cat{L}$ and
+    $I_S$ is the identity object for $\cat{S}$;
+  \item $F(A\otimes B) = eF(A)\otimes eF(B)$ for any objects $A$ and $B$ in
+    $\cat{L}$;
+  \item $F(A\limp B) = F(A)\rightharpoonup F(B)$;
+  \item $F(!A) = cwF(A)$;
+  \end{itemize}
+
+\end{proof}
+
+
+\iffalse
+% Lemma: a linear category is a full sub of a split linear category
 \begin{lemma}
   \label{lem:linear-full-sub}
-  Let $(\cat{L},!,e)$ be a split linear category. Define a full subcategory
-  $\cat{L'}$ of $\cat{L}$ with object $eA$'s, $!eA$'s, and the unitor $I$
-  in $\cat{L}$. Then $(\cat{L'},!,\w{},\c{})$ is a linear category.
+  \todo{Delete this lemma and only keep the one below?}
+  Let $(\cat{L},cw,e)$ be a split linear category. Define a full
+  subcategory $\cat{L'}$ of $\cat{L}$ with object $eA$'s, $cweA$'s, and
+  the unitor $I$ in $\cat{L}$. Then $(\cat{L'},cw,\w{},\c{})$ is a linear
+  category.
 \end{lemma}
 
 \begin{proof}
@@ -2323,20 +2370,20 @@ isomorphism.
     Hence, $\cat{L'}$ is monoidal.
     
     We define a symmetry natural transformation
-    $\beta_{A,B}':!eA\otimes !eB\mto !eB\otimes !eA$ in $\cat{L'}$ as
+    $\beta_{A,B}':cweA\otimes cweB\mto cweB\otimes cweA$ in $\cat{L'}$ as
     \begin{mathpar}
     \bfig
       \morphism<1000,0>[
-        !eA\otimes !eB`
-        e!A\otimes e!B;
+        cweA\otimes cweB`
+        ecwA\otimes ecwB;
         distEx_A\otimes distEx_B]
       \morphism(1000,0)<700,0>[
-        e!A\otimes e!B`
-        e!B\otimes e!A;
-        \e{!A,!B}]
+        ecwA\otimes ecwB`
+        ecwB\otimes ecwA;
+        \e{cwA,cwB}]
       \morphism(1700,0)<1000,0>[
-        e!B\otimes e!A`
-        e!A\otimes e!B;
+        ecwB\otimes ecwA`
+        ecwA\otimes ecwB;
         distEx_B^{-1}\otimes distEx_A^{-1}]
     \efig
     \end{mathpar}
@@ -2346,64 +2393,68 @@ isomorphism.
 
     \todo{Closed: Not sure how $\cat{L'}$ is closed when $\cat{L}$ is not}
 
-  % the monoidal comonad ! is symmetric on L'
-  \item $(!,\varepsilon^!,\delta^!)$ is a symmetric monoidal comonad
+  % the monoidal comonad cw is symmetric on L'
+  \item $(cw,\varepsilon^{cw},\delta^{cw})$ is a symmetric monoidal comonad
     on $\cat{L'}$.
     
-    Lemma~\ref{lem:compose-cw} has proved that $(!,\varepsilon^!,\delta^!)$
-    is a monoidal comonad on $\cat{L}$. Since $\cat{L'}$ is monoidal, then
-    $!$ is also monoidal on $\cat{L'}$. Now we only need to show it is
-    symmetric, i.e. $(!,\q{}^!)$ is a symmetric monoidal endofunctor,
-    and hence $\varepsilon^!$ and $\delta^!$ are symmetric monoidal natural
-    transformations on $\cat{L'}$.
+    Lemma~\ref{lem:compose-cw} has proved that
+    $(cw,\varepsilon^{cw},\delta^{cw})$ is a monoidal comonad on $\cat{L}$.
+    Since $\cat{L'}$ is monoidal, then $cw$ is also monoidal on $\cat{L'}$.
+    Now we only need to show it is symmetric, i.e. $(cw,\q{}^{cw})$ is a
+    symmetric monoidal endofunctor, and hence $\varepsilon^{cw}$ and
+    $\delta^{cw}$ are symmetric monoidal natural transformations on
+    $\cat{L'}$.
     
-    $(!,\q{}^!)$ being symmetric on $\cat{L'}$ means the following
+    $(cw,\q{}^{cw})$ being symmetric on $\cat{L'}$ means the following
     diagram commutes:
     \begin{mathpar}
     \bfig
       \square<800,400>[
-        !eA\otimes !eB`
-        !eB\otimes !eA`
-        !(eA\otimes eB)`
-        !(eB\otimes eA);
+        cweA\otimes cweB`
+        cweB\otimes cweA`
+        cw(eA\otimes eB)`
+        cw(eB\otimes eA);
         \beta_{A,B}'`
-        \q{eA,eB}^!`
-        \q{eB,eA}^!`
-        !\e{A,B}]
+        \q{eA,eB}^{cw}`
+        \q{eB,eA}^{cw}`
+        cw\e{A,B}]
     \efig
     \end{mathpar}
     And the diagram does commute by the diagram chasing:
     \begin{mathpar}
     \bfig
       \Vtriangle|amm|<500,500>[  
-        !eA\otimes !eB`
-        e!A\otimes e!B`
+        cweA\otimes cweB`
+        ecwA\otimes ecwB`
         eA\otimes eB;
         distEx_A\otimes distEx_B`
-        \varepsilon_{eA}^!\otimes\varepsilon_{eB}^!`
-        e\varepsilon_A^!\otimes e\varepsilon_A^!]
+        \varepsilon_{eA}^{cw}\otimes\varepsilon_{eB}^{cw}`
+        e\varepsilon_A^{cw}\otimes e\varepsilon_A^{cw}]
       \Dtriangle(0,-500)|lmm|/->``<-/<500,500>[
-        !eA\otimes !eB`
+        cweA\otimes cweB`
         eA\otimes eB`
-        !(eA\otimes eB);
-        \q{eA,eB}^!``
-        \varepsilon_{eA\otimes eB}^!]
-      \morphism(1000,500)<1100,0>[e!A\otimes e!B`e!B\otimes e!A;\e{!A,!B}]
+        cw(eA\otimes eB);
+        \q{eA,eB}^{cw}``
+        \varepsilon_{eA\otimes eB}^{cw}]
+      \morphism(1000,500)<1100,0>[
+        ecwA\otimes ecwB`
+        ecwB\otimes ecwA;
+        \e{cwA,cwB}]
       \morphism(500,0)|m|<800,0>[eA\otimes eB`eB\otimes eA;\e{A,B}]
       \morphism(0,-500)|b|<2100,0>[
-        !(eA\otimes eB)`
-        !(eB\otimes eA);
-        !\e{A,B}]
+        cw(eA\otimes eB)`
+        cw(eB\otimes eA);
+        cw\e{A,B}]
       \Ctrianglepair(2100,-500)|mrmmr|/->`->`<-`<-`->/<800,500>[
-        e!B\otimes e!A`
+        ecwB\otimes ecwA`
         eB\otimes eA`
-        !eB\otimes !eA`
-        !(eB\otimes eA);
-        e\varepsilon_B^!\otimes e\varepsilon_A^!`
+        cweB\otimes cweA`
+        cw(eB\otimes eA);
+        e\varepsilon_B^{cw}\otimes e\varepsilon_A^{cw}`
         distEx_B^{-1}\otimes distEx_A^{-1}`
-        \varepsilon_{eB}^!\otimes\varepsilon_{eA}^!`
-        \varepsilon_{eB\otimes eA}^!`
-        \q{eB,eA}^!]
+        \varepsilon_{eB}^{cw}\otimes\varepsilon_{eA}^{cw}`
+        \varepsilon_{eB\otimes eA}^{cw}`
+        \q{eB,eA}^{cw}]
       \ptriangle(200,-100)/``/<100,100>[(1)``;``]
       \ptriangle(500,200)/``/<100,100>[(2)``;``]
       \ptriangle(1200,200)/``/<100,100>[(3)``;``]
@@ -2412,11 +2463,11 @@ isomorphism.
       \ptriangle(1900,-250)/``/<100,100>[(6)``;``]
     \efig
     \end{mathpar}
-    , where (1) and (6) commute because $!$ is a monoidal comonad on
+    , where (1) and (6) commute because $cw$ is a monoidal comonad on
     $\cat{L'}$, (2) and (5) are definition of $dist_Ex$, (3) is the
-    naturality of $\varepsilon^!$ and (4) is the naturality of $\e{}$.
+    naturality of $\varepsilon^{cw}$ and (4) is the naturality of $\e{}$.
 
-    Then $\varepsilon^!$ and $\delta^!$ are also symmetric. 
+    Then $\varepsilon^{cw}$ and $\delta^{cw}$ are also symmetric. 
     
   % the three conditions for weak and contraction transformations
   \item the three conditions of the monoidal natural transformations
@@ -2424,16 +2475,15 @@ isomorphism.
 
         Lemma~\ref{lem:composite-cw-2} proves that the three conditions are
         satisfied on $\cat{L}$, and the result can be easily restricted to
-        $\cat{L'}$ by replacing all object $cwA$ with $!eA$, $cwcwA$ with
-        $!e!eA$, etc. and keeping the unitor $I$.
+        $\cat{L'}$ by replacing all object $cwA$ with $cweA$, $cwcwA$ with
+        $cwecweA$, etc. and keeping the unitor $I$.
 
   \end{enumerate}
   In conclusion, the full subcategory $\cat{L'}$ forms a linear category.
 
 \end{proof}
 
-
-
+\fi
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
