@@ -2328,8 +2328,7 @@ isomorphism.
 \begin{proof}
   Suppose $(\cat{L},!,\w{}^L,\c{}^L)$ is a linear category and
   $(\cat{S},cw,\w{}^S,\c{}^S,e,\e{}^S)$ is a split linear category.
-  Let $F:\cat{L}\mto\cat{S}$ be a functor from $\cat{L}$ to $\cat{S}$
-  defined as follows:
+  Let $F:\cat{L}\mto\cat{S}$ be a functor defined as follows:
   \begin{itemize}
   \item $F(I_L)=I_S$, where $I_L$ is the identity object for $\cat{L}$ and
     $I_S$ is the identity object for $\cat{S}$;
@@ -2337,7 +2336,83 @@ isomorphism.
     $\cat{L}$;
   \item $F(A\limp B) = F(A)\rightharpoonup F(B)$;
   \item $F(!A) = cwF(A)$;
+  \item $F(A)=A$ for other basic $A$.
+    \todo{Don't know how to express this.}
   \end{itemize}
+
+  We show that the embedded category in $\cat{L}$ using $F$ is a linear
+  category, denoted $\hat{\cat{L}}$, by checking each component in the
+  definition of a linear category (Definition~\ref{def:linear-category}).
+
+  \begin{enumerate}[label=\textbf{\emph{\alph*}})]
+
+  % L' is symmetric monoidal closed
+  \item First, we need to show that $\hat{\cat{L}}$ is symmetric monoidal
+    closed. \\
+    By the definition of the functor $F$, the natural isomorphism
+    $\lambda$, $\rho$, $\alpha$ are mapped to the followings:
+    \begin{align*}
+      \hat\lambda_A &= F(\lambda_A) : eI_L\otimes eA\mto A     \\
+      \hat\rho_A &= F(\rho_A) : eA\otimes eI_L\mto A           \\
+      \hat\alpha_{A,B,C} &= F(\alpha_{A,B,C})
+        : e(eA\otimes eB)\otimes eC\mto eA\otimes e(eB\otimes eC),
+    \end{align*}
+    and they can be defined in $\cat{L}$ as:
+    \begin{align*}
+      \hat\lambda_A &= \lambda_A^{L}\circ
+                       (\varepsilon_{I_L}^e\otimes\varepsilon_A^e) \\
+      \hat\rho_A &= \rho_A^{L}\circ
+                       (\varepsilon_A^e\otimes\varepsilon_{I_L}^e) \\
+      \hat\alpha_{A,B,C} &= (id_eA\otimes\q{eB,eC}^e)\circ
+                            (id_A\otimes(\delta_B^e\otimes\delta_C^e))\circ
+                            \alpha_{eA,eB,eC}^L\circ
+                            (\varepsilon_{eA\otimes eB}^e\otimes id_{eC})
+    \end{align*}
+    \todo[inline]{$\hat\lambda$ and $\hat\rho$ don't have inverses by this
+      definition because we can't add an $e$ in front of $A$. I tried
+      $F(A)=eA$ for basic $A$ as below, which seems to work.}
+    \begin{align*}
+      \hat\lambda_A &: eI\otimes e^2A\mto eA                          \\
+      \hat\lambda_A &= \lambda_{eA}\circ
+                       (\varepsilon_{I_L}^e\otimes\varepsilon_{eA}^e) \\
+      \hat\lambda_A^{-1} &: eA\mto eI\otimes e^2A                     \\
+      \hat\lambda_A^{-1} &= (\q{I}\otimes\delta_A^e)\circ\lambda_{eA}^{-1}
+    \end{align*}
+    \begin{mathpar}
+    \bfig
+      \square|alrm|/->`<-`->`->/<800,400>[
+        eI_L\otimes e^2A`
+        I_L\otimes e^2A`
+        I_L\otimes e^2A`
+        I_L\otimes eA;
+        \varepsilon_{I_L}^e\otimes id_{e^2A}`
+        \q{I_L}\otimes id_{e^2A}`
+        \id_I\otimes\varepsilon_{eA}^e`
+        \id_I\otimes\varepsilon_{eA}^e]
+      \morphism/=/<800,400>[I_L\otimes e^2A`I_L\otimes e^2A;]
+      \square(0,-400)/`<-`->`<-/<800,400>[
+        I_L\otimes e^2A`
+        I_L\otimes eA`
+        I_L\otimes eA`
+        eA;
+        `
+        id_{I_L}\otimes\delta_A^e`
+        \lambda_{eA}`
+        \lambda_{eA}^{-1}]
+      \morphism(0,-400)/=/<800,400>[I_L\otimes eA`I_L\otimes eA;]
+      \efig
+    \end{mathpar}
+
+    \todo[inline]{Or, if $F(A\otimes B)=F(A)\otimes F(B)$, $F(A)=eA$ for basic $A$,
+      $F(I)=I$, we can have a much simpler solution as follows:}
+    \begin{align*}
+      \hat\lambda_A &: I\otimes eA\mto eA          \\
+      \hat\lambda_A &= \lambda_{eA}                \\
+      \hat\lambda_A^{-1} &= eA\mto I\otimes eA     \\
+      \hat\lambda_A^{-1} &= \lambda_{eA}^{-1}
+    \end{align*}
+
+  \end{enumerate}
 
 \end{proof}
 
@@ -2354,9 +2429,6 @@ isomorphism.
 \end{lemma}
 
 \begin{proof}
-  We prove the lemma by checking each component in the definition of a
-  linear category (Definition~\ref{def:linear-category}).
-
   \begin{enumerate}[label=\textbf{\emph{\alph*}})]
 
   % L' is symmetric monoidal closed
