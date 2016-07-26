@@ -1449,13 +1449,11 @@ shown by the diagram chasings below:
 
   \end{proof}
 
-% Definition: Lambek category with !
+% Definition: Lambek category with cw
 \begin{definition}
-  \label{def:Lambek-!}
+  \label{def:Lambek-cw}
   A \textbf{Lambek category with $cw$}, $(\cat{L},cw,\w{},\c{})$, is
   specified by
-  \todo{I used $cw$ instead of $!$ so that it won't be confused with 
-    the $!$ in linear category when we talk about the embedding.}
   \begin{itemize}
     \item a monoidal category $(\cat{L},I,\otimes)$;
     \item a monoidal comonad $(c,\varepsilon^c,\delta^c)$ with monoidal
@@ -1514,7 +1512,8 @@ shown by the diagram chasings below:
 % Conditions for weakening and contraction
 \begin{lemma}
   \label{lem:composite-cw-2}
-  Let $(\cat{L},cw,\w{},\c{})$ be a Lambek category with $!$. Then the
+  \todo{Delete this lemma?}
+  Let $(\cat{L},cw,\w{},\c{})$ be a Lambek category with $cw$. Then the
   monoidal natural transformations $\w{}$ and $\c{}$ satisfy the following
   three conditions:
   \begin{itemize}
@@ -1752,8 +1751,8 @@ shown by the diagram chasings below:
         \end{mathpar}
       (1), (2) and (3) commute by the functionality of $\lambda$. (6), (7)
       and (8) commute by the functionality of $\rho$. (4) and (9) are
-      conditions of the Lambek category with $!$. And (5) is the definition
-      of $\c{}$.
+      conditions of the Lambek category with $cw$. And (5) is the
+      definition of $\c{}$.
 
       \end{itemize}
     
@@ -2079,7 +2078,7 @@ shown by the diagram chasings below:
       \begin{itemize}
       \item[] \textbf{Case 1:}
         This coherence diagram is given in the definition of the Lambek
-        category with $!$.
+        category with $cw$.
         \begin{mathpar}
         \bfig
           \Vtriangle/->`->`->/<600,500>[
@@ -2151,25 +2150,131 @@ shown by the diagram chasings below:
   \begin{itemize}
   \item a monoidal category $(\cat{L},I,\otimes)$,
   \item a monoidal comonad $(e,\varepsilon,\delta)$ on $\cat{L}$ with
-    $\q{A,B}:eA\otimes eA\mto e(A\otimes B)$ and \\
+    $\q{A,B}:eA\otimes eB\mto e(A\otimes B)$ and \\
     $\q{I}:I\mto eI$, and
-  \item a monoidal natural isomorphism $\e{}$ on $\cat{L}$ with
+  \item a monoidal natural transformation $\e{}$ on $\cat{L}$ with
     components \\
-    $\e{A,B}:eA\otimes eB\mto eB\otimes eA$,
+    $\e{A,B}:e(A\otimes B)\mto eB\otimes eA$
   \end{itemize}
   subject to the following coherence condition:
   \begin{mathpar}
   \bfig
-    \Vtriangle/=`->`<-/<600,400>[
+    \square/->`=`->`/<1600,400>[
+      e(A\otimes B)`
+      eB\otimes eA`
+      e(A\otimes B)`
+      e(B\otimes A);
+      \e{A,B}``
+      \q{B,A}`]
+    \morphism(800,0)<-800,0>[
       eA\otimes eB`
-      eA\otimes eB`
-      eB\otimes eA;
-      `
-      \e{A,B}`
+      e(A\otimes B);
+      \q{A,B}]
+    \morphism(1600,0)<-800,0>[
+      e(B\otimes A)`
+      eA\otimes eB;
       \e{B,A}]
   \efig
   \end{mathpar}
+  and $(e(A\otimes B),\delta_{A\otimes B})$ and
+  $(eB\otimes eA,\q{eB,eA}\circ(\delta_B\otimes\delta_A))$ are coalgebras,
+  i.e. the following diagram commutes:
+  \begin{mathpar}
+  \bfig
+    \square/->`->`->`/<1600,400>[
+      e(A\otimes B)`
+      e^2(A\otimes B)`
+      eB\otimes eA`
+      e(eB\otimes eA);
+      \delta_{A\otimes B}`
+      \e{A,B}`
+      e\e{A,B}`]
+    \morphism<800,0>[
+      eB\otimes eA`
+      e^2B\otimes e^2A;
+      \delta_B\otimes\delta_A]
+    \morphism(800,0)<800,0>[e^2B\otimes e^2A`e(eB\otimes eA);\q{eB,eA}]
+  \efig
+  \end{mathpar}
 \end{definition}
+
+
+
+% Lemma: co-Kleisli category of e is symmetric
+\begin{lemma}
+  \label{lem:cokleisli-exchange}
+  Let $(e,\varepsilon,\delta)$ be a monoidal comonad over a monoidal
+  category $(\cat{L},I,\otimes)$ such that $(\cat{L},e,\e{})$ is a
+  Lambek category with exchange. Then in the co-Kleisli category of
+  $\cat{L}$, there exists a natural isomorphism with components
+  $\gamma_{A,B}:e(A\otimes B)\mto B\otimes A$.
+\end{lemma}
+\begin{proof}
+  Suppose $(\cat{L},e,\e{})$ is a Lambek category with exchange. We define
+  a natural transformation $\gamma_{A,B}:e(A\otimes B)\mto B\otimes A$ as
+  $$\gamma_{A,B}=(\varepsilon_B\otimes\varepsilon_A)\circ\e{A,B}.$$
+  $\gamma$ is a natural isomorphism if the following diagram commutes:
+  \begin{mathpar}
+  \bfig
+    \square/->`->`->`<-/<800,400>[
+      e(A\otimes B)`
+      e^2(A\otimes B)`
+      A\otimes B`
+      e(B\otimes A);
+      \delta_{A\otimes B}`
+      \varepsilon_{A\otimes B}`
+      e\gamma_{A,B}`
+      \gamma_{B,A}]
+  \efig
+  \end{mathpar}
+  , which does commute by the diagram chasing below.
+  \begin{mathpar}
+  \bfig
+    \Vtriangle|amm|/->`->`/<400,400>[
+      e(A\otimes B)`
+      e^2(A\otimes B)`
+      eB\otimes eA;
+      \delta_{A\otimes B}`
+      \e{A,B}`]
+    \Vtriangle(800,0)|amm|/->``<-/<400,400>[
+      e^2(A\otimes B)`
+      e(eB\otimes eA)`
+      e^2B\otimes e^2A;
+      e\e{A,B}``
+      \q{eB,eA}]
+    \qtriangle(400,-400)|mmm|/->`=`->/<800,400>[
+      eB\otimes eA`
+      e^2B\otimes e^2A`
+      eB\otimes eA;
+      \delta_B\otimes\delta_A``
+      e\varepsilon_B\otimes e\varepsilon_A]
+    \btriangle(0,-800)/->``<-/<800,1200>[
+      e(A\otimes B)`
+      A\otimes B`
+      eA\otimes eB;
+      \varepsilon_{A\otimes B}``
+      \varepsilon_A\otimes\varepsilon_B]
+    \morphism(800,-800)|m|<-400,400>[eA\otimes eB`e(A\otimes B);\q{A,B}]
+    \morphism(0,400)/=/<400,-800>[e(A\otimes B)`e(A\otimes B);]
+    \dtriangle(800,-800)/`->`<-/<800,1200>[
+      e(eB\otimes eA)`
+      eA\otimes eB`
+      e(B\otimes A);
+      `
+      e(\varepsilon_B\otimes\varepsilon_A)`
+      \e{B,A}]
+    \morphism(1200,-400)|m|<400,-400>[eB\otimes eA`e(B\otimes A);\q{B,A}]
+    \ptriangle(300,-700)/``/<100,100>[(1)``;``]
+    \ptriangle(900,-650)/``/<100,100>[(2)``;``]
+    \ptriangle(800,100)/``/<100,100>[(3)``;``]
+    \ptriangle(950,-250)/``/<100,100>[(4)``;``]
+    \ptriangle(1450,-300)/``/<100,100>[(5)``;``]
+  \efig
+  \end{mathpar}
+  (1) commutes because $e$ is monoidal. (2) and (3) commute by the
+  definition of the Lambek category with exchange. (4) commutes because $e$
+  is a comonad. And (5) commutes by the naturality of $\q{}$.
+\end{proof}
 
 
 
@@ -2188,7 +2293,7 @@ shown by the diagram chasings below:
       \Vtriangle/<-`<-`->/<500,400>[
         eA`
         cweA`
-        e!A;
+        ecwA;
         \varepsilon_{eA}^{cw}`
         e\varepsilon_A^{cw}`
         distEx_A]
@@ -2233,9 +2338,9 @@ over $e$. While $dist$ is a natural transformation, $distEx$ is a natural
 isomorphism.
 
 
-% Lemma: !e is a monoidal comonad
+% Lemma: cwe is a monoidal comonad
 \begin{lemma}
-  \label{lem:compose-!e}
+  \label{lem:compose-cwe}
   let $(cw,\varepsilon^{cw},\delta^{cw})$ and $(e,\varepsilon^e,\delta^e)$
   be two monoidal comonads on a Lambek category with $cw$ and exchange
   $(\cat{L},I,\otimes,cw,\w{},\c{},e,\e{})$. Then the composition of $cw$
@@ -2288,8 +2393,8 @@ isomorphism.
       (cw)^2e^2A`
       cwecweA;
       \delta_{e^2A}^{cw}``
-      cdist_{eA}`
-      cdist_{eA}]
+      cwdist_{eA}`
+      cwdist_{eA}]
   \efig
   \end{mathpar}
   And the comonad laws can be proved similarly, which we will not elaborate
@@ -2298,6 +2403,236 @@ isomorphism.
 
 
 
+% Lemma: co-Kleisli of cwe is symmetric monoidal
+\begin{lemma}
+  \label{lem:cokleisli-cwe}
+  Let $(cwe,\varepsilon,\delta)$ be a monoidal comonad over a monoidal
+  category $(\cat{L},I,\otimes)$ such that
+  $(\cat{L},I,\otimes,cw,\w{},\c{},e,\e{})$ is a Lambek category with $cw$
+  and exchange. Then the co-Kleisli category of $\cat{L}$, $\cat{L}_{cwe}$,
+  is a symmetric monoidal category.
+\end{lemma}
+\begin{proof}
+  The identity object of $\cat{L}_{cwe}$ is still $I$.
+
+  The left and right unitors, $\hat\lambda_A:I\otimes A\mto A$ and
+  $\hat\rho_A:A\otimes I\mto A$, in $\cat{L}_{cwe}$ are morphisms
+  $cwe(I\otimes A)\mto A$ and $cwe(A\otimes I)\mto A$ in $\cat{L}$,
+  respectively. Then we define $\hat\lambda$ and $\hat\rho$ as:
+  \begin{align*}
+    \hat\lambda_A &= \varepsilon_A\circ cwe\lambda_A     \\
+    \hat\rho_A    &= \varepsilon_A\circ cwe\rho_A,
+  \end{align*}
+  where $\lambda$ and $\rho$ are the left and right unitors in $\cat{L}$,
+  respectively. And we define their inverses as:
+  \begin{align*}
+    \hat\lambda_A^{-1} &= \varepsilon_{I\otimes A}\circ cwe\lambda_A^{-1} \\
+    \hat\rho_A^{-1}    &= \varepsilon_{A\otimes I}\circ cwe\rho_A^{-1}
+  \end{align*}
+  $\hat\lambda$ is a nautral isomorphism with inverse $\hat\lambda^{-1}$
+  because the following diagram chasing commutes:
+  \begin{mathpar}
+  \bfig
+    \Vtrianglepair|aammm|/->`->`->``<-/<800,400>[
+      cwe(I\otimes A)`
+      (cwe)^2(I\otimes A)`
+      (cwe)^2A`
+      cweA;
+      \delta_{I\otimes A}`
+      (cwe)^2\lambda_A`
+      cwe\lambda_A``
+      \delta_A]
+    \btriangle(0,-400)/->`=`<-/<800,800>[
+      cwe(I\otimes A)`
+      I\otimes A`
+      cwe(I\otimes A);
+      \varepsilon_{I\otimes A}``
+      \varepsilon_{I\otimes A}]
+    \btriangle(800,-400)|mmb|/->`=`<-/<800,400>[
+      cweA`
+      cwe(I\otimes A)`
+      cweA;
+      cwe\lambda_A^{-1}``
+      cwe\lambda_A^{-1}]
+    \morphism(1600,400)|r|<0,-800>[(cwe)^2A`cweA;cwe\varepsilon_A]
+    \ptriangle(800,100)/``/<100,100>[(1)``;``]
+    \ptriangle(300,-250)/``/<100,100>[(2)``;``]
+    \ptriangle(600,-100)/``/<100,100>[(3)``;``]
+    \ptriangle(1000,-350)/``/<100,100>[(4)``;``]
+    \ptriangle(1300,-100)/``/<100,100>[(5)``;``]
+  \efig
+  \end{mathpar}
+  (1) commutes by the naturality of $\delta$. (2), (3) and (4) commute
+  trivially. And (5) commutes because $cwe$ is a comonad.
+
+  Similarly, $\hat\rho$ is a natural isomorphism with inverse
+  $\hat\rho^{-1}$ by the following diagram chasing:
+  \begin{mathpar}
+  \bfig
+    \Vtrianglepair|aammm|/->`->`->``<-/<800,400>[
+      cwe(A\otimes I)`
+      (cwe)^2(A\otimes I)`
+      (cwe)^2A`
+      cweA;
+      \delta_{A\otimes I}`
+      (cwe)^2\rho_A`
+      cwe\rho_A``
+      \delta_A]
+    \btriangle(0,-400)/->`=`<-/<800,800>[
+      cwe(A\otimes I)`
+      A\otimes I`
+      cwe(A\otimes I);
+      \varepsilon_{A\otimes I}``
+      \varepsilon_{A\otimes I}]
+    \btriangle(800,-400)|mmb|/->`=`<-/<800,400>[
+      cweA`
+      cwe(A\otimes I)`
+      cweA;
+      cwe\rho_A^{-1}``
+      cwe\rho_A^{-1}]
+    \morphism(1600,400)|r|<0,-800>[(cwe)^2A`cweA;cwe\varepsilon_A]
+  \efig
+  \end{mathpar}
+
+  The associator
+  $\hat\alpha_A:(A\otimes B)\otimes C)\mto A\otimes(B\otimes C)$ in
+  $\cat{L}_{cwe}$ is the morphism
+  $cwe((A\otimes B)\otimes C)\mto A\otimes(B\otimes C)$ in $\cat{L}$.
+  We define $\hat\alpha$ as:
+  $$\hat\alpha_{A,B,C}=\varepsilon_{A\otimes(B\otimes C)}\circ cwe\alpha_{A,B,C},$$
+  where $\alpha$ is the associator of $\cat{L}$. And its inverse is
+  $$\hat\alpha_{A,B,C}^{-1} =
+    \varepsilon_{(A\otimes B)\otimes C}\circ cwe\alpha_{A,B,C}^{-1}$$
+  $\hat\alpha$ is a natural isomorphism with inverse $\hat\alpha^{-1}$
+  because the following diagram chasing commutes:
+  \begin{mathpar}
+  \bfig
+    \Vtrianglepair|aammm|/->`->`->``<-/<1200,400>[
+      cwe((A\otimes B)\otimes C)`
+      (cwe)^2((A\otimes B)\otimes C)`
+      (cwe)^2(A\otimes (B\otimes C))`
+      cwe(A\otimes(B\otimes C));
+      \delta_{(A\otimes B)\otimes C}`
+      (cwe)^2\alpha_{A,B,C}`
+      cwe\alpha_{A,B,C}``
+      \delta_{A\otimes (B\otimes C)}]
+    \btriangle(0,-400)/->`=`<-/<1200,800>[
+      cwe((A\otimes B)\otimes C)`
+      (A\otimes B)\otimes C`
+      cwe((A\otimes B)\otimes C);
+      \varepsilon_{(A\otimes B)\otimes C}``
+      \varepsilon_{(A\otimes B)\otimes C}]
+    \btriangle(1200,-400)|mmb|/->`=`<-/<1200,400>[
+      cwe(A\otimes(B\otimes C))`
+      cwe((A\otimes B)\otimes C)`
+      cwe(A\otimes(B\otimes C));
+      cwe\alpha_{A,B,C}^{-1}``
+      cwe\alpha_{A,B,C}^{-1}]
+    \morphism(2400,400)|r|<0,-800>[
+      (cwe)^2(A\otimes (B\otimes C))`
+      cwe(A\otimes(B\otimes C));
+      cwe\varepsilon_{A\otimes(B\otimes C)}]
+  \efig
+  \end{mathpar}
+
+  Therefore, $\cat{L}_{cwe}$ is a monoidal category.
+
+  The symmetry, $\hat\beta_{A,B}:A\otimes B\mto B\otimes A$, in
+  $\cat{L}_{cwe}$ is the morphism $cwe(A\otimes B)\mto B\otimes A$ in
+  $\cat{L}$, which is defined as:
+  $$\hat\beta_{A,B}=\varepsilon_{B\otimes A}^{cw}\circ cw\gamma_{A,B},$$
+  where $\varepsilon_A^{cw}:cwA\mto A$ is a natural transformation
+  associated with the comonad $cw$, and $\gamma$ is the natural
+  isomorphism defined in Lemma~\ref{lem:cokleisli-exchange}. Then its
+  inverse is
+  $$\hat\beta_{A,B}^{-1}=\varepsilon_{A\otimes B}^{cw}\circ cw\gamma_{B,A}$$
+  $\hat\beta$ is a natural isomorphism with inverse $\hat\beta^{-1}$
+  because the following diagram chasing commutes:
+  \begin{mathpar}
+  \bfig
+    \square|almm|/<-`<-`->`<-/<850,400>[
+      A\otimes B`
+      cw(A\otimes B)`
+      cw(A\otimes B)`
+      (cw)^2(A\otimes B);
+      \varepsilon_{A\otimes B}^{cw}`
+      \varepsilon_{A\otimes B}^{cw}`
+      \delta_{A\otimes B}^{cw}`
+      cw\varepsilon_{A\otimes B}^{cw}]
+    \morphism/=/<850,400>[cw(A\otimes B)`cw(A\otimes B);]
+    \square(850,0)|amrm|/<-``->`<-/<1850,400>[
+      cw(A\otimes B)`
+      cwe(A\otimes B)`
+      (cw)^2(A\otimes B)`
+      (cw)^2e(A\otimes B);
+      cw\varepsilon_{A\otimes B}^e``
+      \delta_{e(A\otimes B}^{cw}`
+      (cw)^2\varepsilon_{A\otimes B}^e]
+    \btriangle(850,-400)|mmm|/<-``<-/<1050,400>[
+      (cw)^2(A\otimes B)`
+      (cw)^2e(B\otimes A)`
+      (cw)^2e^2(A\otimes B);
+      (cw)^2\gamma_{B,A}``
+      (cw)^2e\gamma_{A,B}]
+    \morphism(2700,0)<0,-400>[
+      (cw)^2e(A\otimes B)`
+      (cw)^2e^2(A\otimes B);
+      (cw)^2\delta_{A\otimes B}^e]
+    \qtriangle(1900,-800)|mmr|/=`<-`->/<800,400>[
+      (cw)^2e^2(A\otimes B)`
+      (cw)^2e^2(A\otimes B)`
+      (cwe)^2(A\otimes B);
+      `
+      cwdistEx_{e(A\otimes B)}^{-1}`
+      cwdistEx_{e(A\otimes B)}]
+    \morphism(850,-400)|m|/=/<0,-400>[
+      (cw)^2e(B\otimes A)`
+      (cw)^2e(B\otimes A);]
+    \morphism(2700,-1200)|m|<-1850,800>[
+      cwecw(B\otimes A)`
+      (cw)^2e(B\otimes A);
+      cwdistEx_{B\otimes A}^{-1}]
+    \morphism(850,-800)|m|<1850,-400>[
+      (cw)^2e(B\otimes A)`
+      cwecw(B\otimes A);
+      cwdistEx_{B\otimes A}]
+    \morphism(2700,-800)|r|<0,-400>[
+      (cwe)^2(A\otimes B)`
+      cwecw(B\otimes A);
+      cwecw\gamma_{A,B}]
+    \btriangle(0,-1200)/<-``<-/<2700,1200>[
+      cw(A\otimes B)`
+      cwe(B\otimes A)`
+      cwecw(B\otimes A);
+      cw\gamma_{B,A}``
+      cwe\varepsilon_{B\otimes A}^{cw}]
+    \morphism(850,-400)|m|<-850,-800>[
+      (cw)^2e(B\otimes A)`
+      cwe(B\otimes A);
+      cw\varepsilon_{e(B\otimes A)}^{cw}]
+    \ptriangle(200,250)/``/<100,0>[(1)``;``]
+    \ptriangle(550,100)/``/<100,0>[(2)``;``]
+    \ptriangle(1775,200)/``/<100,0>[(3)``;``]
+    \ptriangle(350,-400)/``/<100,0>[(4)``;``]
+    \ptriangle(1775,-200)/``/<100,0>[(5)``;``]
+    \ptriangle(850,-1000)/``/<100,0>[(6)``;``]
+    \ptriangle(1200,-700)/``/<100,0>[(7)``;``]
+    \ptriangle(1775,-600)/``/<100,0>[(8)``;``]
+    \ptriangle(2550,-550)/``/<100,0>[(9)``;``]
+  \efig
+  \end{mathpar}
+  (1), (7) and (9) commute trivially. (2) is the comonad law for $cw$. (3)
+  commutes by the naturality of $\delta^{cw}$. (4) commutes by the
+  naturality of $\varepsilon^{cw}$. (5) commutes because $\gamma$ is a
+  natural isomorphism (Lemma~\ref{lem:cokleisli-exchange}). (6) is the
+  definition of $distEx$. (8) is the naturality of $distEx$. 
+  
+  In conclusion, $\cat{L}_{cwe}$ is a symmetric monoidal category.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
 % Definition: split linear category
 \begin{definition}
   \label{def:split-linear}
@@ -2314,107 +2649,8 @@ isomorphism.
   \item a natural isomorphism with components $distEx_A:cweA\mto ecwA$.
   \end{itemize}
 \end{definition}
+\fi
 
-
-
-% Lemma: embedding
-\begin{lemma}
-  \label{lem:embedding}
-  Let $(\cat{L},!,\w{}^L,\c{}^L)$ be a linear category and
-  $(\cat{S},cw,\w{}^S,\c{}^S,e,\e{}^S)$ be a split linear category. Then
-  there is an embedding from $\cat{L}$ to $\cat{S}$, i.e. there is a full
-  and faithful functor $F:\cat{L}\mto\cat{S}$.
-\end{lemma}
-\begin{proof}
-  Suppose $(\cat{L},!,\w{}^L,\c{}^L)$ is a linear category and
-  $(\cat{S},cw,\w{}^S,\c{}^S,e,\e{}^S)$ is a split linear category.
-  Let $F:\cat{L}\mto\cat{S}$ be a functor defined as follows:
-  \begin{itemize}
-  \item $F(I_L)=I_S$, where $I_L$ is the identity object for $\cat{L}$ and
-    $I_S$ is the identity object for $\cat{S}$;
-  \item $F(A\otimes B) = eF(A)\otimes eF(B)$ for any objects $A$ and $B$ in
-    $\cat{L}$;
-  \item $F(A\limp B) = F(A)\rightharpoonup F(B)$;
-  \item $F(!A) = cwF(A)$;
-  \item $F(A)=A$ for other basic $A$.
-    \todo{Don't know how to express this.}
-  \end{itemize}
-
-  We show that the embedded category in $\cat{L}$ using $F$ is a linear
-  category, denoted $\hat{\cat{L}}$, by checking each component in the
-  definition of a linear category (Definition~\ref{def:linear-category}).
-
-  \begin{enumerate}[label=\textbf{\emph{\alph*}})]
-
-  % L' is symmetric monoidal closed
-  \item First, we need to show that $\hat{\cat{L}}$ is symmetric monoidal
-    closed. \\
-    By the definition of the functor $F$, the natural isomorphism
-    $\lambda$, $\rho$, $\alpha$ are mapped to the followings:
-    \begin{align*}
-      \hat\lambda_A &= F(\lambda_A) : eI_L\otimes eA\mto A     \\
-      \hat\rho_A &= F(\rho_A) : eA\otimes eI_L\mto A           \\
-      \hat\alpha_{A,B,C} &= F(\alpha_{A,B,C})
-        : e(eA\otimes eB)\otimes eC\mto eA\otimes e(eB\otimes eC),
-    \end{align*}
-    and they can be defined in $\cat{L}$ as:
-    \begin{align*}
-      \hat\lambda_A &= \lambda_A^{L}\circ
-                       (\varepsilon_{I_L}^e\otimes\varepsilon_A^e) \\
-      \hat\rho_A &= \rho_A^{L}\circ
-                       (\varepsilon_A^e\otimes\varepsilon_{I_L}^e) \\
-      \hat\alpha_{A,B,C} &= (id_eA\otimes\q{eB,eC}^e)\circ
-                            (id_A\otimes(\delta_B^e\otimes\delta_C^e))\circ
-                            \alpha_{eA,eB,eC}^L\circ
-                            (\varepsilon_{eA\otimes eB}^e\otimes id_{eC})
-    \end{align*}
-    \todo[inline]{$\hat\lambda$ and $\hat\rho$ don't have inverses by this
-      definition because we can't add an $e$ in front of $A$. I tried
-      $F(A)=eA$ for basic $A$ as below, which seems to work.}
-    \begin{align*}
-      \hat\lambda_A &: eI\otimes e^2A\mto eA                          \\
-      \hat\lambda_A &= \lambda_{eA}\circ
-                       (\varepsilon_{I_L}^e\otimes\varepsilon_{eA}^e) \\
-      \hat\lambda_A^{-1} &: eA\mto eI\otimes e^2A                     \\
-      \hat\lambda_A^{-1} &= (\q{I}\otimes\delta_A^e)\circ\lambda_{eA}^{-1}
-    \end{align*}
-    \begin{mathpar}
-    \bfig
-      \square|alrm|/->`<-`->`->/<800,400>[
-        eI_L\otimes e^2A`
-        I_L\otimes e^2A`
-        I_L\otimes e^2A`
-        I_L\otimes eA;
-        \varepsilon_{I_L}^e\otimes id_{e^2A}`
-        \q{I_L}\otimes id_{e^2A}`
-        \id_I\otimes\varepsilon_{eA}^e`
-        \id_I\otimes\varepsilon_{eA}^e]
-      \morphism/=/<800,400>[I_L\otimes e^2A`I_L\otimes e^2A;]
-      \square(0,-400)/`<-`->`<-/<800,400>[
-        I_L\otimes e^2A`
-        I_L\otimes eA`
-        I_L\otimes eA`
-        eA;
-        `
-        id_{I_L}\otimes\delta_A^e`
-        \lambda_{eA}`
-        \lambda_{eA}^{-1}]
-      \morphism(0,-400)/=/<800,400>[I_L\otimes eA`I_L\otimes eA;]
-      \efig
-    \end{mathpar}
-
-    \todo[inline]{Or, if $F(A\otimes B)=F(A)\otimes F(B)$, $F(A)=eA$ for basic $A$,
-      $F(I)=I$, we can have a much simpler solution as follows:}
-    \begin{align*}
-      \hat\lambda_A &: I\otimes eA\mto eA          \\
-      \hat\lambda_A &= \lambda_{eA}                \\
-      \hat\lambda_A^{-1} &= eA\mto I\otimes eA     \\
-      \hat\lambda_A^{-1} &= \lambda_{eA}^{-1}
-    \end{align*}
-
-  \end{enumerate}
-
-\end{proof}
 
 
 \iffalse
