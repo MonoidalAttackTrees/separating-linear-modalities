@@ -4,3 +4,5 @@
 *.log
 *.out
 *.swp
+/draft/main-notes.pdf
+/draft/test.txt
