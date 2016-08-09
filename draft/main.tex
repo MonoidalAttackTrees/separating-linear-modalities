@@ -165,21 +165,22 @@ TODO: Define Lambek Categories
   \item a monoidal comonad $(w,\varepsilon,\delta)$ on $\cat{L}$ with
     $\q{A,B}:wA\otimes wB\mto w(A\otimes B)$ and $\q{I}:I\mto wI$, and
   \item a monoidal natural transformation $\w{}$ on $\cat{L}$ with
-    components $\w{A}:wA\mto I$ s.t. the following diagrams commutes:
-  \end{itemize}
+    components $\w{A}:wA\mto I$ s.t. $\w{A}$ is a coalgebra morphism, i.e.
+    the following digram commutes:
   \begin{mathpar}
     \bfig
     \square/->`->`->`->/<1000,500>[
       wA`
       I`
-      wwA`
+      w^2A`
       wI;
       \w{A}`
-      \delta{A}`
+      \delta_A`
       \q{I}`
       w\w{A}]
     \efig
   \end{mathpar}
+  \end{itemize}
 \end{definition}
 
 
@@ -215,9 +216,6 @@ TODO: Define Lambek Categories
         \morphism(0,0)|b|<2100,0>[(cA\otimes I)\otimes cA`cA\otimes(I\otimes cA);\alpha_{cA,I,cA}]
       \efig
     \end{mathpar}
-    \todo{The following two diagrams are added to prove $(cwA,\w{A},\c{A})$
-          is a comonoid, corresponding to part of the first diagram in the
-          definition of linear category.}
     \begin{mathpar}
     \bfig
       \square/->`->``->/<1300,800>[
@@ -241,31 +239,6 @@ TODO: Define Lambek Categories
         `
         \alpha_{cA,cA,cA}`
         (id_{cA}\otimes\lambda_{cA})\otimes id_{cA}]
-    \efig
-    \end{mathpar}
-    \begin{mathpar}
-    \bfig
-      \square/->`->``->/<1300,800>[
-        cA\otimes cA`
-        cA\otimes(I\otimes cA)`
-        (cA\otimes I)\otimes cA`
-        ((cA\otimes I)\otimes cA)\otimes cA;
-        id_{cA}\otimes\lambda_{cA}^{-1}`
-        \rho_{cA}^{-1}\otimes id_{cA}``
-        \cL{A,I}\otimes id_{cA}]
-      \qtriangle(1300,400)/->``->/<1300,400>[
-        cA\otimes(I\otimes cA)`
-        cA\otimes(cA\otimes(I\otimes cA))`
-        cA\otimes(cA\otimes cA);
-        id_{cA}\otimes\cR{A,I}``
-        id_{cA}\otimes(id_{cA}\otimes\lambda_{cA})]
-      \dtriangle(1300,0)/`<-`->/<1300,400>[
-        cA\otimes(cA\otimes cA)`
-        ((cA\otimes I)\otimes cA)\otimes cA`
-        (cA\otimes cA)\otimes cA;
-        `
-        \alpha_{cA,cA,cA}`
-        (\rho_{cA}\otimes id_{cA})\otimes id_{cA}]
     \efig
     \end{mathpar}
 
@@ -311,9 +284,8 @@ TODO: Define Lambek Categories
       \e{B,A}]
   \efig
   \end{mathpar}
-  and $(e(A\otimes B),\delta_{A\otimes B})$ and
-  $(eB\otimes eA,\q{eB,eA}\circ(\delta_B\otimes\delta_A))$ are coalgebras,
-  i.e. the following diagram commutes:
+  and $\e{A,B}$ is a coalgebra morphism, i.e. the following diagram
+  commutes:
   \begin{mathpar}
   \bfig
     \square/->`->`->`/<1600,400>[
@@ -565,55 +537,66 @@ TODO: Define Lambek Categories
   \end{mathpar}
 \end{definition}
 
-By the definiiton of the distribute law $dist$ and the comonad laws of $c$
-and $w$, the following two diagrams also commute:
-\begin{mathpar}
-\bfig
-  \Vtriangle/->`->`<-/<500,400>[
-    cwcA`
-    cwc^2A`
-    c^2wcA;
-    cw\delta_A^c`
-    \delta_{wcA}^c`
-    cdist_{cA}]
-\efig
-\and
-\bfig
-  \Vtriangle/->`->`->/<500,400>[
-    wcwA`
-    wcw^2A`
-    w^2cwA;
-    wc\delta_A^w`
-    \delta_{cwA}^w`
-    wdist_{wA}]
-\efig
-\end{mathpar}
-shown by the diagram chasings below:
-\begin{mathpar}
-\bfig
-  \Vtriangle|amm|/->`=`->/<800,300>[
-    cwcA`
-    cwc^2A`
-    cwcA;
-    cw\delta_A^c``
-    cw\varepsilon_{cA}^c]
-  \morphism(0,300)|b|<800,-700>[cwcA`c^2wcA;\delta_{wA}^c]
-  \morphism(800,-400)|m|<0,400>[c^2wcA`cwcA;c\varepsilon_{wcA}^c]
-  \morphism(800,-400)|b|<800,700>[c^2wcA`cwc^2A;cdist_{cA}]
-\efig
-\and
-\bfig
-  \Vtriangle|amm|/->`=`->/<800,300>[
-    wcwA`
-    wcw^2A`
-    wcwA;
-    wc\delta_A^w``
-    wc\varepsilon_{wA}^w]
-  \morphism(0,300)|b|<800,-700>[wcwA`w^2cwA;\delta_{cwA}^w]
-  \morphism(800,-400)|m|<0,400>[w^2cwA`wcwA;w\varepsilon_{cwA}^w]
-  \morphism(1600,300)|b|<-800,-700>[wcw^2A`w^2cwA;wdist_{wA}]
-\efig
-\end{mathpar}
+\begin{lemma}
+  \label{lem:dist}
+  Given two comonads $(c,\varepsilon^c,\delta^c)$ and
+  $(w,\varepsilon^w,\delta^w)$ on a category $\cat{L}$ such that
+  $(\cat{L},c,\cL{},\cR{})$ is a Lambek category with contraction and
+  $(\cat{L},w,\w{})$ is a Lambek category with weakening, the following
+  two diagrams commute:
+  \begin{mathpar}
+  \bfig
+    \Vtriangle/->`->`<-/<500,400>[
+      cwcA`
+      cwc^2A`
+      c^2wcA;
+      cw\delta_A^c`
+      \delta_{wcA}^c`
+      cdist_{cA}]
+  \efig
+  \and
+  \bfig
+    \Vtriangle/->`->`->/<500,400>[
+      wcwA`
+      wcw^2A`
+      w^2cwA;
+      wc\delta_A^w`
+      \delta_{cwA}^w`
+      wdist_{wA}]
+  \efig
+  \end{mathpar}
+\end{lemma}
+
+\begin{proof}
+  The two diagrams above commute by the diagram chasings below:
+  \begin{mathpar}
+  \bfig
+    \Vtriangle|amm|/->`=`->/<800,300>[
+      cwcA`
+      cwc^2A`
+      cwcA;
+      cw\delta_A^c``
+      cw\varepsilon_{cA}^c]
+    \morphism(0,300)|b|<800,-700>[cwcA`c^2wcA;\delta_{wA}^c]
+    \morphism(800,-400)|m|<0,400>[c^2wcA`cwcA;c\varepsilon_{wcA}^c]
+    \morphism(800,-400)|b|<800,700>[c^2wcA`cwc^2A;cdist_{cA}]
+  \efig
+  \and
+  \bfig
+    \Vtriangle|amm|/->`=`->/<800,300>[
+      wcwA`
+      wcw^2A`
+      wcwA;
+      wc\delta_A^w``
+      wc\varepsilon_{wA}^w]
+    \morphism(0,300)|b|<800,-700>[wcwA`w^2cwA;\delta_{cwA}^w]
+    \morphism(800,-400)|m|<0,400>[w^2cwA`wcwA;w\varepsilon_{cwA}^w]
+    \morphism(1600,300)|b|<-800,-700>[wcw^2A`w^2cwA;wdist_{wA}]
+  \efig
+  \end{mathpar}
+  , which commute by the distribute law $dist$ and the comonad laws of $c$
+  and $w$.
+\end{proof}
 
 % Lemma for composing contraction and weakening
 \begin{lemma}
@@ -902,8 +885,8 @@ shown by the diagram chasings below:
 % Definition: Lambek category with cw
 \begin{definition}
   \label{def:Lambek-cw}
-  A \textbf{Lambek category with $cw$}, $(\cat{L},cw,\w{},\c{})$, is
-  specified by
+  A \textbf{Lambek category with $cw$}, $(\cat{L},cw,\w{}^w,\cL{},\cR{})$,
+  is specified by
   \begin{itemize}
     \item a monoidal category $(\cat{L},I,\otimes)$;
     \item a monoidal comonad $(c,\varepsilon^c,\delta^c)$ with monoidal
@@ -942,6 +925,24 @@ shown by the diagram chasings below:
         id_{cwA\otimes I}\otimes\varepsilon_{wA}^c]
     \efig
   \end{mathpar}
+
+  \begin{mathpar}
+    \bfig
+    \square/->`->`->`/<1000,400>[
+      cwA`
+      cwB`
+      wA`
+      wB;
+      f`
+      \varepsilon_{wA}^c`
+      \varepsilon_{wB}^c`]
+    \morphism<500,0>[wA`I;\w{A}^w]
+    \morphism(1000,0)<-500,0>[wB`I;\w{B}^w]
+    \efig
+  \end{mathpar}
+  \todo{I modified this diagram by decomposing $\w{}$ as
+        $\w{}^w\circ\varepsilon$ because we haven't defined $\w{}$ yet.}
+\iffalse
   \begin{mathpar}
   \bfig
     \Vtriangle/->`->`->/<600,400>[
@@ -953,6 +954,7 @@ shown by the diagram chasings below:
       \w{B}]
   \efig
   \end{mathpar}
+\fi
   for any coalgebra morphism $f:(cwA,\delta_A)\mto(cwB,\delta_B)$ between
   free coalgebras.
 \end{definition}
@@ -962,252 +964,248 @@ shown by the diagram chasings below:
 % Conditions for weakening and contraction
 \begin{lemma}
   \label{lem:composite-cw-2}
-  \todo{Delete this lemma?}
-  Let $(\cat{L},cw,\w{},\c{})$ be a Lambek category with $cw$. Then the
-  monoidal natural transformations $\w{}$ and $\c{}$ satisfy the following
-  three conditions:
+  Let $(\cat{L},cw,\w{}^w,\cL{},\cR{})$ be a Lambek category with $cw$.
+  Then the following three conditions are satisfied:
   \begin{itemize}
-    \item[1.] Each $(cwA,\w{A},\c{A})$ is a comonoid.
-    \item[2.] $\w{A}$ and $\c{A}$ are coalgebra morphisms.
-    \item[3.] Any coalgebra morphism $f:(cwA,\delta_A)\mto(cwB,\delta_B)$
+    \item[1.] There exist two natural transformations $\w{A}:cwA\mto I$
+      and $\c{A}:cwA\mto cwA\otimes cwA$.
+    \item[2.] Each $(cwA,\w{A},\c{A})$ is a comonoid.
+    \item[3.] $\w{A}$ and $\c{A}$ are coalgebra morphisms.
+    \item[4.] Any coalgebra morphism $f:(cwA,\delta_A)\mto(cwB,\delta_B)$
       between free coalgebras preserves the comonoid structure given by
       $\w{}$ and $\c{}$.
   \end{itemize}
 \end{lemma}
 
 \begin{proof}
-  We first define $\w{}$ and $\c{}$. Each of them can also be given two
-  equivalent definitions:
   \begin{itemize}
-    \item $\w{A}:cwA\mto I$ is defined as in the diagram below. The left
-      triangle commutes by the definition of $dist$ and the right triangle
-      commutes by the definition of $\w{}^w$.
+  \item[1.]
+    Each of $\w{}$ and $\c{}$can be given two equivalent definitions.
+    $\w{A}:cwA\mto I$ is defined as in the diagram below. The left
+    triangle commutes by the definition of $dist$ and the right triangle
+    commutes by the definition of $\w{}^w$.
+    \begin{mathpar}
+    \bfig
+    \Atrianglepair/<-`->`->`->`->/<600,600>[
+      wcA`
+      cwA`
+      wA`
+      I;
+      dist_A`
+      w\varepsilon_A^c`
+      \w{cA}^w`
+      \varepsilon_{wA}^c`
+      \w{A}^w]
+    \efig
+    \end{mathpar}
+
+    $\c{A}:cwA\mto cwA\otimes cwA$ is defined as below. The left part of
+    the diagram commutes by the definitions of $\cL{}$ and of $\cR{}$, and
+    the right part commutes because $\cat{L}$ is monoidal.
+    \begin{mathpar}
+      \bfig
+      \square/->`->``->/<1050,600>[
+        cwA`
+        cwA\otimes I`
+        I\otimes cwA`
+        cwA\otimes(I\otimes cwA);
+        \rho_{cwA}^{-1}`
+        \lambda_{cwA}^{-1}``
+        \cR{wA,I}]
+      \ptriangle(1050,0)/->``/<1050,600>[
+        cwA\otimes I`
+        (cwA\otimes I)\otimes cwA`
+        cwA\otimes(I\otimes cwA);
+        \cL{wA,I}``]
+      \dtriangle(1050,0)|mrb|/->`->`->/<1050,600>[
+        (cwA\otimes I)\otimes cwA`
+        cwA\otimes(I\otimes cwA)`
+        cwA\otimes cwA;
+        \alpha_{cwA,I,cwA}`
+        \rho_{cwA}\otimes id_{cwA}`
+        id_{cwA}\otimes\lambda_{cwA}]
+      \efig
+    \end{mathpar}
+
+  % Conditions for each cwA being a comonoid
+  \item[2.] Each $(cwA,\w{A},\c{A})$ is a comonoid.
+    \begin{itemize}
+    \item[] \textbf{Case 1:}
       \begin{mathpar}
       \bfig
-      \Atrianglepair/<-`->`->`->`->/<600,600>[
-        wcA`
-	cwA`
-	wA`
-	I;
-        dist_A`
-        w\varepsilon_A^c`
-        \w{cA}^w`
-        \varepsilon_{wA}^c`
-        \w{A}^w]
+      \square/->`->``/<1050,600>[
+        cwA`
+        cwA\otimes cwA`
+        cwA\otimes cwA`;
+        \c{A}`
+        \c{A}``]
+      \square(1050,0)/->``<-`/<1150,600>[
+        cwA\otimes cwA`
+        cwA\otimes(cwA\otimes cwA)``
+        (cwA\otimes cwA)\otimes cwA;
+        id_{cwA}\otimes\c{A}``
+        \alpha_{cwA,cwA,cwA}`]
+        \morphism(0,0)|b|<2200,0>[
+          cwA\otimes cwA`
+          (cwA\otimes cwA)\otimes cwA;
+          \c{A}\otimes id_{cwA}]
       \efig
       \end{mathpar}
 
-    \item $\c{A}:cwA\mto cwA\otimes cwA$ is defined as below. The left part
-      of the diagram commutes by the definitions of $\cL{}$ and of $\cR{}$,
-      and the right part commutes because $\cat{L}$ is monoidal.
+      The previous diagram commutes by the following diagram chasing.
+
       \begin{mathpar}
-        \bfig
-        \square/->`->``->/<1050,600>[
+      \bfig
+        \ptriangle/->`->`=/<1100,400>[
           cwA`
-          cwA\otimes I`
-          I\otimes cwA`
-          cwA\otimes(I\otimes cwA);
-          \rho_{cwA}^{-1}`
-          \lambda_{cwA}^{-1}``
-          \cR{wA,I}]
-        \ptriangle(1050,0)/->``/<1050,600>[
-          cwA\otimes I`
-          (cwA\otimes I)\otimes cwA`
-          cwA\otimes(I\otimes cwA);
-          \cL{wA,I}``]
-        \dtriangle(1050,0)|mrb|/->`->`->/<1050,600>[
-          (cwA\otimes I)\otimes cwA`
-          cwA\otimes(I\otimes cwA)`
+          cwA\otimes cwA`
           cwA\otimes cwA;
-          \alpha_{cwA,I,cwA}`
-          \rho_{cwA}\otimes id_{cwA}`
-          id_{cwA}\otimes\lambda_{cwA}]
-        \efig
-      \end{mathpar}
-  \end{itemize}
-
-  Then we show each condition is satisfied.
-  % Conditions for each cwA being a comonoid
-  \begin{itemize}
-    % Condition 1
-    \item[1.] Each $(cwA,\w{A},\c{A})$ is a comonoid.
-      \begin{itemize}
-      \item[] \textbf{Case 1:}
-        \begin{mathpar}
-        \bfig
-        \square/->`->``/<1050,600>[
-          cwA`
-          cwA\otimes cwA`
-          cwA\otimes cwA`;
           \c{A}`
-          \c{A}``]
-        \square(1050,0)/->``<-`/<1150,600>[
+          \c{A}`]
+        \qtriangle(1100,0)/->``->/<1700,400>[
           cwA\otimes cwA`
-          cwA\otimes(cwA\otimes cwA)``
+          cwA\otimes(cwA\otimes I)`
+          cwA\otimes((cwA\otimes I)\otimes cwA);
+          id_{cwA}\otimes\rho_{cwA}^{-1}``
+          id_{cwA}\otimes\cL{wA,I}]
+        \square(0,-400)|mlmm|/->`->`->`/<1100,400>[
+          cwA\otimes cwA`
+          cwA\otimes(I\otimes cwA)`
+          (cwA\otimes I)\otimes cwA`
+          cwA\otimes(cwA\otimes(I\otimes cwA));
+          id_{cwA}\otimes\lambda_{cwA}^{-1}`
+          \rho_{cwA}^{-1}\otimes id_{cwA}`
+          id_{cwA}\otimes\cR{wA,I}`]
+        \dtriangle(1100,-400)|mrm|/<-`->`->/<1700,400>[
+          cwA\otimes((cwA\otimes I)\otimes cwA)`
+          cwA\otimes(cwA\otimes(I\otimes cwA))`
+          cwA\otimes(cwA\otimes cwA);
+          id_{cwA}\otimes\alpha_{cwA,I,cwA}`
+          id_{cwA}\otimes(\rho_{cwA}\otimes id_{cwA})`
+          id_{cwA}\otimes(id_{cwA}\otimes\lambda_{cwA})]
+        \square(0,-800)/`->`<-`->/<2800,400>[
+          (cwA\otimes I)\otimes cwA`
+          cwA\otimes(cwA\otimes cwA)`
+          ((cwA\otimes I)\otimes cwA)\otimes cwA`
           (cwA\otimes cwA)\otimes cwA;
-          id_{cwA}\otimes\c{A}``
-          \alpha_{cwA,cwA,cwA}`]
-          \morphism(0,0)|b|<2200,0>[
-            cwA\otimes cwA`
-            (cwA\otimes cwA)\otimes cwA;
-            \c{A}\otimes id_{cwA}]
-        \efig
-        \end{mathpar}
+          `
+          \cL{wA,I}\otimes id_{cwA}`
+          \alpha_{cwA,cwA,cwA}`
+          (\rho_{cwA}\otimes id_{cwA})\otimes id_{cwA}]
+        \ptriangle(300,150)/``/<100,100>[(1)``;``]
+        \ptriangle(1950,0)/``/<100,100>[(2)``;``]
+        \ptriangle(2400,-350)/``/<100,100>[(3)``;``]
+        \ptriangle(1400,-750)/``/<100,100>[(4)``;``]
+      \efig
+      \end{mathpar}
 
-        The previous diagram commutes by the following diagram chasing.
+      (1) commutes trivially and we would not expand $\c{}$ for
+      simplicity. (2) and (4) commute because $(\cat{L},c,\cL{},\cR{})$
+      is a Lambek category with contraction. (3) commutes because
+      $\cat{L}$ is monoidal.
 
-        \begin{mathpar}
-        \bfig
-          \ptriangle/->`->`=/<1100,400>[
-            cwA`
-            cwA\otimes cwA`
-            cwA\otimes cwA;
-            \c{A}`
-            \c{A}`]
-          \qtriangle(1100,0)/->``->/<1700,400>[
-            cwA\otimes cwA`
-            cwA\otimes(cwA\otimes I)`
-            cwA\otimes((cwA\otimes I)\otimes cwA);
-            id_{cwA}\otimes\rho_{cwA}^{-1}``
-            id_{cwA}\otimes\cL{wA,I}]
-          \square(0,-400)|mlmm|/->`->`->`/<1100,400>[
-            cwA\otimes cwA`
-            cwA\otimes(I\otimes cwA)`
-            (cwA\otimes I)\otimes cwA`
-            cwA\otimes(cwA\otimes(I\otimes cwA));
-            id_{cwA}\otimes\lambda_{cwA}^{-1}`
-            \rho_{cwA}^{-1}\otimes id_{cwA}`
-            id_{cwA}\otimes\cR{wA,I}`]
-          \dtriangle(1100,-400)|mrm|/<-`->`->/<1700,400>[
-            cwA\otimes((cwA\otimes I)\otimes cwA)`
-            cwA\otimes(cwA\otimes(I\otimes cwA))`
-            cwA\otimes(cwA\otimes cwA);
-            id_{cwA}\otimes\alpha_{cwA,I,cwA}`
-            id_{cwA}\otimes(\rho_{cwA}\otimes id_{cwA})`
-            id_{cwA}\otimes(id_{cwA}\otimes\lambda_{cwA})]
-          \square(0,-800)/`->`<-`->/<2800,400>[
-            (cwA\otimes I)\otimes cwA`
-            cwA\otimes(cwA\otimes cwA)`
-            ((cwA\otimes I)\otimes cwA)\otimes cwA`
-            (cwA\otimes cwA)\otimes cwA;
-            `
-            \cL{wA,I}\otimes id_{cwA}`
-            \alpha_{cwA,cwA,cwA}`
-            (\rho_{cwA}\otimes id_{cwA})\otimes id_{cwA}]
-          \ptriangle(300,150)/``/<100,100>[(1)``;``]
-          \ptriangle(1950,0)/``/<100,100>[(2)``;``]
-          \ptriangle(2400,-350)/``/<100,100>[(3)``;``]
-          \ptriangle(1400,-750)/``/<100,100>[(4)``;``]
-        \efig
-        \end{mathpar}
-
-        (1) commutes trivially and we would not expand $\c{}$ for
-        simplicity. (2) and (4) commute because $(\cat{L},c,\cL{},\cR{})$
-        is a Lambek category with contraction. (3) commutes because
-        $\cat{L}$ is monoidal.
-
-      \item[] \textbf{Case 2:}
-        \begin{mathpar}
-        \bfig
-        \Atrianglepair/->`->`->`<-`->/<1000,800>[
-          cwA`
+    \item[] \textbf{Case 2:}
+      \begin{mathpar}
+      \bfig
+      \Atrianglepair/->`->`->`<-`->/<1000,800>[
+        cwA`
+        I\otimes cwA`
+        cwA\otimes cwA`
+        cwA\otimes I;
+        \lambda^{-1}`
+        \c{A}`
+        \rho^{-1}`
+        \w{A}\otimes id_{cwA}`
+        id_{cwA}\otimes\w{A}]
+      \efig
+      \end{mathpar}
+      The diagram above commutes by the following diagram chasing.
+      \begin{mathpar}
+      \bfig
+        \square/<-`<-`<-`/<2200,1200>[
           I\otimes cwA`
+          wA\otimes cwA`
+          cwA`
+          cwA\otimes cwA;
+          \w{A}^w\otimes id_{cwA}`
+          \lambda_{cwA}^{-1}`
+          \varepsilon_{wA}^c\otimes cwA`]
+        \square(0,-1200)/`->`->`<-/<2200,1200>[
+          cwA`
           cwA\otimes cwA`
-          cwA\otimes I;
-          \lambda^{-1}`
-          \c{A}`
-          \rho^{-1}`
-          \w{A}\otimes id_{cwA}`
+          cwA\otimes I`
+          cwA\otimes wA;
+          `
+          \rho_{cwA}^{-1}`
+          id_{cwA}\otimes\varepsilon_{wA}^c`
           id_{cwA}\otimes\w{A}]
-        \efig
-        \end{mathpar}
-        The diagram above commutes by the following diagram chasing.
-        \begin{mathpar}
-        \bfig
-          \square/<-`<-`<-`/<2200,1200>[
-            I\otimes cwA`
-            wA\otimes cwA`
-            cwA`
-            cwA\otimes cwA;
-            \w{A}^w\otimes id_{cwA}`
-            \lambda_{cwA}^{-1}`
-            \varepsilon_{wA}^c\otimes cwA`]
-          \square(0,-1200)/`->`->`<-/<2200,1200>[
-            cwA`
-            cwA\otimes cwA`
-            cwA\otimes I`
-            cwA\otimes wA;
-            `
-            \rho_{cwA}^{-1}`
-            id_{cwA}\otimes\varepsilon_{wA}^c`
-            id_{cwA}\otimes\w{A}]
-          \Ctriangle(0,-400)|mmm|/<-``->/<500,400>[
-            I\otimes cwA`
-            cwA`
-            cwA\otimes I;
-            \lambda_{cwA}^{-1}``
-            \rho_{cwA}^{-1}]
-          \morphism(500,800)|m|<-500,400>[
-            I\otimes(I\otimes cwA)`
-            I\otimes cwA;
-            id_I\otimes\lambda_{cwA}]
-          \square(500,400)|mmmm|/<-`<-`<-`->/<1200,400>[
-            I\otimes(I\otimes cwA)`
-            wA\otimes(I\otimes cwA)`
-            I\otimes cwA`
-            cwA\otimes(I\otimes cwA);
-            \w{A}^w\otimes id_{I\otimes cwA}`
-            \lambda_{I\otimes cwA}^{-1}`
-            \varepsilon_{wA}^c\otimes id_{I\otimes cwA}`
-            \cR{wA,I}]
-          \morphism(1700,800)|m|<500,400>[
-            wA\otimes(I\otimes cwA)`
-            wA\otimes cwA;
-            id_{wA}\otimes\lambda_{cwA}]
-          \Dtriangle(1700,-400)|mmm|/`->`<-/<500,400>[
-            cwA\otimes(I\otimes cwA)`
-            cwA\otimes cwA`
-            (cwA\otimes I)\otimes cwA;
-            `
-            id_{cwA}\otimes\lambda_{cwA}`
-            \rho_{cwA}\otimes id_{cwA}]
-          \square(500,-800)|mmmm|/->`->`->`<-/<1200,400>[
-            cwA\otimes I`
-            (cwA\otimes I)\otimes cwA`
-            (cwA\otimes I)\otimes I`
-            (cwA\otimes I)\otimes wA;
-            \cL{wA,I}`
-            \rho_{cwA}^{-1}`
-            id_{cwA\otimes I}\otimes\varepsilon_{wA}^c`
-            id_{cwA\otimes I}\otimes\w{A}^w]
-          \morphism(500,-800)|m|<-500,-400>[
-            (cwA\otimes I)\otimes I`
-            cwA\otimes I;
-            \rho_{cwA}\otimes id_I]
-          \morphism(1700,-800)|m|<500,-400>[
-            (cwA\otimes I)\otimes wA`
-            cwA\otimes wA;
-            \rho_{cwA}\otimes id_{wA}]
-          \ptriangle(200,500)/``/<100,100>[(1)``;``]
-          \ptriangle(1100,900)/``/<100,100>[(2)``;``]
-          \ptriangle(2000,500)/``/<100,100>[(3)``;``]
-          \ptriangle(1100,500)/``/<100,100>[(4)``;``]
-          \ptriangle(1100,-100)/``/<100,100>[(5)``;``]
-          \ptriangle(200,-700)/``/<100,100>[(6)``;``]
-          \ptriangle(1100,-1100)/``/<100,100>[(7)``;``]
-          \ptriangle(2000,-700)/``/<100,100>[(8)``;``]
-          \ptriangle(1100,-700)/``/<100,100>[(9)``;``]
-        \efig
-        \end{mathpar}
-      (1), (2) and (3) commute by the functionality of $\lambda$. (6), (7)
-      and (8) commute by the functionality of $\rho$. (4) and (9) are
-      conditions of the Lambek category with $cw$. And (5) is the
-      definition of $\c{}$.
+        \Ctriangle(0,-400)|mmm|/<-``->/<500,400>[
+          I\otimes cwA`
+          cwA`
+          cwA\otimes I;
+          \lambda_{cwA}^{-1}``
+          \rho_{cwA}^{-1}]
+        \morphism(500,800)|m|<-500,400>[
+          I\otimes(I\otimes cwA)`
+          I\otimes cwA;
+          id_I\otimes\lambda_{cwA}]
+        \square(500,400)|mmmm|/<-`<-`<-`->/<1200,400>[
+          I\otimes(I\otimes cwA)`
+          wA\otimes(I\otimes cwA)`
+          I\otimes cwA`
+          cwA\otimes(I\otimes cwA);
+          \w{A}^w\otimes id_{I\otimes cwA}`
+          \lambda_{I\otimes cwA}^{-1}`
+          \varepsilon_{wA}^c\otimes id_{I\otimes cwA}`
+          \cR{wA,I}]
+        \morphism(1700,800)|m|<500,400>[
+          wA\otimes(I\otimes cwA)`
+          wA\otimes cwA;
+          id_{wA}\otimes\lambda_{cwA}]
+        \Dtriangle(1700,-400)|mmm|/`->`<-/<500,400>[
+          cwA\otimes(I\otimes cwA)`
+          cwA\otimes cwA`
+          (cwA\otimes I)\otimes cwA;
+          `
+          id_{cwA}\otimes\lambda_{cwA}`
+          \rho_{cwA}\otimes id_{cwA}]
+        \square(500,-800)|mmmm|/->`->`->`<-/<1200,400>[
+          cwA\otimes I`
+          (cwA\otimes I)\otimes cwA`
+          (cwA\otimes I)\otimes I`
+          (cwA\otimes I)\otimes wA;
+          \cL{wA,I}`
+          \rho_{cwA}^{-1}`
+          id_{cwA\otimes I}\otimes\varepsilon_{wA}^c`
+          id_{cwA\otimes I}\otimes\w{A}^w]
+        \morphism(500,-800)|m|<-500,-400>[
+          (cwA\otimes I)\otimes I`
+          cwA\otimes I;
+          \rho_{cwA}\otimes id_I]
+        \morphism(1700,-800)|m|<500,-400>[
+          (cwA\otimes I)\otimes wA`
+          cwA\otimes wA;
+          \rho_{cwA}\otimes id_{wA}]
+        \ptriangle(200,500)/``/<100,100>[(1)``;``]
+        \ptriangle(1100,900)/``/<100,100>[(2)``;``]
+        \ptriangle(2000,500)/``/<100,100>[(3)``;``]
+        \ptriangle(1100,500)/``/<100,100>[(4)``;``]
+        \ptriangle(1100,-100)/``/<100,100>[(5)``;``]
+        \ptriangle(200,-700)/``/<100,100>[(6)``;``]
+        \ptriangle(1100,-1100)/``/<100,100>[(7)``;``]
+        \ptriangle(2000,-700)/``/<100,100>[(8)``;``]
+        \ptriangle(1100,-700)/``/<100,100>[(9)``;``]
+      \efig
+      \end{mathpar}
+    (1), (2) and (3) commute by the functionality of $\lambda$. (6), (7)
+    and (8) commute by the functionality of $\rho$. (4) and (9) are
+    conditions of the Lambek category with $cw$. And (5) is the
+    definition of $\c{}$.
 
-      \end{itemize}
+    \end{itemize}
     
-    % Condition 2
-    \item $\w{}$ and $\c{}$ are coalgebra morphisms.
+    % Condition 3
+    \item[3.] $\w{}$ and $\c{}$ are coalgebra morphisms.
       \begin{itemize}
       \item[] \textbf{Case 1:}
         \begin{mathpar}
@@ -1520,8 +1518,8 @@ shown by the diagram chasings below:
         \end{mathpar}
       \end{itemize}
     
-    % Condition 3
-    \item Any coalgebra morphism $f:(cwA,\delta_A)\mto (cwB,\delta_B)$
+    % Condition 4
+    \item[4.] Any coalgebra morphism $f:(cwA,\delta_A)\mto (cwB,\delta_B)$
       between free coalgebras preserves the comonoid structure given
       by $\w{}$ and $\c{}$.
 
@@ -1624,32 +1622,41 @@ shown by the diagram chasings below:
     \efig
   \end{mathpar}
 \end{definition}
-Same as the distributive law $dist$, the following digrams also commute:
-\begin{mathpar}
-\bfig
-  \Vtriangle/->`->`<-/<500,400>[
-    cwecwA`
-    cwe(cw)^2A`
-    (cw)^2ecwA;
-    cwe\delta_A^{cw}`
-    \delta_{cweA}^{cw}`
-    cwdistEx_{cwA}]
-\efig
-\and
-\bfig
-  \Vtriangle/->`->`->/<500,400>[
-    ecweA`
-    ecwe^2A`
-    e^2cweA;
-    ecw\delta_A^e`
-    \delta_{cweA}^e`
-    edistEx_{eA}]
-\efig
-\end{mathpar}
 
-Notice the difference between $dist$ of $c$ over $w$ and $distEx$ of $cw$
-over $e$. While $dist$ is a natural transformation, $distEx$ is a natural
-isomorphism.
+\begin{lemma}
+  \label{lem:distEx}
+  Given two comonads $(cw,\varepsilon^{cw},\delta^{cw})$ and
+  $(e,\varepsilon^e,\delta^e)$ on a category $\cat{L}$ such that
+  $(\cat{L},cw,\w{},\c{})$ is a Lambek category with $cw$ and
+  $(\cat{L},e,\e{})$ is a Lambek category with exchange, the following
+  two digrams also commute:
+  \begin{mathpar}
+  \bfig
+    \Vtriangle/->`->`<-/<500,400>[
+      cwecwA`
+      cwe(cw)^2A`
+      (cw)^2ecwA;
+      cwe\delta_A^{cw}`
+      \delta_{cweA}^{cw}`
+      cwdistEx_{cwA}]
+  \efig
+  \and
+  \bfig
+    \Vtriangle/->`->`->/<500,400>[
+      ecweA`
+      ecwe^2A`
+      e^2cweA;
+      ecw\delta_A^e`
+      \delta_{cweA}^e`
+      edistEx_{eA}]
+  \efig
+  \end{mathpar}
+\end{lemma}
+
+  The proof is similar with the proof of Lemma~\ref{lem:dist} and we will
+  not elaborate it here. Also, notice the difference between $dist$ of $c$
+  over $w$ and $distEx$ of $cw$ over $e$. While $dist$ is a natural
+  transformation, $distEx$ is a natural isomorphism.
 
 
 % Lemma: cwe is a monoidal comonad
