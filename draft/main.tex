@@ -158,15 +158,11 @@ TODO: Define Lambek Categories
 \label{subsec:lambek_categories_with_weakening_and_contraction}
 \begin{definition}
   \label{def:weakening}
-  A \textbf{Lambek category with weakening}, $(\cat{L},w,\w{})$, is
-  specified by
-  \begin{itemize}
-  \item a monoidal category $(\cat{L},I,\otimes)$,
-  \item a monoidal comonad $(w,\varepsilon,\delta)$ on $\cat{L}$ with
-    $\q{A,B}:wA\otimes wB\mto w(A\otimes B)$ and $\q{I}:I\mto wI$, and
-  \item a monoidal natural transformation $\w{}$ on $\cat{L}$ with
-    components $\w{A}:wA\mto I$ s.t. $\w{A}$ is a coalgebra morphism, i.e.
-    the following digram commutes:
+  A \textbf{Lambek category with weakening}, $(\cat{L},w,\w{})$, is a
+  Lambek category equipped with a monoidal comonad
+  $(w,\varepsilon,\delta)$, and a monoidal natural transformation
+  $\w{A}:wA\mto I$.  Furthermore, $\w{}$ must be a coalgebra morphism.
+  That is, the following digram must commute:
   \begin{mathpar}
     \bfig
     \square/->`->`->`->/<1000,500>[
@@ -180,25 +176,23 @@ TODO: Define Lambek Categories
       w\w{A}]
     \efig
   \end{mathpar}
-  \end{itemize}
 \end{definition}
 
 
 
 \begin{definition}
   \label{def:contraction}
-  A \textbf{Lambek category with contraction}, $(\cat{L},c,\cL{},\cR{})$,
-  is specified by
-  \begin{itemize}
-  \item a monoidal category $(\cat{L},I,\otimes)$,
-  \item a monoidal comonad $(c,\varepsilon,\delta)$ on $\cat{L}$ with
-    $\q{A,B}:cA\otimes cB\mto c(A\otimes B)$ and \\
-    $\q{I}:I\mto cI$, and
-  \item monoidal natural transformations $\cL{}$ and $\cR{}$ on $\cat{L}$
-    with components \\
-    $\cL{A,B}:cA\otimes B\mto (cA\otimes B)\otimes cA$ and 
-    $\cR{A,B}:B\otimes cA\mto cA\otimes (B\otimes cA)$, s.t. the following
-    diagrams commutes:
+  A \textbf{Lambek category with contraction},
+  $(\cat{L},c,\cL{},\cR{})$, is a Lambek category equipped with a
+  monoidal comonad $(c,\varepsilon,\delta)$, and two monoidal natural
+  transformations:
+  \[
+  \begin{array}{l}
+    \cL{A,B}:cA\otimes B\mto (cA\otimes B)\otimes cA\\
+    \cR{A,B}:B\otimes cA\mto cA\otimes (B\otimes cA)
+  \end{array}
+  \]
+  Furthermore, the following diagrams must commute:
     \begin{mathpar}
       \bfig
       \square/<-`->``/<1050,600>[
@@ -241,8 +235,6 @@ TODO: Define Lambek Categories
         (id_{cA}\otimes\lambda_{cA})\otimes id_{cA}]
     \efig
     \end{mathpar}
-
-  \end{itemize}
 \end{definition}
 
 % subsection lambek_categories_with_weakening_and_contraction (end)
@@ -253,18 +245,11 @@ TODO: Define Lambek Categories
 % Definition: Lambek with exchange
 \begin{definition}
   \label{def:exchange}
-  A \textbf{Lambek category with exchange}, $(\cat{L},e,\e{})$, is
-  specified by
-  \begin{itemize}
-  \item a monoidal category $(\cat{L},I,\otimes)$,
-  \item a monoidal comonad $(e,\varepsilon,\delta)$ on $\cat{L}$ with
-    $\q{A,B}:eA\otimes eB\mto e(A\otimes B)$ and \\
-    $\q{I}:I\mto eI$, and
-  \item a monoidal natural transformation $\e{}$ on $\cat{L}$ with
-    components \\
-    $\e{A,B}:e(A\otimes B)\mto eB\otimes eA$
-  \end{itemize}
-  subject to the following coherence condition:
+  A \textbf{Lambek category with exchange}, $(\cat{L},e,\e{})$, is a
+  Lambek category equipped with a monoidal comonad
+  $(e,\varepsilon,\delta)$ on $\cat{L}$, and a monoidal natural
+  transformation $\e{A,B}:e(A\otimes B)\mto eB\otimes eA$.
+  Furthermore, the following diagrams must commute:
   \begin{mathpar}
   \bfig
     \square/->`=`->`/<1600,400>[
@@ -283,10 +268,7 @@ TODO: Define Lambek Categories
       eA\otimes eB;
       \e{B,A}]
   \efig
-  \end{mathpar}
-  and $\e{A,B}$ is a coalgebra morphism, i.e. the following diagram
-  commutes:
-  \begin{mathpar}
+  \and
   \bfig
     \square/->`->`->`/<1600,400>[
       e(A\otimes B)`
@@ -303,24 +285,27 @@ TODO: Define Lambek Categories
     \morphism(800,0)<800,0>[e^2B\otimes e^2A`e(eB\otimes eA);\q{eB,eA}]
   \efig
   \end{mathpar}
+  Note that the second diagram above shows that $\e{A,B}$ is a
+  coalgebra morphism.
 \end{definition}
 
+\todo[inline]{Define the cokleisli category of $e$ and name it $\cat{L}_e$}
 
-
-% Lemma: co-Kleisli category of e is symmetric
-\begin{lemma}
-  \label{lem:cokleisli-exchange}
-  Let $(e,\varepsilon,\delta)$ be a monoidal comonad over a monoidal
-  category $(\cat{L},I,\otimes)$ such that $(\cat{L},e,\e{})$ is a
-  Lambek category with exchange. Then in the co-Kleisli category of
-  $\cat{L}$, there exists a natural isomorphism with components
-  $\gamma_{A,B}:e(A\otimes B)\mto B\otimes A$.
+\begin{lemma}[$\cat{L}_e$ is symmetric]
+  \label{lemma:cokleisli_cat_is_symmetric}
+  Suppose $(\cat{L},e,\e{})$ is a Lambek category with exchange.  Then
+  the co-Kleisli category $\cat{L}_e$ is symmetric monoidal.  That is,
+  there is a natural isomorphism $\gamma_{A,B} : e(A \otimes B) \mto B
+  \otimes A$, and the following diagrams commute:
+  \todo[inline]{Fill in the diagrams}
 \end{lemma}
 \begin{proof}
   Suppose $(\cat{L},e,\e{})$ is a Lambek category with exchange. We define
   a natural transformation $\gamma_{A,B}:e(A\otimes B)\mto B\otimes A$ as
   $$\gamma_{A,B}=(\varepsilon_B\otimes\varepsilon_A)\circ\e{A,B}.$$
-  $\gamma$ is a natural isomorphism if the following diagram commutes:
+  Clearly, $\gamma$ is natural because it is the composition of
+  natural transformations.  The following diagram shows $\gamma$ is an
+  isomorphism in $\cat{L}_e$:
   \begin{mathpar}
   \bfig
     \square/->`->`->`<-/<800,400>[
@@ -334,7 +319,7 @@ TODO: Define Lambek Categories
       \gamma_{B,A}]
   \efig
   \end{mathpar}
-  , which does commute by the diagram chasing below.
+  The previous diagram commutes because the following one does:
   \begin{mathpar}
   \bfig
     \Vtriangle|amm|/->`->`/<400,400>[
@@ -378,11 +363,12 @@ TODO: Define Lambek Categories
     \ptriangle(1450,-300)/``/<100,100>[(5)``;``]
   \efig
   \end{mathpar}
-  (1) commutes because $e$ is monoidal. (2) and (3) commute by the
-  definition of the Lambek category with exchange. (4) commutes because $e$
-  is a comonad. And (5) commutes by the naturality of $\q{}$.
+  Diagram (1) commutes because $e$ is monoidal, diagrams (2) and (3) commute by the
+  definition of the Lambek category with exchange, diagram (4) commutes because $e$
+  is a comonad, and diagram (5) commutes by the naturality of $\q{}$.
+  \ \\
+  \todo[inline]{prove the rest}
 \end{proof}
-
 % subsection lambek_categories_with_exchange (end)
 
 \subsection{Linear Categories}
@@ -568,7 +554,7 @@ TODO: Define Lambek Categories
 \end{lemma}
 
 \begin{proof}
-  The two diagrams above commute by the diagram chasings below:
+  The two diagrams above commute because the following ones due:
   \begin{mathpar}
   \bfig
     \Vtriangle|amm|/->`=`->/<800,300>[
@@ -594,315 +580,35 @@ TODO: Define Lambek Categories
     \morphism(1600,300)|b|<-800,-700>[wcw^2A`w^2cwA;wdist_{wA}]
   \efig
   \end{mathpar}
-  , which commute by the distribute law $dist$ and the comonad laws of $c$
+  They both commute by the distribute law and the comonad laws of $c$
   and $w$.
 \end{proof}
 
 % Lemma for composing contraction and weakening
-\begin{lemma}
+\begin{lemma}[Composition of Weakening and Contraction]
   \label{lem:compose-cw}
-  Let $(c,\varepsilon^c,\delta^c)$ and $(w,\varepsilon^w,\delta^w)$ be
-  two monoidal comonads on a Lambek category with weakening and contraction
-  $(\cat{L},I,\otimes,w,\w{}^w,c,\cL{},\cR{})$. Then the
-  composition of $c$ and $w$ using the distributive law
-  $dist_A:cwA\mto wcA$ is a monoidal comonad $(cw,\varepsilon,\delta)$
-  on $\cat{L}$.
+  Suppose \\ $(\cat{L},I,\otimes,w,\w{}^w,c,\cL{},\cR{})$ is a Lambek
+  category with weakening and contraction, where
+  $(w,\varepsilon^w,\delta^w)$ and $(c,\varepsilon^c,\delta^c)$ are
+  the respective monoidal comonads. Then the composition of $c$ and
+  $w$ using the distributive law $dist_A:cwA\mto wcA$ is a monoidal
+  comonad on $\cat{L}$.
 \end{lemma}
 \begin{proof}
-  Suppose $(c,\varepsilon^c,\delta^c)$ and $(w,\varepsilon^w,\delta^w)$
-  are monoidal comonads, and \\
-  $(\cat{L},I,\otimes,w,\w{}^w,c,\cL{},\cR{})$ is a Lambek
-  category with weakening and contraction. Since by definition
-  $c,w:\cat{L} \mto \cat{L}$ are monoidal functors we know that their
-  composition $cw:\cat{L} \mto \cat{L}$ is a monoidal functor:
-  \begin{center}
-  \begin{align*}
-    \q{A,B} &: cwA\otimes cwB\mto cw(A\otimes B)   \\
-    \q{A,B} &= c\q{A,B}^w\circ\q{wA,wB}^c        \\
-    \q{I} &: I\mto cwI                             \\
-    \q{I} &= c\q{I}^w\circ\q{I}^c
-  \end{align*}
-  \end{center}
-
-  We must now define both $\varepsilon_A:cwA\mto A$ and
-  $\delta_A:cwA\mto cwcwA$, and then show that they are monoidal
-  natural transformations subject to the comonad laws. Since we are
-  composing two comonads each of $\varepsilon$ and $\delta$ can be
-  given two definitions, but they are equivalent:
-  \begin{itemize}
-    \item $\varepsilon_A:cwA\mto A$ is defined as in the diagram
-      below, which commutes by the naturality of $\varepsilon^c$.
-      \begin{mathpar}
-      \bfig
-      \square(1050,0)/->`->`->`->/<1050,600>[
-      cwA`
-      wA`
-      cA`
-      A;
-      \varepsilon_{wA}^c`
-      c\varepsilon_A^w`
-      \varepsilon_A^w`
-      \varepsilon_A^c]
-      \efig
-      \end{mathpar}
-
-  \item $\delta_A:cwA\mto cwcwA$ is defined as in the diagram:
-    \begin{mathpar}
-    \bfig
-      \square|almb|/->`->`->`->/<1050,600>[
-      cwA`
-      cw^2A`
-      c^2wA`
-      c^2w^2A;
-      c\delta_A^w`
-      \delta_{wA}^c`
-      \delta_{w^2A}^c`
-      c^2\delta_A^w]
-    \square(1050,0)|amrb|/->``->`->/<1050,600>[
-      cw^2A`
-      c^2w^2A`
-      c^2w^2A`
-      cwcwA;
-      \delta_{w^2A}^c``
-      cdist_{wA}`
-      cdist_{wA}]
-    \efig
-    \end{mathpar}
-    The left part of the diagram commutes by the naturality
-    of $\delta^c$ and the right part commutes trivially.
-  \end{itemize}
-
-  The remainder of the proof shows that the comonad laws hold.
-
-  \begin{itemize}
-    \item[] \textbf{Case 1:}
-    \begin{mathpar}
-    \bfig
-      \square/->`->`->`->/<1050,600>[
-        cwA`
-        cwcwA`
-        cwcwA`
-        cwcwcwA;
-        \delta_A`
-        \delta_A`
-        cw\delta_A`
-        \delta_{cwA}]
-    \efig
-    \end{mathpar}
-
-    The previous diagram commutes because the following one does.
-
-    \begin{mathpar}
-    \bfig
-      \ptriangle/->`->`=/<700,400>[
-        cwA`
-        cwcwA`
-        cwcwA;
-        \delta_A`
-        \delta_A`]
-      \square(700,0)|amm|/->`->`->`/<900,400>[
-        cwcwA`
-        cwcw^2A`
-        c^2wcwA`
-        c^2wcw^2A;
-        cwc\delta_A^w`
-        \delta_{wcwA}^c`
-        \delta_{wcw^2A}^c`]
-      \ptriangle(1600,0)|amm|/->``<-/<1100,400>[
-        cwcw^2A`
-        cwc^2w^2A`
-        c^2wcw^2A;
-        cw\delta_{w^2A}^c`
-        `
-        cdist_{cw^2A}]
-      \qtriangle(700,-600)|mmm|/->`->`->/<900,600>[
-        c^2wcwA`
-        c^2wcw^2A`
-        c^2w^2cwA;
-        c^2wc\delta_A^w`
-        c^2\delta_{cwA}^w`
-        c^2wdist_{wA}]
-      \btriangle(0,-600)/->``->/<1600,600>[
-        cwcwA`
-        cw^2cwA`
-        c^2w^2cwA;
-        c\delta_{cwA}^w`
-        `
-        \delta_{w^2cwA}^c]
-      \dtriangle(1600,-600)/`->`->/<1100,1000>[
-        cwc^2w^2A`
-        c^2w^2cwA`
-        cwcwcwA;
-        `
-        cwcdist_{wA}`
-        cdist_{wcwA}]
-      % To show texts in each subdiagram:
-      \ptriangle(200,-150)/``/<400,400>[(1)``;``]
-      \ptriangle(1000,-200)/``/<400,400>[(2)``;``]
-      \ptriangle(1300,-600)/``/<400,400>[(3)``;``]
-      \ptriangle(500,-700)/``/<400,400>[(4)``;``]
-      \ptriangle(1850,-150)/``/<400,400>[(5)``;``]
-      \ptriangle(2100,-700)/``/<400,400>[(6)``;``]
-    \efig
-    \end{mathpar}
-
-    (1) commutes by equality and we will not expand $\delta_A$ for
-    simplicity. (2) and (4) commutes by the naturality of $\delta^c$. (3),
-    (5) commutes by the conditions of $dist$. (6) commutes by the naturality of
-    $dist$.
-
-    \item[] \textbf{Case 2}:
-      \begin{mathpar}
-      \bfig
-        \qtriangle/->`=`->/<600,600>[
-          cwA`
-          cwcwA`
-          cwA;
-          \delta_A``
-          cw\varepsilon_A]
-      \efig
-      \end{mathpar}
-
-      The triangle commutes because of the following diagram chasing.
-
-      \begin{mathpar}
-      \bfig
-        \qtriangle|amm|/->`<-`=/<1200,600>[
-          cwA`
-          cw^2A`
-          cw^2A;
-          c\delta_A^w`
-          c\varepsilon_{wA}^w`]
-        \ptriangle(1200,0)|amm|/->``->/<600,600>[
-          cw^2A`
-          c^2w^2A`
-          cw^2A;
-          \delta_{w^2A}^c``
-          c\varepsilon_{w^2A}^c]
-        \btriangle(0,-1200)/=``<-/<1200,1800>[
-          cwA`
-          cwA`
-          wcwA;
-          ``\varepsilon_{cwA}^w]
-        \btriangle(1200,-1200)|mmb|/`<-`<-/<600,1200>[
-          cw^2A`
-          wcwA`
-          cwcwA;
-          `
-          cw\varepsilon_{wA}^c`
-          \varepsilon_{wcwA}^c]
-        \dtriangle(600,-600)|mmm|/`->`<-/<600,600>[
-          cw^2A`
-          wA`
-          w^2A;
-          `
-          \varepsilon_{w^2A}^c`
-          \varepsilon_{wA}^w]
-        \morphism(0,600)|m|<600,-1200>[cwA`wA;\varepsilon_{wA}^c]
-        \morphism(0,-1200)|m|<600,600>[cwA`wA;\varepsilon_{wA}^c]
-        \morphism(1200,-1200)|m|<0,600>[wcwA`w^2A;w\varepsilon_{wA}^c]
-        \morphism(1800,600)|r|<0,-1800>[c^2w^2A`cwcwA;cdist_{wA}]
-        \ptriangle(800,300)/``/<100,100>[(1)``;``]
-        \ptriangle(1350,300)/``/<100,100>[(2)``;``]
-        \ptriangle(700,-300)/``/<100,100>[(3)``;``]
-        \ptriangle(1600,-300)/``/<100,100>[(4)``;``]
-        \ptriangle(300,-700)/``/<100,100>[(5)``;``]
-        \ptriangle(700,-1000)/``/<100,100>[(6)``;``]
-        \ptriangle(1450,-1000)/``/<100,100>[(7)``;``]
-      \efig
-      \end{mathpar}
-      (1) commutes by the comonad law for $w$ with components $\delta_A^w$
-      and $\varepsilon_{wA}^w$. (2) commutes by the comonad law for $c$ with
-      components $\delta_{w^2A}^c$ and $\varepsilon_{w^2A}^c$. (3) and (7)
-      commute by the naturality of $\varepsilon^c$. (4) commutes by the condition
-      of $dist$. (5) commutes trivially. And (6) commutes by the naturality of
-      $\varepsilon^w$.
-      
-    \item[] \textbf{Case 3}:
-      \begin{mathpar}
-      \bfig
-        \btriangle/->`=`->/<600,600>[
-          cwA`
-          cwcwA`
-          cwA;
-          \delta_A``
-          \varepsilon_{cwA}]
-      \efig
-      \end{mathpar}
-
-    The previous triangle commutes because the following diagram chasing
-    does.
-
-    \begin{mathpar}
-    \bfig
-      \qtriangle|amm|/->`->`/<800,400>[
-        cwA`
-        cw^2A`
-        c^2wA;
-        c\delta_A^w`
-        \delta_{wA}^c`]
-      \morphism(0,400)|m|/<-/<800,-800>[cwA`c^2wA;c\varepsilon_{wA}^c]
-      \ptriangle(800,0)|amm|/->``<-/<800,400>[
-        cw^2A`
-        c^2w^2A`
-        c^2wA;
-        \delta_{w^2A}^c``
-        c^2\delta_A^w]
-      \morphism(800,-400)|m|/<-/<800,800>[c^2wA`c^2w^2A;c^2w\varepsilon_A^w]
-      \morphism(800,0)/=/<0,-400>[c^2wA`c^2wA;]
-      \btriangle(0,-800)/=``<-/<800,1200>[
-        cwA`
-        cwA`
-        cwcA;
-        ``
-        cw\varepsilon_A^c]
-      \dtriangle(800,-800)/`->`<-/<800,1200>[
-        c^2w^2A`
-        cwcA`
-        cwcwA;
-        `
-        cdist_{wA}`
-        cwc\varepsilon_A^w]
-      \morphism(800,-400)|m|/->/<0,-400>[c^2wA`cwcA;cdist_A]
-      \ptriangle(800,100)/``/<100,100>[(1)``;``]
-      \ptriangle(600,-100)/``/<100,100>[(2)``;``]
-      \ptriangle(1000,-100)/``/<100,100>[(3)``;``]
-      \ptriangle(400,-600)/``/<100,100>[(4)``;``]
-      \ptriangle(1200,-600)/``/<100,100>[(5)``;``]
-    \efig
-    \end{mathpar}
-
-    (1) commutes by the naturality of $\delta^c$. (2) is the comonad law
-    for $c$ with components $\delta_{wA}^c$ and $\varepsilon_{wA}^c$. (3)
-    is the comonad law for $w$ with components $\delta_A^w$ and
-    $\varepsilon_A^w$. (4) commutes by the condition of $dist$. And (5)
-    commute by the naturality of $dist$.
-
-    \end{itemize}
-
-  \end{proof}
+  For the complete proof see
+  Appendix~\ref{subsec:proof_of_composition_of_weakening_and_contraction_lem:compose-cw}.
+\end{proof}
 
 % Definition: Lambek category with cw
 \begin{definition}
   \label{def:Lambek-cw}
-  A \textbf{Lambek category with $cw$}, $(\cat{L},cw,\w{}^w,\cL{},\cR{})$,
-  is specified by
-  \begin{itemize}
-    \item a monoidal category $(\cat{L},I,\otimes)$;
-    \item a monoidal comonad $(c,\varepsilon^c,\delta^c)$ with monoidal
-      natural transformations $\cL{}$ and $\cR{}$ on $\cat{L}$ s.t.
-      $(\cat{L},c,\cL{},\cR{})$ is a Lambek category with contraction;
-    \item a monoidal comonad $(w,\varepsilon^w,\delta^w)$ with a monoidal
-      natural transformation $\w{}$ on $\cat{L}$ s.t. $(\cat{L},w,\w{}^w)$
-      is a Lambek category with weakening;
-    \item a natural transformation with components $dist_A:cwA\mto wcA$;
-  \end{itemize}
-  where $cw$ is the composite monoidal comonad $cw$ defined in the proof of
-  Lemma~\ref{lem:compose-cw}, s.t. the following additional coherence
-  diagrams commute:
+  A \textbf{Lambek category with $cw$},
+  $(\cat{L},cw,\w{}^w,\cL{},\cR{}, dist)$, is a Lambek category with
+  weakening and contraction, and a distributive law.  Furthermore, the
+  following coherence diagrams commute:
   \begin{mathpar}
     \bfig
-      \square/->`->`<-`->/<1200,400>[
+      \square|amma|/->`->`<-`->/<1200,400>[
         I\otimes cwA`
         I\otimes (I\otimes cwA)`
         cwA\otimes(I\otimes cwA)`
@@ -914,7 +620,7 @@ TODO: Define Lambek Categories
     \efig
     \and
     \bfig
-      \square/->`->`<-`->/<1200,400>[
+      \square|amma|/->`->`<-`->/<1200,400>[
         cwA\otimes I`
         (cwA\otimes I)\otimes I`
         (cwA\otimes I)\otimes cwA`
@@ -924,11 +630,9 @@ TODO: Define Lambek Categories
         id_{cwA\otimes I}\otimes\w{A}^w`
         id_{cwA\otimes I}\otimes\varepsilon_{wA}^c]
     \efig
-  \end{mathpar}
-
-  \begin{mathpar}
+    \and
     \bfig
-    \square/->`->`->`/<1000,400>[
+    \square|amma|/->`->`->`/<1000,400>[
       cwA`
       cwB`
       wA`
@@ -939,9 +643,7 @@ TODO: Define Lambek Categories
     \morphism<500,0>[wA`I;\w{A}^w]
     \morphism(1000,0)<-500,0>[wB`I;\w{B}^w]
     \efig
-  \end{mathpar}
-  \todo{I modified this diagram by decomposing $\w{}$ as
-        $\w{}^w\circ\varepsilon$ because we haven't defined $\w{}$ yet.}
+  \end{mathpar}  
 \iffalse
   \begin{mathpar}
   \bfig
@@ -955,7 +657,7 @@ TODO: Define Lambek Categories
   \efig
   \end{mathpar}
 \fi
-  for any coalgebra morphism $f:(cwA,\delta_A)\mto(cwB,\delta_B)$ between
+  where $f:(cwA,\delta_A)\mto(cwB,\delta_B)$ is any coalgebra morphism between
   free coalgebras.
 \end{definition}
 
