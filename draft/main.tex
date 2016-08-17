@@ -293,12 +293,13 @@ TODO: Define Lambek Categories
   \label{def:cokleisli-exchange}
   Let $(\cat{L},e,\e{})$ be a Lambek category with exchange. The
   \textbf{co-Kleisli Category of $e$}, $\cat{L}_e$, is a category with the
-  same objects as $\cat{L}$. There is an arrow $f_e:A\mto B$ in $\cat{L}_e$
-  if there is an arrow $f:eA\mto B$ in $\cat{L}$. The identity arrow
-  $id_{A_e}:A\mto A$ is the arrow $\varepsilon_A:eA\mto A$ in $\cat{L}$.
-  Given $f_e:A\mto B$ and $g_e:B\mto C$ in $\cat{L}_e$, which are arrows
+  same objects as $\cat{L}$. There is an arrow $\hat{f}:A\mto B$ in
+  $\cat{L}_e$ if there is an arrow $f:eA\mto B$ in $\cat{L}$. The
+  identity arrow $\hat{id_A}:A\mto A$ is the arrow
+  $\varepsilon_A:eA\mto A$ in $\cat{L}$. Given $\hat{f}:A\mto B$ and
+  $\hat{g}:B\mto C$ in $\cat{L}_e$, which are arrows
   $f:eA\mto B$ and $g:eB\mto C$ in $\cat{L}$, the composition
-  $g_e\circ f_e:A\mto C$ is defined as $g\circ ef\circ\delta_A$.
+  $\hat{g}\circ\hat{f}:A\mto C$ is defined as $g\circ ef\circ\delta_A$.
 \end{definition}
 
 \begin{lemma}[$\cat{L}_e$ is symmetric]
@@ -307,11 +308,171 @@ TODO: Define Lambek Categories
   the co-Kleisli category $\cat{L}_e$ is symmetric monoidal.  That is,
   there is a natural isomorphism $\gamma_{A,B} : e(A \otimes B) \mto B
   \otimes A$, and the following diagrams commute:
-  \todo[inline]{Fill in the diagrams}
+  \begin{mathpar}
+  \bfig
+  \square/->`->`<-`->/<800,400>[
+    e(A\otimes B)`
+    A\otimes B`
+    e^2(A\otimes B)`
+    e(B\otimes A);
+    \hat{id}_{A\otimes B}`
+    \delta_{A\otimes B}`
+    \gamma_{B,A}`
+    e\gamma_{A,B}]
+  \efig
+  \and
+  \bfig
+  \square/->`->`->`<-/<800,400>[
+    e(I\otimes A)`
+    e^2(I\otimes A)`
+    A`
+    e(A\otimes I);
+    \delta_{I\otimes A}`
+    \hat{\lambda_A}`
+    e\gamma_{I,A}`
+    \hat{\rho_A}]
+  \efig
+  \end{mathpar}
+  , where $\hat{id}$ is the identity morphism in $\cat{L}_e$, $I$ is the
+  identity object of $\cat{L}_e$, and $\hat\lambda$ and $\hat\rho$ are the
+  left and right unitors of $\cat{L}_e$, respectively.
+  \todo[inline]{Don't know how to express the two diagrams for monoidal.
+  For example, the morphism 
+  $id_A\otimes\lambda_A:A\otimes(I\otimes B)\rightarrow A\otimes B$
+  in $\cat{L}$
+  is $e(A\otimes(I\otimes B))\rightarrow A\otimes B$ in $\cat{L}_e$ and
+  can be defined as
+  $(id_A\otimes\lambda_B)\circ\varepsilon_{A\otimes(I\otimes B)}$. But I
+  feel like it should use $\hat\lambda$ in the definition.}
 \end{lemma}
+
 \begin{proof}
-  Suppose $(\cat{L},e,\e{})$ is a Lambek category with exchange. We define
-  a natural transformation $\gamma_{A,B}:e(A\otimes B)\mto B\otimes A$ as
+  Let $I$ be the identity object in $\cat{L}$. Then the identity object of
+  $\cat{L}_e$ is still $I$. The left and right unitors,
+  $\hat\lambda_A:I\otimes A\mto A$ and $\hat\rho_A:A\otimes I\mto A$, in
+  $\cat{L}_e$ are morphisms $e(I\otimes A)\mto A$ and $e(A\otimes I)\mto A$
+  in $\cat{L}$, respectively. Then we define $\hat\lambda$ and $\hat\rho$
+  as:
+  \begin{align*}
+    \hat\lambda_A &= \varepsilon_A\circ e\lambda_A     \\
+    \hat\rho_A    &= \varepsilon_A\circ e\rho_A,
+  \end{align*}
+  where $\lambda$ and $\rho$ are the left and right unitors in $\cat{L}$,
+  respectively. And we define their inverses as:
+  \begin{align*}
+    \hat\lambda_A^{-1} &= \varepsilon_{I\otimes A}\circ e\lambda_A^{-1} \\
+    \hat\rho_A^{-1}    &= \varepsilon_{A\otimes I}\circ e\rho_A^{-1}
+  \end{align*}
+  $\hat\lambda$ is a nautral isomorphism with inverse $\hat\lambda^{-1}$
+  because the following diagram chasing commutes:
+  \begin{mathpar}
+  \bfig
+    \Vtrianglepair|aammm|/->`->`->``<-/<800,400>[
+      e(I\otimes A)`
+      e^2(I\otimes A)`
+      e^2A`
+      eA;
+      \delta_{I\otimes A}`
+      e^2\lambda_A`
+      e\lambda_A``
+      \delta_A]
+    \btriangle(0,-400)/->`=`<-/<800,800>[
+      e(I\otimes A)`
+      I\otimes A`
+      e(I\otimes A);
+      \varepsilon_{I\otimes A}``
+      \varepsilon_{I\otimes A}]
+    \btriangle(800,-400)|mmb|/->`=`<-/<800,400>[
+      eA`
+      e(I\otimes A)`
+      eA;
+      e\lambda_A^{-1}``
+      e\lambda_A^{-1}]
+    \morphism(1600,400)|r|<0,-800>[e^2A`eA;e\varepsilon_A]
+    \ptriangle(800,100)/``/<100,100>[(1)``;``]
+    \ptriangle(300,-250)/``/<100,100>[(2)``;``]
+    \ptriangle(600,-100)/``/<100,100>[(3)``;``]
+    \ptriangle(1000,-350)/``/<100,100>[(4)``;``]
+    \ptriangle(1300,-100)/``/<100,100>[(5)``;``]
+  \efig
+  \end{mathpar}
+  (1) commutes by the naturality of $\delta$. (2), (3) and (4) commute
+  trivially. And (5) commutes because $e$ is a comonad.
+
+  Similarly, $\hat\rho$ is a natural isomorphism with inverse
+  $\hat\rho^{-1}$ by the following diagram chasing:
+  \begin{mathpar}
+  \bfig
+    \Vtrianglepair|aammm|/->`->`->``<-/<800,400>[
+      e(A\otimes I)`
+      e^2(A\otimes I)`
+      e^2A`
+      eA;
+      \delta_{A\otimes I}`
+      e^2\rho_A`
+      e\rho_A``
+      \delta_A]
+    \btriangle(0,-400)/->`=`<-/<800,800>[
+      e(A\otimes I)`
+      A\otimes I`
+      e(A\otimes I);
+      \varepsilon_{A\otimes I}``
+      \varepsilon_{A\otimes I}]
+    \btriangle(800,-400)|mmb|/->`=`<-/<800,400>[
+      eA`
+      e(A\otimes I)`
+      eA;
+      e\rho_A^{-1}``
+      e\rho_A^{-1}]
+    \morphism(1600,400)|r|<0,-800>[e^2A`eA;e\varepsilon_A]
+  \efig
+  \end{mathpar}
+
+  The associator
+  $\hat\alpha_A:(A\otimes B)\otimes C)\mto A\otimes(B\otimes C)$ in
+  $\cat{L}_e$ is the morphism
+  $e((A\otimes B)\otimes C)\mto A\otimes(B\otimes C)$ in $\cat{L}$.
+  We define $\hat\alpha$ as:
+  $$\hat\alpha_{A,B,C}=\varepsilon_{A\otimes(B\otimes C)}\circ e\alpha_{A,B,C},$$
+  where $\alpha$ is the associator of $\cat{L}$. And its inverse is
+  $$\hat\alpha_{A,B,C}^{-1} =
+    \varepsilon_{(A\otimes B)\otimes C}\circ e\alpha_{A,B,C}^{-1}$$
+  $\hat\alpha$ is a natural isomorphism with inverse $\hat\alpha^{-1}$
+  because the following diagram chasing commutes:
+  \begin{mathpar}
+  \bfig
+    \Vtrianglepair|aammm|/->`->`->``<-/<1200,400>[
+      e((A\otimes B)\otimes C)`
+      e^2((A\otimes B)\otimes C)`
+      e^2(A\otimes (B\otimes C))`
+      e(A\otimes(B\otimes C));
+      \delta_{(A\otimes B)\otimes C}`
+      e^2\alpha_{A,B,C}`
+      e\alpha_{A,B,C}``
+      \delta_{A\otimes (B\otimes C)}]
+    \btriangle(0,-400)/->`=`<-/<1200,800>[
+      e((A\otimes B)\otimes C)`
+      (A\otimes B)\otimes C`
+      e((A\otimes B)\otimes C);
+      \varepsilon_{(A\otimes B)\otimes C}``
+      \varepsilon_{(A\otimes B)\otimes C}]
+    \btriangle(1200,-400)|mmb|/->`=`<-/<1200,400>[
+      e(A\otimes(B\otimes C))`
+      e((A\otimes B)\otimes C)`
+      e(A\otimes(B\otimes C));
+      e\alpha_{A,B,C}^{-1}``
+      e\alpha_{A,B,C}^{-1}]
+    \morphism(2400,400)|r|<0,-800>[
+      e^2(A\otimes (B\otimes C))`
+      e(A\otimes(B\otimes C));
+      e\varepsilon_{A\otimes(B\otimes C)}]
+  \efig
+  \end{mathpar}
+
+  Therefore, $\cat{L}_e$ is a monoidal category.
+
+  Then, we define a natural transformation
+  $\gamma_{A,B}:e(A\otimes B)\mto B\otimes A$ as
   $$\gamma_{A,B}=(\varepsilon_B\otimes\varepsilon_A)\circ\e{A,B}.$$
   Clearly, $\gamma$ is natural because it is the composition of
   natural transformations.  The following diagram shows $\gamma$ is an
@@ -373,11 +534,61 @@ TODO: Define Lambek Categories
     \ptriangle(1450,-300)/``/<100,100>[(5)``;``]
   \efig
   \end{mathpar}
-  Diagram (1) commutes because $e$ is monoidal, diagrams (2) and (3) commute by the
-  definition of the Lambek category with exchange, diagram (4) commutes because $e$
-  is a comonad, and diagram (5) commutes by the naturality of $\q{}$.
-  \ \\
-  \todo[inline]{prove the rest}
+  Diagram (1) commutes because $e$ is monoidal, diagrams (2) and (3)
+  commute by the definition of the Lambek category with exchange, diagram
+  (4) commutes because $e$ is a comonad, and diagram (5) commutes by the
+  naturality of $\q{}$.
+
+  Further, the following diagram also commutes
+  \begin{mathpar}
+  \bfig
+  \square/->`->`->`<-/<800,400>[
+    e(I\otimes A)`
+    e^2(I\otimes A)`
+    A`
+    e(A\otimes I);
+    \delta_{I\otimes A}`
+    \hat{\lambda_A}`
+    e\gamma_{I,A}`
+    \hat{\rho_A}]
+  \efig
+  \end{mathpar}
+  by the diagram chasing below:
+  \begin{mathpar}
+  \bfig
+  \square|alrm|/->`->`->`<-/<1500,600>[
+    e(I\otimes A)`
+    e^2(I\otimes A)`
+    eA`
+    e(A\otimes I);
+    \delta_{I\otimes A}`
+    e\lambda_A`
+    e\gamma_{I,A}`
+    e\rho_A]
+  \morphism|m|<500,300>[eA`A;\varepsilon_A]
+  \morphism(1000,300)|m|<-500,0>[I\otimes A`A;\lambda_A]
+  \morphism(0,600)|m|<1000,-300>[e(I\otimes A)`I\otimes A;\varepsilon_{I\otimes A}]
+  \morphism(1500,0)|m|<-500,300>[e(A\otimes I)`I\otimes A;\gamma_{A,I}]
+  \square(0,-300)|mlrb|/`->`->`<-/<1500,300>[
+    eA`
+    e(A\otimes I)`
+    A`
+    eA;
+    `
+    \varepsilon_A`
+    e\rho_A`
+    \varepsilon_A]
+  \ptriangle(250,250)/``/<100,100>[(1)``;``]
+  \ptriangle(750,50)/``/<100,100>[(2)``;``]
+  \ptriangle(1200,300)/``/<100,100>[(3)``;``]
+  \ptriangle(750,-250)/``/<100,100>[(4)``;``]
+  \efig
+  \end{mathpar}
+  in which (1) commutes by the naturality of $\varepsilon$, (3) commutes
+  because $\gamma$ is a natural isomorphism, and (4) commutes trivially.
+  \todo{Need (2)?}
+
+  In conclusion, $\cat{L}_e$ is symmetric monoidal.
 \end{proof}
 % subsection lambek_categories_with_exchange (end)
 
