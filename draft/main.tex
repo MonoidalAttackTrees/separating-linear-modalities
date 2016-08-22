@@ -289,7 +289,6 @@ TODO: Define Lambek Categories
   coalgebra morphism.
 \end{definition}
 
-<<<<<<< HEAD
 \begin{definition}
   \label{def:cokleisli-exchange}
   Let $(\cat{L},e,\e{})$ be a Lambek category with exchange. The
@@ -302,9 +301,6 @@ TODO: Define Lambek Categories
   $f:eA\mto B$ and $g:eB\mto C$ in $\cat{L}$, the composition
   $\hat{g}\circ\hat{f}:A\mto C$ is defined as $g\circ ef\circ\delta_A$.
 \end{definition}
-=======
-\todo[inline]{Define the cokleisli category of $e$ and name it $\cat{L}_e$}
->>>>>>> origin/master
 
 \begin{lemma}[$\cat{L}_e$ is symmetric]
   \label{lemma:cokleisli_cat_is_symmetric}
@@ -312,7 +308,6 @@ TODO: Define Lambek Categories
   the co-Kleisli category $\cat{L}_e$ is symmetric monoidal.  That is,
   there is a natural isomorphism $\gamma_{A,B} : e(A \otimes B) \mto B
   \otimes A$, and the following diagrams commute:
-<<<<<<< HEAD
   \begin{mathpar}
   \bfig
   \square/->`->`<-`->/<800,400>[
@@ -349,9 +344,6 @@ TODO: Define Lambek Categories
   can be defined as
   $(id_A\otimes\lambda_B)\circ\varepsilon_{A\otimes(I\otimes B)}$. But I
   feel like it should use $\hat\lambda$ in the definition.}
-=======
-  \todo[inline]{Fill in the diagrams}
->>>>>>> origin/master
 \end{lemma}
 
 \begin{proof}
@@ -542,7 +534,7 @@ TODO: Define Lambek Categories
     \ptriangle(1450,-300)/``/<100,100>[(5)``;``]
   \efig
   \end{mathpar}
-<<<<<<< HEAD
+
   Diagram (1) commutes because $e$ is monoidal, diagrams (2) and (3)
   commute by the definition of the Lambek category with exchange, diagram
   (4) commutes because $e$ is a comonad, and diagram (5) commutes by the
@@ -597,14 +589,6 @@ TODO: Define Lambek Categories
   because $\gamma$ is a natural isomorphism, and (4) commutes trivially.
   \todo{Need (2)?}
 
-  In conclusion, $\cat{L}_e$ is symmetric monoidal.
-=======
-  Diagram (1) commutes because $e$ is monoidal, diagrams (2) and (3) commute by the
-  definition of the Lambek category with exchange, diagram (4) commutes because $e$
-  is a comonad, and diagram (5) commutes by the naturality of $\q{}$.
-  \ \\
-  \todo[inline]{prove the rest}
->>>>>>> origin/master
 \end{proof}
 % subsection lambek_categories_with_exchange (end)
 
@@ -785,12 +769,8 @@ TODO: Define Lambek Categories
 \end{lemma}
 
 \begin{proof}
-<<<<<<< HEAD
   The two diagrams above commute because the following ones commute by the
   distributive law and the comonad laws for $c$ and $w$.
-=======
-  The two diagrams above commute because the following ones due:
->>>>>>> origin/master
   \begin{mathpar}
   \bfig
     \Vtriangle|amm|/->`=`->/<600,300>[
@@ -816,11 +796,6 @@ TODO: Define Lambek Categories
     \morphism(1200,300)|b|<-600,-700>[wcw^2A`w^2cwA;wdist_{wA}]
   \efig
   \end{mathpar}
-<<<<<<< HEAD
-=======
-  They both commute by the distribute law and the comonad laws of $c$
-  and $w$.
->>>>>>> origin/master
 \end{proof}
 
 % Lemma for composing contraction and weakening
