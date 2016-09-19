@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 \documentclass{article}
 \usepackage[margin=1in]{geometry}
+=======
+                       \documentclass{article}
+>>>>>>> origin/master
 \usepackage{amssymb,amsmath}
 \usepackage{amsthm}
 \usepackage{cmll}
@@ -267,7 +271,11 @@ TODO: Define Lambek Categories
     \begin{mathpar}
       \bfig
       \square|amma|/->`->`<-`->/<1000,500>[
+<<<<<<< HEAD
         e^2A \otimes e^2B`
+=======
+        e^2A \otimes e^2A`
+>>>>>>> origin/master
         e^2B \otimes e^2A`
         eA \otimes eB`
         eB \otimes eA;
@@ -342,9 +350,15 @@ TODO: Define Lambek Categories
 \end{lemma}
 \begin{proof}
   We must first define the unitors, and then the associator.  Then we
+<<<<<<< HEAD
   show that they respect the monoidal coherence diagrams. Throughout this
   proof we will make use of the coalgebra $(A,h_A)$, $(B,h_B)$, and
   $(C,h_C)$.
+=======
+  show that they respect the symmetry monoidal coherence diagrams.
+  Throughout this proof we will make use of the coalgebra $(A,h_A)$,
+  $(B,h_B)$, and $(C,h_C)$.
+>>>>>>> origin/master
 
   The tensor product of $(A, h_A)$ and $(B, h_b)$ is $(A \otimes
   B,q_{A,B} \circ (h_A \otimes h_B))$, and the unit of the tensor
@@ -374,7 +388,11 @@ TODO: Define Lambek Categories
   diagram commutes by the fact that $e$ is a monoidal functor, and the
   bottom diagram commutes by the action diagrams for the coalgebra
   $(A,h_A)$. Showing the left unitor is a coalgebra morphism is
+<<<<<<< HEAD
   similar. \todo{Doesn't seem right.}
+=======
+  similar.
+>>>>>>> origin/master
 
   The unitors are natural and isomorphisms, because they are
   essentially inherited from the underlying Lambek category.
@@ -563,6 +581,7 @@ TODO: Define Lambek Categories
   of $\e{A,B}$ or the action diagrams.
 \end{proof}
 
+<<<<<<< HEAD
 define coforks.
 
 \begin{lemma}
@@ -585,6 +604,60 @@ define coforks.
   \efig
   \]
 \end{proof}
+=======
+\begin{definition}
+  \label{def:cofork}
+  Given two parallel arrows $f,g : B \mto C$ in a category $\cat{C}$,
+  a \textbf{cofork} is a morphism $c : A \mto B$ such that
+  the following diagram commutes:
+  \[
+  A \mto^c B \two^f_g C
+  \]
+  That is, $f \circ c = g \circ c$.
+\end{definition}
+
+\begin{lemma}
+  \label{lemma:cofork-for-ex}
+  The morphism $\e{A,B} \circ (\h{A} \otimes \h{B})$ is a cofork of
+  the morphisms $(\h{A} \otimes \h{B}) \circ (\varepsilon_B \otimes
+  \varepsilon_A)$ and $(\varepsilon_B \otimes \varepsilon_A) \circ
+  (\delta_B \otimes \delta_A)$.
+\end{lemma}
+\begin{proof}
+  We prove this by equational reasoning as follows:
+  \[
+  \small
+  \begin{array}{lll}
+    (\h{B} \otimes \h{A}) \circ (\varepsilon_B \otimes \varepsilon_A) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+    \\\,\,\,\,\,\,\,\,\,\,\,
+    = (\h{B} \otimes \h{A}) \circ (\varepsilon_B \otimes \varepsilon_A) \circ (\h{B} \otimes \h{A}) \circ \beta_{A,B}
+    & \text{(Corollary~\ref{corollary:ex-simple})}\\
+    \,\,\,\,\,\,\,\,\,\,\,= (\h{B} \otimes \h{A}) \circ ((\varepsilon_B \circ \h{B}) \otimes (\varepsilon_A \circ \h{A})) \circ \beta_{A,B}
+    & \text{}\\
+    \,\,\,\,\,\,\,\,\,\,\,= (\h{B} \otimes \h{A}) \circ (\id_B \otimes \id_A) \circ \beta_{A,B}
+    & \text{(Action diagrams)}\\
+    \,\,\,\,\,\,\,\,\,\,\,= (\h{B} \otimes \h{A}) \circ \beta_{A,B}
+    & \text{}\\
+    \,\,\,\,\,\,\,\,\,\,\,= \e{A,B} \circ (\h{A} \otimes \h{B})
+    & \text{(Corollary~\ref{corollary:ex-simple})}\\
+    \,\,\,\,\,\,\,\,\,\,\,= (\id_B \otimes \id_A) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+    & \text{}\\
+    \,\,\,\,\,\,\,\,\,\,\,= ((e\varepsilon_B \circ \delta_B) \otimes (e\varepsilon_A \circ \delta_A)) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+    & \text{(Monoidal Comonad)}\\
+    \,\,\,\,\,\,\,\,\,\,\,= (e\varepsilon_B \otimes e\varepsilon_A) \circ (\delta_B \otimes \delta_A) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+    & \text{}\\
+  \end{array}
+  \]
+\end{proof}
+
+\begin{lemma}
+  \label{lemma:beta-coalgebra-morph}
+  In $\cat{L}^e$, $\beta$ is a coalgebra morphism.
+\end{lemma}
+\begin{proof}
+  ...
+\end{proof}
+>>>>>>> origin/master
 
 \begin{lemma}[The Eilenberg-Moore Category is Symmetric Monoidal]
   \label{lemma:the_eilenberg-moore_category_is_symmetric_monoidal}
