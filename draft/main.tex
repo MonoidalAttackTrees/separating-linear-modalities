@@ -1,4 +1,4 @@
-\documentclass{article}
+                       \documentclass{article}
 \usepackage{amssymb,amsmath}
 \usepackage{amsthm}
 \usepackage{cmll}
@@ -562,7 +562,50 @@ TODO: Define Lambek Categories
   of $\e{A,B}$ or the action diagrams.
 \end{proof}
 
-define coforks.
+\begin{definition}
+  \label{def:cofork}
+  Given two parallel arrows $f,g : B \mto C$ in a category $\cat{C}$,
+  a \textbf{cofork} is a morphism $c : A \mto B$ such that
+  the following diagram commutes:
+  \[
+  A \mto^c B \two^f_g C
+  \]
+  That is, $f \circ c = g \circ c$.
+\end{definition}
+
+\begin{lemma}
+  \label{lemma:cofork-for-ex}
+  The morphism $\e{A,B} \circ (\h{A} \otimes \h{B})$ is a cofork of
+  the morphisms $(\h{A} \otimes \h{B}) \circ (\varepsilon_B \otimes
+  \varepsilon_A)$ and $(\varepsilon_B \otimes \varepsilon_A) \circ
+  (\delta_B \otimes \delta_A)$.
+\end{lemma}
+\begin{proof}
+  We prove this by equational reasoning as follows:
+  \[
+  \small
+  \begin{array}{lll}
+    (\h{B} \otimes \h{A}) \circ (\varepsilon_B \otimes \varepsilon_A) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+    \\\,\,\,\,\,\,\,\,\,\,\,
+    = (\h{B} \otimes \h{A}) \circ (\varepsilon_B \otimes \varepsilon_A) \circ (\h{B} \otimes \h{A}) \circ \beta_{A,B}
+    & \text{(Corollary~\ref{corollary:ex-simple})}\\
+    \,\,\,\,\,\,\,\,\,\,\,= (\h{B} \otimes \h{A}) \circ ((\varepsilon_B \circ \h{B}) \otimes (\varepsilon_A \circ \h{A})) \circ \beta_{A,B}
+    & \text{}\\
+    \,\,\,\,\,\,\,\,\,\,\,= (\h{B} \otimes \h{A}) \circ (\id_B \otimes \id_A) \circ \beta_{A,B}
+    & \text{(Action diagrams)}\\
+    \,\,\,\,\,\,\,\,\,\,\,= (\h{B} \otimes \h{A}) \circ \beta_{A,B}
+    & \text{}\\
+    \,\,\,\,\,\,\,\,\,\,\,= \e{A,B} \circ (\h{A} \otimes \h{B})
+    & \text{(Corollary~\ref{corollary:ex-simple})}\\
+    \,\,\,\,\,\,\,\,\,\,\,= (\id_B \otimes \id_A) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+    & \text{}\\
+    \,\,\,\,\,\,\,\,\,\,\,= ((e\varepsilon_B \circ \delta_B) \otimes (e\varepsilon_A \circ \delta_A)) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+    & \text{(Monoidal Comonad)}\\
+    \,\,\,\,\,\,\,\,\,\,\,= (e\varepsilon_B \otimes e\varepsilon_A) \circ (\delta_B \otimes \delta_A) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+    & \text{}\\
+  \end{array}
+  \]
+\end{proof}
 
 \begin{lemma}
   \label{lemma:beta-coalgebra-morph}
