@@ -247,11 +247,11 @@ TODO: Define Lambek Categories
   A \textbf{Lambek category with exchange}, $(\cat{L},e,\e{})$, is a
   Lambek category equipped with a monoidal comonad
   $(e,\varepsilon,\delta)$ on $\cat{L}$, and a monoidal natural
-  transformation $\e{A,B}:eA \otimes eB \mto eB \otimes eA$.
-  Furthermore, the following must hold:
-  \begin{itemize}
-  \item $\e{A,B}$ must be an involution:
-    \[
+  transformation $\e{A,B}:eA \otimes eB \mto eB \otimes eA$.  We
+  require $\e{}$ to be a coalgebra morphism, and the following
+  diagrams must commute:
+  \[
+  \begin{array}{cccc}
     \bfig
     \qtriangle|amm|/->`=`->/<1000,500>[
       eA \otimes eB`
@@ -260,61 +260,46 @@ TODO: Define Lambek Categories
       \e{A,B}``
       \e{B,A}]
     \efig
-    \]     
-  \item The following coherence diagrams with respect to the comonad
-    must commute:
-    \begin{mathpar}
-      \bfig
-      \square|amma|/->`->`<-`->/<1000,500>[
-        e^2A \otimes e^2A`
-        e^2B \otimes e^2A`
-        eA \otimes eB`
-        eB \otimes eA;
-        \e{eA,eB}`
-        \varepsilon_{eA} \otimes \varepsilon_{eB}`
-        \delta_B \otimes \delta_A`
-        \e{A,B}]
-      \efig
-    \end{mathpar}
-  \end{itemize}  
-%% \begin{mathpar}
-  %% \bfig
-  %%   \square/->`=`->`/<1600,400>[
-  %%     e(A\otimes B)`
-  %%     eB\otimes eA`
-  %%     e(A\otimes B)`
-  %%     e(B\otimes A);
-  %%     \e{A,B}``
-  %%     \q{B,A}`]
-  %%   \morphism(800,0)<-800,0>[
-  %%     eA\otimes eB`
-  %%     e(A\otimes B);
-  %%     \q{A,B}]
-  %%   \morphism(1600,0)<-800,0>[
-  %%     e(B\otimes A)`
-  %%     eA\otimes eB;
-  %%     \e{B,A}]
-  %% \efig
-  %% \and
-  %% \bfig
-  %%   \square/->`->`->`/<1600,400>[
-  %%     e(A\otimes B)`
-  %%     e^2(A\otimes B)`
-  %%     eB\otimes eA`
-  %%     e(eB\otimes eA);
-  %%     \delta_{A\otimes B}`
-  %%     \e{A,B}`
-  %%     e\e{A,B}`]
-  %%   \morphism<800,0>[
-  %%     eB\otimes eA`
-  %%     e^2B\otimes e^2A;
-  %%     \delta_B\otimes\delta_A]
-  %%   \morphism(800,0)<800,0>[e^2B\otimes e^2A`e(eB\otimes eA);\q{eB,eA}]
-  %% \efig
-  %% \end{mathpar}
-  %% Note that the second diagram above shows that $\e{A,B}$ is a
-  %% coalgebra morphism.
+    &
+    \quad
+    &
+    \bfig
+    \square|amma|<1000,500>[
+      e^2A \otimes e^2B`
+      e^2B \otimes e^2A`
+      e(eA \otimes eB)`
+      e(eB \otimes eA);
+      \e{eA,eB}`
+      \q{eA,eB}`
+      \q{eB,eA}`
+      e\e{A,B}]
+    \efig          
+  \end{array}
+  \]
+  Furthermore, for any coalgebra morphisms $f : (eA, \delta) \mto
+  (eB,\delta)$ and $g : (eC,\delta) \mto (eD,\delta)$ between free
+  coalgebras the following diagram must commute:
+  \[
+  \bfig
+  \square(0,-500)|amma|<800,500>[
+    eA \otimes eC`
+    eB \otimes eD`
+    eC \otimes eA`
+    eD \otimes eB;
+    f \otimes g`
+    \e{A,C}`
+    \e{B,D}`
+    g \otimes f]      
+  \efig
+  \]
+  The morphism $\q{A,B} : eA \otimes eB \mto e(A \otimes B)$ makes
+  $(e,\q{})$ a monoidal functor.
 \end{definition}
+The first diagram in the previous definition makes $\e{}$ an
+involution, and the second and third diagrams are required in the
+proof that the Eilenberg-Moore category is symmetric; see the proofs of
+Lemma~\ref{lemma:beta-coalgebra-morph} and
+Lemma~\ref{lemma:the_eilenberg-moore_category_is_symmetric_monoidal}.
 
 \begin{definition}
   \label{def:eilenberg-moore-cat}
@@ -363,17 +348,15 @@ TODO: Define Lambek Categories
         \morphism(650,500)<650,0>[eA \otimes I`eA \otimes eI;\id{} \otimes \q{I}]
         \square(1300,0)|amma|/->``->`/<650,500>[eA \otimes eI`e(A \otimes I)``eA;\q{A,I}``e\rho`]
 
-        \morphism(650,500)<1300,-500>[eA \otimes I`eA;\lambda]
+        \morphism(650,500)<1300,-500>[eA \otimes I`eA;\rho]
         \morphism<1950,0>[A`eA;h_A]
         \efig
       \end{array}
     \end{math}
   \end{center}
-  The top-left diagram commutes by naturality of $\rho$, the top-right
-  diagram commutes by the fact that $e$ is a monoidal functor, and the
-  bottom diagram commutes by the action diagrams for the coalgebra
-  $(A,h_A)$. Showing the left unitor is a coalgebra morphism is
-  similar.
+  The left diagram commutes by naturality of $\rho$, the right diagram
+  commutes by the fact that $e$ is a monoidal functor.  Showing the
+  left unitor is a coalgebra morphism is similar.
 
   The unitors are natural and isomorphisms, because they are
   essentially inherited from the underlying Lambek category.
@@ -558,8 +541,9 @@ TODO: Define Lambek Categories
   \efig
   \]
   The diagram on the right commutes because $\beta_{A,B}$ is a natural
-  transformation, and the other diagrams commute by either naturality
-  of $\e{A,B}$ or the action diagrams.
+  transformation, and the other diagrams commute either because
+  $\cat{L}$ is a Lambek category with exchange, or by the action
+  diagrams.
 \end{proof}
 
 \begin{definition}
@@ -576,8 +560,8 @@ TODO: Define Lambek Categories
 \begin{lemma}
   \label{lemma:cofork-for-ex}
   The morphism $\e{A,B} \circ (\h{A} \otimes \h{B})$ is a cofork of
-  the morphisms $(\h{A} \otimes \h{B}) \circ (\varepsilon_B \otimes
-  \varepsilon_A)$ and $(\varepsilon_B \otimes \varepsilon_A) \circ
+  the morphisms $(\h{B} \otimes \h{A}) \circ (\varepsilon_B \otimes
+  \varepsilon_A)$ and $(e\varepsilon_B \otimes e\varepsilon_A) \circ
   (\delta_B \otimes \delta_A)$.
 \end{lemma}
 \begin{proof}
@@ -612,7 +596,84 @@ TODO: Define Lambek Categories
   In $\cat{L}^e$, $\beta$ is a coalgebra morphism.
 \end{lemma}
 \begin{proof}
-  ...
+  The proof follows from the commutativity of the following diagram:
+  \[
+  \small
+  \bfig
+  \square|amma|<800,500>[
+    A \otimes B`
+    eA \otimes eB`
+    eA \otimes eB`
+    e^2A \otimes e^2B;
+    h_A \otimes h_B`
+    h_A \otimes h_B`
+    \delta_A \otimes \delta_B`
+    eh_A \otimes eh_B]
+
+  \square(800,0)|amma|<800,500>[
+    eA \otimes eB`
+    eB \otimes eA`
+    e^2A \otimes e^2B`
+    e^2B \otimes e^2A;
+    \e{A,B}`
+    \delta_A \otimes \delta_B`
+    \delta_B \otimes \delta_A`
+    \e{eA,eB}]
+
+  \square(1600,0)|amma|<800,500>[
+    eB \otimes eA`
+    B \otimes A`
+    e^2B \otimes e^2A`
+    eA \otimes eB;
+    \varepsilon_B \otimes \varepsilon_A`
+    \delta_B \otimes \delta_A`
+    h_B \otimes h_A`
+    e\varepsilon_B \otimes e\varepsilon_A]
+
+  \square(0,-500)|amma|<800,500>[
+    eA \otimes eB`
+    e^2A \otimes e^2B`
+    e(A \otimes B)`
+    e(eA \otimes eB);
+    eh_A \otimes eh_B`
+    \q{A,B}`
+    \q{eA,eB}`
+    e(h_A \otimes h_B)]
+
+  \square(800,-500)|amma|<800,500>[
+    e^2A \otimes e^2B`
+    e^2B \otimes e^2A`
+    e(eA \otimes eB)`
+    e(eB \otimes eA);
+    \e{eA,eB}`
+    \q{eA,eB}`
+    \q{eB,eA}`
+    e\e{A,B}]
+
+  \square(1600,-500)|amma|<800,500>[
+    e^2B \otimes e^2A`
+    eA \otimes eB`
+    e(eB \otimes eA)`
+    e(B \otimes A);
+    e\varepsilon_B \otimes e\varepsilon_A`
+    \q{eB,eA}`
+    \q{B,A}`
+    e(\varepsilon_B \otimes \varepsilon_A)]
+
+  \place(400,250)[\text{(1)}]
+  \place(1200,250)[\text{(2)}]
+  \place(2000,250)[\text{(3)}]
+  \place(400,-250)[\text{(4)}]
+  \place(1200,-250)[\text{(5)}]
+  \place(2000,-250)[\text{(6)}]
+  \efig 
+  \]
+  Diagram one commutes by the action diagrams for the coalgebras
+  $(A,h_A)$ and $(B,h_B)$, diagram two commutes because $\cat{L}$ is a
+  Lambek category with exchange, diagram three does not commute, but
+  holds by Lemma~\ref{lemma:cofork-for-ex}, diagram four and six
+  commute by naturality of $\q{}$, and diagram five commutes because
+  $\cat{L}$ is a Lambek category with exchange.
 \end{proof}
 
 \begin{lemma}[The Eilenberg-Moore Category is Symmetric Monoidal]
@@ -631,26 +692,26 @@ TODO: Define Lambek Categories
     h_A \otimes h_B`
     h_A \otimes h_B`
     \delta_A \otimes \delta_B`
-    eh_A \otimes eh_B]
+    \delta_A \otimes \delta_B]
 
   \square(0,-500)|amma|<800,500>[
     eA \otimes eB`
     e^2A \otimes e^2B`
     eB \otimes eA`
     e^2B \otimes e^2A;
-    eh_A \otimes eh_B`
+    \delta_A \otimes \delta_B`
     \e{A,B}`
     \e{eA,eB}`
-    eh_B \otimes eh_A]
+    \delta_B \otimes \delta_A]
 
   \square(0,-1000)|ammm|<800,500>[
     eB \otimes eA`
     e^2B \otimes e^2A`
     B \otimes A`
     eB \otimes eA;
-    eh_B \otimes eh_A`
+    \delta_B \otimes \delta_A`
     \varepsilon_B \otimes \varepsilon_A`
-    \varepsilon_{eB} \otimes \varepsilon_{eA}`
+    e\varepsilon_{B} \otimes e\varepsilon_{A}`
     h_B \otimes h_A]
 
   \square(800,-1000)|ammm|<1200,500>[
@@ -659,20 +720,9 @@ TODO: Define Lambek Categories
     eB \otimes eA`
     eA \otimes eB;
     \e{eB,eA}`
-    \varepsilon_{eB} \otimes \varepsilon_{eA}`
-    \varepsilon_{eA} \otimes \varepsilon_{eB}`
+    e\varepsilon_{B} \otimes e\varepsilon_{A}`
+    e\varepsilon_{A} \otimes e\varepsilon_{B}`
     \e{B,A}]
-
-  \Atriangle(800,-1000)|mmm|/<-`=`/<600,250>[
-    eA \otimes eB`
-    eB \otimes eA`
-    eA \otimes eB;
-    \e{B,A}``]
-
-  \morphism(1400,-750)|m|<600,250>[
-    eA \otimes eB`
-    e^2A \otimes e^2B;
-    \delta_A \otimes \delta_B]
 
   \btriangle(800,-500)|mmm|/`=`/<1200,500>[
     e^2A \otimes e^2B`
@@ -692,20 +742,18 @@ TODO: Define Lambek Categories
   \place(400,-250)[(2)]
   \place(400,-750)[(3)]
   \place(1100,-300)[(4)]
-  \place(1100,-700)[(5)]
-  \place(1400,-880)[(6)]
-  \place(1760,-750)[(7)]
-  \place(1400,250)[(8)]
+  \place(1400,-750)[(5)]
+  \place(1400,250)[(6)]
   \efig
   \]
-  Diagram one commutes by the action diagrams of the Eilenberg Moore
-  category, diagram two commutes by naturality of $\e{}$, diagram
-  three commutes by naturality of $\varepsilon$, diagram four and five
-  commute by the coherence diagrams of $\e{}$, diagram six clearly
-  commutes, diagram seven commutes because $(e,\varepsilon,\delta)$ is
-  a comonad, and diagram eight commutes by both the action diagrams of
-  the Eilenberg Moore category and the fact that
-  $(e,\varepsilon,\delta)$ is a comonad.
+  Diagram one commutes trivially commutes, diagram two commutes
+  because $\cat{L}$ is a Lambek category with exchange, diagram three
+  does not commute, but holds by Lemma~\ref{lemma:cofork-for-ex},
+  diagram four and five commute by the coherence diagrams of $\e{}$,
+  diagram six clearly commutes, diagram seven commutes because
+  $(e,\varepsilon,\delta)$ is a comonad, and diagram eight commutes by
+  both the action diagrams of the Eilenberg Moore category and the
+  fact that $(e,\varepsilon,\delta)$ is a comonad.
   
   At this point we must verify that $\beta$ respects the coherence
   diagrams of a symmetric monoidal category; see
