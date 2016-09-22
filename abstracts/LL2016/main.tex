@@ -175,7 +175,7 @@ following rules:
 \vspace{-7px}
 \]
 The first two rules allow formulas under the of-course modality to be
-weakened into the context and the second rules allows repeated
+weakened into the context and the second rule allows repeated
 hypotheses to be contracted.  Now the last two rules imply that the
 of-course modality is a comonad.
 
@@ -208,7 +208,7 @@ ability to model logics with both weakening and contraction.  In
 addition to these two modalities we add a third, $e A$, which adds
 exchange.  In fact, under $e A$ we recover full intuitionistic linear
 logic.  Finally, we show how to compose all three of these modalities
-to obtain that the ability to recover the of-course modality.
+to obtain the ability to recover the of-course modality.
 
 \textbf{Categorical model.} Following Bierman \cite{Bierman:1994} we
 first show how to construct a categorical model in terms of monoidal
@@ -235,8 +235,8 @@ isomorphism $\e{A,B} : eA \otimes eB \mto eB \otimes eA$; subject
 to several coherence diagrams.  The Eilenberg-Moore category for this
 comonad is indeed symmetric monoidal.  Thus, by adding another
 distributive law (natural isomorphism) $\mathsf{dist}_A : ecwA \mto
-wceA$ we can construct the comonad
-$(wce,\varepsilon_{wce},\delta_{wce})$ whose Eilenberg-Moore category
+cweA$ we can construct the comonad
+$(cwe,\varepsilon_{cwe},\delta_{cwe})$ whose Eilenberg-Moore category
 is cartesian.  In this setting the two contractions blend together to
 form the usual $\c{A} : A \mto A \otimes A$.
 
@@ -268,14 +268,14 @@ example, the rules for the exchange modality are defined as follows:
 \vspace{-7px}
 \]
 At this point we are forced to ask a question, which of the
-distributive laws do we choose to add?  There are many given three
-comonads.  We choose the necessary laws to be able to model several
-different substructural logics: $\mathsf{dist}_1 : cwA \mto wcA$,
-$\mathsf{dist}_2 : weA \mto ewA$, $\mathsf{dist}_3 : ceA \mto ecA$,
-and $\mathsf{dist}_4 : cewA \mto ewcA$.  These distributive laws allow
-for the encoding of the Lambek calculus with weakening, contraction,
-and exchange, affine logic, strict logic, and full intuitionistic
-linear logic.  The type system is left for future work.
+distributive laws do we choose to add?  There are many.  We choose the
+necessary laws to be able to model several different substructural
+logics: $\mathsf{dist}_1 : cwA \mto wcA$, $\mathsf{dist}_2 : weA \mto
+ewA$, $\mathsf{dist}_3 : ceA \mto ecA$, and $\mathsf{dist}_4 : ecwA
+\mto cweA$.  These distributive laws allow for the encoding of the
+Lambek calculus with weakening, contraction, and exchange, affine
+logic, strict logic, and full intuitionistic linear logic.  The type
+system is left for future work.
 
 \textbf{Conclusion.}  The main application we have in mind for the
 logic we describe above is to use it has a logical foundation of the
