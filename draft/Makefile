@@ -27,7 +27,7 @@ endif
 
 # Now this takes the full LaTex translation and compiles it using
 # pdflatex.
-main.pdf : main.tex ref.bib Makefile appendix.tex exchange.tex
+main.pdf : main.tex ref.bib Makefile appendix.tex exchange.tex Lambek-categories.tex
 	$(PDFLATEX) -jobname=main main.tex
 	$(BIBTEX) main
 	$(PDFLATEX) -jobname=main main.tex

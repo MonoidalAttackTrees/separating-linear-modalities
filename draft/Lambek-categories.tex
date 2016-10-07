@@ -1,0 +1,106 @@
+\begin{definition}
+  \label{def:Lambek-category}
+  A \textbf{monoidal category}, $(\cat{L}, \otimes, I, \lambda,
+  \rho)$, is a category, $\cat{L}$, equipped with a bifunctor,
+  $\otimes : \cat{L} \times \cat{L} \mto \cat{L}$, called the tensor
+  product, a distinguished object $I$ of $\cat{L}$ called the unit,
+  and three natural isomorphisms $\lambda_A : I \otimes A \mto A$,
+  $\rho_A : A \otimes I \mto A$, and $\alpha_{A,B,C} : A \otimes (B
+  \otimes C) \mto (A \otimes B) \otimes C$ called the left and right
+  unitors and the associator respectively.  Finally, these are subject
+  to the following coherence diagrams:
+  \begin{mathpar}
+    \bfig
+    \hSquares|aammmma|/->`->`->``->``/<400>[
+      ((A \otimes B) \otimes C) \otimes D`
+      (A \otimes (B \otimes C)) \otimes D`
+      A \otimes ((B \otimes C) \otimes D)`
+      (A \otimes B) \otimes (C \otimes D)``
+      A \otimes (B \otimes (C \otimes D));
+      \alpha_{A,B,C} \otimes \id_D`
+      \alpha_{A,B \otimes C,D}`
+      \alpha_{A \otimes B,C,D}``
+      \id_A \otimes \alpha_{B,C,D}``]
+
+    \morphism(-200,0)<2700,0>[
+      (A \otimes B) \otimes (C \otimes D)`
+      A \otimes (B \otimes (C \otimes D));
+      \alpha_{A,B,C \otimes D}]
+    \efig
+    \and
+    \bfig
+    \Vtriangle[
+      (A \otimes I) \otimes B`
+      A \otimes (I \otimes B)`
+      A \otimes B;
+      \alpha_{A,I,B}`
+      \rho_{A}\otimes id_B`
+      id_A\otimes\lambda_{B}]
+    \efig
+  \end{mathpar}
+\end{definition}
+
+\begin{definition}
+  \label{def:Lambek-category}
+  A \textbf{Lambek category} is a monoidal category $(\cat{L},
+  \otimes, I, \lambda, \rho,\alpha)$ equipped with two bifunctors
+  $\lto : \catop{L} \times \cat{L} \mto \cat{L}$ and $\rto : \cat{L}
+  \times \catop{L} \mto \cat{L}$ that are both right adjoint to the
+  tensor product.  That is, the following natural isomorphisms hold:
+  \begin{center}
+    \begin{math}
+      \begin{array}{lll}
+        \Hom{L}{X \otimes A}{B} \cong \Hom{L}{X}{A \lto B} & \quad\quad\quad\quad & 
+        \Hom{L}{A \otimes X}{B} \cong \Hom{L}{X}{B \rto A}\\
+      \end{array}
+    \end{math}
+  \end{center}
+\end{definition}
+One might call Lambek categories biclosed monoidal categories, but we
+name them in homage to Lambek for his contributions to non-commutative
+linear logic.
+
+\begin{definition}
+  \label{def:sym-monoidal-category}
+  A monoidal category $(\cat{L},\otimes,I,\lambda,\rho,\alpha)$ is
+  \textbf{symmetric} if there is a natural transformation $\beta_{A,B}
+  : A \otimes B \mto B \otimes A$ such that $\beta_{B,A} \circ
+  \beta_{A,B} = \id_{A \otimes B}$ and the following commute:
+  \begin{center}
+    \begin{math}
+      \small
+      \begin{array}{lll}
+        \bfig
+        \hSquares|aammmaa|/->`->`->``->`->`->/[
+        (A \otimes B) \otimes C`
+        A \otimes (B \otimes C)`
+        (B \otimes C) \otimes A`
+        (B \otimes A) \otimes C`
+        B \otimes (A \otimes C)`
+        B \otimes (C \otimes A);
+        \alpha_{A,B,C}`
+        \beta_{A,B \otimes C}`
+        \beta_{A,B} \otimes \id_C``
+        \alpha_{B,C,A}`
+        \alpha_{B,A,C}`
+        \id_B \otimes \beta_{A,C}]
+        \efig
+        & \quad &
+        \bfig
+          \Vtriangle[
+            I \otimes A`
+            A \otimes I`
+            A;
+            \beta_{I,A}`
+            \lambda_A`
+            \rho_A]
+          \efig
+      \end{array}
+    \end{math}
+  \end{center}
+\end{definition}
+
+\begin{definition}
+  \label{def:sym-monoidal-closed}
+  A 
+\end{definition}
