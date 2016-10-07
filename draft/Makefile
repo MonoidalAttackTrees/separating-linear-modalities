@@ -34,4 +34,4 @@ main.pdf : main.tex ref.bib Makefile appendix.tex exchange.tex
 	$(PDFLATEX) -jobname=main main.tex
 
 clean :
-	rm -f *.aux *.dvi *.ps *.log *-ott.tex *-output.tex *.bbl *.blg *.rel *.pdf *~ *.vtc *.out *.spl *-inc.tex
+	rm -f *.aux *.dvi *.ps *.log *-ott.tex *-output.tex *.bbl *.blg *.rel *~ *.vtc *.out *.spl *-inc.tex
