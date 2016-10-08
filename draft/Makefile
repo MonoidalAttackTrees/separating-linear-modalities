@@ -27,11 +27,11 @@ endif
 
 # Now this takes the full LaTex translation and compiles it using
 # pdflatex.
-main.pdf : main.tex ref.bib Makefile appendix.tex
+main.pdf : main.tex ref.bib Makefile appendix.tex exchange.tex Lambek-categories.tex
 	$(PDFLATEX) -jobname=main main.tex
 	$(BIBTEX) main
 	$(PDFLATEX) -jobname=main main.tex
 	$(PDFLATEX) -jobname=main main.tex
 
 clean :
-	rm -f *.aux *.dvi *.ps *.log *-ott.tex *-output.tex *.bbl *.blg *.rel *.pdf *~ *.vtc *.out *.spl *-inc.tex
+	rm -f *.aux *.dvi *.ps *.log *-ott.tex *-output.tex *.bbl *.blg *.rel *~ *.vtc *.out *.spl *-inc.tex

@@ -1,0 +1,298 @@
+\documentclass{article}
+\usepackage{amssymb,amsmath}
+\usepackage{amsthm}
+\usepackage{cmll}
+\usepackage{txfonts}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{todonotes}
+\usepackage{mathpartir}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage[barr]{xy}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage[inline]{enumitem}
+
+\usepackage{caption}
+\captionsetup[figure]{name=Diagram}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+%% This renames Barr's \to to \mto.  This allows us to use \to for imp
+%% and \mto for a inline morphism.
+\let\mto\to
+\let\to\relax
+\newcommand{\to}{\rightarrow}
+\newcommand{\ndto}[1]{\to_{#1}}
+\newcommand{\ndwedge}[1]{\wedge_{#1}}
+
+% Commands that are useful for writing about type theory and programming language design.
+%% \newcommand{\case}[4]{\text{case}\ #1\ \text{of}\ #2\text{.}#3\text{,}#2\text{.}#4}
+\newcommand{\interp}[1]{\llbracket #1 \rrbracket}
+\newcommand{\normto}[0]{\rightsquigarrow^{!}}
+\newcommand{\join}[0]{\downarrow}
+\newcommand{\redto}[0]{\rightsquigarrow}
+\newcommand{\nat}[0]{\mathbb{N}}
+\newcommand{\fun}[2]{\lambda #1.#2}
+\newcommand{\CRI}[0]{\text{CR-Norm}}
+\newcommand{\CRII}[0]{\text{CR-Pres}}
+\newcommand{\CRIII}[0]{\text{CR-Prog}}
+\newcommand{\subexp}[0]{\sqsubseteq}
+%% Must include \usepackage{mathrsfs} for this to work.
+
+\date{}
+
+\let\b\relax
+\let\d\relax
+\let\t\relax
+\let\r\relax
+\let\c\relax
+\let\j\relax
+\let\wn\relax
+\let\H\relax
+
+% Cat commands.
+\newcommand{\powerset}[1]{\mathcal{P}(#1)}
+\newcommand{\cat}[1]{\mathcal{#1}}
+\newcommand{\func}[1]{\mathsf{#1}}
+\newcommand{\iso}[0]{\mathsf{iso}}
+\newcommand{\H}[0]{\func{H}}
+\newcommand{\J}[0]{\func{J}}
+\newcommand{\catop}[1]{\cat{#1}^{\mathsf{op}}}
+\newcommand{\Hom}[3]{\mathsf{Hom}_{\cat{#1}}(#2,#3)}
+\newcommand{\limp}[0]{\multimap}
+\newcommand{\colimp}[0]{\multimapdotinv}
+\newcommand{\dial}[1]{\mathsf{Dial_{#1}}(\mathsf{Sets^{op}})}
+\newcommand{\dialSets}[1]{\mathsf{Dial_{#1}}(\mathsf{Sets})}
+\newcommand{\dcSets}[1]{\mathsf{DC_{#1}}(\mathsf{Sets})}
+\newcommand{\sets}[0]{\mathsf{Sets}}
+\newcommand{\obj}[1]{\mathsf{Obj}(#1)}
+\newcommand{\mor}[1]{\mathsf{Mor(#1)}}
+\newcommand{\id}[0]{\mathsf{id}}
+\newcommand{\lett}[0]{\mathsf{let}\,}
+\newcommand{\inn}[0]{\,\mathsf{in}\,}
+\newcommand{\cur}[1]{\mathsf{cur}(#1)}
+\newcommand{\curi}[1]{\mathsf{cur}^{-1}(#1)}
+
+\newcommand{\w}[1]{\mathsf{weak}_{#1}}
+\newcommand{\c}[1]{\mathsf{contra}_{#1}}
+\newcommand{\cL}[1]{\mathsf{contraL}_{#1}}
+\newcommand{\cR}[1]{\mathsf{contraR}_{#1}}
+\newcommand{\e}[1]{\mathsf{ex}_{#1}}
+
+\newcommand{\m}[1]{\mathsf{m}_{#1}}
+\newcommand{\n}[1]{\mathsf{n}_{#1}}
+\newcommand{\b}[1]{\mathsf{b}_{#1}}
+\newcommand{\d}[1]{\mathsf{d}_{#1}}
+\newcommand{\h}[1]{\mathsf{h}_{#1}}
+\newcommand{\p}[1]{\mathsf{p}_{#1}}
+\newcommand{\q}[1]{\mathsf{q}_{#1}}
+\newcommand{\t}[0]{\mathsf{t}}
+\newcommand{\r}[1]{\mathsf{r}_{#1}}
+\newcommand{\s}[1]{\mathsf{s}_{#1}}
+\newcommand{\j}[1]{\mathsf{j}_{#1}}
+\newcommand{\jinv}[1]{\mathsf{j}^{-1}_{#1}}
+\newcommand{\wn}[0]{\mathop{?}}
+\newcommand{\codiag}[1]{\bigtriangledown_{#1}}
+
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#1}%
+    \setlength{\rightmargin}{#2}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+
+\newenvironment{diagram}{
+  \begin{center}
+    \begin{math}
+      \bfig
+}{
+      \efig
+    \end{math}
+  \end{center}
+}
+
+%% %% Ott
+%% \input{BiLNL-inc}
+
+\urldef{\mailsa}\path|{heades}@augusta.edu|
+
+\begin{document}
+
+\title{\vspace{-45px}On Linear Modalities for Exchange, Weakening, and Contraction}
+\author{Harley Eades III and Jiaming Jiang}
+\date{Computer Science, Augusta University\\Computer Science, North Carolina State University}
+
+\maketitle 
+
+%% - Start with idea: supporting a wide range of substructural logics
+%%     - Lambek calculus
+%%     - Linear logic
+%%     - Affine Logic
+\vspace{-15px}
+\textbf{Introduction.} In 1987 Girard introduced a new logic
+\cite{Girard:1987} that is based on the property that every hypothesis
+must be used exactly once.  He called this logic, linear logic.  This
+means that the structural rules weakening and contraction are not
+admissible.  However, to recover the ability to allow weakening and
+contraction without sacrificing linearity completely Girard introduced
+the of-course modality, denoted by $!A$, which is defined by the
+following rules:
+\vspace{-7px}
+\[
+\small
+\begin{array}{cccccccccccccc}
+  $$\mprset{flushleft}
+  \inferrule* [right=] {
+    \Gamma \vdash B
+  }{\Gamma,!A \vdash B}
+  &
+  $$\mprset{flushleft}
+  \inferrule* [right=] {
+    \Gamma_1,!A,!A,\Gamma_2 \vdash B
+  }{\Gamma_1,!A,\Gamma_2 \vdash B}
+  &
+  $$\mprset{flushleft}
+  \inferrule* [right=] {
+    !\Gamma \vdash B
+  }{!\Gamma \vdash !B}
+  &
+  $$\mprset{flushleft}
+  \inferrule* [right=] {
+    \Gamma,A \vdash B
+  }{\Gamma,!A \vdash B}
+\end{array}
+\vspace{-7px}
+\]
+The first two rules allow formulas under the of-course modality to be
+weakened into the context and the second rule allows repeated
+hypotheses to be contracted.  Now the last two rules imply that the
+of-course modality is a comonad.
+
+Linear logic is also commutative, that is, it contains the exchange
+structural rule:
+\vspace{-7px}
+\[
+\small
+\inferrule* [right=] {
+  \Gamma_1,A,B,\Gamma_2 \vdash C
+}{\Gamma_1,B,A,\Gamma_2 \vdash C}
+\vspace{-7px}
+\]
+Non-commutative formulations of linear logic go back to Lambek
+\cite{Lambek1958} which happened to be before Girard.  Lambek used a
+non-commutative tensor product to model sentence structure in
+linguistics.  Today non-commutative linear logic has seen many
+applications in computer science and linguistics.  However, some have
+posed the question of whether an exchange modality can be added to
+non-commutative linear logic in the same way that Girard added
+weakening and contraction.
+
+We propose a new logic that has the ability to model several
+substructural logics.  The base of this logic is in non-commutative
+linear logic.  Then we split the of-course modality into two separate
+modalities: $w A$ and $c A$.  The former models weakening and the
+latter contraction.  Then using a distributive law we show how to
+compose these two modalities in such a way that the logic has the
+ability to model logics with both weakening and contraction.  In
+addition to these two modalities we add a third, $e A$, which adds
+exchange.  In fact, under $e A$ we recover full intuitionistic linear
+logic.  Finally, we show how to compose all three of these modalities
+to obtain the ability to recover the of-course modality.
+
+\textbf{Categorical model.} Following Bierman \cite{Bierman:1994} we
+first show how to construct a categorical model in terms of monoidal
+categories.  Suppose $(M, I, \otimes)$ is a monoidal category, where
+$\otimes : M \times M \mto M$ is the tensor product with $I$ its unit.
+Then equip $(M, I, \otimes)$ with two comonads
+$(w,\varepsilon_w,\delta_w)$ and $(c,\varepsilon_c,\delta_c)$ where $w
+: M \mto M$ and $c : M \mto M$ are endofunctors, and $\varepsilon_w :
+wA \mto A$, $\varepsilon_c : cA \mto A$, $\delta_w : w^2A \mto wA$ and
+$\delta_c : c^2A \mto cA$ are all natural transformations.  Then we
+add the natural transformations $\w{A} : wA \mto I$, $\cL{A,B} : cA
+\otimes B \mto (cA \otimes B) \otimes cA$ and $\cR{A,B} : B \otimes cA
+\mto cA \otimes (B \otimes cA)$ where the first models weakening and
+the last two model contraction.  All of these are subject to several
+coherence diagrams; omitted for brevity.  By adding a distributive law
+(natural transformation), $\mathsf{dist}_A : cwA \mto wcA$, we can
+construct another comonad $(wc,\varepsilon_{wc},\delta_{wc})$ which
+models both weakening and contraction.  Keep in mind that the
+Eilenberg-Moore category for $wc : M \mto M$ is not cartesian or even
+symmetric monoidal, because the exchange rule defined in terms of
+weakening and contraction does not have the necessary properties.  We
+add a third comonad $(e,\varepsilon_e,\delta_e)$ with the natural
+isomorphism $\e{A,B} : eA \otimes eB \mto eB \otimes eA$; subject
+to several coherence diagrams.  The Eilenberg-Moore category for this
+comonad is indeed symmetric monoidal.  Thus, by adding another
+distributive law (natural isomorphism) $\mathsf{dist}_A : ecwA \mto
+cweA$ we can construct the comonad
+$(cwe,\varepsilon_{cwe},\delta_{cwe})$ whose Eilenberg-Moore category
+is cartesian.  In this setting the two contractions blend together to
+form the usual $\c{A} : A \mto A \otimes A$.
+
+\textbf{Logic and type system.} By exploiting the beautiful
+Curry-Howard-Lambek correspondence we can form a logic and type system
+using the previous model.  The base of the logic is the Lambek
+Calculus (non-commutative linear logic) with the various comonads
+defined in the same way the of-course modality is defined.  For
+example, the rules for the exchange modality are defined as follows:
+\vspace{-7px}
+\[
+\small
+\begin{array}{cccccccccccccc}
+  $$\mprset{flushleft}
+  \inferrule* [right=] {
+    \Gamma_1,eA,eB,\Gamma_2 \vdash C
+  }{\Gamma_1,eB,eA,\Gamma_2 \vdash C}
+  &
+  $$\mprset{flushleft}
+  \inferrule* [right=] {
+    e\Gamma \vdash B
+  }{e\Gamma \vdash eB}
+  &
+  $$\mprset{flushleft}
+  \inferrule* [right=] {
+    \Gamma,A \vdash B
+  }{\Gamma,eA \vdash B}
+\end{array}
+\vspace{-7px}
+\]
+At this point we are forced to ask a question, which of the
+distributive laws do we choose to add?  There are many.  We choose the
+necessary laws to be able to model several different substructural
+logics: $\mathsf{dist}_1 : cwA \mto wcA$, $\mathsf{dist}_2 : weA \mto
+ewA$, $\mathsf{dist}_3 : ceA \mto ecA$, and $\mathsf{dist}_4 : ecwA
+\mto cweA$.  These distributive laws allow for the encoding of the
+Lambek calculus with weakening, contraction, and exchange, affine
+logic, strict logic, and full intuitionistic linear logic.  The type
+system is left for future work.
+
+\textbf{Conclusion.}  The main application we have in mind for the
+logic we describe above is to use it has a logical foundation of the
+graphical model of threat analysis known as attack trees
+\cite{Eades:2016a}.  These types of models require several different
+commutative and non-commutative tensor products within the same logic.
+We also believe that this type of system will be of interest to the
+linear logic community, because it allows for the encoding of
+several different forms of commutative and non-commutative
+substructural logics.
+
+\vspace{-15px}
+\bibliographystyle{plainurl} \bibliography{ref}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

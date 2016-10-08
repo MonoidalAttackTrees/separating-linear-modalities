@@ -1,0 +1,242 @@
+\begin{definition}
+  \label{def:exchange}
+  A \textbf{Lambek category with exchange}, $(\cat{L},e,\e{})$, is a
+  Lambek category equipped with a monoidal comonad
+  $(e,\varepsilon,\delta)$ on $\cat{L}$, and a monoidal natural
+  transformation $\e{A,B}:eA \otimes eB \mto eB \otimes eA$.  We
+  require $\e{}$ to be a coalgebra morphism, and the following
+  diagrams must commute:
+  \[
+  \small
+  \begin{array}{cccccccc}
+    \bfig
+    \square|amma|<700,500>[
+      e^2A \otimes e^2B`
+      e^2B \otimes e^2A`
+      e(eA \otimes eB)`
+      e(eB \otimes eA);
+      \e{eA,eB}`
+      \q{eA,eB}`
+      \q{eB,eA}`
+      e\e{A,B}]
+    \efig
+    &
+    \quad
+    &    
+    \bfig
+    \qtriangle|amm|/->`=`->/<700,500>[
+      eA \otimes eB`
+      eB \otimes eA`
+      eA \otimes eB;
+      \e{A,B}``
+      \e{B,A}]
+    \efig
+    &
+    \quad
+    &
+    \bfig
+    \square|amma|/->`->`->`/<800,400>[
+      eI \otimes eA`
+      eA \otimes eI`
+      I \otimes eA`
+      eA \otimes I;
+      \e{I,A}`
+      \varepsilon_I \otimes \id`
+      \id \otimes \varepsilon_I`]
+
+    \Vtriangle(0,-200)/`->`->/<400,200>[
+      I \otimes eA`
+      eA \otimes I`
+      eA;`
+      \lambda_{eA}`
+      \rho_{eA}]
+    \efig
+  \end{array}
+  \]
+  \[
+  \begin{array}{cccccccc}
+    \bfig
+    \square|amma|/->`->``/<1100,400>[
+      (eA \otimes eB) \otimes eC`
+      eA \otimes (eB \otimes eC)`
+      (eB \otimes eA) \otimes eC`;
+      \alpha_{eA,eB,eC}`
+      \e{A,B} \otimes \id_{eC}``]
+    
+    \morphism(0,0)|m|/->/<0,-400>[
+      (eB \otimes eA) \otimes eC`
+      eB \otimes (eA \otimes eC);
+      \alpha_{eB,eA,eC}]
+
+    \morphism(0,-400)|a|/->/<2100,0>[
+      eB \otimes (eA \otimes eC)`
+      eB \otimes (eC \otimes eA);
+      \id_{eB} \otimes \e{A,C}]
+    
+    \morphism(1100,400)|a|/->/<1150,0>[
+      eA \otimes (eB \otimes eC)`
+      eA \otimes (e^2B \otimes e^2C);
+      \id_{eA} \otimes (\delta_{B} \otimes \delta_C)]
+    \morphism(2250,400)|a|/->/<1000,0>[
+      eA \otimes (e^2B \otimes e^2C)`
+      eA \otimes e(eB \otimes eC);
+      \id_{eA} \otimes \q{eB,eC}]
+    \morphism(3250,400)|m|/->/<0,-400>[
+      eA \otimes e(eB \otimes eC)`
+      e(eB \otimes eC) \otimes eA;
+      \e{eA,eB \otimes eC}]
+    \morphism(3250,0)|m|/->/<0,-400>[
+      e(eB \otimes eC) \otimes eA`
+      (eB \otimes eC) \otimes eA;
+      \varepsilon_{eB \otimes eC} \otimes \id_{eA}]
+    \morphism(3250,-400)|a|/->/<-1150,0>[
+      (eB \otimes eC) \otimes eA`
+      eB \otimes (eC \otimes eA);
+      \alpha_{eB,eC,eA}]
+    \efig
+  \end{array}
+  \]
+  Furthermore, for any coalgebra morphisms $f : (eA, \delta) \mto
+  (eB,\delta)$ and $g : (eC,\delta) \mto (eD,\delta)$ between free
+  coalgebras the following diagram must commute:
+  \begin{center}
+    \begin{math}
+      \bfig
+      \square(0,-500)|amma|<800,500>[
+        eA \otimes eC`
+        eB \otimes eD`
+        eC \otimes eA`
+        eD \otimes eB;
+        f \otimes g`
+        \e{A,C}`
+        \e{B,D}`
+        g \otimes f]      
+      \efig
+    \end{math}
+  \end{center}
+  The morphism $\q{A,B} : eA \otimes eB \mto e(A \otimes B)$ makes
+  $(e,\q{})$ a monoidal functor.
+\end{definition}
+The first diagram in the previous definition makes $e : \cat{L} \mto
+\cat{L}$ a symmetric monoidal functor, and the second, third, and
+forth diagrams make the category of free coalgebras (the Kleisli
+category) symmetric monoidal.
+
+\begin{definition}
+  \label{def:eilenberg-moore-cat}
+  Suppose $(\cat{L},e,\e{})$ is a Lambek category with exchange.  Then
+  the \textbf{Eilenberg Moore category}, $\cat{L}^e$, of the comonad
+  $(e, \varepsilon, \delta)$ has as objects all the e-coalgebras $(A,
+  h_A : A \mto eA)$, and as morphisms all the coalgebra morphisms.  We
+  call $h_A$ the action of the coalgebra.  Furthermore, the following
+  (action) diagrams must commute:
+  \begin{mathpar}
+    \bfig
+    \square[A`eA`eA`e^2A;h_A`h_A`eh_A`\delta_A]    
+    \efig
+    \and
+    \bfig
+    \btriangle/->`=`->/[A`eA`A;h_A``\varepsilon_A]
+    \efig
+  \end{mathpar}
+\end{definition}
+
+\begin{lemma}[The Eilenberg Moore Category is Monoidal]
+  \label{lemma:the_eilenberg_moore_category_is_monoidal}
+  The category $\cat{L}^e$ is monoidal.
+\end{lemma}
+\begin{proof}
+  For the complete proof see
+  Appendix~\ref{subsec:proof_of_the_eilenberg-moore_category_is_monoidal_lemma:the_eilenberg_moore_category_is_monoidal}.
+\end{proof}
+
+\begin{lemma}
+  \label{lemma:pseudo-braided}
+  In $\cat{L}^e$ there is a natural transformation $\beta_{A,B} : A \otimes B \mto B \otimes A$.
+\end{lemma}
+\begin{proof}
+  We define $\beta$ as follows:
+  \begin{center}
+    \begin{math}
+      \beta_{A,B} := A \otimes B \mto^{h_A \otimes h_B} eA \otimes eB \mto^{ex_{A,B}} eB \otimes eA \mto^{\varepsilon_B \otimes \varepsilon_A} B \otimes A
+    \end{math}
+  \end{center}
+For the proof that it is natural please see Appendix~\ref{subsec:proof_of_lemma:pseudo-braided}.
+\end{proof}
+
+\begin{corollary}
+  \label{corollary:ex-simple}
+  For any coalgebras $(A,h_A)$ and $(B,h_B)$ the following commutes:
+  \begin{center}
+    \begin{math}
+      \bfig
+      \square|aaaa|/->`=``->/<700,500>[
+        A \otimes B`
+        eA \otimes eB`
+        A \otimes B`
+        eA \otimes eB;
+        h_A \otimes h_B```
+        h_A \otimes h_B]
+
+      \square(700,0)|aaaa|/->```->/<700,500>[
+        eA \otimes eB`
+        eB \otimes eA`
+        eA \otimes eB`
+        eB \otimes eA;
+        \e{A,B}```
+        \e{A,B}]
+
+      \square(1400,0)|aama|/->``->`=/<700,500>[
+        eB \otimes eA`
+        B \otimes A`
+        eB \otimes eA`
+        eB \otimes eA;
+        \varepsilon_B \otimes \varepsilon_A``
+        h_B \otimes h_A`]
+      \efig
+    \end{math}
+  \end{center}
+\end{corollary}
+\begin{proof}
+For the complete proof please see
+Appendix~\ref{subsec:proof_of_corollary:ex-simple}.
+\end{proof}
+
+\begin{definition}
+  \label{def:cofork}
+  Given two parallel arrows $f,g : B \mto C$ in a category $\cat{C}$,
+  a \textbf{cofork} is a morphism $c : A \mto B$ such that the diagram
+  $A \mto^c B \two^f_g C$ commutes.  That is, $f \circ c = g \circ c$.
+\end{definition}
+
+\begin{lemma}
+  \label{lemma:cofork-for-ex}
+  The morphism $\e{A,B} \circ (\h{A} \otimes \h{B})$ is a cofork of
+  the morphisms $(\h{B} \otimes \h{A}) \circ (\varepsilon_B \otimes
+  \varepsilon_A)$ and $(e\varepsilon_B \otimes e\varepsilon_A) \circ
+  (\delta_B \otimes \delta_A)$.
+\end{lemma}
+\begin{proof}
+  This proof holds by straightforward equational reasoning.  For the
+  complete proof please see
+  Appendix~\ref{subsec:proof_of_lemma:cofork-for-ex}.
+\end{proof}
+
+\begin{lemma}
+  \label{lemma:beta-coalgebra-morph}
+  In $\cat{L}^e$, $\beta$ is a coalgebra morphism.
+\end{lemma}
+\begin{proof}
+  For the complete proof see
+  Appendix~\ref{subsec:proof_of_lemmabeta-coalgebra-morph}.
+\end{proof}
+
+\begin{lemma}[The Eilenberg-Moore Category is Symmetric Monoidal]
+  \label{lemma:the_eilenberg-moore_category_is_symmetric_monoidal}
+  The category $\cat{L}^e$ is symmetric monoidal.
+\end{lemma}
+\begin{proof}
+  For the complete proof please see
+  Appendix~\ref{subsec:proof_of_the_eilenberg-moore_category_is_symmetric_lemma:the_eilenberg-moore_category_is_symmetric_monoidal}.
+\end{proof}
+
