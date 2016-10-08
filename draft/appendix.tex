@@ -1,188 +1,13 @@
-\subsection{Symmetric Monoidal Categories}
-\label{subsec:symmetric_monoidal_categories}
-
-\begin{definition}
-  \label{def:monoidal-category}
-  A \textbf{monoidal category} is a category, $\cat{M}$,
-  with the following data:
-  \begin{itemize}
-  \item An object $\top$ of $\cat{M}$,
-  \item A bi-functor $\otimes : \cat{M} \times \cat{M} \mto \cat{M}$,
-  \item The following natural isomorphisms:
-    \[
-    \begin{array}{lll}
-      \lambda_A : \top \otimes A \mto A\\
-      \rho_A : A \otimes \top \mto A\\      
-      \alpha_{A,B,C} : (A \otimes B) \otimes C \mto A \otimes (B \otimes C)\\
-    \end{array}
-    \]
-  \item Subject to the following coherence diagrams:
-    \begin{mathpar}
-      \bfig
-      \vSquares|ammmmma|/->`->```->``<-/[
-        ((A \otimes B) \otimes C) \otimes D`
-        (A \otimes (B \otimes C)) \otimes D`
-        (A \otimes B) \otimes (C \otimes D)``
-        A \otimes (B \otimes (C \otimes D))`
-        A \otimes ((B \otimes C) \otimes D);
-        \alpha_{A,B,C} \otimes \id_D`
-        \alpha_{A \otimes B,C,D}```
-        \alpha_{A,B,C \otimes D}``
-        \id_A \otimes \alpha_{B,C,D}]      
-      
-      \morphism(1185,1000)|m|<0,-1000>[
-        (A \otimes (B \otimes C)) \otimes D`
-        A \otimes ((B \otimes C) \otimes D);
-        \alpha_{A,B \otimes C,D}]
-      \efig
-    \end{mathpar}
-    \begin{mathpar}
-      \bfig
-      \Vtriangle[
-        (A \otimes \top) \otimes B`
-        A \otimes (\top \otimes B)`
-        A \otimes B;
-        \alpha_{A,\top,B}`
-        \rho_{A}\otimes id_B`
-        id_A\otimes\lambda_{B}]
-      \efig
-    \end{mathpar}
-  \end{itemize}
-\end{definition}
-
-% Definition: symmetric monoidal category
-\begin{definition}
-  \label{def:sym-monoidal-category}
-  A \textbf{symmetric monoidal category (SMC)} is a category, $\cat{M}$,
-  with the following data:
-  \begin{itemize}
-  \item An object $\top$ of $\cat{M}$,
-  \item A bi-functor $\otimes : \cat{M} \times \cat{M} \mto \cat{M}$,
-  \item The following natural isomorphisms:
-    \[
-    \begin{array}{lll}
-      \lambda_A : \top \otimes A \mto A\\
-      \rho_A : A \otimes \top \mto A\\      
-      \alpha_{A,B,C} : (A \otimes B) \otimes C \mto A \otimes (B \otimes C)\\
-    \end{array}
-    \]
-  \item A symmetry natural isomorphism:
-    \[
-    \beta_{A,B} : A \otimes B \mto B \otimes A
-    \]
-  \item Subject to the following coherence diagrams:
-    \begin{mathpar}
-      \bfig
-      \vSquares|ammmmma|/->`->```->``<-/[
-        ((A \otimes B) \otimes C) \otimes D`
-        (A \otimes (B \otimes C)) \otimes D`
-        (A \otimes B) \otimes (C \otimes D)``
-        A \otimes (B \otimes (C \otimes D))`
-        A \otimes ((B \otimes C) \otimes D);
-        \alpha_{A,B,C} \otimes \id_D`
-        \alpha_{A \otimes B,C,D}```
-        \alpha_{A,B,C \otimes D}``
-        \id_A \otimes \alpha_{B,C,D}]      
-      
-      \morphism(1185,1000)|m|<0,-1000>[
-        (A \otimes (B \otimes C)) \otimes D`
-        A \otimes ((B \otimes C) \otimes D);
-        \alpha_{A,B \otimes C,D}]
-      \efig
-      \and
-      \bfig
-      \hSquares|aammmaa|/->`->`->``->`->`->/[
-        (A \otimes B) \otimes C`
-        A \otimes (B \otimes C)`
-        (B \otimes C) \otimes A`
-        (B \otimes A) \otimes C`
-        B \otimes (A \otimes C)`
-        B \otimes (C \otimes A);
-        \alpha_{A,B,C}`
-        \beta_{A,B \otimes C}`
-        \beta_{A,B} \otimes \id_C``
-        \alpha_{B,C,A}`
-        \alpha_{B,A,C}`
-        \id_B \otimes \beta_{A,C}]
-      \efig      
-    \end{mathpar}
-    \begin{mathpar}
-      \bfig
-      \Vtriangle[
-        (A \otimes \top) \otimes B`
-        A \otimes (\top \otimes B)`
-        A \otimes B;
-        \alpha_{A,\top,B}`
-        \rho_{A}\otimes id_B`
-        id_A\otimes\lambda_{B}]
-      \efig
-      \and
-      \bfig
-      \btriangle[
-        A \otimes B`
-        B \otimes A`
-        A \otimes B;
-        \beta_{A,B}`
-        \id_{A \otimes B}`
-        \beta_{B,A}]
-      \efig
-      \and
-      \bfig
-      \Vtriangle[
-        \top \otimes A`
-        A \otimes \top`
-        A;
-        \beta_{\top,A}`
-        \lambda_A`
-        \rho_A]
-      \efig
-    \end{mathpar}    
-  \end{itemize}
-\end{definition}
-
-% Definition: monoidal biclosed category
-\begin{definition}
-  \label{def:monoidal-biclosed-category}
-  A \textbf{monoidal biclosed category} is a monoidal category
-  $(\cat{M},\top,\otimes)$, such that, for any object $B$ of $\cat{M}$,
-  each of the functors $-\otimes B:\cat{M}\mto\cat{M}$ and
-  $B\otimes -:\cat{M}\mto\cat{M}$ has a specified right adjoint. Hence,
-  for any object $A$ and $C$ of $\cat{M}$, there are two objects
-  $C\leftharpoonup B$ and $B\rightharpoonup C$ of $\cat{M}$ and two
-  natural bijections:
-  \begin{align*}
-  \Hom{\cat{M}}{A\otimes B}{C} &\cong
-    \Hom{\cat{M}}{A}{C\leftharpoonup B} \\
-  \Hom{\cat{M}}{B \otimes A}{C} &\cong
-    \Hom{\cat{M}}{A}{B \rightharpoonup C}
-  \end{align*}
-\end{definition}
-
-% Definition: symmetric monoidal closed category
-\begin{definition}
-  \label{def:SMCC}
-  A \textbf{symmetric monoidal closed category (SMCC)} is a symmetric
-  monoidal category, $(\cat{M},\top,\otimes)$, such that, for any object
-  $B$ of $\cat{M}$, the functor $- \otimes B : \cat{M} \mto \cat{M}$
-  has a specified right adjoint.  Hence, for any objects $A$ and $C$
-  of $\cat{M}$ there is an object $B \limp C$ of $\cat{M}$ and a
-  natural bijection:
-  \[
-  \Hom{\cat{M}}{A \otimes B}{C} \cong \Hom{\cat{M}}{A}{B \limp C}
-  \]
-  We call the functor $\limp : \cat{M} \times \cat{M} \mto \cat{M}$
-  the internal hom of $\cat{M}$.
-\end{definition}
+\subsection{Basic Structures on Monoidal Categories}
+\label{subsec:basic_structures_on_monoidal_categories}
 
 \begin{definition}
   \label{def:MCFUN}
-  Suppose we are given two monoidal categories
-  $(\cat{M}_1,\top_1,\otimes_1,\alpha_1,\lambda_1,\rho_1,\beta_1)$ and
-  $(\cat{M}_2,\top_2,\otimes_2,\alpha_2,\lambda_2,\rho_2,\beta_2)$.  Then a
-  \textbf{monoidal functor} is a functor $F : \cat{M}_1 \mto
-  \cat{M}_2$, a map $m_{\top_1} : \top_2 \mto F\top_1$ and a natural transformation
-  $m_{A,B} : FA \otimes_2 FB \mto F(A \otimes_1 B)$ subject to the
-  following coherence conditions:
+  Suppose we are given two monoidal categories $\cat{M}_1$ and
+  $\cat{M}_2$.  Then a \textbf{monoidal functor} is a functor $F :
+  \cat{M}_1 \mto \cat{M}_2$, a map $m_{I_1} : I_2 \mto FI_1$ and a
+  natural transformation $m_{A,B} : FA \otimes_2 FB \mto F(A \otimes_1
+  B)$ subject to the following coherence conditions:
   \begin{mathpar}
     \bfig
     \vSquares|ammmmma|/->`->`->``->`->`->/[
@@ -203,26 +28,26 @@
   \begin{mathpar}
     \bfig
     \square|amma|/->`->`<-`->/<1000,500>[
-      \top_2 \otimes_2 FA`
+      I_2 \otimes_2 FA`
       FA`
-      F\top_1 \otimes_2 FA`
-      F(\top_1 \otimes_1 A);
+      FI_1 \otimes_2 FA`
+      F(I_1 \otimes_1 A);
       {\lambda_2}_{FA}`
-      m_{\top_1} \otimes \id_{FA}`
+      m_{I_1} \otimes \id_{FA}`
       F{\lambda_1}_{A}`
-      m_{\top_1,A}]
+      m_{I_1,A}]
     \efig
     \and
     \bfig
     \square|amma|/->`->`<-`->/<1000,500>[
-      FA \otimes_2 \top_2`
+      FA \otimes_2 I_2`
       FA`
-      FA \otimes_2 F\top_1`
-      F(A \otimes_1 \top_1);
+      FA \otimes_2 FI_1`
+      F(A \otimes_1 I_1);
       {\rho_2}_{FA}`
-      \id_{FA} \otimes m_{\top_1}`
+      \id_{FA} \otimes m_{I_1}`
       F{\rho_1}_{A}`
-      m_{A,\top_1}]
+      m_{A,I_1}]
     \efig
     \end{mathpar}
   Need to notice that the composition of monoidal functors is also monoidal,
@@ -232,79 +57,34 @@
 
 \begin{definition}
   \label{def:SMCFUN}
-  Suppose we are given two symmetric monoidal closed categories\\
-  $(\cat{M}_1,\top_1,\otimes_1,\alpha_1,\lambda_1,\rho_1,\beta_1)$ and
-  $(\cat{M}_2,\top_2,\otimes_2,\alpha_2,\lambda_2,\rho_2,\beta_2)$.  Then a
-  \textbf{symmetric monoidal functor} is a functor $F : \cat{M}_1 \mto
-  \cat{M}_2$, a map $m_{\top_1} : \top_2 \mto F\top_1$ and a natural
-  transformation $m_{A,B} : FA \otimes_2 FB \mto F(A \otimes_1 B)$ subject
-  to the following coherence conditions:
-  \begin{mathpar}
-    \bfig
-    \vSquares|ammmmma|/->`->`->``->`->`->/[
-      (FA \otimes_2 FB) \otimes_2 FC`
-      FA \otimes_2 (FB \otimes_2 FC)`
-      F(A \otimes_1 B) \otimes_2 FC`
-      FA \otimes_2 F(B \otimes_1 C)`
-      F((A \otimes_1 B) \otimes_1 C)`
-      F(A \otimes_1 (B \otimes_1 C));
-      {\alpha_2}_{FA,FB,FC}`
-      m_{A,B} \otimes \id_{FC}`
-      \id_{FA} \otimes m_{B,C}``
-      m_{A \otimes_1 B,C}`
-      m_{A,B \otimes_1 C}`
-      F{\alpha_1}_{A,B,C}]
-    \efig
-    \end{mathpar}
-%    \and
-\begin{mathpar}
-    \bfig
-    \square/->`->`<-`->/<1000,500>[
-      \top_2 \otimes_2 FA`
-      FA`
-      F\top_1 \otimes_2 FA`
-      F(\top_1 \otimes_1 A);
-      {\lambda_2}_{FA}`
-      m_{\top_1} \otimes \id_{FA}`
-      F{\lambda_1}_{A}`
-      m_{\top_1,A}]
-    \efig
-    \and
-    \bfig
-    \square/->`->`<-`->/<1000,500>[
-      FA \otimes_2 \top_2`
-      FA`
-      FA \otimes_2 F\top_1`
-      F(A \otimes_1 \top_1);
-      {\rho_2}_{FA}`
-      \id_{FA} \otimes m_{\top_1}`
-      F{\rho_1}_{A}`
-      m_{A,\top_1}]
-    \efig
-     \end{mathpar}
-     
-      \begin{mathpar}
-    \bfig
-    \square/->`->`->`->/<1000,500>[
-      FA \otimes_2 FB`
-      FB \otimes_2 FA`
-      F(A \otimes_1 B)`
-      F(B \otimes_1 A);
-      {\beta_2}_{FA,FB}`
-      m_{A,B}`
-      m_{B,A}`
-      F{\beta_1}_{A,B}]
-    \efig
-  \end{mathpar}
+  Suppose we are given two symmetric monoidal closed categories
+  $\cat{M}_1$ and $\cat{M}_2$.  Then a \textbf{symmetric monoidal
+    functor} is a monoidal functor $(F, m) : \cat{M}_1 \mto \cat{M}_2$
+  subject to the following additional coherence condition:
+  \begin{center}
+    \begin{math}
+      \bfig
+      \square/->`->`->`->/<1000,500>[
+        FA \otimes_2 FB`
+        FB \otimes_2 FA`
+        F(A \otimes_1 B)`
+        F(B \otimes_1 A);
+        {\beta_2}_{FA,FB}`
+        m_{A,B}`
+        m_{B,A}`
+        F{\beta_1}_{A,B}]
+      \efig
+    \end{math}
+  \end{center}
 \end{definition}
 
 \begin{definition}
   \label{def:MCNAT}
-  Suppose $(\cat{M}_1,\top_1,\otimes_1)$ and $(\cat{M}_2,\top_2,\otimes_2)$
-  are monoidal categories, and $(F,m)$ and $(G,n)$ are monoidal functors
-  between $\cat{M}_1$ and $\cat{M}_2$.  Then a \textbf{
-    monoidal natural transformation} is a natural transformation,
-  $f : F \mto G$, subject to the following coherence diagrams:
+  Suppose $\cat{M}_1$ and $\cat{M}_2$ are monoidal categories, and
+  $(F,m)$ and $(G,n)$ are monoidal functors between $\cat{M}_1$ and
+  $\cat{M}_2$.  Then a \textbf{ monoidal natural transformation} is a
+  natural transformation, $f : F \mto G$, subject to the following
+  coherence diagrams:
   \begin{mathpar}
     \bfig
     \square<1000,500>[
@@ -320,59 +100,26 @@
     \and
     \bfig
     \Vtriangle/->`<-`<-/[
-      F\top_1`
-      G\top_1`
-      \top_2;
-      f_{\top_1}`
-      m_{\top_1}`
-      n_{\top_1}]
-    \efig
-  \end{mathpar}  
-\end{definition}
-
-\begin{definition}
-  \label{def:SMCNAT}
-  Suppose $(\cat{M}_1,\top_1,\otimes_1)$ and $(\cat{M}_2,\top_2,\otimes_2)$
-  are SMCs, and $(F,m)$ and $(G,n)$ are symmetric monoidal functors
-  between $\cat{M}_1$ and $\cat{M}_2$.  Then a \textbf{symmetric
-    monoidal natural transformation} is a natural transformation,
-  $f : F \mto G$, subject to the following coherence diagrams:
-  \begin{mathpar}
-    \bfig
-    \square<1000,500>[
-      FA \otimes_2 FB`
-      F(A \otimes_1 B)`
-      GA \otimes_2 GB`
-      G(A \otimes_1 B);
-      m_{A,B}`
-      f_A \otimes_2 f_B`
-      f_{A \otimes_1 B}`
-      n_{A,B}]
-    \efig
-    \and
-    \bfig
-    \Vtriangle/->`<-`<-/[
-      F\top_1`
-      G\top_1`
-      \top_2;
-      f_{\top_1}`
-      m_{\top_1}`
-      n_{\top_1}]
+      FI_1`
+      GI_1`
+      I_2;
+      f_{I_1}`
+      m_{I_1}`
+      n_{I_1}]
     \efig
   \end{mathpar}  
 \end{definition}
 
 \begin{definition}
   \label{def:MCADJ}
-  Suppose $(\cat{M}_1,\top_1,\otimes_1)$ and $(\cat{M}_2,\top_2,\otimes_2)$
-  are monoidal categories, and $(F,m)$ is a monoidal functor between
-  $\cat{M}_1$ and $\cat{M}_2$ and $(G,n)$ is a monoidal
-  functor between $\cat{M}_2$ and $\cat{M}_1$.  Then a
-  \textbf{monoidal adjunction} is an ordinary adjunction
-  $\cat{M}_1 : F \dashv G : \cat{M}_2$ such that the unit,
-  $\eta_A : A \to GFA$, and the counit, $\varepsilon_A : FGA \to A$, are
-  monoidal natural transformations.  Thus, the following
-  diagrams must commute:
+  Suppose $\cat{M}_1$ and $\cat{M}_2$ are monoidal categories, and
+  $(F,m)$ is a monoidal functor between $\cat{M}_1$ and $\cat{M}_2$
+  and $(G,n)$ is a monoidal functor between $\cat{M}_2$ and
+  $\cat{M}_1$.  Then a \textbf{monoidal adjunction} is an ordinary
+  adjunction $\cat{M}_1 : F \dashv G : \cat{M}_2$ such that the unit,
+  $\eta_A : A \to GFA$, and the counit, $\varepsilon_A : FGA \to A$,
+  are monoidal natural transformations.  Thus, the following diagrams
+  must commute:
   \begin{mathpar}
     \bfig
     \square/->`->`->`<-/<1000,500>[
@@ -388,19 +135,19 @@
     \and
     \bfig
     %% \Vtriangle|amm|/->`<-`=/[
-    %%   FG\top_1`
-    %%   \top_1`
-    %%   \top_1;
-    %%   \varepsilon_{\top_1}`
-    %%   \q{\top_1}`]
+    %%   FGI_1`
+    %%   I_1`
+    %%   I_1;
+    %%   \varepsilon_{I_1}`
+    %%   \q{I_1}`]
     \square/->`<-`->`=/<1000,500>[
-      F\top_1`
-      FG\top_2`
-      \top_2`
-      \top_2;
-      Fn_{\top_2}`
-      m_{\top_1}`
-      \varepsilon_{\top_1}`]    
+      FI_1`
+      FGI_2`
+      I_2`
+      I_2;
+      Fn_{I_2}`
+      m_{I_1}`
+      \varepsilon_{I_1}`]    
     \efig
     \and
     \bfig
@@ -424,110 +171,30 @@
     \and
     \bfig
     %% \Vtriangle|amm|/->`=`<-/[
-    %%   \top_1`
-    %%   GF\top_1`
-    %%   \top_1;
-    %%   \eta_{\top_1}``
-    %%   p_{\top_1}]
+    %%   I_1`
+    %%   GFI_1`
+    %%   I_1;
+    %%   \eta_{I_1}``
+    %%   p_{I_1}]
     \square/->`<-`<-`=/<1000,500>[
-      G\top_2`
-      GF\top_1`
-      \top_1`
-      \top_1;
-      Gm_{\top_1}`
-      n_{\top_2}`
-      \eta_{\top_1}`]      
-    \efig
-  \end{mathpar} 
-\end{definition}
-
-\begin{definition}
-  \label{def:SMCADJ}
-  Suppose $(\cat{M}_1,\top_1,\otimes_1)$ and $(\cat{M}_2,\top_2,\otimes_2)$
-  are SMCs, and $(F,m)$ is a symmetric monoidal functor between
-  $\cat{M}_1$ and $\cat{M}_2$ and $(G,n)$ is a symmetric monoidal
-  functor between $\cat{M}_2$ and $\cat{M}_1$.  Then a
-  \textbf{symmetric monoidal adjunction} is an ordinary adjunction
-  $\cat{M}_1 : F \dashv G : \cat{M}_2$ such that the unit,
-  $\eta_A : A \to GFA$, and the counit, $\varepsilon_A : FGA \to A$, are
-  symmetric monoidal natural transformations.  Thus, the following
-  diagrams must commute:
-  \begin{mathpar}
-    \bfig
-    \square/->`->`->`<-/<1000,500>[
-      FGA \otimes_2 FGB`
-      F(GA \otimes_1 GB)`
-      A \otimes_2 B`
-      FGA \otimes_2 FGB;
-      m_{GA,GB}`
-      \varepsilon_A \otimes_1 \varepsilon_B`
-      Fn_{A,B}`
-      \varepsilon_{A \otimes_1 B}]
-    \efig
-    \and
-    \bfig
-    %% \Vtriangle|amm|/->`<-`=/[
-    %%   FG\top_1`
-    %%   \top_1`
-    %%   \top_1;
-    %%   \varepsilon_{\top_1}`
-    %%   \q{\top_1}`]
-    \square/->`<-`->`=/<1000,500>[
-      F\top_1`
-      FG\top_2`
-      \top_2`
-      \top_2;
-      Fn_{\top_2}`
-      m_{\top_1}`
-      \varepsilon_{\top_1}`]    
-    \efig
-    \and
-    \bfig
-    %% \dtriangle|mmb|<1000,500>[
-    %%   A \otimes_2 B`
-    %%   GFA \otimes_2 GFB`
-    %%   GF(A \otimes_2 B);
-    %%   \eta_A \otimes_2 \eta_B`
-    %%   \eta_{A \otimes_2 B}`
-    %%   \p{A,B}]
-    \square/<-`->`->`->/<1000,500>[
-      GFA \otimes_1 GFB`
-      A \otimes_1 B`
-      G(FA \otimes_2 FB)`
-      GF(A \otimes_1 B);
-      \eta_A \otimes_1 \eta_B`
-      n_{FA,FB}`
-      \eta_{A \otimes_1 B}`
-      m_{A,B}]
-    \efig
-    \and
-    \bfig
-    %% \Vtriangle|amm|/->`=`<-/[
-    %%   \top_1`
-    %%   GF\top_1`
-    %%   \top_1;
-    %%   \eta_{\top_1}``
-    %%   p_{\top_1}]
-    \square/->`<-`<-`=/<1000,500>[
-      G\top_2`
-      GF\top_1`
-      \top_1`
-      \top_1;
-      Gm_{\top_1}`
-      n_{\top_2}`
-      \eta_{\top_1}`]      
+      GI_2`
+      GFI_1`
+      I_1`
+      I_1;
+      Gm_{I_1}`
+      n_{I_2}`
+      \eta_{I_1}`]      
     \efig
   \end{mathpar} 
 \end{definition}
 
 \begin{definition}
   \label{def:monoidal-comonad}
-  A \textbf{monoidal comonad} on a monoidal
-  category $\cat{C}$ is a triple $(T,\varepsilon, \delta)$, where
-  $(T,\m{})$ is a monoidal endofunctor on $\cat{C}$,
-  $\varepsilon_A : TA \mto A$ and $\delta_A : TA \to T^2 A$ are
-  monoidal natural transformations, which make the following
-  diagrams commute:
+  A \textbf{monoidal comonad} on a monoidal category $\cat{C}$ is a
+  triple $(T,\varepsilon, \delta)$, where $(T,\m{})$ is a monoidal
+  endofunctor on $\cat{C}$, $\varepsilon_A : TA \mto A$ and $\delta_A
+  : TA \to T^2 A$ are monoidal natural transformations, which make the
+  following diagrams commute:
   \begin{mathpar}
     \bfig
     \square<600,600>[
@@ -568,11 +235,11 @@
     \and
     \bfig
     \Vtriangle/<-`->`=/<600,600>[
-      T\top`
-      \top`
-      \top;
-      \m{\top}`
-      \varepsilon_\top`]
+      TI`
+      I`
+      I;
+      \m{I}`
+      \varepsilon_I`]
     \efig    
   \end{mathpar}
   \begin{mathpar}
@@ -594,101 +261,14 @@
     \and
     \bfig
     \square<600,600>[
-      \top`
-      T\top`
-      T\top`
-      T^2\top;
-      \m{\top}`
-      \m{\top}`
-      \delta_\top`
-      T\m{\top}]
-    \efig
-  \end{mathpar}
-\end{definition}
-
-
-\begin{definition}
-  \label{def:symm-monoidal-comonad}
-  A \textbf{symmetric monoidal comonad} on a symmetric monoidal
-  category $\cat{C}$ is a triple $(T,\varepsilon, \delta)$, where
-  $(T,\m{})$ is a symmetric monoidal endofunctor on $\cat{C}$,
-  $\varepsilon_A : TA \mto A$ and $\delta_A : TA \to T^2 A$ are
-  symmetric monoidal natural transformations, which make the following
-  diagrams commute:
-  \begin{mathpar}
-    \bfig
-    \square<600,600>[
-      TA`
-      T^2A`
-      T^2A`
-      T^3A;
-      \delta_A`
-      \delta_A`
-      T\delta_A`
-      \delta_{TA}]
-    \efig
-    \and
-    \bfig
-    \Atrianglepair/=`->`=`<-`->/<600,600>[
-      TA`
-      TA`
-      T^2 A`
-      TA;`
-      \delta_A``
-      \varepsilon_{TA}`
-      T\varepsilon_A]
-    \efig
-  \end{mathpar}
-  The assumption that $\varepsilon$ and $\delta$ are symmetric
-  monoidal natural transformations amount to the following diagrams
-  commuting:
-  \begin{mathpar}
-    \bfig
-    \qtriangle/->`->`->/<1000,600>[
-      TA \otimes TB`
-      T(A \otimes B)`
-      A \otimes B;
-      \m{A,B}`
-      \varepsilon_A \otimes \varepsilon_B`
-    \varepsilon_{A \otimes B}]
-    \efig
-    \and
-    \bfig
-    \Vtriangle/<-`->`=/<600,600>[
-      T\top`
-      \top`
-      \top;
-      \m{\top}`
-      \varepsilon_\top`]
-    \efig    
-  \end{mathpar}
-  \begin{mathpar}
-    \bfig
-    \square|alab|/`->``->/<1050,600>[
-      TA \otimes TB``
-      T^2A \otimes T^2B`
-      T(TA \otimes TB);`
-      \delta_A \otimes \delta_B``
-      \m{TA,TB}]
-    \square(1050,0)|mmrb|/``->`->/<1050,600>[`
-      T(A \otimes B)`
-      T(TA \otimes TB)`
-      T^2(A \otimes B);``
-      \delta_{A \otimes B}`
-      T\m{A,B}]
-    \morphism(0,600)<2100,0>[TA \otimes TB`T(A \otimes B);\m{A,B}]
-    \efig
-    \and
-    \bfig
-    \square<600,600>[
-      \top`
-      T\top`
-      T\top`
-      T^2\top;
-      \m{\top}`
-      \m{\top}`
-      \delta_\top`
-      T\m{\top}]
+      I`
+      TI`
+      TI`
+      T^2I;
+      \m{I}`
+      \m{I}`
+      \delta_I`
+      T\m{I}]
     \efig
   \end{mathpar}
 \end{definition}
