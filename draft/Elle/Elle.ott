@@ -56,6 +56,14 @@ t :: 'term_' ::=
   {{tex \mathsf{con}_r\,[[x]],[[y]]\,\mathsf{to}\,[[t1]]\,\mathsf{in}\,[[t2]] }}
   | ex x1 , x2 with t1 , t2 in t3 :: :: Ex
   {{tex \mathsf{ex}\,[[x1]],[[x2]]\,\mathsf{with}\,[[t1]],[[t2]]\,\mathsf{in}\,[[t3]] }}
+  | distecw t                     :: :: DistECW
+  {{tex \mathsf{dist}_{\mathsf{ecw} }\,[[t]] }}
+  | distcw t                     :: :: DistCW
+  {{tex \mathsf{dist}_{\mathsf{cw} }\,[[t]] }}
+  | distew t                     :: :: DistEW
+  {{tex \mathsf{dist}_{\mathsf{ew} }\,[[t]] }}
+  | distec t                     :: :: DistEC
+  {{tex \mathsf{dist}_{\mathsf{ec} }\,[[t]] }}  
 
 G {{tex \Gamma}}, D {{tex \Delta}}, I {{tex \Phi}}, P {{tex \Psi}} :: 'Ctx_' ::=
   | .       :: :: Empty
@@ -122,7 +130,6 @@ by
   G1;P1;I1;D1 |- t1 : Unit && G2;P2;I1;D2 |- t2 : C
   ------------------------------------------------------------ :: unitE
   (G1,G2);(P1,P2);(I1,I2);(D1,D2) |- letU unit be t1 in t2 : C
-
 
   G1;P1;I1;D1 |- t1 : A && G2;P2;I1;D2 |- t2 : B
   ------------------------------------------------------ :: tensorI
@@ -191,3 +198,19 @@ by
   G1,x1 : A, x2 : B,G2;P;I;D |- t : C
   ------------------------------------------------------ :: ex
   G,z1 : B, z2 : A;P;I;D |- ex x1,x2 with z1,z2 in t : C
+
+  G;P;I;D |- t : w c A
+  --------------------------- :: DistCW
+  G;P;I;D |- distcw t : c w A
+
+  G;P;I;D |- t : w e A
+  -------------------------- :: DistEW
+  G;P;I;D |- distew t : e w A
+
+  G;P;I;D |- t : c e A
+  -------------------------- :: DistEC
+  G;P;I;D |- distec t : e c A
+
+  G;P;I;D |- t : w c e A
+  ---------------------------- :: DistECW
+  G;P;I;D |- distecw t : e c w A
