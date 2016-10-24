@@ -1,0 +1,48 @@
+% Input variables.
+metavar vars ,  n , a, x , y, z , w , m , o ::=  
+indexvar ivar, i , k , j , l ::= 
+
+grammar
+
+% Lambek: formulas:
+A, B, C :: 'Lform_' ::=
+  | Base    ::   :: Base          {{com Base type }}
+  {{tex \mathsf{B} }}
+  | Unit    ::   :: Unit          {{com Unit }}
+  | A (x) B ::   :: Tensor        {{com Non-commutative tensor }}
+  | A (e) B ::   :: TensorE       {{com Commutative tensor }}    
+  | A (w) B ::   :: TensorW       {{com Non-commutative tensor with weakening }}
+  | A (c) B ::   :: TensorC       {{com Non-commutative tensor with contraction }}    
+  | A -> B  ::   :: LFun          {{com Left implication }}
+  | A <- B  ::   :: RFun          {{com Right implication }}
+  | A -o B  ::   :: Fun           {{com Linear implication }}  
+  | ( A )   :: M :: Parens 
+  | h( A )  :: M :: HiddenParens 
+  {{ tex [[A]] }}
+
+
+formula :: 'formula_' ::=
+  | judgement            ::   :: judgement
+  | formula1 && formula2 :: M :: quad
+  {{tex [[formula1]] \quad [[formula2]] }}
+  | formula1 ... formulai :: M :: vec
+  | ( formula )          :: S :: parens
+  {{tex [[formula]] }}
+
+terminals :: 'terminals_' ::=
+  | Unit :: :: Unit
+  {{tex \mathsf{Unit} }}
+  | (x)  :: :: Tensor
+  {{tex \circop{} }}
+  | (e)  :: :: ETensor
+  {{tex \circop{e} }}  
+  | (w)  :: :: WTensor
+  {{tex \circop{w} }}  
+  | (c)  :: :: CTensor
+  {{tex \circop{c} }}  
+  | ->   :: :: LFun
+  {{tex \rightharpoonup }}
+  | <-   :: :: RFun
+  {{tex \leftharpoonup }}
+  | -o   :: :: Limp
+  {{tex \multimap }}
