@@ -5,8 +5,8 @@
   $\otimes : \cat{L} \times \cat{L} \mto \cat{L}$, called the tensor
   product, a distinguished object $I$ of $\cat{L}$ called the unit,
   and three natural isomorphisms $\lambda_A : I \otimes A \mto A$,
-  $\rho_A : A \otimes I \mto A$, and $\alpha_{A,B,C} : A \otimes (B
-  \otimes C) \mto (A \otimes B) \otimes C$ called the left and right
+  $\rho_A : A \otimes I \mto A$, and $\alpha_{A,B,C} : (A \otimes B)
+  \otimes C \mto A \otimes (B \otimes C)$ called the left and right
   unitors and the associator respectively.  Finally, these are subject
   to the following coherence diagrams:
   \begin{mathpar}
@@ -63,7 +63,7 @@ linear logic.
 \begin{definition}
   \label{def:sym-monoidal-category}
   A monoidal category $(\cat{L},\otimes,I,\lambda,\rho,\alpha)$ is
-  \textbf{symmetric} if there is a natural transformation $\beta_{A,B}
+  \textbf{symmetric} if there is a natural isomorphism $\beta_{A,B}
   : A \otimes B \mto B \otimes A$ such that $\beta_{B,A} \circ
   \beta_{A,B} = \id_{A \otimes B}$ and the following commute:
   \begin{center}

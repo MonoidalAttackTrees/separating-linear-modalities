@@ -141,7 +141,7 @@ category) symmetric monoidal.
   \end{mathpar}
 \end{definition}
 
-\begin{lemma}[The Eilenberg Moore Category is Monoidal]
+\begin{lemma}[The Eilenberg Moore Category of the comonad $e$ is Monoidal]
   \label{lemma:the_eilenberg_moore_category_is_monoidal}
   The category $\cat{L}^e$ is monoidal.
 \end{lemma}
@@ -166,7 +166,7 @@ For the proof that it is natural please see Appendix~\ref{subsec:proof_of_lemma:
 
 \begin{corollary}
   \label{corollary:ex-simple}
-  For any coalgebras $(A,h_A)$ and $(B,h_B)$ the following commutes:
+  For any coalgebras $(A,h_A)$ and $(B,h_B)$ the followings commute:
   \begin{center}
     \begin{math}
       \bfig
@@ -196,11 +196,21 @@ For the proof that it is natural please see Appendix~\ref{subsec:proof_of_lemma:
       \efig
     \end{math}
   \end{center}
+  \begin{center}
+    \begin{math}
+      \bfig
+       \square<800,400>[
+         eA\otimes eB`eB\otimes eA`e(A\otimes B)`e(B\otimes A);
+         \e{A,B}`\q{A,B}`\q{B,A}`e\beta_{A,B}]
+      \efig
+    \end{math}
+  \end{center}
 \end{corollary}
 \begin{proof}
 For the complete proof please see
 Appendix~\ref{subsec:proof_of_corollary:ex-simple}.
 \end{proof}
+
 
 \begin{definition}
   \label{def:cofork}
@@ -231,7 +241,7 @@ Appendix~\ref{subsec:proof_of_corollary:ex-simple}.
   Appendix~\ref{subsec:proof_of_lemmabeta-coalgebra-morph}.
 \end{proof}
 
-\begin{lemma}[The Eilenberg-Moore Category is Symmetric Monoidal]
+\begin{lemma}[The Eilenberg-Moore Category of the comonad $e$ is Symmetric Monoidal]
   \label{lemma:the_eilenberg-moore_category_is_symmetric_monoidal}
   The category $\cat{L}^e$ is symmetric monoidal.
 \end{lemma}

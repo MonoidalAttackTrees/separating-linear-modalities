@@ -419,7 +419,7 @@ of $\varepsilon$.
 
 \subsubsection{Proof of Corollary~\ref{corollary:ex-simple}}
 \label{subsec:proof_of_corollary:ex-simple}
-This proof follows by the fact that the following diagram commutes:
+The first diagram commutes by the fact that the following diagram commutes:
 \[
 \bfig
 \square|mmmm|/=`->`->`=/<900,500>[
@@ -468,6 +468,34 @@ The diagram on the right commutes because $\beta_{A,B}$ is a natural
 transformation, and the other diagrams commute either because
 $\cat{L}$ is a Lambek category with exchange, or by the action
 diagrams.
+
+The second diagram commtues by the following:
+\[
+\bfig
+  \square<2400,1200>[
+    eA\otimes eB`eB\otimes eA`e(A\otimes B)`e(B\otimes A);
+    \e{A,B}`\q{A,B}`\q{B,A}`e\beta_{A,B}]
+  \morphism(0,1200)|m|<400,-400>[eA\otimes eB`e^2A\otimes e^2B;eh_A\otimes eh_B]
+  \square(400,400)|mmmm|<800,400>[
+    e^2A\otimes e^2B`e^2B\otimes e^2A`e(eA\otimes eB)`e(eB\otimes eA);
+    \e{eA,eB}`\q{eA,eB}`\q{eB,eA}`e\e{A,B}]
+  \morphism(1200,800)|m|<800,0>[
+    e^2B\otimes e^2A`eB\otimes eA;
+    e\varepsilon_B\otimes e\varepsilon_A]
+  \morphism(2400,1200)|m|<-1200,-400>[
+    eB\otimes eA`e^2B\otimes e^2A;
+    eh_B\otimes eh_A]
+  \morphism(2400,1200)|m|/=/<-400,-400>[eB\otimes eA`eB\otimes eA;]
+  \morphism|m|<400,400>[e(A\otimes B)`e(eA\otimes eB);e(h_A\otimes h_B)]
+  \morphism(1200,400)|m|<1200,-400>[
+    e(eB\otimes eA)`e(B\otimes A);e(\varepsilon_B\otimes\varepsilon_A)]
+\efig
+\]
+The top quadrangle commutes by the naturality of $\e{}$. The triangle
+commutes by the definition $\cat{L}^e$
+(Definition~\ref{def:eilenberg-moore-cat}). The left and right quadrangles
+commute by the naturality of $\q{}$. And the quadrangle at the bottom is
+the definition of $\beta$.
 % subsubsection proof_of_corollary:ex-simple (end)
 
 \subsubsection{Proof of Lemma~\ref{lemma:cofork-for-ex}}
@@ -498,6 +526,45 @@ We prove this by equational reasoning as follows:
     \end{array}
   \end{math}
 \end{center}
+Or simplified as:
+\begin{center}
+  \begin{math}
+    \small
+    \begin{array}{lll}
+      (\h{B} \otimes \h{A}) \circ (\varepsilon_B \otimes \varepsilon_A) \circ \e{A,B} \circ (\h{A} \otimes \h{B})\\
+      \,\,\,\,\,\,\,\,\,\,\,= \e{A,B} \circ (\h{A} \otimes \h{B})
+      & \text{(Corollary~\ref{corollary:ex-simple})}\\
+      \,\,\,\,\,\,\,\,\,\,\,= (\id_B \otimes \id_A) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+      & \text{}\\
+      \,\,\,\,\,\,\,\,\,\,\,= ((e\varepsilon_B \circ \delta_B) \otimes (e\varepsilon_A \circ \delta_A)) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+      & \text{(Monoidal Comonad)}\\
+      \,\,\,\,\,\,\,\,\,\,\,= (e\varepsilon_B \otimes e\varepsilon_A) \circ (\delta_B \otimes \delta_A) \circ \e{A,B} \circ (\h{A} \otimes \h{B})
+      & \text{}\\
+    \end{array}
+  \end{math}
+\end{center}
+Or by diagram chasing:
+\begin{mathpar}
+\bfig
+  \iiixiii/->`->`->``->```->``->``/<800,400>[
+    A\otimes B`eA\otimes eB`eB\otimes eA`
+    eA\otimes eB``B\otimes A`
+    eB\otimes eA``eB\otimes eA;
+    h_A\otimes h_B`\e{A,B}`
+    h_A\otimes h_B``\varepsilon_B\otimes\varepsilon_A`
+    ``
+    \e{A,B}``h_B\otimes h_A`
+    `]
+  \Vtriangle(0,-400)/=`->`<-/<800,400>[
+    eB\otimes eA`
+    eB\otimes eA`
+    e^2B\otimes e^2A;
+    `
+    \delta_B\otimes\delta_A`
+    e\varepsilon_B\otimes e\varepsilon_B]
+\efig
+\end{mathpar}
+The upper rectangle commutes by Corollary~\ref{corollary:ex-simple} and the lower triangle commutes because $e$ is a comonad.
 % subsubsection proof_of_lemma:cofork-for-ex (end)
 
 \subsubsection{Proof of Lemma~\ref{lemma:beta-coalgebra-morph}}
