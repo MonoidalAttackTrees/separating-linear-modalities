@@ -141,6 +141,15 @@
 }}
 
 
+\newcommand{\ottdruleAXXCutName}[0]{\ottdrulename{A\_Cut}}
+\newcommand{\ottdruleAXXCut}[1]{\ottdrule[#1]{%
+\ottpremise{ \Delta_{{\mathrm{1}}}  \vdash_{\mathcal{A} }  \ottnt{X}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{X}  \vdash_{\mathcal{A} }  \ottnt{Y} }%
+}{
+\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \vdash_{\mathcal{A} }  \ottnt{Y}}{%
+{\ottdruleAXXCutName}{}%
+}}
+
+
 \newcommand{\ottdruleAXXAssoclName}[0]{\ottdrulename{A\_Assocl}}
 \newcommand{\ottdruleAXXAssocl}[1]{\ottdrule[#1]{%
 \ottpremise{ \Delta  \ottsym{,}  \ottnt{X}  \ottsym{,}  \ottnt{Y}  \vdash_{\mathcal{A} }  \ottnt{Z}  \quad   \Delta  \neq \emptyset  }%
@@ -175,6 +184,7 @@
 \ottusedrule{\ottdruleAXXTl{}}
 \ottusedrule{\ottdruleAXXIRr{}}
 \ottusedrule{\ottdruleAXXIRl{}}
+\ottusedrule{\ottdruleAXXCut{}}
 \ottusedrule{\ottdruleAXXAssocl{}}
 \ottusedrule{\ottdruleAXXAssocr{}}
 \ottusedrule{\ottdruleAXXFr{}}
@@ -287,6 +297,24 @@
 }}
 
 
+\newcommand{\ottdruleLXXACutName}[0]{\ottdrulename{L\_ACut}}
+\newcommand{\ottdruleLXXACut}[1]{\ottdrule[#1]{%
+\ottpremise{ \Delta_{{\mathrm{1}}}  \vdash_{\mathcal{A} }  \ottnt{X}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{X}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A} }%
+}{
+\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A}}{%
+{\ottdruleLXXACutName}{}%
+}}
+
+
+\newcommand{\ottdruleLXXCutName}[0]{\ottdrulename{L\_Cut}}
+\newcommand{\ottdruleLXXCut}[1]{\ottdrule[#1]{%
+\ottpremise{ \Delta_{{\mathrm{1}}}  \ottsym{;}  \Gamma_{{\mathrm{1}}}  \vdash_{\mathcal{L} }  \ottnt{A}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma_{{\mathrm{2}}}  \ottsym{,}  \ottnt{A}  \vdash_{\mathcal{L} }  \ottnt{B} }%
+}{
+\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma_{{\mathrm{1}}}  \ottsym{,}  \Gamma_{{\mathrm{2}}}  \vdash_{\mathcal{L} }  \ottnt{B}}{%
+{\ottdruleLXXCutName}{}%
+}}
+
+
 \newcommand{\ottdruleLXXGrName}[0]{\ottdrulename{L\_Gr}}
 \newcommand{\ottdruleLXXGr}[1]{\ottdrule[#1]{%
 \ottpremise{\Delta  \vdash_{\mathcal{A} }  \ottnt{X}}%
@@ -326,6 +354,8 @@
 \ottusedrule{\ottdruleLXXIRr{}}
 \ottusedrule{\ottdruleLXXIRl{}}
 \ottusedrule{\ottdruleLXXAIRl{}}
+\ottusedrule{\ottdruleLXXACut{}}
+\ottusedrule{\ottdruleLXXCut{}}
 \ottusedrule{\ottdruleLXXGr{}}
 \ottusedrule{\ottdruleLXXGl{}}
 \ottusedrule{\ottdruleLXXFl{}}
@@ -347,7 +377,7 @@
 \ottall
 
 \begin{verbatim}
-Definition rules:        25 good    0 bad
-Definition rule clauses: 46 good    0 bad
+Definition rules:        28 good    0 bad
+Definition rule clauses: 52 good    0 bad
 \end{verbatim}
 \end{document}
