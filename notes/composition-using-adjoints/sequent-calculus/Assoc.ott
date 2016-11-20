@@ -10,8 +10,7 @@ X, Y, Z :: 'aform_' ::=
   | I       ::   :: Unit          {{com Unit }}
   {{tex I }}
   | X >= Y   ::   :: Tensor        {{com Associative Non-commutative tensor }}
-  | X -> Y  ::   :: RFun          {{com Left implication }}
-  | Y <- X  ::   :: LFun          {{com Right implication }}
+  | X -> Y  ::   :: RFun          {{com Implication }}
   | F A     ::   :: RFunc         {{com Right adjoint }}
   {{tex \mathsf{F}\,[[A]] }}
   | ( X )   :: M :: Parens 
@@ -23,8 +22,7 @@ A, B, C :: 'naform_' ::=
   | J       ::   :: Unit          {{com Unit }}
   {{tex J }}  
   | A > B   ::   :: Tensor        {{com Non-associative Non-commutative tensor }}
-  | A -> B  ::   :: RFun          {{com Left implication }}
-  | B <- A  ::   :: LFun          {{com Right implication }}
+  | A -> B  ::   :: RFun          {{com Implication }}
   | g X     ::   :: RFunc         {{com Right adjoint }}
   {{tex \mathsf{G}\,[[X]] }}
   | ( A )   :: M :: Parens 
