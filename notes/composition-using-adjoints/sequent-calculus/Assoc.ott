@@ -22,7 +22,7 @@ X, Y, Z :: 'aform_' ::=
 A, B, C :: 'naform_' ::=
   | J       ::   :: Unit          {{com Unit }}
   {{tex J }}  
-  | A > B   ::   :: Tensor        {{com Associative Non-commutative tensor }}
+  | A > B   ::   :: Tensor        {{com Non-associative Non-commutative tensor }}
   | A -> B  ::   :: RFun          {{com Left implication }}
   | B <- A  ::   :: LFun          {{com Right implication }}
   | g X     ::   :: RFunc         {{com Right adjoint }}
