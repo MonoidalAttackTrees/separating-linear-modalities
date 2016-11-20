@@ -13,7 +13,14 @@
 \usepackage[barr]{xy}
 \usepackage{comment}
 \usepackage{graphicx}
-\usepackage[inline]{enumitem}
+\usepackage{enumerate}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
 
 %% This renames Barr's \to to \mto.  This allows us to use \to for imp
 %% and \mto for a inline morphism.
@@ -146,8 +153,8 @@ Now suppose we have the following adjunctions:
   \begin{math}
     \begin{array}{lll}
       \bfig
-      \morphism(0,0)|a|/{@{>}@/^1.5em/}/<900,0>[\cat{L}_1`\cat{L}_2;F]
-      \morphism(0,0)|b|/{@{<-}@/_1.5em/}/<900,0>[\cat{L}_1`\cat{L}_2;G]
+      \morphism(0,0)|a|/{@{>}@/^1.5em/}/<900,0>[\cat{L}_3`\cat{L}_2;F]
+      \morphism(0,0)|b|/{@{<-}@/_1.5em/}/<900,0>[\cat{L}_3`\cat{L}_2;G]
       \place(450,0)[\perp]
       \efig
       & \quad &
@@ -163,8 +170,8 @@ Then they can be composed into the adjunction:
 \begin{center}
   \begin{math}
       \bfig
-      \morphism(0,0)|a|/{@{>}@/^1.5em/}/<900,0>[\cat{L}_1`\cat{L}_2;F]
-      \morphism(0,0)|b|/{@{<-}@/_1.5em/}/<900,0>[\cat{L}_1`\cat{L}_2;G]
+      \morphism(0,0)|a|/{@{>}@/^1.5em/}/<900,0>[\cat{L}_3`\cat{L}_2;F]
+      \morphism(0,0)|b|/{@{<-}@/_1.5em/}/<900,0>[\cat{L}_3`\cat{L}_2;G]
       \place(450,0)[\perp]
 
       \morphism(900,0)|a|/{@{>}@/^1.5em/}/<900,0>[\cat{L}_2`\cat{L}_1;H]
@@ -388,11 +395,148 @@ In this section we show how to model the Lambek Calculus without
 association or exchange with three comonads, one that adds back in
 association, one that adds back in exchange, and one the composes the
 two which will allow both to be used.
+
+First, we define our base category.
+\begin{definition}
+  \label{def:Lambek-category}
+  A \textbf{Lambek category} is a category $(\cat{L}, \otimes, I,
+  \lambda, \rho)$ where $\otimes : \cat{L} \times \cat{L} \mto
+  \cat{L}$ is a bifunctor, $I$ is a distinguished object called the
+  unit, and two natural isomorphisms $\lambda_A : I \otimes A \mto A$
+  called the left unitor and $\rho_A : A \otimes I \mto A$ called the
+  right unitor.
+\end{definition}
+We can equivalently phrase a Lambek category to be a monoidal category
+without the associator, and hence, all of the diagrams disappear as
+well.
+\begin{definition}
+  \label{def:biclosed}
+  A Lambek category is \textbf{biclosed} if it is equipped with two
+  bifunctors $\lto : \catop{L} \times \cat{L} \mto \cat{L}$ and $\rto
+  : \cat{L} \times \catop{L} \mto \cat{L}$ that are both right adjoint
+  to the tensor product.  That is, the following natural bijections
+  hold:
+  \begin{center}
+    \begin{math}
+      \begin{array}{lll}
+        \Hom{L}{X \otimes A}{B} \cong \Hom{L}{X}{A \lto B}\\
+        \Hom{L}{A \otimes X}{B} \cong \Hom{L}{X}{B \rto A}\\
+      \end{array}
+    \end{math}
+  \end{center}
+\end{definition}
+Next we extend Lambek categories with structural rules.
+\begin{definition}
+  \label{def:exchange}
+  A \textbf{Lambek category with exchange} is a Lambek category
+  $(\cat{L}, \otimes, \lambda, \rho)$ equipped with a natural
+  transformation $\beta_{A,B}:A \otimes B \mto B \otimes A$.  We
+  require the following diagrams to commute:
+  \[
+  \begin{array}{cccccccc}    
+    \bfig
+    \qtriangle|amm|/->`=`->/<580,500>[
+      A \otimes B`
+      B \otimes A`
+      A \otimes B;
+      \beta_{A,B}``
+      \beta_{B,A}]
+    \efig
+    &
+    \quad
+    &
+    \bfig    
+    \Vtriangle/->`->`->/<325,500>[
+      I \otimes A`
+      A \otimes I`
+      A;
+      \beta_{I,A}`
+      \lambda_{A}`
+      \rho_{A}]
+    \efig
+  \end{array}
+  \]    
+\end{definition}
+\begin{definition}
+  \label{def:exchange}
+  A \textbf{Lambek category with association} is a Lambek category
+  $(\cat{L}, \otimes, \lambda, \rho)$ equipped with a natural
+  isomorphism $\alpha_{A,B}: (A \otimes B) \otimes C \mto A \otimes
+  (B \otimes C)$.  We require the following diagrams to commute:
+  \begin{mathpar}
+    \footnotesize
+    \bfig
+    \hSquares|aammmma|/->`->`->``->``/<400>[
+      ((A \otimes B) \otimes C) \otimes D`
+      (A \otimes (B \otimes C)) \otimes D`
+      A \otimes ((B \otimes C) \otimes D)`
+      (A \otimes B) \otimes (C \otimes D)``
+      A \otimes (B \otimes (C \otimes D));
+      \alpha_{A,B,C} \otimes \id_D`
+      \alpha_{A,B \otimes C,D}`
+      \alpha_{A \otimes B,C,D}``
+      \id_A \otimes \alpha_{B,C,D}``]
+
+    \morphism(-200,0)<2381,0>[
+      (A \otimes B) \otimes (C \otimes D)`
+      A \otimes (B \otimes (C \otimes D));
+      \alpha_{A,B,C \otimes D}]
+    \efig
+    \and
+    \bfig
+    \Vtriangle[
+      (A \otimes I) \otimes B`
+      A \otimes (I \otimes B)`
+      A \otimes B;
+      \alpha_{A,I,B}`
+      \rho_{A}\otimes id_B`
+      id_A\otimes\lambda_{B}]
+    \efig
+  \end{mathpar}    
+\end{definition}
+\noindent
+In other words, a Lambek category with association is a monoidal
+category.
+
+At this point we define our model that equips a Lambek category with
+three comonads for association, exchange, and their combination.
+\begin{definition}
+  \label{def:adjoint-model}
+  An \textbf{adjoint model for association and exchange or AE model}, \\
+  $(\cat{L},L,P,\cat{E},F,G,\cat{A},H,J,\cat{M})$, consists of the following:
+  \begin{itemize}
+  \item $\cat{L}$ is a Lambek category,
+  \item $\cat{E}$ is a Lambek category with exchange,
+  \item $\cat{A}$ is a Lambek category with association,    
+  \item $\cat{M}$ is a Lambek category with association and exchange,
+  \item $L : \cat{L} \mto \cat{E}$ and $P : \cat{E} \mto \cat{L}$ are monoidal functors,
+  \item $F : \cat{L} \mto \cat{A}$ and $G : \cat{A} \mto \cat{L}$ are monoidal functors,
+  \item $H : \cat{A} \mto \cat{M}$ and $J : \cat{M} \mto \cat{A}$ are monoidal functors, and
+  \item $P \dashv L$, $G \dashv F$ and $J \dashv H$ are monoidal adjunctions.
+  \end{itemize}
+\end{definition}
+
+\begin{lemma}[Composition in the Adjoint Model]
+  \label{lemma:composition_in_the_adjoint_model}
+  Suppose $(\cat{L},F,G,\cat{A},H,J,\cat{M})$ is an AE model.  Then
+  following holds:
+  \begin{enumerate}[a.]
+  \item There is an monoidal comonad $a = GF : \cat{L} \mto \cat{L}$
+  \item There is an monoidal comonad $e = PL : \cat{L} \mto \cat{L}$
+  \item There is an monoidal comonad $\widetilde{e} = JH : \cat{A} \mto \cat{A}$
+  \item There is a monoidal adjunction $\cat{M} : GJ \dashv FH : \cat{L}$
+  \item There is a monoidal comonad $m = GJHF : \cat{L} \mto \cat{L}$
+  \end{enumerate}
+\end{lemma}
+
+
 % section combining_structural_rules (end)
 
 
-\nocite{*} \bibliographystyle{plainurl}
-\bibliography{ref}
+\begin{comment}
+  
+\end{comment}
+\nocite{*} \bibliographystyle{plainurl} \bibliography{ref}
 
 \end{document}
 

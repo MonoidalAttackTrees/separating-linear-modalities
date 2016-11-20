@@ -1,0 +1,194 @@
+% Input variables.
+metavar vars ,  n , a, x , y, z , w , m , o ::=  
+indexvar ivar, i , k , j , l ::=
+metavar const, b ::= 
+
+grammar
+
+% Associative formulas:
+X, Y, Z :: 'aform_' ::=
+  | I       ::   :: Unit          {{com Unit }}
+  {{tex I }}
+  | X >= Y   ::   :: Tensor        {{com Associative Non-commutative tensor }}
+  | X -> Y  ::   :: RFun          {{com Left implication }}
+  | Y <- X  ::   :: LFun          {{com Right implication }}
+  | F A     ::   :: RFunc         {{com Right adjoint }}
+  {{tex \mathsf{F}\,[[A]] }}
+  | ( X )   :: M :: Parens 
+  | h( X )  :: M :: HiddenParens 
+  {{ tex [[X]] }}
+
+% Non-associative formulas:
+A, B, C :: 'naform_' ::=
+  | J       ::   :: Unit          {{com Unit }}
+  {{tex J }}  
+  | A > B   ::   :: Tensor        {{com Associative Non-commutative tensor }}
+  | A -> B  ::   :: RFun          {{com Left implication }}
+  | B <- A  ::   :: LFun          {{com Right implication }}
+  | g X     ::   :: RFunc         {{com Right adjoint }}
+  {{tex \mathsf{G}\,[[X]] }}
+  | ( A )   :: M :: Parens 
+  | h( A )  :: M :: HiddenParens 
+  {{ tex [[A]] }}
+
+% Non-associative contexts:
+G {{tex \Gamma}} :: 'nactx_' ::=
+  | . :: :: Empty
+  | A :: :: El
+  | G1 , G2 :: :: Ext
+  | ( G ) :: :: Paren
+  | h( G ) :: :: HParen
+  {{tex [[G]] }}
+
+% Associative contexts:
+D {{tex \Delta}} :: 'actx_' ::=
+  | . :: :: Empty
+  | X :: :: El
+  | D1 , D2 :: :: Ext
+  | ( D ) :: :: Paren
+  | h( D ) :: :: HParen
+  {{tex [[D]] }}
+
+formula :: 'formula_' ::=
+  | judgement            ::   :: judgement
+  | formula1 && formula2 :: M :: quad
+  {{tex [[formula1]] \quad [[formula2]] }}
+  | formula1 ... formulai :: M :: vec
+  | ( formula )          :: S :: parens
+  {{tex [[formula]] }}
+  | D != 0 :: M :: nonempty
+  {{tex [[D]] \neq \emptyset }} 
+
+terminals :: 'terminals_' ::=
+  | Unit :: :: Unit
+  {{tex \mathsf{Unit} }}
+  | >  :: :: Tensor
+  {{tex \rhd }}
+  | >=  :: :: Tensor2
+  {{tex \unrhd }}  
+  | ->   :: :: LFun
+  {{tex \rightharpoonup }}
+  | <-   :: :: RFun
+  {{tex \leftharpoonup }}
+  | -o   :: :: Limp
+  {{tex \multimap }}
+  | |-A   :: :: AVdash
+  {{tex \vdash_{\mathcal{A} } }}
+  | |-L   :: :: LVdash
+  {{tex \vdash_{\mathcal{L} } }}  
+ 
+defns
+  Jtype :: '' ::=
+
+defn
+  D |-A X :: :: air :: 'A_'
+by
+
+  ------- :: var
+  X |-A X
+
+  ------- :: Ir
+  . |-A I
+
+  D |-A X
+  ---------- :: Il
+  D, I |-A X
+
+  D1 |-A X && D2 |-A Y
+  -------------------- :: Tr
+  D1,D2 |-A X >= Y
+
+  X,Y |-A Z
+  ------------ :: Tl
+  X >= Y |-A Z
+
+  D,X |-A Y
+  ------------ :: IRr
+  D |-A X -> Y
+
+  D1 |-A X && D2,Y |-A Z
+  ---------------------- :: IRl
+  D1,D2,X -> Y |-A Z
+
+  D,X,Y |-A Z && D != 0
+  --------------------- :: Assocl
+  D,X >= Y |-A Z
+
+  X,Y,D |-A Z && D != 0
+  --------------------- :: Assocr
+  X >= Y,D |-A Z
+
+  D;. |-L A
+  ----------- :: Fr
+  D |-A F A
+
+defn
+  D ; G |-L A :: :: nair :: 'L_'
+by
+
+  --------- :: var
+  .;A |-L A
+
+  --------- :: Jr
+  .;. |-L J
+
+  D;G |-L A
+  ------------ :: Jl
+  D;G, J |-L A
+
+  D;G |-L A
+  ------------ :: Il
+  D,I;G |-L A
+
+  D1;G1 |-L A && D2;G2 |-L B
+  -------------------------- :: Tr
+  D1,D2;G1,G2 |-L A > B
+
+  D;A,B |-L C
+  --------------- :: Tl
+  D;A > B |-L C
+
+  X,Y;G |-L C
+  ---------------- :: ATl
+  X >= Y;G |-L C
+
+  D,X,Y;G |-L A && D != 0
+  ----------------------- :: Assocl
+  D,X >= Y;G |-L A
+
+  X,Y,D;G |-L A && D != 0
+  ----------------------- :: Assocr
+  X >= Y,D;G |-L A
+
+  D;G,A |-L B
+  -------------- :: IRr
+  D;G |-L A -> B
+
+  D1;G1 |-L A && D2;G2,B |-L C
+  ---------------------------- :: IRl
+  D1,D2;G1,G2,A -> B |-L C
+
+  D1 |-A X && D2,Y;G |-L A
+  ------------------------ :: AIRl
+  D1,D2,X -> Y;G |-L A
+
+  D |-A X
+  ----------- :: Gr
+  D;. |-L g X
+
+  D,X;G |-L A
+  ------------- :: Gl
+  D;G,g X |-L A
+
+  D;G,A |-L B
+  ------------- :: Fl
+  D,F A;G |-L B
+  
+  
+
+% A, B, C |- A >= (B >= C)
+% ------------------------------
+% (A >= B),C |- A >= (B >= C)
+% ------------------------------
+% (A >= B) >= C |- A >= (B >= C)
+
