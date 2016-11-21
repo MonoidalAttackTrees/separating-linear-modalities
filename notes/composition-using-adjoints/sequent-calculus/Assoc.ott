@@ -10,7 +10,7 @@ X, Y, Z :: 'aform_' ::=
   | I       ::   :: Unit          {{com Unit }}
   {{tex I }}
   | X >= Y   ::   :: Tensor        {{com Associative Non-commutative tensor }}
-  | X -> Y  ::   :: RFun          {{com Implication }}
+  | Y <- X  ::   :: RFun          {{com Implication }}
   | F A     ::   :: RFunc         {{com Right adjoint }}
   {{tex \mathsf{F}\,[[A]] }}
   | ( X )   :: M :: Parens 
@@ -90,7 +90,7 @@ by
 
   D |-A X
   ---------- :: Il
-  D, I |-A X
+  I,D |-A X
 
   D1 |-A X && D2 |-A Y
   -------------------- :: Tr
@@ -100,17 +100,17 @@ by
   ------------ :: Tl
   X >= Y |-A Z
 
-  D,X |-A Y
+  X,D |-A Y
   ------------ :: IRr
-  D |-A X -> Y
+  D |-A Y <- X
 
-  D1 |-A X && D2,Y |-A Z
-  ---------------------- :: IRl
-  D1,D2,X -> Y |-A Z
+  D1 |-A X && D2,Y,D3 |-A Z
+  ------------------------- :: IRl
+  D1,D2,Y <- X,D3 |-A Z
 
-  D1 |-A X && D2,X |-A Y
-  ---------------------- :: Cut
-  D1,D2 |-A Y
+  D1 |-A X && D2,X,D3 |-A Y
+  ------------------------- :: Cut
+  D1,D2,D3 |-A Y
 
   D,X,Y |-A Z && D != 0
   --------------------- :: Assocl
@@ -140,7 +140,7 @@ by
 
   D;G |-L A
   ------------ :: Il
-  D,I;G |-L A
+  I,D;G |-L A
 
   D1;G1 |-L A && D2;G2 |-L B
   -------------------------- :: Tr
@@ -166,35 +166,33 @@ by
   -------------- :: IRr
   D;G |-L A -> B
 
-  D1;G1 |-L A && D2;G2,B |-L C
-  ---------------------------- :: IRl
-  D1,D2;G1,G2,A -> B |-L C
+  D1;G1 |-L A && D2;G2,B,G3 |-L C
+  ------------------------------- :: IRl
+  D1,D2;G1,G2,A -> B,G3 |-L C
 
-  D1 |-A X && D2,Y;G |-L A
-  ------------------------ :: AIRl
-  D1,D2,X -> Y;G |-L A
+  D1 |-A X && D2,Y,D3;G |-L A
+  --------------------------- :: AIRl
+  D1,Y <- X,D2,D3;G |-L A
 
-  D1 |-A X && D2,X;G |-L A
+  D1 |-A X && D2,X,D3;G |-L A
   ------------------------- :: ACut
-  D1,D2;G |-L A
+  D1,D2,D3;G |-L A
 
-  D1;G1 |-L A && D2;G2,A |-L B
-  ----------------------------- :: Cut
-  D1,D2;G1,G2 |-L B
+  D1;G1 |-L A && D2;G2,A,G3 |-L B
+  ------------------------------- :: Cut
+  D1,D2;G1,G2,G3 |-L B
 
   D |-A X
   ----------- :: Gr
   D;. |-L g X
 
-  D,X;G |-L A
+  X,D;G |-L A
   ------------- :: Gl
   D;G,g X |-L A
 
   D;G,A |-L B
   ------------- :: Fl
-  D,F A;G |-L B
-  
-  
+  F A,D;G |-L B  
 
 % A, B, C |- A >= (B >= C)
 % ------------------------------

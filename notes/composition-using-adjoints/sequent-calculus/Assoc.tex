@@ -44,7 +44,7 @@
 \ottrulehead{\ottnt{X}  ,\ \ottnt{Y}  ,\ \ottnt{Z}}{::=}{}\ottprodnewline
 \ottfirstprodline{|}{ I }{}{}{}{\ottcom{Unit}}\ottprodnewline
 \ottprodline{|}{\ottnt{X}  \unrhd  \ottnt{Y}}{}{}{}{\ottcom{Associative Non-commutative tensor}}\ottprodnewline
-\ottprodline{|}{\ottnt{X}  \rightharpoonup  \ottnt{Y}}{}{}{}{\ottcom{Implication}}\ottprodnewline
+\ottprodline{|}{\ottnt{Y}  \leftharpoonup  \ottnt{X}}{}{}{}{\ottcom{Implication}}\ottprodnewline
 \ottprodline{|}{ \mathsf{F}\, \ottnt{A} }{}{}{}{\ottcom{Right adjoint}}}
 
 \newcommand{\ottA}{
@@ -100,7 +100,7 @@
 \newcommand{\ottdruleAXXIl}[1]{\ottdrule[#1]{%
 \ottpremise{\Delta  \vdash_{\mathcal{A} }  \ottnt{X}}%
 }{
-\Delta  \ottsym{,}   I   \vdash_{\mathcal{A} }  \ottnt{X}}{%
+ I   \ottsym{,}  \Delta  \vdash_{\mathcal{A} }  \ottnt{X}}{%
 {\ottdruleAXXIlName}{}%
 }}
 
@@ -125,27 +125,27 @@
 
 \newcommand{\ottdruleAXXIRrName}[0]{\ottdrulename{A\_IRr}}
 \newcommand{\ottdruleAXXIRr}[1]{\ottdrule[#1]{%
-\ottpremise{\Delta  \ottsym{,}  \ottnt{X}  \vdash_{\mathcal{A} }  \ottnt{Y}}%
+\ottpremise{\ottnt{X}  \ottsym{,}  \Delta  \vdash_{\mathcal{A} }  \ottnt{Y}}%
 }{
-\Delta  \vdash_{\mathcal{A} }  \ottnt{X}  \rightharpoonup  \ottnt{Y}}{%
+\Delta  \vdash_{\mathcal{A} }  \ottnt{Y}  \leftharpoonup  \ottnt{X}}{%
 {\ottdruleAXXIRrName}{}%
 }}
 
 
 \newcommand{\ottdruleAXXIRlName}[0]{\ottdrulename{A\_IRl}}
 \newcommand{\ottdruleAXXIRl}[1]{\ottdrule[#1]{%
-\ottpremise{ \Delta_{{\mathrm{1}}}  \vdash_{\mathcal{A} }  \ottnt{X}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{Y}  \vdash_{\mathcal{A} }  \ottnt{Z} }%
+\ottpremise{ \Delta_{{\mathrm{1}}}  \vdash_{\mathcal{A} }  \ottnt{X}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{Y}  \ottsym{,}  \Delta_{{\mathrm{3}}}  \vdash_{\mathcal{A} }  \ottnt{Z} }%
 }{
-\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{X}  \rightharpoonup  \ottnt{Y}  \vdash_{\mathcal{A} }  \ottnt{Z}}{%
+\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{Y}  \leftharpoonup  \ottnt{X}  \ottsym{,}  \Delta_{{\mathrm{3}}}  \vdash_{\mathcal{A} }  \ottnt{Z}}{%
 {\ottdruleAXXIRlName}{}%
 }}
 
 
 \newcommand{\ottdruleAXXCutName}[0]{\ottdrulename{A\_Cut}}
 \newcommand{\ottdruleAXXCut}[1]{\ottdrule[#1]{%
-\ottpremise{ \Delta_{{\mathrm{1}}}  \vdash_{\mathcal{A} }  \ottnt{X}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{X}  \vdash_{\mathcal{A} }  \ottnt{Y} }%
+\ottpremise{ \Delta_{{\mathrm{1}}}  \vdash_{\mathcal{A} }  \ottnt{X}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{X}  \ottsym{,}  \Delta_{{\mathrm{3}}}  \vdash_{\mathcal{A} }  \ottnt{Y} }%
 }{
-\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \vdash_{\mathcal{A} }  \ottnt{Y}}{%
+\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{,}  \Delta_{{\mathrm{3}}}  \vdash_{\mathcal{A} }  \ottnt{Y}}{%
 {\ottdruleAXXCutName}{}%
 }}
 
@@ -220,7 +220,7 @@
 \newcommand{\ottdruleLXXIl}[1]{\ottdrule[#1]{%
 \ottpremise{\Delta  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A}}%
 }{
-\Delta  \ottsym{,}   I   \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A}}{%
+ I   \ottsym{,}  \Delta  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A}}{%
 {\ottdruleLXXIlName}{}%
 }}
 
@@ -281,36 +281,36 @@
 
 \newcommand{\ottdruleLXXIRlName}[0]{\ottdrulename{L\_IRl}}
 \newcommand{\ottdruleLXXIRl}[1]{\ottdrule[#1]{%
-\ottpremise{ \Delta_{{\mathrm{1}}}  \ottsym{;}  \Gamma_{{\mathrm{1}}}  \vdash_{\mathcal{L} }  \ottnt{A}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma_{{\mathrm{2}}}  \ottsym{,}  \ottnt{B}  \vdash_{\mathcal{L} }  \ottnt{C} }%
+\ottpremise{ \Delta_{{\mathrm{1}}}  \ottsym{;}  \Gamma_{{\mathrm{1}}}  \vdash_{\mathcal{L} }  \ottnt{A}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma_{{\mathrm{2}}}  \ottsym{,}  \ottnt{B}  \ottsym{,}  \Gamma_{{\mathrm{3}}}  \vdash_{\mathcal{L} }  \ottnt{C} }%
 }{
-\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma_{{\mathrm{1}}}  \ottsym{,}  \Gamma_{{\mathrm{2}}}  \ottsym{,}  \ottnt{A}  \rightharpoonup  \ottnt{B}  \vdash_{\mathcal{L} }  \ottnt{C}}{%
+\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma_{{\mathrm{1}}}  \ottsym{,}  \Gamma_{{\mathrm{2}}}  \ottsym{,}  \ottnt{A}  \rightharpoonup  \ottnt{B}  \ottsym{,}  \Gamma_{{\mathrm{3}}}  \vdash_{\mathcal{L} }  \ottnt{C}}{%
 {\ottdruleLXXIRlName}{}%
 }}
 
 
 \newcommand{\ottdruleLXXAIRlName}[0]{\ottdrulename{L\_AIRl}}
 \newcommand{\ottdruleLXXAIRl}[1]{\ottdrule[#1]{%
-\ottpremise{ \Delta_{{\mathrm{1}}}  \vdash_{\mathcal{A} }  \ottnt{X}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{Y}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A} }%
+\ottpremise{ \Delta_{{\mathrm{1}}}  \vdash_{\mathcal{A} }  \ottnt{X}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{Y}  \ottsym{,}  \Delta_{{\mathrm{3}}}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A} }%
 }{
-\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{X}  \rightharpoonup  \ottnt{Y}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A}}{%
+\Delta_{{\mathrm{1}}}  \ottsym{,}  \ottnt{Y}  \leftharpoonup  \ottnt{X}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{,}  \Delta_{{\mathrm{3}}}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A}}{%
 {\ottdruleLXXAIRlName}{}%
 }}
 
 
 \newcommand{\ottdruleLXXACutName}[0]{\ottdrulename{L\_ACut}}
 \newcommand{\ottdruleLXXACut}[1]{\ottdrule[#1]{%
-\ottpremise{ \Delta_{{\mathrm{1}}}  \vdash_{\mathcal{A} }  \ottnt{X}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{X}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A} }%
+\ottpremise{ \Delta_{{\mathrm{1}}}  \vdash_{\mathcal{A} }  \ottnt{X}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{,}  \ottnt{X}  \ottsym{,}  \Delta_{{\mathrm{3}}}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A} }%
 }{
-\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A}}{%
+\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{,}  \Delta_{{\mathrm{3}}}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A}}{%
 {\ottdruleLXXACutName}{}%
 }}
 
 
 \newcommand{\ottdruleLXXCutName}[0]{\ottdrulename{L\_Cut}}
 \newcommand{\ottdruleLXXCut}[1]{\ottdrule[#1]{%
-\ottpremise{ \Delta_{{\mathrm{1}}}  \ottsym{;}  \Gamma_{{\mathrm{1}}}  \vdash_{\mathcal{L} }  \ottnt{A}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma_{{\mathrm{2}}}  \ottsym{,}  \ottnt{A}  \vdash_{\mathcal{L} }  \ottnt{B} }%
+\ottpremise{ \Delta_{{\mathrm{1}}}  \ottsym{;}  \Gamma_{{\mathrm{1}}}  \vdash_{\mathcal{L} }  \ottnt{A}  \quad  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma_{{\mathrm{2}}}  \ottsym{,}  \ottnt{A}  \ottsym{,}  \Gamma_{{\mathrm{3}}}  \vdash_{\mathcal{L} }  \ottnt{B} }%
 }{
-\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma_{{\mathrm{1}}}  \ottsym{,}  \Gamma_{{\mathrm{2}}}  \vdash_{\mathcal{L} }  \ottnt{B}}{%
+\Delta_{{\mathrm{1}}}  \ottsym{,}  \Delta_{{\mathrm{2}}}  \ottsym{;}  \Gamma_{{\mathrm{1}}}  \ottsym{,}  \Gamma_{{\mathrm{2}}}  \ottsym{,}  \Gamma_{{\mathrm{3}}}  \vdash_{\mathcal{L} }  \ottnt{B}}{%
 {\ottdruleLXXCutName}{}%
 }}
 
@@ -326,7 +326,7 @@
 
 \newcommand{\ottdruleLXXGlName}[0]{\ottdrulename{L\_Gl}}
 \newcommand{\ottdruleLXXGl}[1]{\ottdrule[#1]{%
-\ottpremise{\Delta  \ottsym{,}  \ottnt{X}  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A}}%
+\ottpremise{\ottnt{X}  \ottsym{,}  \Delta  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{A}}%
 }{
 \Delta  \ottsym{;}  \Gamma  \ottsym{,}   \mathsf{G}\, \ottnt{X}   \vdash_{\mathcal{L} }  \ottnt{A}}{%
 {\ottdruleLXXGlName}{}%
@@ -337,7 +337,7 @@
 \newcommand{\ottdruleLXXFl}[1]{\ottdrule[#1]{%
 \ottpremise{\Delta  \ottsym{;}  \Gamma  \ottsym{,}  \ottnt{A}  \vdash_{\mathcal{L} }  \ottnt{B}}%
 }{
-\Delta  \ottsym{,}   \mathsf{F}\, \ottnt{A}   \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{B}}{%
+ \mathsf{F}\, \ottnt{A}   \ottsym{,}  \Delta  \ottsym{;}  \Gamma  \vdash_{\mathcal{L} }  \ottnt{B}}{%
 {\ottdruleLXXFlName}{}%
 }}
 
