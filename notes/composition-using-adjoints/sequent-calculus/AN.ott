@@ -1,0 +1,96 @@
+% Input variables.
+metavar vars ,  n , a, x , y, z , w , m , o ::=  
+indexvar ivar, i , k , j , l ::=
+metavar const, b ::= 
+
+grammar
+
+% Non-associative formulas:
+A, B, C :: 'naform_' ::=
+  | J       ::   :: Unit          {{com Unit }}
+  {{tex J }}  
+  | A > B   ::   :: Tensor        {{com Non-associative Non-commutative tensor }}
+  | B <- A  ::   :: RFun          {{com Implication }}
+  | ( A )   :: M :: Parens 
+  | h( A )  :: M :: HiddenParens 
+  {{ tex [[A]] }}
+
+% Contexts:
+G {{tex \Gamma}} :: 'nactx_' ::=
+  | . :: :: Empty
+  {{tex \cdot }}
+  | A :: :: NAEl
+  | G1 , G2 :: :: Ext
+  | ( G ) :: :: Paren
+  | h( G ) :: :: HParen
+  {{tex [[G]] }}
+
+formula :: 'formula_' ::=
+  | judgement            ::   :: judgement
+  | formula1 && formula2 :: M :: quad
+  {{tex [[formula1]] \quad [[formula2]] }}
+  | formula1 ... formulai :: M :: vec
+  | ( formula )          :: S :: parens
+  {{tex [[formula]] }}
+  | G != 0 :: M :: nonempty2
+  {{tex [[G]] \neq \emptyset }}   
+
+terminals :: 'terminals_' ::=
+  | Unit :: :: Unit
+  {{tex \mathsf{Unit} }}
+  | >  :: :: Tensor
+  {{tex \rhd }}
+  | >=  :: :: Tensor2
+  {{tex \unrhd }}  
+  | ->   :: :: LFun
+  {{tex \rightharpoonup }}
+  | <-   :: :: RFun
+  {{tex \leftharpoonup }}
+  | -o   :: :: Limp
+  {{tex \multimap }}
+  | |-A   :: :: AVdash
+  {{tex \vdash_{\mathcal{A} } }}
+  | |-L   :: :: LVdash
+  {{tex \vdash_{\mathcal{L} } }}  
+
+defns
+  Jtype :: '' ::=
+
+
+defn
+  G |-L A :: :: nair :: 'L_'
+by
+
+  ------- :: var
+  A |-L A
+
+  ------- :: Jr
+  . |-L J
+
+  G |-L A
+  ---------- :: Jl
+  J,G |-L A
+
+  C |-L A && G |-L B
+  ------------------ :: Tr
+  C,G |-L A > B
+
+  G,A,B |-L C
+  ------------- :: Tl
+  G,A > B |-L C
+
+  A,G |-L B
+  ------------ :: IRr
+  G |-L A <- B
+
+  G |-L A && B |-L C
+  ------------------ :: IRl
+  B <- A,G |-L C
+
+  G2 |-L A && G1,A |-L B
+  ---------------------- :: Cut
+  G1,G2 |-L B
+
+  C |-L A && A,G |-L B
+  -------------------- :: CutR
+  C,G |-L B 

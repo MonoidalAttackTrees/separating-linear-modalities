@@ -1,0 +1,65 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{supertabular}
+\usepackage{geometry}
+\usepackage{ifthen}
+\usepackage{alltt}%hack
+\geometry{a4paper,dvips,twoside,left=22.5mm,right=22.5mm,top=20mm,bottom=30mm}
+\usepackage{color}
+\usepackage{mathpartir}
+
+\input{NA-ott}
+\input{AN-ott}
+\input{AL-ott}
+\input{ANA-ott}
+
+\begin{document}
+
+\section{NA Logic}
+\label{sec:na_logic}
+\input{NA-output}
+% section na_logic (end)
+
+\section{AN Logic}
+\label{sec:an_logic}
+\input{AN-output}
+% section an_logic (end)
+
+\section{AL Logic}
+\label{sec:al_logic}
+\input{AL-output}
+% section al_logic (end)
+
+\section{ANA Logic}
+\label{sec:ana_logic}
+\input{ANA-output}
+% section ana_logic (end)
+
+\appendix
+
+\section*{Appendix}
+\label{sec:appendix}
+
+\section{Full Specification of NA Logic}
+\label{sec:full_specification_na_logic}
+\NAall
+% section full_specification_na_logic (end)
+
+\section{Full Specification of AN Logic}
+\label{sec:full_specification_an_logic}
+\ANall
+% section full_specification_an_logic (end)
+
+\section{Full Specification of AL Logic}
+\label{sec:full_specification_al_logic}
+\ALall
+% section full_specification_al_logic (end)
+
+\section{Full Specification of ANA Logic}
+\label{sec:full_specification_ana_logic}
+\ANAall
+% section full_specification_ana_logic (end)
+% section appendix (end)
+
+
+\end{document}
