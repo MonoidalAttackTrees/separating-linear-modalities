@@ -33,11 +33,7 @@ formula :: 'formula_' ::=
   | ( formula )          :: S :: parens
   {{tex [[formula]] }}
   | G != 0 :: M :: nonempty2
-  {{tex [[G]] \neq \emptyset }}
-  | | G | > 1 :: M :: Card1
-  {{tex |[[G]]| > 1 }}
-  | | G | <= 1 :: M :: Card2
-  {{tex |[[G]]| \leq 1 }}
+  {{tex [[G]] \neq \emptyset }}   
 
 terminals :: 'terminals_' ::=
   | Unit :: :: Unit
@@ -71,13 +67,13 @@ by
   ------- :: Jr
   . |-L J
 
-  G |-L A
-  ---------- :: Jl
-  J,G |-L A
+  G1,G2 |-L A
+  ------------- :: Jl
+  G1,J,G2 |-L A
 
-  C |-L A && G |-L B
-  ------------------ :: Tr
-  C,G |-L A > B
+  G1 |-L A && G2 |-L B
+  -------------------- :: Tr
+  G1,G2 |-L A > B
 
   G,A,B |-L C
   ------------- :: Tl
@@ -85,16 +81,17 @@ by
 
   A,G |-L B
   ------------ :: IRr
-  G |-L A <- B
+  G |-L B <- A
 
-  G |-L A && B |-L C
-  ------------------ :: IRl
-  B <- A,G |-L C
-
-  (G2 |-L A && G1,A |-L B) && |G2| > 1
-  ------------------------------------ :: CutL
-  G1,G2 |-L B
-
-  (G2 |-L A && G1,A,G3 |-L B) && |G2| <= 1
-  ---------------------------------------- :: CutR
+  G2 |-L A && G1,B,G3 |-L C
+  ---------------------- :: IRl
+  G1,B <- A,G2,G3 |-L C
+  
+  G2 |-L A && G1,A,G3 |-L B
+  ------------------------- :: Cut
   G1,G2,G3 |-L B
+
+% A > (B > C) |-L (A  > B) > C
+%
+% Context: X1,X2,X3,X4,...,Xi
+% Interpreted: X1 > (X2 > (X3 > (X4 > (...(Xi > X(i+1))...))))

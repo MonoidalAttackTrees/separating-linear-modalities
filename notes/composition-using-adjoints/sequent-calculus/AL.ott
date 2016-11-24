@@ -10,7 +10,7 @@ A, B, C :: 'naform_' ::=
   | J       ::   :: Unit          {{com Unit }}
   {{tex J }}  
   | A > B   ::   :: Tensor        {{com Non-associative Non-commutative tensor }}
-  | B <- A  ::   :: RFun          {{com Implication }}
+  | A -> B  ::   :: RFun          {{com Implication }}
   | ( A )   :: M :: Parens 
   | h( A )  :: M :: HiddenParens 
   {{ tex [[A]] }}
@@ -56,7 +56,6 @@ terminals :: 'terminals_' ::=
 defns
   Jtype :: '' ::=
 
-
 defn
   G |-L A :: :: nair :: 'L_'
 by
@@ -67,28 +66,31 @@ by
   ------- :: Jr
   . |-L J
 
-  G |-L A
-  ---------- :: Jl
-  J,G |-L A
+  G1,G2 |-L A
+  ------------- :: Jl
+  G1,J,G2 |-L A
 
-  G |-L A && C |-L B
-  ------------------ :: Tr
-  G,C |-L A > B
+  G1 |-L A && G2 |-L B
+  -------------------- :: Tr
+  G1,G2 |-L A > B
 
-  G,A,B |-L C
+  A,B,G |-L C
   ------------- :: Tl
   G,A > B |-L C
 
-  A,G |-L B
+  G,A |-L B
   ------------ :: IRr
-  G |-L A <- B
+  G |-L A -> B
 
-  G |-L A && B |-L C
-  ------------------ :: IRl
-  B <- A,G |-L C
+  G2 |-L A && G1,B,G3 |-L C
+  ---------------------- :: IRl
+  G1,A -> B,G2,G3 |-L C
   
   G2 |-L A && G1,A,G3 |-L B
   ------------------------- :: Cut
-  G1,G2 |-L B
+  G1,G2,G3 |-L B
 
-% A > (B > C) |-L (A  > B) > C
+% (A  > B) > C |-L A > (B > C)
+%
+% Context: X1,X2,X3,X4,...,Xi
+% Interpreted: ((...(((X1 > X2) > X3) > X4)...) > Xi) > X(i+1)

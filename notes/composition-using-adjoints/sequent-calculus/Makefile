@@ -19,6 +19,9 @@ pdf : main.pdf
 AL-output.tex : AL.ott AL.tex
 	$(OTT) $(OTT_FLAGS) -i AL.ott -o AL-ott.tex -tex_filter AL.tex AL-output.tex -tex_name_prefix AL
 
+AR-output.tex : AR.ott AR.tex
+	$(OTT) $(OTT_FLAGS) -i AR.ott -o AR-ott.tex -tex_filter AR.tex AR-output.tex -tex_name_prefix AR
+
 AN-output.tex : AN.ott AN.tex
 	$(OTT) $(OTT_FLAGS) -i AN.ott -o AN-ott.tex -tex_filter AN.tex AN-output.tex -tex_name_prefix AN
 
@@ -28,7 +31,7 @@ NA-output.tex : NA.ott NA.tex
 ANA-output.tex : ANA.ott ANA.tex
 	$(OTT) $(OTT_FLAGS) -i ANA.ott -o ANA-ott.tex -tex_filter ANA.tex ANA-output.tex -tex_name_prefix ANA
 
-main.pdf : Makefile main.tex ANA-output.tex NA-output.tex AN-output.tex AL-output.tex
+main.pdf : Makefile main.tex ANA-output.tex NA-output.tex AN-output.tex AR-output.tex AL-output.tex
 	$(PDFLATEX) main.tex
 
 clean :

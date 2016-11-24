@@ -11,8 +11,6 @@ A, B, C :: 'naform_' ::=
   {{tex J }}  
   | A > B   ::   :: Tensor        {{com Non-associative Non-commutative tensor }}
   | A -> B  ::   :: RFun          {{com Implication }}
-  | g X     ::   :: RFunc         {{com Right adjoint }}
-  {{tex \mathsf{G}\,[[X]] }}
   | ( A )   :: M :: Parens 
   | h( A )  :: M :: HiddenParens 
   {{ tex [[A]] }}
