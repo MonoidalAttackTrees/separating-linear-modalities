@@ -1,0 +1,83 @@
+\begin{definition}
+  \label{def:contraction}
+  A \textbf{Lambek category with contraction},
+  $(\cat{L},c,\cL{},\cR{})$, is a Lambek category equipped with a
+  monoidal comonad $(c,\varepsilon,\delta)$, and two monoidal natural
+  transformations:
+  \[
+  \begin{array}{l}
+    \cL{A,B}:cA\otimes B\mto (cA\otimes B)\otimes cA\\
+    \cR{A,B}:B\otimes cA\mto cA\otimes (B\otimes cA)
+  \end{array}
+  \]
+  Furthermore, the following diagrams must commute:
+    \begin{mathpar}
+      \bfig
+      \square/<-`->``/<1050,400>[
+	cA\otimes I`
+        cA`
+        (cA\otimes I)\otimes cA`;
+	\rho_{cA}^{-1}`
+	\cL{A,I}``]
+      \square(1050,0)/->``->`/<1050,400>[
+        cA`
+        I\otimes cA``
+        cA\otimes(I\otimes cA);
+        \lambda_{cA}^{-1}``
+	\cR{A,I}`]
+        \morphism(0,0)|b|<2100,0>[(cA\otimes I)\otimes cA`cA\otimes(I\otimes cA);\alpha_{cA,I,cA}]
+      \efig
+    \end{mathpar}
+    \begin{mathpar}
+    \bfig
+      \square/->`->``->/<1300,800>[
+        cA\otimes cA`
+        cA\otimes(cA\otimes I)`
+        (I\otimes cA)\otimes cA`
+        (cA\otimes(I\otimes cA))\otimes cA;
+        id_{cA}\otimes\rho_{cA}^{-1}`
+        \lambda_{cA}^{-1}\otimes id_{cA}``
+        \cR{A,I}\otimes id_{cA}]
+      \qtriangle(1300,400)/->``->/<1300,400>[
+        cA\otimes(cA\otimes I)`
+        cA\otimes((cA\otimes I)\otimes cA)`
+        cA\otimes(cA\otimes cA);
+        id_{cA}\otimes\cL{A,I}``
+        id_{cA}\otimes(\rho_{cA}\otimes id_{cA})]
+      \dtriangle(1300,0)/`<-`->/<1300,400>[
+        cA\otimes(cA\otimes cA)`
+        (cA\otimes(I\otimes cA))\otimes cA`
+        (cA\otimes cA)\otimes cA;
+        `
+        \alpha_{cA,cA,cA}`
+        (id_{cA}\otimes\lambda_{cA})\otimes id_{cA}]
+    \efig
+    \end{mathpar}
+\end{definition}
+
+\begin{definition}
+  \label{def:eilenberg-moore-contraction}
+  Suppose $(\cat{L},c,\cL{},\cR{})$ is a Lambek category with contraction.  Then
+  the \textbf{Eilenberg Moore category}, $\cat{L}^c$, of the comonad
+  $(c, \varepsilon, \delta)$ has as objects all the c-coalgebras $(A,
+  h_A : A \mto cA)$, and as morphisms all the coalgebra morphisms.  We
+  call $h_A$ the action of the coalgebra.  Furthermore, the following
+  (action) diagrams must commute:
+  \begin{mathpar}
+    \bfig
+    \square[A`cA`cA`c^2A;h_A`h_A`ch_A`\delta_A]    
+    \efig
+    \and
+    \bfig
+    \btriangle/->`=`->/[A`cA`A;h_A``\varepsilon_A]
+    \efig
+  \end{mathpar}
+\end{definition}
+
+\begin{lemma}[The Eilenberg Moore Category of the comonad $c$ is Monoidal]
+  \label{lemma:the_eilenberg_moore_contraction_is_monoidal}
+  The category $\cat{L}^c$ is monoidal.
+\end{lemma}
+\begin{proof}
+  The proof is similar with the proof of Lemma~\ref{lemma:the_eilenberg_moore_category_is_monoidal}.
+\end{proof}

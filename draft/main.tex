@@ -157,97 +157,31 @@ TODO \cite{Benton:1994}
 \input{Lambek-categories}
 % subsection lambek_categories (end)
 
-\subsection{Lambek Categories with Weakening and Contraction}
-\label{subsec:lambek_categories_with_weakening_and_contraction}
-\begin{definition}
-  \label{def:weakening}
-  A \textbf{Lambek category with weakening}, $(\cat{L},w,\w{})$, is a
-  Lambek category equipped with a monoidal comonad
-  $(w,\varepsilon,\delta)$, and a monoidal natural transformation
-  $\w{A}:wA\mto I$.  Furthermore, $\w{}$ must be a coalgebra morphism.
-  That is, the following digram must commute:
-  \begin{mathpar}
-    \bfig
-    \square/->`->`->`->/<800,400>[
-      wA`
-      I`
-      w^2A`
-      wI;
-      \w{A}`
-      \delta_A`
-      \q{I}`
-      w\w{A}]
-    \efig
-  \end{mathpar}
-\end{definition}
 
-
-
-\begin{definition}
-  \label{def:contraction}
-  A \textbf{Lambek category with contraction},
-  $(\cat{L},c,\cL{},\cR{})$, is a Lambek category equipped with a
-  monoidal comonad $(c,\varepsilon,\delta)$, and two monoidal natural
-  transformations:
-  \[
-  \begin{array}{l}
-    \cL{A,B}:cA\otimes B\mto (cA\otimes B)\otimes cA\\
-    \cR{A,B}:B\otimes cA\mto cA\otimes (B\otimes cA)
-  \end{array}
-  \]
-  Furthermore, the following diagrams must commute:
-    \begin{mathpar}
-      \bfig
-      \square/<-`->``/<1050,400>[
-	cA\otimes I`
-        cA`
-        (cA\otimes I)\otimes cA`;
-	\rho_{cA}^{-1}`
-	\cL{A,I}``]
-      \square(1050,0)/->``->`/<1050,400>[
-        cA`
-        I\otimes cA``
-        cA\otimes(I\otimes cA);
-        \lambda_{cA}^{-1}``
-	\cR{A,I}`]
-        \morphism(0,0)|b|<2100,0>[(cA\otimes I)\otimes cA`cA\otimes(I\otimes cA);\alpha_{cA,I,cA}]
-      \efig
-    \end{mathpar}
-    \begin{mathpar}
-    \bfig
-      \square/->`->``->/<1300,800>[
-        cA\otimes cA`
-        cA\otimes(cA\otimes I)`
-        (I\otimes cA)\otimes cA`
-        (cA\otimes(I\otimes cA))\otimes cA;
-        id_{cA}\otimes\rho_{cA}^{-1}`
-        \lambda_{cA}^{-1}\otimes id_{cA}``
-        \cR{A,I}\otimes id_{cA}]
-      \qtriangle(1300,400)/->``->/<1300,400>[
-        cA\otimes(cA\otimes I)`
-        cA\otimes((cA\otimes I)\otimes cA)`
-        cA\otimes(cA\otimes cA);
-        id_{cA}\otimes\cL{A,I}``
-        id_{cA}\otimes(\rho_{cA}\otimes id_{cA})]
-      \dtriangle(1300,0)/`<-`->/<1300,400>[
-        cA\otimes(cA\otimes cA)`
-        (cA\otimes(I\otimes cA))\otimes cA`
-        (cA\otimes cA)\otimes cA;
-        `
-        \alpha_{cA,cA,cA}`
-        (id_{cA}\otimes\lambda_{cA})\otimes id_{cA}]
-    \efig
-    \end{mathpar}
-\end{definition}
-
-% subsection lambek_categories_with_weakening_and_contraction (end)
 
 \subsection{Lambek Categories with Exchange}
 \label{subsec:lambek_categories_with_exchange}
-
 \input{exchange}
 
 % subsection lambek_categories_with_exchange (end)
+
+
+
+\subsection{Lambek Categories with Weakening}
+\label{subsec:lambek_categories_with_weakening}
+\input{weakening}
+
+% subsection lambek_categories_with_weakening (end)
+
+
+
+\subsection{Lambek Categories with Contraction}
+\label{subsec:lambek_categories_with_contraction}
+\input{contraction}
+
+% subsection lambek_categories_with_contraction (end)
+
+
 
 \subsection{Linear Categories}
 \label{subsec:linear_categories}
@@ -375,22 +309,31 @@ TODO \cite{Benton:1994}
   \begin{mathpar}
     \bfig
       \Vtriangle/<-`<-`->/<500,400>[
-        wA`
-        cwA`
-        wcA;
-        \varepsilon_{wA}^c`
-        w\varepsilon_A^c`
-        dist_A]
+        wA`cwA`wcA;
+        \varepsilon_{wA}^c`w\varepsilon_A^c`dist_A]
     \efig
     \and
     \bfig
       \Vtriangle/<-`<-`->/<500,400>[
-        cA`
-        cwA`
-        wcA;
-        c\varepsilon_A^w`
-        \varepsilon_{cA}^w`
-        dist_A]
+        cA`cwA`wcA;
+        c\varepsilon_A^w`\varepsilon_{cA}^w`dist_A]
+    \efig
+  \end{mathpar}
+  \begin{mathpar}
+    \bfig
+      \square/->`->``->/<500,800>[
+        cwA`c^2wA`wcA`wc^2A;
+        \delta^c_{wA}`dist_A``w\delta^c_A]
+      \morphism(500,800)<0,-400>[c^2wA`cwcA;cdist_A]
+      \morphism(500,400)<0,-400>[cwcA`wc^2A;dist_{cA}]
+    \efig
+    \and
+    \bfig
+      \square/->`->``->/<500,800>[
+        cwA`cw^2A`wcA`w^2cA;
+        c\delta^w_A`dist_A``\delta^w_{cA}]
+      \morphism(500,800)<0,-400>[cw^2A`wcwA;dist_{wA}]
+      \morphism(500,400)<0,-400>[wcwA`w^2cA;wdist_A]
     \efig
   \end{mathpar}
 \end{definition}
