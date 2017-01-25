@@ -1,0 +1,161 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+% Definition: split linear category
+\begin{definition}
+  \label{def:split-linear}
+  A \textbf{split linear category} $(\cat{L},cw,\w{},\c{},e,\e{})$ is
+  specified by
+  \begin{itemize}
+  \item a biclosed monoidal category $(\cat{L},I,\otimes)$;
+  \item a monoidal comonad $(cw,\varepsilon^{cw},\delta^{cw})$ with
+    monoidal natural transformations $\w{}$ and $\c{}$ s.t.
+    $(\cat{L},cw,\w{},\c{})$ is a Lambek category with $cw$;
+  \item a monoidal comonad $(e,\varepsilon^e,\delta^e)$ with monoidal
+    natural transformations $\e{}$ s.t. $(\cat{L},e,\e{})$ is a Lambek
+    category with exchange;
+  \item a natural isomorphism with components $distEx_A:cweA\mto ecwA$.
+  \end{itemize}
+\end{definition}
+\fi
+
+
+
+\iffalse
+% Lemma: a linear category is a full sub of a split linear category
+\begin{lemma}
+  \label{lem:linear-full-sub}
+  \todo{Delete this lemma and only keep the one below?}
+  Let $(\cat{L},cw,e)$ be a split linear category. Define a full
+  subcategory $\cat{L'}$ of $\cat{L}$ with object $eA$'s, $cweA$'s, and
+  the unitor $I$ in $\cat{L}$. Then $(\cat{L'},cw,\w{},\c{})$ is a linear
+  category.
+\end{lemma}
+
+\begin{proof}
+  \begin{enumerate}[label=\textbf{\emph{\alph*}})]
+
+  % L' is symmetric monoidal closed
+  \item First, we need to show that $\cat{L'}$ is symmetric monoidal
+    closed. \\
+    Since $I$ is an object $\cat{L'}$, then the natural isomorphisms
+    $\lambda$ and $\rho$ of $\cat{L}$ still hold in $\cat{L'}$. And the
+    tensor product $\otimes$ is associative in $\cat{L'}$ because
+    $$\alpha_{eA,eB,eC}:
+      (eA\otimes eB)\otimes eC\mto eA\otimes(eB\otimes eC)$$
+    Hence, $\cat{L'}$ is monoidal.
+    
+    We define a symmetry natural transformation
+    $\beta_{A,B}':cweA\otimes cweB\mto cweB\otimes cweA$ in $\cat{L'}$ as
+    \begin{mathpar}
+    \bfig
+      \morphism<1000,0>[
+        cweA\otimes cweB`
+        ecwA\otimes ecwB;
+        distEx_A\otimes distEx_B]
+      \morphism(1000,0)<700,0>[
+        ecwA\otimes ecwB`
+        ecwB\otimes ecwA;
+        \e{cwA,cwB}]
+      \morphism(1700,0)<1000,0>[
+        ecwB\otimes ecwA`
+        ecwA\otimes ecwB;
+        distEx_B^{-1}\otimes distEx_A^{-1}]
+    \efig
+    \end{mathpar}
+    
+    $\beta'$ is a natural isomorphism because $distEx$ and $\e{}$ are
+    natural isomorphisms. So $\cat{L}'$ is symmetric.
+
+    \todo{Closed: Not sure how $\cat{L'}$ is closed when $\cat{L}$ is not}
+
+  % the monoidal comonad cw is symmetric on L'
+  \item $(cw,\varepsilon^{cw},\delta^{cw})$ is a symmetric monoidal comonad
+    on $\cat{L'}$.
+    
+    Lemma~\ref{lem:compose-cw} has proved that
+    $(cw,\varepsilon^{cw},\delta^{cw})$ is a monoidal comonad on $\cat{L}$.
+    Since $\cat{L'}$ is monoidal, then $cw$ is also monoidal on $\cat{L'}$.
+    Now we only need to show it is symmetric, i.e. $(cw,\q{}^{cw})$ is a
+    symmetric monoidal endofunctor, and hence $\varepsilon^{cw}$ and
+    $\delta^{cw}$ are symmetric monoidal natural transformations on
+    $\cat{L'}$.
+    
+    $(cw,\q{}^{cw})$ being symmetric on $\cat{L'}$ means the following
+    diagram commutes:
+    \begin{mathpar}
+    \bfig
+      \square<800,400>[
+        cweA\otimes cweB`
+        cweB\otimes cweA`
+        cw(eA\otimes eB)`
+        cw(eB\otimes eA);
+        \beta_{A,B}'`
+        \q{eA,eB}^{cw}`
+        \q{eB,eA}^{cw}`
+        cw\e{A,B}]
+    \efig
+    \end{mathpar}
+    And the diagram does commute by the diagram chasing:
+    \begin{mathpar}
+    \bfig
+      \Vtriangle|amm|<500,500>[  
+        cweA\otimes cweB`
+        ecwA\otimes ecwB`
+        eA\otimes eB;
+        distEx_A\otimes distEx_B`
+        \varepsilon_{eA}^{cw}\otimes\varepsilon_{eB}^{cw}`
+        e\varepsilon_A^{cw}\otimes e\varepsilon_A^{cw}]
+      \Dtriangle(0,-500)|lmm|/->``<-/<500,500>[
+        cweA\otimes cweB`
+        eA\otimes eB`
+        cw(eA\otimes eB);
+        \q{eA,eB}^{cw}``
+        \varepsilon_{eA\otimes eB}^{cw}]
+      \morphism(1000,500)<1100,0>[
+        ecwA\otimes ecwB`
+        ecwB\otimes ecwA;
+        \e{cwA,cwB}]
+      \morphism(500,0)|m|<800,0>[eA\otimes eB`eB\otimes eA;\e{A,B}]
+      \morphism(0,-500)|b|<2100,0>[
+        cw(eA\otimes eB)`
+        cw(eB\otimes eA);
+        cw\e{A,B}]
+      \Ctrianglepair(2100,-500)|mrmmr|/->`->`<-`<-`->/<800,500>[
+        ecwB\otimes ecwA`
+        eB\otimes eA`
+        cweB\otimes cweA`
+        cw(eB\otimes eA);
+        e\varepsilon_B^{cw}\otimes e\varepsilon_A^{cw}`
+        distEx_B^{-1}\otimes distEx_A^{-1}`
+        \varepsilon_{eB}^{cw}\otimes\varepsilon_{eA}^{cw}`
+        \varepsilon_{eB\otimes eA}^{cw}`
+        \q{eB,eA}^{cw}]
+      \ptriangle(200,-100)/``/<100,100>[(1)``;``]
+      \ptriangle(500,200)/``/<100,100>[(2)``;``]
+      \ptriangle(1200,200)/``/<100,100>[(3)``;``]
+      \ptriangle(1000,-350)/``/<100,100>[(4)``;``]
+      \ptriangle(1900,50)/``/<100,100>[(5)``;``]
+      \ptriangle(1900,-250)/``/<100,100>[(6)``;``]
+    \efig
+    \end{mathpar}
+    , where (1) and (6) commute because $cw$ is a monoidal comonad on
+    $\cat{L'}$, (2) and (5) are definition of $dist_Ex$, (3) is the
+    naturality of $\varepsilon^{cw}$ and (4) is the naturality of $\e{}$.
+
+    Then $\varepsilon^{cw}$ and $\delta^{cw}$ are also symmetric. 
+    
+  % the three conditions for weak and contraction transformations
+  \item the three conditions of the monoidal natural transformations
+        $\w{}$ and $\c{}$ on are satisfied on $\cat{L'}$.
+
+        Lemma~\ref{lem:composite-cw-2} proves that the three conditions are
+        satisfied on $\cat{L}$, and the result can be easily restricted to
+        $\cat{L'}$ by replacing all object $cwA$ with $cweA$, $cwcwA$ with
+        $cwecweA$, etc. and keeping the unitor $I$.
+
+  \end{enumerate}
+  In conclusion, the full subcategory $\cat{L'}$ forms a linear category.
+
+\end{proof}
+
+\fi
