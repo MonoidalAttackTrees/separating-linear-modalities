@@ -111,15 +111,73 @@ linear logic.
 
 \begin{definition}
   \label{def:weakening}
-  A \textbf{Lambek category with weakening}, 
+  A \textbf{Lambek category with weakening}, $(\cat{L}, \otimes, I,
+  \lambda, \rho, \alpha, \w{})$, is a Lambek category $(\cat{L}, \otimes, I,
+  \lambda, \rho,\alpha)$ equipped with a natural transformation
+  $\w{A} : A \mto I$.
 \end{definition}
 
 \begin{definition}
   \label{def:contraction}
-  A \textbf{Lambek category with contraction},
+  A \textbf{Lambek category with contraction}, $(\cat{L}, \otimes, I,
+  \lambda, \rho, \alpha, \cL{},\cR{})$, is a Lambek category $(\cat{L}, \otimes, I,
+  \lambda, \rho,\alpha)$ equipped with natural transformations:
+  \[
+  \begin{array}{lll}
+    \cL{A,B} : (A \otimes B) \mto (A \otimes B) \otimes A & \quad &
+    \cR{A,B} : (B \otimes A) \mto A \otimes (B \otimes A)\\
+  \end{array}
+  \]
+  Furthermore, the following diagrams must commute:
+    \begin{mathpar}
+      \bfig
+      \square/<-`->``/<1050,400>[
+	A\otimes I`
+        A`
+        (A\otimes I)\otimes A`;
+	\rho_{A}^{-1}`
+	\cL{A,I}``]
+      \square(1050,0)/->``->`/<1050,400>[
+        A`
+        I\otimes A``
+        A\otimes(I\otimes A);
+        \lambda_{A}^{-1}``
+	\cR{A,I}`]
+        \morphism(0,0)|b|<2100,0>[(A\otimes I)\otimes A`A\otimes(I\otimes A);\alpha_{A,I,A}]
+      \efig
+    \end{mathpar}
+    \begin{mathpar}
+    \bfig
+      \square/->`->``->/<1300,800>[
+        A\otimes A`
+        A\otimes(A\otimes I)`
+        (I\otimes A)\otimes A`
+        (A\otimes(I\otimes A))\otimes A;
+        id_{A}\otimes\rho_{A}^{-1}`
+        \lambda_{A}^{-1}\otimes id_{A}``
+        \cR{A,I}\otimes id_{A}]
+      \qtriangle(1300,400)/->``->/<1300,400>[
+        A\otimes(A\otimes I)`
+        A\otimes((A\otimes I)\otimes A)`
+        A\otimes(A\otimes A);
+        id_{A}\otimes\cL{A,I}``
+        id_{A}\otimes(\rho_{A}\otimes id_{A})]
+      \dtriangle(1300,0)/`<-`->/<1300,400>[
+        A\otimes(A\otimes A)`
+        (A\otimes(I\otimes A))\otimes A`
+        (A\otimes A)\otimes A;
+        `
+        \alpha_{A,A,A}`
+        (id_{A}\otimes\lambda_{A})\otimes id_{A}]
+    \efig
+    \end{mathpar}
 \end{definition}
 
 \begin{definition}
   \label{def:exchange}
-  A \textbf{Lambek category with exchange}, 
+  A \textbf{Lambek category with exchange}, $(\cat{L}, \otimes, I,
+  \lambda, \rho, \alpha, \e{})$, is a Lambek category, $(\cat{L},
+  \otimes, I, \lambda, \rho, \alpha)$, such that $\cat{L}$ is
+  symmetric monoidal, where $\e{A,B} : A \otimes B \mto B \otimes A$
+  is the symmetry.
 \end{definition}
