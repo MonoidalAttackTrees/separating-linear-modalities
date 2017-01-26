@@ -16,11 +16,11 @@ all: pdf
 
 pdf : Elle.pdf
 
-Elle-ott.tex : Elle.ott
-	$(OTT) $(OTT_FLAGS) -i Elle.ott -o Elle-ott.tex
+Elle-output.tex : Elle.ott Elle.tex
+	$(OTT) $(OTT_FLAGS) -i Elle.ott -o Elle-ott.tex -tex_filter Elle.tex Elle-output.tex
 
-Elle.pdf : Elle.tex Makefile Elle-ott.tex
-	$(PDFLATEX) Elle.tex
+Elle.pdf : Elle.tex Makefile Elle-output.tex
+	$(PDFLATEX) -jobname=Elle Elle-output.tex
 
 clean :
 	rm -f *.aux *.dvi *.ps *.log *-ott.tex *-output.tex *.bbl *.blg *.rel *.pdf *~ *.vtc *.out *.spl *-inc.tex

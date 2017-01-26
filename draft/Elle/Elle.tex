@@ -6,6 +6,7 @@
 \usepackage{txfonts}
 \usepackage{color}
 \usepackage{tikz}
+\usepackage{mathpartir}
 
 \newcommand\encircle[1]{%
   \tikz[baseline=(X.base)] 
@@ -17,6 +18,55 @@
 \input{Elle-ott}
 
 \begin{document}
-  \footnotesize
-  \ottall
+
+\noindent
+Deriving exchange in Elle comonadicly:
+
+\begin{center}
+  \tiny
+  \begin{math}
+    $$\mprset{flushleft}
+    \inferrule* [right={\tiny impR}] {
+      $$\mprset{flushleft}
+    \inferrule* [right={\tiny tenL}] {
+      $$\mprset{flushleft}
+    \inferrule* [right={\tiny Fl}] {
+      $$\mprset{flushleft}
+      \inferrule* [right={\tiny Fl}] {
+        $$\mprset{flushleft}
+        \inferrule* [right={\tiny beta}] {
+          $$\mprset{flushleft}
+          \inferrule* [right={\tiny tenR}] {
+            $$\mprset{flushleft}
+            \inferrule* [right={\tiny Fr}] {
+              $$\mprset{flushleft}
+              \inferrule* [right={\tiny ax}] {
+                \,
+              }{[[y0 : Gf B |- y0 : Gf B]]}
+            }{[[y0 : Gf B; . |- F y0 : F Gf B]]}
+            \\
+            $$\mprset{flushleft}
+            \inferrule* [right={\tiny Fr}] {
+              $$\mprset{flushleft}
+              \inferrule* [right={\tiny ax}] {
+                \,
+              }{[[x0 : Gf A |- x0 : Gf A]]}
+            }{[[x0 : Gf A; . |- F x0 : F Gf A]]}
+          }{[[y0 : Gf B, x0 : Gf A ; . |- h(F y0) (x) F x0 : h(F Gf B) (x) F Gf A]]}
+        }{[[x1 : Gf A, y1 : Gf B ; . |- ex y1 , x1 with y0 , x0 in (h(F y0) (x) F x0) : h(F Gf B) (x) F Gf A]]}
+      }{[[x1 : Gf A ; y2 : F Gf B |- let y2 : F Gf B be F y1 in (ex y1 , x1 with y0 , x0 in (h(F y0) (x) F x0)) : h(F Gf B) (x) F Gf A]]}
+    }{[[. ; x2 : F Gf A, y2 : F Gf B |- let x2 : F Gf A be F x1 in (let y2 : F Gf B be F y1 in (ex y1 , x1 with y0 , x0 in (h(F y0) (x) F x0))) : h(F Gf B) (x) F Gf A]]}
+    }{[[. ; z : h(F Gf A) (x) F Gf B |- let z : h(F Gf A) (x) F Gf B be x2 (x) y2 in (let x2 : F Gf A be F x1 in (let y2 : F Gf B be F y1 in (ex y1 , x1 with y0 , x0 in (h(F y0) (x) F x0)))) : (h(F Gf B) (x) F Gf A)]]}
+    }{[[. ; . |- \l z : h(F Gf A) (x) F Gf B . let z : h(F Gf A) (x) F Gf B be x2 (x) y2 in (let x2 : F Gf A be F x1 in (let y2 : F Gf B be F y1 in (ex y1 , x1 with y0 , x0 in (h(F y0) (x) F x0)))) : (h(F Gf A) (x) F Gf B) -> (h(F Gf B) (x) F Gf A)]]}
+  \end{math}
+\end{center}
+
+\appendix
+
+\section{Full Ott Spec}
+\label{sec:full_ott_spec}
+\footnotesize
+\ottall
+% section full_ott_spec (end)
+
 \end{document}
