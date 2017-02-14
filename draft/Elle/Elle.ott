@@ -5,65 +5,108 @@ metavar const, b ::=
 
 grammar
 
-A, B, C :: 'form_' ::=
-  | Base    ::   :: Base          {{com Base type }}
+
+% Lambek category:
+A, B, C :: 'lform_' ::=
+  | Base    ::   :: Base          
   {{tex \mathsf{B} }}
-  | Unit    ::   :: Unit          {{com Unit }}
-  | A (x) B ::   :: Tensor        {{com Non-commutative tensor }}
-  | A -> B  ::   :: RFun          {{com Left implication }}
-  | A <- B  ::   :: LFun          {{com Right implication }}
-  | w A     ::   :: Weak
-  {{tex \mathsf{w}\,[[A]] }}
-  | c A     ::   :: Contraction
-  {{tex \mathsf{c}\,[[A]] }}
-  | e A     ::   :: Exchange
-  {{tex \mathsf{e}\,[[A]] }}  
+  | Unit    ::   :: Unit          
+  | A (x) B ::   :: Tensor        
+  | A -> B  ::   :: RFun          
+  | A <- B  ::   :: LFun          
   | ( A )   :: M :: Parens 
   | h( A )  :: M :: HiddenParens 
   {{ tex [[A]] }}
+  | F X     ::   :: LeftAdj
+  {{tex \mathsf{F}[[X]] }}
+
+% Symmetric monoidal closed category:
+X, Y, Z :: 'sform_' ::=
+  | Base    ::   :: Base          
+  {{tex \mathsf{B} }}
+  | Unit    ::   :: Unit          
+  | X (x) Y ::   :: Tensor        
+  | X -> Y  ::   :: LFun          
+  | X <- Y  ::   :: RFun          
+  | ( X )   :: M :: Parens 
+  | h( X )  :: M :: HiddenParens 
+  {{ tex [[X]] }}
+  | Gf A     ::   :: RightAdj
+  {{tex \mathsf{G}[[A]] }}
+
+T :: 'type_' ::=
+  | A :: :: LType
+  | X :: :: SType
+
+p :: 'pattern_' ::=
+  | - :: :: hole
+  {{tex \star }}
+  | x :: :: var
+  | triv :: :: triv
+  {{tex \mathsf{triv} }}
+  | p (x) p' :: :: ten
+  | F x :: :: LeftAdj
+  {{tex \mathsf{F} [[x]] }}
+  | Gf x     ::   :: RightAdj
+  {{tex \mathsf{G}[[x]] }}
 
 t :: 'term_' ::=
   | x :: :: Var
   | b :: :: Const
-  | unit :: :: Unit
-  {{tex \mathsf{unit} }}
-  | let t1 : A be t2 in t3 :: :: let
-  {{tex \mathsf{let}\,[[t1]] : [[A]]\,\mathsf{be}\,[[t2]]\,\mathsf{in}\,[[t3]] }}
-  | letU t1 be t2 in t3 :: S :: letUnit
-  {{tex \mathsf{let}\,[[t1]]\,\mathsf{be}\,[[t2]]\,\mathsf{in}\,[[t3]] }}  
+  | triv :: :: Unit
+  {{tex \mathsf{triv} }}
+  | let t1 : T be p in t2 :: :: let
+  {{tex \mathsf{let}\,[[t1]] : [[T]]\,\mathsf{be}\,[[p]]\,\mathsf{in}\,[[t2]] }}
   | t1 (x) t2 :: :: Tensor
   | \l x : A . t :: :: LFun
   {{tex \lambda_l [[x]] : [[A]].[[t]] }}
   | \r x : A . t :: :: RFun
   {{tex \lambda_r [[x]] : [[A]].[[t]] }}
+  | \ x : A . t :: :: Fun
+  {{tex \lambda [[x]] : [[A]].[[t]] }}  
   | appl t1 t2   :: :: Appl
   {{tex \mathsf{app}_l\,[[t1]]\,[[t2]] }}
   | appr t1 t2   :: :: Appr
   {{tex \mathsf{app}_r\,[[t1]]\,[[t2]] }}
-  | w t          :: :: Weak
-  {{tex \mathsf{w}\,[[t]] }}
-  | e t          :: :: Exchange
-  {{tex \mathsf{e}\,[[t]] }}
-  | c t          :: :: Contraction
-  {{tex \mathsf{c}\,[[t]] }}
-  | weakl t1 in t2 :: :: Weakl
-  {{tex \mathsf{weak}_l\,[[t1]]\,\mathsf{in}\,[[t2]] }}
-  | weakr t1 in t2 :: :: Weakr
-  {{tex \mathsf{weak}_r\,[[t1]]\,\mathsf{in}\,[[t2]] }}
-  | conl x , y to t1 in t2 :: :: Conl
-  {{tex \mathsf{con}_l\,[[x]],[[y]]\,\mathsf{to}\,[[t1]]\,\mathsf{in}\,[[t2]] }}
-  | conr x , y to t1 in t2 :: :: Conr
-  {{tex \mathsf{con}_r\,[[x]],[[y]]\,\mathsf{to}\,[[t1]]\,\mathsf{in}\,[[t2]] }}
+  | app t1 t2   :: :: App
+  {{tex \mathsf{app}\,[[t1]]\,[[t2]] }}  
   | ex x1 , x2 with t1 , t2 in t3 :: :: Ex
   {{tex \mathsf{ex}\,[[x1]],[[x2]]\,\mathsf{with}\,[[t1]],[[t2]]\,\mathsf{in}\,[[t3]] }}
-  | distecw t                     :: :: DistECW
-  {{tex \mathsf{dist}_{\mathsf{ecw} }\,[[t]] }}
-  | distcw t                     :: :: DistCW
-  {{tex \mathsf{dist}_{\mathsf{cw} }\,[[t]] }}
-  | distew t                     :: :: DistEW
-  {{tex \mathsf{dist}_{\mathsf{ew} }\,[[t]] }}
-  | distec t                     :: :: DistEC
-  {{tex \mathsf{dist}_{\mathsf{ec} }\,[[t]] }}  
+  | [ t1 / x ] t2 :: M :: Subst
+  | [ s / x ] t   :: M :: Subst2
+  | ( t )         :: S :: parens
+  | h( t )        :: M :: hparen
+  {{tex [[t]] }}
+  | F s           ::   :: LeftAdj
+  {{tex \mathsf{F}[[s]] }}
+
+s :: 'sterm_' ::=
+  | x :: :: Var
+  | b :: :: Const
+  | triv :: :: Unit
+  {{tex \mathsf{triv} }}
+  | let s1 : X be p in s2 :: :: let
+  {{tex \mathsf{let}\,[[s1]] : [[X]]\,\mathsf{be}\,[[p]]\,\mathsf{in}\,[[s2]] }}
+  | s1 (x) s2 :: :: Tensor
+  | \l x : X . s :: :: LFun
+  {{tex \lambda_l [[x]] : [[X]].[[s]] }}
+  | \r x : X . s :: :: RFun
+  {{tex \lambda_r [[x]] : [[X]].[[s]] }}
+  | \ x : X . s :: :: Fun
+  {{tex \lambda [[x]] : [[X]].[[s]] }}  
+  | appl s1 s2   :: :: Appl
+  {{tex \mathsf{app}_l\,[[s1]]\,[[s2]] }}
+  | appr s1 s2   :: :: Appr
+  {{tex \mathsf{app}_r\,[[s1]]\,[[s2]] }}
+  | app s1 s2   :: :: App
+  {{tex \mathsf{app}\,[[s1]]\,[[s2]] }}  
+  | ex x1 , x2 with s1 , s2 in s3 :: :: Ex
+  {{tex \mathsf{ex}\,[[x1]],[[x2]]\,\mathsf{with}\,[[s1]],[[s2]]\,\mathsf{in}\,[[s3]] }}
+  | [ s1 / x ] s2 :: M :: Subst
+  | ( s )         :: S :: parens
+  | h( s )        :: M :: hparen
+  | Gf t           ::   :: RightAdj
+  {{tex \mathsf{G}[[t]] }}
 
 G {{tex \Gamma}}, D {{tex \Delta}}, I {{tex \Phi}}, P {{tex \Psi}} :: 'Ctx_' ::=
   | .       :: :: Empty
@@ -71,6 +114,7 @@ G {{tex \Gamma}}, D {{tex \Delta}}, I {{tex \Phi}}, P {{tex \Psi}} :: 'Ctx_' ::=
   | G1 , G2 :: :: Ext
   | x : A   :: :: El
   | ( G )   :: S :: Paren
+  | x : X   ::   :: EParen
 
 formula :: 'formula_' ::=
   | judgement            ::   :: judgement
@@ -106,111 +150,129 @@ defns
   Jtype :: '' ::=
 
 defn
-  G ; P ; I ; D |- t : A :: :: lty :: ''
+  G |- s : X :: :: sty :: 'S_'
+by 
+
+  -------------- :: var
+  x : X |- x : X
+
+  G,D |- s : X
+  --------------------------------------------- :: unitL
+  G,x : Unit,D |- let x : Unit be triv in s : X
+
+  ---------------- :: unitR
+  . |- triv : Unit
+
+  G, x : X, y : Y,D |- s : Z
+  --------------------------------------------- :: beta
+  G, z : Y, w : X,D |- ex w,z with x,y in s : Z
+
+  G |- s1 : X && D1,x : X,D2 |- s2 : Y
+  ------------------------------------ :: cut
+  D1,G,D2 |- [s1/x]s2 : Y
+
+  G,x : X,y : Y,D |- s : Z
+  ------------------------------------------------------ :: tenL
+  G,z : X (x) Y,D |- let z : X (x) Y be x (x) y in s : Z
+
+  G |- s1 : X && D |- s2 : Y
+  -------------------------- :: ten
+  G,D |- s1 (x) s2 : X (x) Y  
+
+  G |- s1 : X && D1,x : Y,D2 |- s2 : Z
+  ----------------------------------------- :: impLl
+  D1,G,y : X -> Y,D2 |- [appl y s1/x]s2 : Z
+
+  G |- s1 : X && D1,x : Y,D2 |- s2 : Z
+  ----------------------------------------- :: impL2
+  D1,y : Y <- X,G,D2 |- [appr y s1/x]s2 : Z
+
+  G, x : X |- s : Y
+  ---------------------- :: impRl
+  G |- \l x:X.s : X -> Y
+
+  x : X,G |- s : Y
+  ---------------------- :: impRr
+  G |- \r x:X.s : Y <- X
+
+  G ; . |- t : A
+  ---------------- :: Gr
+  G |- Gf t : Gf A
+
+defn
+  G ; P |- t : A :: :: lty :: 'L_'
 by
 
-  -------------------------- :: Lax
-  . ; . ; . ; x : A |- x : A
+  ------------------ :: ax
+  . ; x : A |- x : A
 
-  -------------------------- :: Wax
-  . ; . ; x : A ; . |- x : A
+  G,D;P |- t : A
+  ----------------------------------------------- :: unitl1
+  G,x : Unit,D;P |- let x : Unit be triv in t : A
 
-  -------------------------- :: Cax
-  . ; x : A ; . ; . |- x : A
+  G;P,I |- t : A
+  ----------------------------------------------- :: unitl2
+  G;P,x : Unit,I |- let x : Unit be triv in t : A
 
-  -------------------------- :: Eax
-  x : A ; . ; . ; . |- x : A
+  -------------------- :: unitr
+  . ; . |- triv : Unit
 
-  ---------------------- :: const
-  . ; . ; . ; . |- b : B
+  G, x : X, y : Y,D;P |- t : A
+  ----------------------------------------------- :: beta
+  G, z : Y, w : X,D;P |- ex w,z with x,y in t : A
 
-  ---------------------------- :: unitI
-  . ; . ; . ; . |- unit : Unit
+  G |- s : X && D1,x : X,D2;P |- t : A
+  ------------------------------------ :: cut1
+  D1,G,D2;I |- [s/x]t : A
 
-  G1;P1;I1;D1 |- t1 : Unit && G2;P2;I1;D2 |- t2 : C
-  ------------------------------------------------------------ :: unitE
-  (G1,G2);(P1,P2);(I1,I2);(D1,D2) |- letU unit be t1 in t2 : C
+  G;P |- t1 : A && D;I1,x : A,I2 |- t2 : B
+  ---------------------------------------- :: cut2
+  G,D;I1,P,I2 |- [t1/x]t2 : B
 
-  G1;P1;I1;D1 |- t1 : A && G2;P2;I1;D2 |- t2 : B
-  ------------------------------------------------------ :: tensorI
-  (G1,G2);(P1,P2);(I1,I2);(D1,D2) |- t1 (x) t2 : A (x) B
+  G,x : X,y : Y,D;P |- t : A
+  -------------------------------------------------------- :: tenL1
+  G,z : X (x) Y,D;P |- let z : X (x) Y be x (x) y in t : A
 
-  G1;P1;I1;D1 |- t1 : A (x) B && G2;P2;I1;D2, x: A, y : B |- t2 : B
-  ------------------------------------------------------------------------ :: tensorE
-  (G1,G2);(P1,P2);(I1,I2);(D1,D2) |- let x (x) y : A (x) B be t1 in t2 : C
+  G;P,x : A, y : B,I |- t : A
+  -------------------------------------------------------- :: tenL2
+  G;P,z : A (x) B,I |- let z : A (x) B be x (x) y in t : A
 
-  G;P;I;x : A,D |- t : B
-  -------------------------------- :: lfun
-  G;P;I;D |- \l x : A . t : A -> B
+  G;P |- t1 : A && D;I |- t2 : B
+  ------------------------------ :: tenR
+  G,D;P,I |- t1 (x) t2 : A (x) B
 
-  G;P;I;D,x : A |- t : B
-  -------------------------------- :: rfun
-  G;P;I;D |- \r x : A . t : B <- A
+  G |- s : X && D1,x : Y,D2;P |- t : A
+  ----------------------------------------- :: impLl
+  D1,G,y : X -> Y,D2;P |- [appl y s/x]t : A
 
-  G1;P1;I1;D1 |- t1 : A -> B && G2;P2;I1;D2 |- t2 : A
-  --------------------------------------------------- :: lapp
-  (G1,G2);(P1,P2);(I1,I2);(D1,D2) |- appl t1 t2 : B
+  G |- s : X && D1,x : Y,D2;P |- t : A
+  ------------------------------------------ :: impL2
+  D1,y : Y <- X,G,D2;P |- [appr y s1/x]t : A
 
-  G1;P1;I1;D1 |- t1 : B <- A && G2;P2;I1;D2 |- t2 : A
-  --------------------------------------------------- :: rapp
-  (G1,G2);(P1,P2);(I1,I2);(D1,D2) |- appr t1 t2 : B
+  G;P |- t1 : A && D;I1,x : B,I2 |- t2 : A
+  --------------------------------------------- :: impL3
+  G,D;I1,P,y : A -> B,I2 |- [appl y t1/x]t2 : A
 
-  .;.;P;. |- t : A
-  -------------------- :: wI
-  .;.;P;. |- w t : w A
+  G;P |- t1 : A && D;I1,x : B,I2 |- t2 : A
+  --------------------------------------------- :: impL4
+  G,D;I1,y : B <- A,P,I2 |- [appl y t1/x]t2 : A
 
-  .;I;.;. |- t : A
-  -------------------- :: cI
-  .;I;.;. |- c t : c A
+  G;P,x : A |- t : B
+  ------------------------ :: impRl
+  G;P |- \l x:A.t : A -> B
 
-  G;.;.;. |- t : A
-  -------------------- :: eI
-  G;.;.;. |- e t : e A
+  G;x : A,P |- t : B
+  ------------------------ :: impRr
+  G;P |- \r x:A.t : B <- A
 
-  G1;P1;I1;D1 |- t1 : w A && G2;P2;I1, x : A;D2 |- t2 : B
-  ---------------------------------------------------------------- :: wE
-  (G1,G2);(P1,P2);(I1,I2);(D1,D2) |- let w x : w A be t1 in t2 : B
+  G |- s : X
+  ---------------- :: Fr
+  G;. |- F s : F X
 
-  G1;P1;I1;D1 |- t1 : c A && G2;P2, x : A;I1;D2 |- t2 : B
-  ---------------------------------------------------------------- :: cE
-  (G1,G2);(P1,P2);(I1,I2);(D1,D2) |- let c x : c A be t1 in t2 : B
+  G,x : X;P |- t : A
+  ------------------------------------------ :: Fl
+  G;z : F X,P |- let z : F X be F x in t : A
 
-  G1;P1;I1;D1 |- t1 : e A && G2, x : A;P2;I1;D2 |- t2 : B
-  ---------------------------------------------------------------- :: eE
-  (G1,G2);(P1,P2);(I1,I2);(D1,D2) |- let e x : e A be t1 in t2 : B
-
-  G;P;I;D |- t : B && x nin FV(t)
-  -------------------------------- :: rweak
-  G;P;I,x : A;D |- weakr x in t : B
-
-  G;P;I;D |- t : B && x nin FV(t)
-  --------------------------------- :: lweak
-  G;P;x : A,I;D |- weakl x in t : B
-
-  G;P1,x : A,P2,y : A,P3;I;D |- t : B
-  ---------------------------------------------- :: lcon
-  G;P1,z : A,P2,P3;I;D |- conl x,y to z in t : B
-
-  G;P1,x : A,P2,y : A,P3;I;D |- t : B
-  ---------------------------------------------- :: rcon
-  G;P1,P2,z : A,P3;I;D |- conr x,y to z in t : B
-
-  G1,x1 : A, x2 : B,G2;P;I;D |- t : C
-  ------------------------------------------------------ :: ex
-  G,z1 : B, z2 : A;P;I;D |- ex x1,x2 with z1,z2 in t : C
-
-  G;P;I;D |- t : w c A
-  --------------------------- :: DistCW
-  G;P;I;D |- distcw t : c w A
-
-  G;P;I;D |- t : w e A
-  -------------------------- :: DistEW
-  G;P;I;D |- distew t : e w A
-
-  G;P;I;D |- t : c e A
-  -------------------------- :: DistEC
-  G;P;I;D |- distec t : e c A
-
-  G;P;I;D |- t : w c e A
-  ---------------------------- :: DistECW
-  G;P;I;D |- distecw t : e c w A
+  G;P,x : A |- t : B
+  --------------------------------------------- :: Gl
+  z : Gf A,G;P |- let z : Gf A be Gf x in t : B
