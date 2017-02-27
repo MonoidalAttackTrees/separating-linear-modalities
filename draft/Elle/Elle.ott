@@ -72,6 +72,10 @@ t :: 'term_' ::=
   {{tex \mathsf{app}\,[[t1]]\,[[t2]] }}  
   | ex x1 , x2 with t1 , t2 in t3 :: :: Ex
   {{tex \mathsf{ex}\,[[x1]],[[x2]]\,\mathsf{with}\,[[t1]],[[t2]]\,\mathsf{in}\,[[t3]] }}
+  | contrR x1 as t1 , t2 in t3 :: :: ContrR
+  {{tex \mathsf{contrR}\,[[x1]]\,\mathsf{as}\,[[t1]],[[t2]]\,\mathsf{in}\,[[t3]] }}
+  | contrL x1 as t1 , t2 in t3 :: :: ContrL
+  {{tex \mathsf{contrL}\,[[x1]]\,\mathsf{as}\,[[t1]],[[t2]]\,\mathsf{in}\,[[t3]] }}
   | [ t1 / x ] t2 :: M :: Subst
   | [ s / x ] t   :: M :: Subst2
   | ( t )         :: S :: parens
@@ -102,6 +106,10 @@ s :: 'sterm_' ::=
   {{tex \mathsf{app}\,[[s1]]\,[[s2]] }}  
   | ex x1 , x2 with s1 , s2 in s3 :: :: Ex
   {{tex \mathsf{ex}\,[[x1]],[[x2]]\,\mathsf{with}\,[[s1]],[[s2]]\,\mathsf{in}\,[[s3]] }}
+  | contrR x1 as s1 , s2 in s3 :: :: ContrR
+  {{tex \mathsf{contrR}\,[[x1]]\,\mathsf{as}\,[[s1]],[[s2]]\,\mathsf{in}\,[[s3]] }}
+  | contrL x1 as s1 , s2 in s3 :: :: ContrL
+  {{tex \mathsf{contrL}\,[[x1]]\,\mathsf{as}\,[[s1]],[[s2]]\,\mathsf{in}\,[[s3]] }}
   | [ s1 / x ] s2 :: M :: Subst
   | ( s )         :: S :: parens
   | h( s )        :: M :: hparen
@@ -166,6 +174,18 @@ by
   G, x : X, y : Y,D |- s : Z
   --------------------------------------------- :: beta
   G, z : Y, w : X,D |- ex w,z with x,y in s : Z
+
+  G1, x : X, G2, y : X, G3 |- s : Y
+  --------------------------------------------- :: contrR
+  G1, G2, z : X, G3 |- contrR z as x,y in s : Y
+
+  G1, x : X, G2, y : X, G3 |- s : Y
+  --------------------------------------------- :: contrL
+  G1, z : X, G2, G3 |- contrL z as x,y in s : Y
+
+  G, D |- s : Y
+  -------------------- :: weak
+  G, x : X, D |- s : Y
 
   G |- s1 : X && D1,x : X,D2 |- s2 : Y
   ------------------------------------ :: cut
