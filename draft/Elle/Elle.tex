@@ -181,9 +181,9 @@ Deriving contrL in Elle comonadicly:
           \inferrule* [right={\tiny unitR}] {
             \,
           }{[[. |- triv : Unit]]}
-        }{[[x0 : Gf A ; . |- triv : Unit]]}
-      }{[[x1 : F Gf A ; . |- let x1 : F Gf A be F x0 in triv : Unit]]}
-    }{[[. ; . |- \l x1 : F Gf A . let x1 : F Gf A be F x0 in triv : (F Gf A) -> (Unit)]]}
+        }{[[x0 : Gf A ; . |- weak x0 in triv : Unit]]}
+      }{[[x1 : F Gf A ; . |- let x1 : F Gf A be F x0 in weak x0 in triv : Unit]]}
+    }{[[. ; . |- \l x1 : F Gf A . let x1 : F Gf A be F x0 in weak x0 in triv : (F Gf A) -> (Unit)]]}
   \end{math}
 \end{center}
 

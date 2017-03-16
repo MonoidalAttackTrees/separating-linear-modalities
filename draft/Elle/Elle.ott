@@ -250,7 +250,7 @@ by
   G, z : Y, w : X,D;P |- ex w,z with x,y in t : A
 
   G, D ; P |- t : B && x nin1 |G,D,P|
-  ---------------------------------- :: weak
+  ----------------------------------- :: weak
   G, x : X, D ; P |- weak x in t : B
 
   G1, x : X, G2, y : X, G3 ; P |- t : B
