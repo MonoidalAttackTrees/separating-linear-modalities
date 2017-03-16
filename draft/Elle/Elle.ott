@@ -137,6 +137,10 @@ formula :: 'formula_' ::=
   {{tex [[formula]] }}
   | x nin FV ( t ) :: :: FV
   {{tex [[x]] \not\in \mathsf{FV}([[t]]) }}
+  | x nin1 | G , D , P | :: :: NiNCtx1
+  {{tex [[x]] \not\in | [[G]], [[D]], [[P]] | }}
+  | x nin2 | G , D |     :: :: NiNCtx2
+  {{tex [[x]] \not\in | [[G]], [[D]] | }}
 
 terminals :: 'terminals_' ::=
   | Unit :: :: Unit
@@ -187,7 +191,7 @@ by
   --------------------------------------------- :: contrL
   G1, z : X, G2, G3 |- contrL z as x,y in s : Y
 
-  G, D |- s : Y
+  G, D |- s : Y && x nin2 |G,D|
   ------------------------------ :: weak
   G, x : X, D |- weak x in s : Y
 
@@ -245,7 +249,7 @@ by
   ----------------------------------------------- :: beta
   G, z : Y, w : X,D;P |- ex w,z with x,y in t : A
 
-  G, D ; P |- t : B
+  G, D ; P |- t : B && x nin1 |G,D,P|
   ---------------------------------- :: weak
   G, x : X, D ; P |- weak x in t : B
 
