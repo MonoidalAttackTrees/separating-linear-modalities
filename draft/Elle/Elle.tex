@@ -106,8 +106,8 @@ Deriving contrR in Elle comonadicly:
                 }{[[y0 : Gf B, x0 : Gf A ; . |- h(F y0) (x) F x0 : h(F Gf B) (x) F Gf A]]}
               }{[[x1 : Gf A, y0 : Gf B, x0 : Gf A ; . |- h(F x1) (x) (h(F y0) (x) F x0) : h(F Gf A) (x) (h(F Gf B) (x) F Gf A)]]}
             }{[[y0 : Gf B, x2 : Gf A ; . |- contrR x2 as x1, x0 in (h(F x1) (x) (h(F y0) (x) F x0)) : h(F Gf A) (x) (h(F Gf B) (x) F Gf A)]]}
-          }{[[y0 : Gf B, x3 : F Gf A ; . |- let x3 : F Gf A be F x2 in (contrR x2 as x1, x0 in (h(F x1) (x) (h(F y0) (x) F x0))) : h(F Gf A) (x) (h(F Gf B) (x) F Gf A)]]}
-        }{[[y1 : F Gf B, x3 : F Gf A ; . |- let y1 : F Gf B be F y0 in (let x3 : F Gf A be F x2 in (contrR x2 as x1, x0 in (h(F x1) (x) (h(F y0) (x) F x0)))) : h(F Gf A) (x) (h(F Gf B) (x) F Gf A)]]}
+          }{[[y0 : Gf B ; x3 : F Gf A |- let x3 : F Gf A be F x2 in (contrR x2 as x1, x0 in (h(F x1) (x) (h(F y0) (x) F x0))) : h(F Gf A) (x) (h(F Gf B) (x) F Gf A)]]}
+        }{[[. ; y1 : F Gf B, x3 : F Gf A |- let y1 : F Gf B be F y0 in (let x3 : F Gf A be F x2 in (contrR x2 as x1, x0 in (h(F x1) (x) (h(F y0) (x) F x0)))) : h(F Gf A) (x) (h(F Gf B) (x) F Gf A)]]}
       }{[[. ; z : h(F Gf B) (x) F Gf A |- let z : h(F Gf B) (x) F Gf A be y1 (x) x3 in (let y1 : F Gf B be F y0 in (let x3 : F Gf A be F x2 in (contrR x2 as x1, x0 in (h(F x1) (x) (h(F y0) (x) F x0))))) : h(F Gf A) (x) (h(F Gf B) (x) F Gf A)]]}
     }{[[. ; . |- \l z : h(F Gf B) (x) F Gf A . let z : h(F Gf B) (x) F Gf A be y1 (x) x3 in (let y1 : F Gf B be F y0 in (let x3 : F Gf A be F x2 in (contrR x2 as x1, x0 in (h(F x1) (x) (h(F y0) (x) F x0))))) : (h(F Gf B) (x) F Gf A) -> (h(F Gf A) (x) (h(F Gf B) (x) F Gf A))]]}
   \end{math}
