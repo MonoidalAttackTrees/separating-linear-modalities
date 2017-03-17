@@ -25,9 +25,13 @@ ifeq ($(SKIM), skim_revert.sh)
 	$(SKIM) $(CURDIR)/main.pdf
 endif
 
+introduction-ott.tex : introduction.tex Elle/Elle.ott
+	@$(OTT) $(OTT_FLAGS) -i Elle/Elle.ott -o Elle-inc.tex -tex_name_prefix L \
+		-tex_filter introduction.tex introduction-ott.tex
+
 # Now this takes the full LaTex translation and compiles it using
 # pdflatex.
-main.pdf : main.tex ref.bib Makefile appendix.tex Lambek-categories.tex
+main.pdf : main.tex ref.bib Makefile appendix.tex Lambek-categories.tex introduction-ott.tex categorical-models.tex
 	$(PDFLATEX) -jobname=main main.tex
 	$(BIBTEX) main
 	$(PDFLATEX) -jobname=main main.tex

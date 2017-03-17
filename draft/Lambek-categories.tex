@@ -182,29 +182,25 @@ linear logic.
   is the symmetry.
 \end{definition}
 
-
 \begin{lemma}
   \label{lemma:internal-homs-collapse}
   Let $A$ and $B$ be two objects in a Lambek category with exchange. Then
-  $$(A \lto B) \cong (B \rto A)$$.
+  $(A \lto B) \cong (B \rto A)$.
 \end{lemma}
 \begin{proof}
-  For any object $C$ in the category, we have
+  First, notice that for any object $C$ we have
   \begin{center}
   \begin{math}
   \small
-  \begin{array}{lll}
-    \,\,\,\,\,Hom[C,A\lto B]
-    \\\,\,\,\,\,\,\,\,\,\,\,
-    \cong Hom[C\otimes A,B] & \cat{L}\text{ is a Lambek category}\\
-    \,\,\,\,\,\,\,\,\,\,\,\cong Hom[A\otimes C,B] & \text{By the symmetry }\e{C,A}\\
-    \,\,\,\,\,\,\,\,\,\,\,\cong Hom[C,B\rto A] & \cat{L}\text{ is a Lambek category}
+  \begin{array}{lllll}
+    Hom[C,A\lto B]
+    & \cong & Hom[C\otimes A,B] & \cat{L}\text{ is a Lambek category}\\
+    & \cong & Hom[A\otimes C,B] & \text{By the symmetry }\e{C,A}\\
+    & \cong & Hom[C,B\rto A]    & \cat{L}\text{ is a Lambek category}
   \end{array}
   \end{math}
-  \end{center}
-  Similarly, the function $Hom[D,A\lto B]\rightarrow Hom[C,A\lto B]$ is isomorphic to the
-  function $Hom[D,B\rto A]\rightarrow Hom[C,B\rto A]$. \\
-  Thus, $Y_C(A\lto B)\cong Y_C(B\rto A)$, where $Y_C$ is a Yoneda embedding. So $A\lto B\cong B\rto A$ by Yoneda Lemma.
+  \end{center}  
+  Thus, $A\lto B\cong B\rto A$ by the Yoneda lemma.
 \end{proof}
 
 

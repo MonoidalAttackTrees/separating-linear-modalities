@@ -97,6 +97,8 @@
 \newcommand{\wn}[0]{\mathop{?}}
 \newcommand{\codiag}[1]{\bigtriangledown_{#1}}
 
+\newcommand{\seq}{\rhd}
+
 \newenvironment{changemargin}[2]{%
   \begin{list}{}{%
     \setlength{\topsep}{0pt}%
@@ -118,18 +120,18 @@
   \end{center}
 }
 
-%% %% Ott
-%% \input{BiLNL-inc}
+%% Ott
+\input{Elle-inc}
 
-\title{An Adjoint Model for Process Trees with Sequential Composition}
-\author[1]{Jiaming Jiang}
-\author[2]{Harley Eades III}
-\affil[1]{Computer Science, North Carolina State University, Raleigh, North Carolina, USA\\
-  \texttt{jjiang13@ncsu.edu}}
-\affil[2]{Computer Science, Augusta University, Augusta, Georgia, USA\\
+\title{A Family of Adjoint Models as the Foundation of Process Tree Based Threat Analysis}
+\author[1]{Harley Eades III}
+\author[2]{Jiaming Jiang}
+\affil[1]{Computer Science, Augusta University, Augusta, Georgia, USA\\
   \texttt{heades@augusta.edu}}
+\affil[2]{Computer Science, North Carolina State University, Raleigh, North Carolina, USA\\
+  \texttt{jjiang13@ncsu.edu}}
 
-\Copyright{Jiaming J. Open and Harley E. Access}
+\Copyright{Harley E. Open and Jiaming J. Access}
 
 \subjclass{TODO}
 \keywords{TODO}
@@ -144,16 +146,12 @@
 
 \section{Introduction}
 \label{sec:introduction}
-TODO \cite{Benton:1994}
+\input{introduction-ott}
 % section introduction (end)
 
 \section{Categorical Models}
 \label{sec:categorical_models}
-
-\subsection{Lambek Categories}
-\label{subsec:lambek_categories}
-\input{Lambek-categories}
-% subsection lambek_categories (end)
+\input{categorical-models}
 % section categorical_models (end)
 
 \section{Related Work}

@@ -1,0 +1,57 @@
+We develop a categorical framework in which many different
+intuitionistic substructural logics may be modeled.  The locus of this
+framework is an adjunction.  We initially take a monoidal category,
+$\cat{L}$, as a base, and then extend it with one or more structural
+morphisms -- a morphism corresponding to a structural rule in logic --
+to obtain a second category $\hat{\cat{L}}$.  Then we form a monoidal
+adjunction $\hat{\cat{L}} : F \dashv G : \cat{L}$ just as
+Benton~\cite{Benton:1994} did for intuitionistic linear logic.
+Depending on which structural morphisms we add to $\hat{\cat{L}}$ we
+will obtain different models.  In particular, each model will come
+endowed with a comonad on $\cat{L}$ which equips $\cat{L}$ with the
+ability to track the corresponding structural rule(s).
+
+We will show that by adding the morphisms for either weakening,
+contraction, or exchange, to $\cat{L}$ will yield an adjoint model of
+non-commutative relevance logic/linear logic, non-commutative
+contraction logic/linear logic, and commutative/non-commutative linear
+logic.  The latter model will come with a monoidal comonad $e :
+\cat{L} \mto \cat{L}$ such that there is a symmetry $\e{A,B} : eA \seq
+eB \mto eB \seq eA$, where $- \seq -$ denotes a non-commutative tensor
+product.  In fact, this is the first adjoint model of the Lambek
+calculus with the exchange comonad.
+
+At this point we will have adjoint models for each individual
+structural rule.  What if we want more than one structural rule?
+There are a few different choices that one can choose from depending
+on the scenario.  First, if $\hat{\cat{L}}$ contains more than one
+structural rule, then $\cat{L}$ will have a single comonad that adds
+all of those structural rules to $\cat{L}$.  For example, if
+$\hat{\cat{L}}$ contains weakening, contraction, and exchange, then
+$\hat{\cat{L}}$ is cartesian closed and $\cat{L}$ will have the usual
+$! : \cat{L} \mto \cat{L}$ comonad.  The second scenario is when
+$\cat{L}$ also contains some structural rules.  For example, if
+$\hat{\cat{L}}$ contains exchange and weakening and $\cat{L}$ contains
+exchange, then $\cat{L}$ will have a comonad, $r : \cat{L} \mto
+\cat{L}$, which combines linear logic with relevance logic.  Thus, how
+we instantiate the two categories in the adjunction influences which
+logic one may model.
+
+What if we want multiple comonads tracking different logics?  In this
+scenario the different comonads would allow us to mix the different
+logics in interesting ways.  Suppose $\cat{L}$ has no structural rules
+and $\cat{E}$ is $\cat{L}$ with exchange and $\cat{EW}$ is $\cat{E}$
+with weakening.  Then we can form two adjunctions $\cat{E} : F \dashv
+G : \cat{L}$ and $\cat{EW} : H \dashv J : \cat{L}$, but the categories
+$\cat{E}$ and $\cat{EW}$ have a structural rule in common.  So
+instead, we form the adjunction $\cat{EW} : H \dashv J : \cat{E} : F
+\dashv G : \cat{L}$.  Thus, $\cat{L}$ has the exchange comonad $e = FG
+: \cat{L} \mto \cat{L}$ as well as the relevance logic comonad $r =
+FHJG: \cat{L} \mto \cat{L}$.  Additionally, there is a comonad $w = JH
+: \cat{E} \mto \cat{E}$ adding weakening to $\cat{E}$.
+
+
+\subsection{Lambek Categories}
+\label{subsec:lambek_categories}
+\input{Lambek-categories}
+% subsection lambek_categories (end)
