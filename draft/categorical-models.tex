@@ -25,12 +25,12 @@ At this point we will have adjoint models for each individual
 structural rule.  What if we want more than one structural rule?
 There are a few different choices that one can choose from depending
 on the scenario.  First, if $\hat{\cat{L}}$ contains more than one
-structural rule, then $\cat{L}$ will have a single comonad that adds
-all of those structural rules to $\cat{L}$.  For example, if
+structural morphism, then $\cat{L}$ will have a single comonad that adds
+all of those structural morphisms to $\cat{L}$.  For example, if
 $\hat{\cat{L}}$ contains weakening, contraction, and exchange, then
 $\hat{\cat{L}}$ is cartesian closed and $\cat{L}$ will have the usual
 $! : \cat{L} \mto \cat{L}$ comonad.  The second scenario is when
-$\cat{L}$ also contains some structural rules.  For example, if
+$\cat{L}$ also contains some structural morphisms.  For example, if
 $\hat{\cat{L}}$ contains exchange and weakening and $\cat{L}$ contains
 exchange, then $\cat{L}$ will have a comonad, $r : \cat{L} \mto
 \cat{L}$, which combines linear logic with relevance logic.  Thus, how
@@ -39,19 +39,26 @@ logic one may model.
 
 What if we want multiple comonads tracking different logics?  In this
 scenario the different comonads would allow us to mix the different
-logics in interesting ways.  Suppose $\cat{L}$ has no structural rules
+logics in interesting ways.  Suppose $\cat{L}$ has no structural morphisms
 and $\cat{E}$ is $\cat{L}$ with exchange and $\cat{EW}$ is $\cat{E}$
 with weakening.  Then we can form two adjunctions $\cat{E} : F \dashv
 G : \cat{L}$ and $\cat{EW} : H \dashv J : \cat{L}$, but the categories
-$\cat{E}$ and $\cat{EW}$ have a structural rule in common.  So
+$\cat{E}$ and $\cat{EW}$ have a structural morphism in common.  So
 instead, we form the adjunction $\cat{EW} : H \dashv J : \cat{E} : F
 \dashv G : \cat{L}$.  Thus, $\cat{L}$ has the exchange comonad $e = FG
 : \cat{L} \mto \cat{L}$ as well as the relevance logic comonad $r =
 FHJG: \cat{L} \mto \cat{L}$.  Additionally, there is a comonad $w = JH
-: \cat{E} \mto \cat{E}$ adding weakening to $\cat{E}$.
+: \cat{E} \mto \cat{E}$ adding weakening to $\cat{E}$.  This idea is
+based on the amazing work of Mellies~\cite{MELLIES2004202}.
+Throughout the remainder of this section we make these ideas precise.
 
 
 \subsection{Lambek Categories}
 \label{subsec:lambek_categories}
 \input{Lambek-categories}
 % subsection lambek_categories (end)
+
+\subsection{Structural Adjoint Models}
+\label{subsec:adjoint_models}
+\input{adjoint-models}
+% subsection adjoint_models (end)

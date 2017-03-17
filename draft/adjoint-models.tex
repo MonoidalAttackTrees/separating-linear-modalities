@@ -1,0 +1,34 @@
+Now we turn to making our model precise.
+\begin{definition}
+  \label{def:model}  
+  Suppose $\cat{L}_0, \ldots, \cat{L}_n$ is a family of Lambek
+  categories with zero or more structural morphisms where $\cat{L}_i$
+  is a full subcategory of $\cat{L}_{i+1}$.  Then a \textbf{structural
+    adjoint model}, $(\cat{L}_n,F_n, G_n)$, is a composition of monoidal adjunctions:
+  $\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1} : F_{n-1} \dashv G_{n-1} : \cat{L}_{n-2} : \cdots : \cat{L}_1 : F \dashv G : \cat{L}_0$.
+\end{definition}
+This definition is an extension -- or perhaps a simplification due to
+the isolation of exchange -- of the models discussed by
+Melli\'es~\cite{MELLIES2004202}.
+
+Our structural adjoint model subsumes Benton's~\cite{Benton:1994}
+linear/non-linear model (LNL).  Simply take $\cat{L}_0$ to be a Lambek
+category with exchange and $\cat{L}_1$ to be a Lambek category with
+weakening, contraction, and exchange, and thus, $\cat{L}_1$ is
+cartesian closed.  However, our model is a lot more flexible and
+expressive.
+
+\begin{lemma}[Comonads in a Structural Adjoint Model]
+  \label{lemma:comonads_in_a_structural_adjoint_model}
+  Suppose $(\cat{L}_n,F_n, G_n)$ is a structural adjoint model.  Then
+  there are the following comonads:  
+  \begin{itemize}
+  \item $(\cat{L}_0, F_0G_0, \varepsilon^0, \delta^0), \ldots, (\cat{L}_{n-1}, F_nG_n, \varepsilon^{n}, \delta^{n})$
+  \item $(\cat{L}_0, F_0F_1G_1G_0, \varepsilon^0, \delta^0), \ldots, (\cat{L}_{n-1}, F_{n-1}F_nG_nG_{n-1}, \varepsilon^{n}, \delta^{n})$
+  \item $(\cat{L}_0, F_0F_1F_2G_2G_1G_0, \varepsilon^0, \delta^0), \ldots, (\cat{L}_{n-1}, F_{n-2}F_{n-1}F_nG_nG_{n-1}G_{n-2}, \varepsilon^{n}, \delta^{n})$\\
+    $\vdots$
+  \item $(\cat{L}_0, F_0 \cdots F_nG_n \cdots G_0, \varepsilon^0, \delta^0)$
+  \end{itemize}
+ 
+\end{lemma}
+

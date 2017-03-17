@@ -1,105 +1,118 @@
+The bases of all of our models will be what we call Lambek categories.
+These are named after Joachim Lambek to pay homage to his work on the
+Lambek calculus which can be seen as non-commutative intuitionistic
+linear logic \cite{Lambek1968-LAMTMO-5}. Thus, each of our models have
+a very basic foundation.
+
+Lambek categories are based on (non-symmetric) monoidal categories.
 \begin{definition}
   \label{def:Lambek-category}
-  A \textbf{monoidal category}, $(\cat{L}, \otimes, I, \lambda,
+  A \textbf{monoidal category}, $(\cat{L}, \seq, I, \lambda,
   \rho)$, is a category, $\cat{L}$, equipped with a bifunctor,
-  $\otimes : \cat{L} \times \cat{L} \mto \cat{L}$, called the tensor
+  $\seq : \cat{L} \times \cat{L} \mto \cat{L}$, called the tensor
   product, a distinguished object $I$ of $\cat{L}$ called the unit,
-  and three natural isomorphisms $\lambda_A : I \otimes A \mto A$,
-  $\rho_A : A \otimes I \mto A$, and $\alpha_{A,B,C} : A \otimes (B
-  \otimes C) \mto (A \otimes B) \otimes C$ called the left and right
+  and three natural isomorphisms $\lambda_A : I \seq A \mto A$,
+  $\rho_A : A \seq I \mto A$, and $\alpha_{A,B,C} : A \seq (B
+  \seq C) \mto (A \seq B) \seq C$ called the left and right
   unitors and the associator respectively.  Finally, these are subject
   to the following coherence diagrams:
   \begin{mathpar}
     \bfig
     \hSquares|aammmma|/->`->`->``->``/<400>[
-      ((A \otimes B) \otimes C) \otimes D`
-      (A \otimes (B \otimes C)) \otimes D`
-      A \otimes ((B \otimes C) \otimes D)`
-      (A \otimes B) \otimes (C \otimes D)``
-      A \otimes (B \otimes (C \otimes D));
-      \alpha_{A,B,C} \otimes \id_D`
-      \alpha_{A,B \otimes C,D}`
-      \alpha_{A \otimes B,C,D}``
-      \id_A \otimes \alpha_{B,C,D}``]
+      ((A \seq B) \seq C) \seq D`
+      (A \seq (B \seq C)) \seq D`
+      A \seq ((B \seq C) \seq D)`
+      (A \seq B) \seq (C \seq D)``
+      A \seq (B \seq (C \seq D));
+      \alpha_{A,B,C} \seq \id_D`
+      \alpha_{A,B \seq C,D}`
+      \alpha_{A \seq B,C,D}``
+      \id_A \seq \alpha_{B,C,D}``]
 
     \morphism(-200,0)<2700,0>[
-      (A \otimes B) \otimes (C \otimes D)`
-      A \otimes (B \otimes (C \otimes D));
-      \alpha_{A,B,C \otimes D}]
+      (A \seq B) \seq (C \seq D)`
+      A \seq (B \seq (C \seq D));
+      \alpha_{A,B,C \seq D}]
     \efig
     \and
     \bfig
     \Vtriangle[
-      (A \otimes I) \otimes B`
-      A \otimes (I \otimes B)`
-      A \otimes B;
+      (A \seq I) \seq B`
+      A \seq (I \seq B)`
+      A \seq B;
       \alpha_{A,I,B}`
-      \rho_{A}\otimes id_B`
-      id_A\otimes\lambda_{B}]
+      \rho_{A}\seq id_B`
+      id_A\seq\lambda_{B}]
     \efig
   \end{mathpar}
 \end{definition}
-
+\noindent
+A Lambek category adds closure to monoidal categories.
 \begin{definition}
   \label{def:Lambek-category}
   A \textbf{Lambek category} is a monoidal category $(\cat{L},
-  \otimes, I, \lambda, \rho,\alpha)$ equipped with two bifunctors
+  \seq, I, \lambda, \rho,\alpha)$ equipped with two bifunctors
   $\lto : \catop{L} \times \cat{L} \mto \cat{L}$ and $\rto : \cat{L}
   \times \catop{L} \mto \cat{L}$ that are both right adjoint to the
   tensor product.  That is, the following natural bijections hold:
   \begin{center}
     \begin{math}
       \begin{array}{lll}
-        \Hom{L}{X \otimes A}{B} \cong \Hom{L}{X}{A \lto B} & \quad\quad\quad\quad & 
-        \Hom{L}{A \otimes X}{B} \cong \Hom{L}{X}{B \rto A}\\
+        \Hom{L}{X \seq A}{B} \cong \Hom{L}{X}{A \lto B} & \quad\quad\quad\quad & 
+        \Hom{L}{A \seq X}{B} \cong \Hom{L}{X}{B \rto A}\\
       \end{array}
     \end{math}
   \end{center}
 \end{definition}
-One might call Lambek categories biclosed monoidal categories, but we
-name them in homage to Lambek for his contributions to non-commutative
-linear logic.
+An alternative name for Lambek categories is biclosed monoidal
+categories.
 
+If we add add a symmetry to a Lambek category then we will obtain a
+symmetric monoidal closed category.  The following two definitions and
+lemma capture this result.
 \begin{definition}
   \label{def:sym-monoidal-category}
-  A monoidal category $(\cat{L},\otimes,I,\lambda,\rho,\alpha)$ is
-  \textbf{symmetric} if there is a natural transformation $\beta_{A,B}
-  : A \otimes B \mto B \otimes A$ such that $\beta_{B,A} \circ
-  \beta_{A,B} = \id_{A \otimes B}$ and the following commute:
+  A monoidal category $(\cat{L},\seq,I,\lambda,\rho,\alpha)$ is
+  \textbf{symmetric} if there is a natural transformation $\e{A,B}
+  : A \seq B \mto B \seq A$ such that $\e{B,A} \circ
+  \e{A,B} = \id_{A \seq B}$ and the following commute:
   \begin{center}
     \begin{math}
       \small
       \begin{array}{lll}
         \bfig
         \hSquares|aammmaa|/->`->`->``->`->`->/[
-        (A \otimes B) \otimes C`
-        A \otimes (B \otimes C)`
-        (B \otimes C) \otimes A`
-        (B \otimes A) \otimes C`
-        B \otimes (A \otimes C)`
-        B \otimes (C \otimes A);
+        (A \seq B) \seq C`
+        A \seq (B \seq C)`
+        (B \seq C) \seq A`
+        (B \seq A) \seq C`
+        B \seq (A \seq C)`
+        B \seq (C \seq A);
         \alpha_{A,B,C}`
-        \beta_{A,B \otimes C}`
-        \beta_{A,B} \otimes \id_C``
-        \alpha_{B,C,A}`
+        \e{A,B \seq C}`
+        \e{A,B} \seq \id_C``
         \alpha_{B,A,C}`
-        \id_B \otimes \beta_{A,C}]
+        \alpha_{B,A,C}`
+        \id_B \seq \e{A,C}]
         \efig
         & \quad &
         \bfig
           \Vtriangle[
-            I \otimes A`
-            A \otimes I`
+            I \seq A`
+            A \seq I`
             A;
-            \beta_{I,A}`
+            \e{I,A}`
             \lambda_A`
             \rho_A]
           \efig
       \end{array}
     \end{math}
   \end{center}
+  Throughout this paper when $- \seq -$ is symmetric we denote it by
+  $- \otimes -$.
 \end{definition}
-
+We call a symmetric Lambek category a Lambek category with exchange,
+because the symmetric models the exchange rule.
 \begin{definition}
   \label{def:sym-monoidal-closed}
   A symmetric monoidal category $(\cat{L}, \otimes, I, \lambda, \rho,
@@ -108,7 +121,33 @@ linear logic.
   right adjoint to the tensor product.  That is, the following natural
   bijection $\Hom{L}{X \otimes A}{B} \cong \Hom{L}{X}{A \limp B}$ holds.
 \end{definition}
+\begin{lemma}
+  \label{lemma:internal-homs-collapse}
+  Let $A$ and $B$ be two objects in a Lambek category with exchange. Then
+  $(A \lto B) \cong (B \rto A)$.
+\end{lemma}
+\begin{proof}
+  First, notice that for any object $C$ we have
+  \begin{center}
+  \begin{math}
+  \small
+  \begin{array}{lllll}
+    Hom[C,A\lto B]
+    & \cong & Hom[C\otimes A,B] & \cat{L}\text{ is a Lambek category}\\
+    & \cong & Hom[A\otimes C,B] & \text{By the symmetry }\e{C,A}\\
+    & \cong & Hom[C,B\rto A]    & \cat{L}\text{ is a Lambek category}
+  \end{array}
+  \end{math}
+  \end{center}  
+  Thus, $A\lto B\cong B\rto A$ by the Yoneda lemma.
+\end{proof}
+\begin{corollary}
+  \label{corollary:LC-with-ex-mc}
+  A Lambek category with exchange is symmetric monoidal closed.
+\end{corollary}
 
+We will also be discussing two other structural rules: weakening and
+contraction.  These are defined as follows.
 \begin{definition}
   \label{def:weakening}
   A \textbf{Lambek category with weakening}, $(\cat{L}, \otimes, I,
@@ -116,7 +155,6 @@ linear logic.
   \lambda, \rho,\alpha)$ equipped with a natural transformation
   $\w{A} : A \mto I$.
 \end{definition}
-
 \begin{definition}
   \label{def:contraction}
   A \textbf{Lambek category with contraction}, $(\cat{L}, \otimes, I,
@@ -172,36 +210,17 @@ linear logic.
     \efig
     \end{mathpar}
 \end{definition}
-
-\begin{definition}
-  \label{def:exchange}
-  A \textbf{Lambek category with exchange}, $(\cat{L}, \otimes, I,
-  \lambda, \rho, \alpha, \e{})$, is a Lambek category, $(\cat{L},
-  \otimes, I, \lambda, \rho, \alpha)$, such that $\cat{L}$ is
-  symmetric monoidal, where $\e{A,B} : A \otimes B \mto B \otimes A$
-  is the symmetry.
-\end{definition}
-
-\begin{lemma}
-  \label{lemma:internal-homs-collapse}
-  Let $A$ and $B$ be two objects in a Lambek category with exchange. Then
-  $(A \lto B) \cong (B \rto A)$.
-\end{lemma}
-\begin{proof}
-  First, notice that for any object $C$ we have
-  \begin{center}
-  \begin{math}
-  \small
-  \begin{array}{lllll}
-    Hom[C,A\lto B]
-    & \cong & Hom[C\otimes A,B] & \cat{L}\text{ is a Lambek category}\\
-    & \cong & Hom[A\otimes C,B] & \text{By the symmetry }\e{C,A}\\
-    & \cong & Hom[C,B\rto A]    & \cat{L}\text{ is a Lambek category}
-  \end{array}
-  \end{math}
-  \end{center}  
-  Thus, $A\lto B\cong B\rto A$ by the Yoneda lemma.
-\end{proof}
+We call the morphisms:
+\[
+\begin{array}{lll}
+  \e{A,B} : A \otimes B \mto B \otimes A\\
+  \w{A} : A \mto I\\
+  \cL{A,B} : (A \otimes B) \mto (A \otimes B) \otimes A\\
+  \cR{A,B} : (B \otimes A) \mto A \otimes (B \otimes A)\\
+\end{array}
+\]
+structural morphisms, because they all model the various structural
+rules in intuitionistic logic.
 
 
 

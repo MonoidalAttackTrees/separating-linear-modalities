@@ -31,7 +31,7 @@ introduction-ott.tex : introduction.tex Elle/Elle.ott
 
 # Now this takes the full LaTex translation and compiles it using
 # pdflatex.
-main.pdf : main.tex ref.bib Makefile appendix.tex Lambek-categories.tex introduction-ott.tex categorical-models.tex
+main.pdf : main.tex ref.bib Makefile appendix.tex Lambek-categories.tex introduction-ott.tex categorical-models.tex adjoint-models.tex
 	$(PDFLATEX) -jobname=main main.tex
 	$(BIBTEX) main
 	$(PDFLATEX) -jobname=main main.tex
