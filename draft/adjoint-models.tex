@@ -43,18 +43,107 @@ structural rule as morphisms.
 
 \begin{lemma}
   \label{lemma:kleisli_category_gen}
-  Suppose $\cat{L}_i : F_i \dashv G_i : \cat{L}_{i-1}$ is a monoidal
+  Suppose $\cat{L}_l : F \dashv G : \cat{L}_{r}$ is a monoidal
   adjunction in the structural adjoint model
   $\overrightarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$.  Then
-  the Eilenberg-Moore category, $\cat{L}^E_{i-1}$, contains all of the
-  structural morphisms from both $\cat{L}_{i-1}$ and $\cat{L}_{i}$.
+  the Eilenberg-Moore category, $\cat{L}^E_{r}$, contains all of the
+  structural morphisms from both $\cat{L}_{r}$ and $\cat{L}_{l}$.
 \end{lemma}
-
+\begin{proof}
+  This result holds similarly to Benton's~\cite{Benton:1994} proof
+  that the Eilenberg-Moore category for the of-course comoand is
+  cartesian closed.  So we omit the details.
+\end{proof}
 
 \subsection{Example Structural Adjoint Models}
 \label{subsec:example_structural_adjoint_models}
 
-\textbf{Exchange.}
+We can give a number of example adjoint structures that are of
+interest to the research community.
+
+\textbf{Exchange.}  The first is a model that reveals how to combine
+the Lambek Calculus with the exchange comonad and Girard's of-course
+comonad.  This model is of interest to the linguistics community
+\cite{?}, because they often only want exchange in very controlled
+instances.  Valeria de Paiva~\cite{?} was the first to show that this
+is possible using Dialectica Categories and Reedy's~\cite{?}  model.
+However, she uses a comonad with the natural transformation $\e{A,B} :
+A \seq eB \mto eB \seq A$, but we feel this goes against the standard
+view of algebraic binary operations.  In addition, while Dialectica
+categories are extremely useful, but rather complex, we are interested
+in simpler models.  Thus, we prefer an adjoint model with a comonad
+which has the natural transformation $\e{A,B} : eA \seq eB \mto eB
+\seq eA$.
+
+As we have said in the introduction there are many security
+applications where one must have both a commutative and a
+non-commutative tensor product within the same logic.  For example,
+when reasoning about process trees in threat analysis.
+
+\begin{definition}
+  \label{def:LC-adjoint-structure}
+  Suppose $\cat{L}_{ewc}$ is a Lambek category with exchange,
+  weakening, and contraction, $\cat{L}_e$ is a Lambek category with
+  exchange, and $\cat{L}$ is a Lambek category.  Then a \textbf{LC
+    adjoint model} is the structural adjoint model
+  $\cat{L}_{ewc} : H \dashv J : \cat{L}_e : F \dashv G : \cat{L}$.
+\end{definition}
+
+We must now show that $\cat{L}$ in a LC adjoint model has two comonads
+$e : \cat{L} \mto \cat{L}$ adding exchange to $\cat{L}$, and $! :
+\cat{L} \mto \cat{L}$ -- Girard's of-course modality -- adding
+weakening, contraction, and exchange.  We first have the following
+corollary to Lemma~\ref{lemma:comonads_in_a_structural_adjoint_model}.
+
+\begin{corollary}
+  \label{corollary:LC-comonads}
+  Suppose $\cat{L}_{ewc} : H \dashv J : \cat{L}_e : F \dashv G : \cat{L}$ is a LC adjoint model.
+  Then there are comonads 
+  $(e : \cat{L} \mto \cat{L}, \varepsilon^e, \delta^e)$, $(! : \cat{L} \mto \cat{L}, \varepsilon^!, \delta^!)$,
+  and $(!_e : \cat{L}_e \mto \cat{L}_e, \varepsilon^{!_e}, \delta^{!_e})$.
+\end{corollary}
+\begin{proof}
+  We only show how each of the tuples are defined:
+  \begin{itemize}
+  \item $eA = FGA$, $\varepsilon^{e}_A : eA \mto A$ is the
+    counit of the adjunction, and $\delta^{e}_A = F\eta^e_{GA} : eA
+    \mto eeA$, where $\eta^e_A : A \mto GFA$ is the unit of the
+    adjunction.
+    
+  \item $!_eA = HJA$, $\varepsilon^{!_e}_A : !_eA \mto A$ is the
+    counit of the adjunction, and $\delta^{!_e}_A = H\eta^{!_e}_{JA} : !_e A
+    \mto !_e!_eA$, where $\eta^{!_e}_A : A \mto JHA$ is the unit of the
+    adjunction.  
+
+  \item $!A = FHJGA$, $\varepsilon^{!}_A : !A \mto A$ is the
+    counit of the adjunction, and $\delta^{!}_A = FH\eta^{!}_{JGA} : ! A
+    \mto !!A$, where $\eta^!_A : A \mto JGFHA$ is the unit of the
+    adjunction.
+  \end{itemize}  
+\end{proof}
+
+\noindent
+As a corollary to Lemma~\ref{lemma:kleisli_category_gen} we show that
+the Eilenberg-Moore categories contain the required structure.
+\begin{corollary}
+  \label{corollary:EM-LC-adjoint-model}
+  Suppose $\cat{L}_{ewc} : H \dashv J : \cat{L}_e : F \dashv G : \cat{L}$ is a LC adjoint model. Then
+  the Eilenberg-Moore Categories associated with the comonads
+  $(e : \cat{L} \mto \cat{L}, \varepsilon^e, \delta^e)$, $(! : \cat{L} \mto \cat{L}, \varepsilon^!, \delta^!)$,
+  and $(!_e : \cat{L}_e \mto \cat{L}_e, \varepsilon^{!_e}, \delta^{!_e})$
+  have the structure:
+  $\cat{L}^E_e$ is symmetric monoidal, and
+  $\cat{L}^E_!$ and $\cat{L}^E_{!_e}$ are cartesian closed.
+\end{corollary}
+\begin{proof}
+  The proof that $\cat{L}^E_{!_e}$ is cartesian closed follows from
+  Benton~\cite{Benton:1994}, because $\cat{L}_e$ is symmetric
+  monoidal, and $\cat{L}_{ewc}$ is cartesian closed, and hence
+  $\cat{L}_{ewc} : H \dashv J : \cat{L}_e$ is a LNL model.  So we only
+  give proofs of the other two categories.
+  
+  TODO: Jiaming
+\end{proof}
 
 Prove the Eilenberg-Moore category is symmetric monoidal.
 
@@ -67,3 +156,8 @@ Prove the Klesli category has contractions.
 Prove the Klesli category has weakening.
 
 % subsection example_structural_adjoint_models (end)
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: main.tex
+%%% End: 
