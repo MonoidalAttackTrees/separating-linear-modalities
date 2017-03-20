@@ -4,23 +4,23 @@ Now we turn to making our model precise.
   Suppose $\cat{L}_0, \ldots, \cat{L}_n$ is a family of Lambek
   categories with zero or more structural morphisms where $\cat{L}_i$
   is a full subcategory of $\cat{L}_{i+1}$.  Then a \textbf{structural
-    adjoint model}, $(\cat{L}_n,F_n, G_n)$, is a composition of monoidal adjunctions:
-  $\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1} : F_{n-1} \dashv G_{n-1} : \cat{L}_{n-2} : \cdots : \cat{L}_1 : F \dashv G : \cat{L}_0$.
+    adjoint model}, \\ $\overrightarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$, is a composition of monoidal adjunctions:
+  \[ \cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1} : F_{n-1} \dashv G_{n-1} : \cat{L}_{n-2} : \cdots : \cat{L}_1 : F \dashv G : \cat{L}_0. \]
 \end{definition}
 This definition is an extension -- or perhaps a simplification due to
 the isolation of exchange -- of the models discussed by
 Melli\'es~\cite{MELLIES2004202}.
 
 Our structural adjoint model subsumes Benton's~\cite{Benton:1994}
-linear/non-linear model (LNL).  Simply take $\cat{L}_0$ to be a Lambek
-category with exchange and $\cat{L}_1$ to be a Lambek category with
-weakening, contraction, and exchange, and thus, $\cat{L}_1$ is
-cartesian closed.  However, our model is a lot more flexible and
-expressive.
+linear/non-linear model (LNL).  Simply take the sequence of Lambek
+categories to be $\cat{L}_0$, a Lambek category with exchange, and
+$\cat{L}_1$, a Lambek category with weakening, contraction, and
+exchange, and thus, $\cat{L}_1$ is cartesian closed.  However, our
+model is a lot more flexible and expressive.
 
 \begin{lemma}[Comonads in a Structural Adjoint Model]
   \label{lemma:comonads_in_a_structural_adjoint_model}
-  Suppose $(\cat{L}_n,F_n, G_n)$ is a structural adjoint model.  Then
+  Suppose $\overrightarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$ is a structural adjoint model.  Then
   there are the following comonads:  
   \begin{itemize}
   \item $(\cat{L}_0, F_0G_0, \varepsilon^0, \delta^0), \ldots, (\cat{L}_{n-1}, F_nG_n, \varepsilon^{n}, \delta^{n})$
@@ -28,7 +28,42 @@ expressive.
   \item $(\cat{L}_0, F_0F_1F_2G_2G_1G_0, \varepsilon^0, \delta^0), \ldots, (\cat{L}_{n-1}, F_{n-2}F_{n-1}F_nG_nG_{n-1}G_{n-2}, \varepsilon^{n}, \delta^{n})$\\
     $\vdots$
   \item $(\cat{L}_0, F_0 \cdots F_nG_n \cdots G_0, \varepsilon^0, \delta^0)$
-  \end{itemize}
- 
+  \end{itemize} 
+\end{lemma}
+\begin{proof}
+  This proof easily follows from the well-known fact that adjoints
+  induce comonads -- as well as monads -- and composition of adjoints.
+\end{proof}
+The previous lemma shows that a Lambek category $\cat{L}_i$ in the
+sequence is endowed with all of the structure found in each of the
+categories above it, but this structure is explicitly tracked using
+the various comonads.  That is, the Eilenberg-Moore category of each of the
+comonads mentioned in the previous lemma has the corresponding
+structural rule as morphisms.
+
+\begin{lemma}
+  \label{lemma:kleisli_category_gen}
+  Suppose $\cat{L}_i : F_i \dashv G_i : \cat{L}_{i-1}$ is a monoidal
+  adjunction in the structural adjoint model
+  $\overrightarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$.  Then
+  the Eilenberg-Moore category, $\cat{L}^E_{i-1}$, contains all of the
+  structural morphisms from both $\cat{L}_{i-1}$ and $\cat{L}_{i}$.
 \end{lemma}
 
+
+\subsection{Example Structural Adjoint Models}
+\label{subsec:example_structural_adjoint_models}
+
+\textbf{Exchange.}
+
+Prove the Eilenberg-Moore category is symmetric monoidal.
+
+\textbf{Contraction.}
+
+Prove the Klesli category has contractions.
+
+\textbf{Contraction and Exchange.}
+
+Prove the Klesli category has weakening.
+
+% subsection example_structural_adjoint_models (end)
