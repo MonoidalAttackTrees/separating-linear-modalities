@@ -61,19 +61,19 @@ structural rule as morphisms.
 We can give a number of example adjoint structures that are of
 interest to the research community.
 
-\textbf{Exchange.}  The first is a model that reveals how to combine
-the Lambek Calculus with the exchange comonad and Girard's of-course
-comonad.  This model is of interest to the linguistics community
-\cite{?}, because they often only want exchange in very controlled
-instances.  Valeria de Paiva~\cite{?} was the first to show that this
-is possible using Dialectica Categories and Reedy's~\cite{?}  model.
-However, she uses a comonad with the natural transformation $\e{A,B} :
-A \seq eB \mto eB \seq A$, but we feel this goes against the standard
-view of algebraic binary operations.  In addition, while Dialectica
-categories are extremely useful, but rather complex, we are interested
-in simpler models.  Thus, we prefer an adjoint model with a comonad
-which has the natural transformation $\e{A,B} : eA \seq eB \mto eB
-\seq eA$.
+\textbf{Lambek Calculus with Exchange.}  The first is a model that
+reveals how to combine the Lambek Calculus with the exchange comonad
+and Girard's of-course comonad.  This model is of interest to the
+linguistics community \cite{?}, because they often only want exchange
+in very controlled instances.  Valeria de Paiva~\cite{?} was the first
+to show that this is possible using Dialectica Categories and
+Reedy's~\cite{?}  model.  However, she uses a comonad with the natural
+transformation $\e{A,B} : A \seq eB \mto eB \seq A$, but we feel this
+goes against the standard view of algebraic binary operations.  In
+addition, while Dialectica categories are extremely useful, but rather
+complex, we are interested in simpler models.  Thus, we prefer an
+adjoint model with a comonad which has the natural transformation
+$\e{A,B} : eA \seq eB \mto eB \seq eA$.
 
 As we have said in the introduction there are many security
 applications where one must have both a commutative and a
@@ -144,16 +144,34 @@ the Eilenberg-Moore categories contain the required structure.
   
   TODO: Jiaming
 \end{proof}
+\noindent
+The previous result shows that $\cat{L}$ has the following structural morphisms:
+\[
+\begin{array}{lllllll}
+  \e{A,B} : eA \seq eB \mto eB \seq eA & \quad & 
+  \w{A} : !A \mto I & \quad &
+  \c{A} : !A \seq !A \mto !A\\
+\end{array}
+\]
+In addition, the category $\cat{L}_e$ has the following structural morphisms:
+\[
+\begin{array}{llllll}
+  \e{A,B} : A \otimes B \mto B \otimes A & \quad &
+  \w{A} : !_eA \mto I & \quad &
+  \c{A} : !_eA \otimes !_eA \mto !_eA\\
+\end{array}
+\]
+However, notice that exchange is a first class citizen, and hence, is not tracked by a comonad.
 
-Prove the Eilenberg-Moore category is symmetric monoidal.
-
-\textbf{Contraction.}
+\textbf{Affine Logic.} 
 
 Prove the Klesli category has contractions.
 
-\textbf{Contraction and Exchange.}
+\textbf{Strict Logic.}
 
 Prove the Klesli category has weakening.
+
+\textbf{Combing Logics.} 
 
 % subsection example_structural_adjoint_models (end)
 
