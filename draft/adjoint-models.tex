@@ -3,8 +3,8 @@ Now we turn to making our model precise.
   \label{def:model}  
   Suppose $\cat{L}_0, \ldots, \cat{L}_n$ is a family of Lambek
   categories with zero or more structural morphisms where $\cat{L}_0$
-  is a full subcategory of each $\cat{L}_{i}$.  Then a \textbf{structural
-    adjoint model}, \\ $\overrightarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$, is a composition of monoidal adjunctions:
+  is a full subcategory of each $\cat{L}_{i}$ for $0 < i \leq n$.  Then a \textbf{structural
+    adjoint model}, $\overleftarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$, is a composition of monoidal adjunctions:
   \[ \cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1} : F_{n-1} \dashv G_{n-1} : \cat{L}_{n-2} : \cdots : \cat{L}_1 : F \dashv G : \cat{L}_0. \]
 \end{definition}
 This definition is an extension -- or perhaps a simplification due to
@@ -20,7 +20,7 @@ model is a lot more flexible and expressive.
 
 \begin{lemma}[Comonads in a Structural Adjoint Model]
   \label{lemma:comonads_in_a_structural_adjoint_model}
-  Suppose $\overrightarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$ is a structural adjoint model.  Then
+  Suppose $\overleftarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$ is a structural adjoint model.  Then
   there are the following comonads:  
   \begin{itemize}
   \item $(\cat{L}_0, F_0G_0, \varepsilon^0, \delta^0), \ldots, (\cat{L}_{n-1}, F_nG_n, \varepsilon^{n}, \delta^{n})$
@@ -43,7 +43,7 @@ structural rule as morphisms.
 
 \begin{lemma}
   \label{lemma:kleisli_category_gen}
-  Suppose $\overrightarrow{\cat{L}_n : F_n \dashv G_n :
+  Suppose $\overleftarrow{\cat{L}_n : F_n \dashv G_n :
     \cat{L}_{n-1}}$ is a structural adjoint model containing
   the adjunction
   $\cat{L}_j : F_{j-1} \dashv G_{j-1} : \cat{L}_{j-1} : \cdots : \cat{L}_{i+1} : F_i \dashv G_i : \cat{L}_i$
