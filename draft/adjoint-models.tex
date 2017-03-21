@@ -2,8 +2,8 @@ Now we turn to making our model precise.
 \begin{definition}
   \label{def:model}  
   Suppose $\cat{L}_0, \ldots, \cat{L}_n$ is a family of Lambek
-  categories with zero or more structural morphisms where $\cat{L}_i$
-  is a full subcategory of $\cat{L}_{i+1}$.  Then a \textbf{structural
+  categories with zero or more structural morphisms where $\cat{L}_0$
+  is a full subcategory of each $\cat{L}_{i}$.  Then a \textbf{structural
     adjoint model}, \\ $\overrightarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$, is a composition of monoidal adjunctions:
   \[ \cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1} : F_{n-1} \dashv G_{n-1} : \cat{L}_{n-2} : \cdots : \cat{L}_1 : F \dashv G : \cat{L}_0. \]
 \end{definition}
@@ -55,10 +55,23 @@ structural rule as morphisms.
   cartesian closed.  So we omit the details.
 \end{proof}
 
+Multiple structural adjoint models can have the same Eilenberg-Moore
+category associated with the comonad induced by the model.  For
+example, the comonad associated with $\cat{L}_e : F \dashv G :
+\cat{L}_{c}$ is the exchange comonad given below, and hence, its
+Eilenberg-Moore category contains both contraction and exchange, which
+is a model of strict logic. However, $\cat{L}_c : F \dashv G :
+\cat{L}_{e}$ induces the contraction comonad, but its Eilenberg-Moore
+category is the same.  The difference between these two models is
+whats being explicitly tracked.  In the first model contraction is a
+first-class citizen, but exchange is being tracked by the comonad,
+while in the second example exchange is a first-class citizen and
+contraction is being explicitly tracked by the comonad.
+
 \subsection{Example Structural Adjoint Models}
 \label{subsec:example_structural_adjoint_models}
 
-We can give a number of example adjoint structures that are of
+We give a number of example adjoint structures that are of
 interest to the research community.
 
 \textbf{Lambek Calculus with Exchange.}  The first is a model that
@@ -202,9 +215,13 @@ transformation $\c{A} : cA \otimes cA \mto cA$.  Finally, the
 Eilenberg-Moore category $\cat{L}^E_c$ models intuitionistic strict
 logic.
 
-\textbf{Combining Logics.} 
-
 % subsection example_structural_adjoint_models (end)
+
+\subsection{Combining Models}
+\label{subsec:combining_models}
+
+
+% subsection combining_models (end)
 
 %%% Local Variables: 
 %%% mode: latex
