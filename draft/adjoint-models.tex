@@ -43,11 +43,15 @@ structural rule as morphisms.
 
 \begin{lemma}
   \label{lemma:kleisli_category_gen}
-  Suppose $\cat{L}_l : F \dashv G : \cat{L}_{r}$ is a monoidal
-  adjunction in the structural adjoint model
-  $\overrightarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$.  Then
-  the Eilenberg-Moore category, $\cat{L}^E_{r}$, contains all of the
-  structural morphisms from both $\cat{L}_{r}$ and $\cat{L}_{l}$.
+  Suppose $\overrightarrow{\cat{L}_n : F_n \dashv G_n :
+    \cat{L}_{n-1}}$ is a structural adjoint model containing
+  the adjunction
+  $\cat{L}_j : F_{j-1} \dashv G_{j-1} : \cat{L}_{j-1} : \cdots : \cat{L}_{i+1} : F_i \dashv G_i : \cat{L}_i$
+  for $0 \leq i < n$ and $0 < j \leq n$.  If
+  $(\cat{L}_i, M, \varepsilon, \delta)$ is the comonad
+  defined by $M A = F_i\cdots F_{j-1}G_{j-1} \cdots G_iA $, then
+  the Eilenberg-Moore category, $\cat{L}^E_M$, contains every structural morphism
+  in the categories $\cat{L}_i,\ldots,\cat{L}_j$.
 \end{lemma}
 \begin{proof}
   This result holds similarly to Benton's~\cite{Benton:1994} proof
