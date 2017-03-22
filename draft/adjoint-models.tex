@@ -5,7 +5,7 @@ Now we turn to making our model precise.
   categories with zero or more structural morphisms where $\cat{L}_0$
   is a full subcategory of each $\cat{L}_{i}$ for $0 < i \leq n$.  Then a \textbf{composition of structure},
   $\overleftarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$, is a composition of monoidal adjunctions:
-  \[ \cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1} : F_{n-1} \dashv G_{n-1} : \cat{L}_{n-2} : \cdots : \cat{L}_1 : F \dashv G : \cat{L}_0. \]
+  \[ \cat{L}_n : F_{n-1} \dashv G_{n-1} : \cat{L}_{n-1} : F_{n-2} \dashv G_{n-2} : \cat{L}_{n-2} : \cdots : \cat{L}_1 : F_0 \dashv G_0 : \cat{L}_0. \]
   We call $\cat{L}_0$ the base of the composition.
 \end{definition}
 This definition is an extension -- or perhaps a simplification due to
@@ -24,11 +24,11 @@ model is a lot more flexible and expressive.
   Suppose $\overleftarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}$ is a composition of structure.  Then
   there are the following comonads:  
   \begin{itemize}
-  \item $(\cat{L}_0, F_0G_0, \varepsilon^0, \delta^0), \ldots, (\cat{L}_{n-1}, F_nG_n, \varepsilon^{n}, \delta^{n})$
-  \item $(\cat{L}_0, F_0F_1G_1G_0, \varepsilon^0, \delta^0), \ldots, (\cat{L}_{n-1}, F_{n-1}F_nG_nG_{n-1}, \varepsilon^{n}, \delta^{n})$
-  \item $(\cat{L}_0, F_0F_1F_2G_2G_1G_0, \varepsilon^0, \delta^0), \ldots, (\cat{L}_{n-1}, F_{n-2}F_{n-1}F_nG_nG_{n-1}G_{n-2}, \varepsilon^{n}, \delta^{n})$\\
+  \item $(\cat{L}_0, F_0G_0, \varepsilon_0, \delta_0), \ldots, (\cat{L}_{n-1}, F_nG_n, \varepsilon_{n-1}, \delta_{n-1})$
+  \item $(\cat{L}_0, F_0F_1G_1G_0, \varepsilon_0, \delta_0), \ldots, (\cat{L}_{n-1}, F_{n-1}F_nG_nG_{n-1}, \varepsilon_{n-1}, \delta_{n-1})$
+  \item $(\cat{L}_0, F_0F_1F_2G_2G_1G_0, \varepsilon_0, \delta_0), \ldots, (\cat{L}_{n-1}, F_{n-2}F_{n-1}F_nG_nG_{n-1}G_{n-2}, \varepsilon_{n-1}, \delta_{n-1})$\\
     $\vdots$
-  \item $(\cat{L}_0, F_0 \cdots F_nG_n \cdots G_0, \varepsilon^0, \delta^0)$
+  \item $(\cat{L}_0, F_0 \cdots F_nG_n \cdots G_0, \varepsilon_0, \delta_0)$
   \end{itemize} 
 \end{lemma}
 \begin{proof}
@@ -216,7 +216,7 @@ logic -- sometimes referred to as contraction logic -- as well.
 Just as above this model comes with a comonad $(c : \cat{L}_e \mto
 \cat{L}_e, \varepsilon^c, \delta^c)$ defined in the same way as $!_eA$
 and $wA$ from above.  This then equips $\cat{L}_e$ with the natural
-transformation $\c{A} : cab \otimes cA \mto cA$.  Finally, the
+transformation $\c{A} : cA \otimes cA \mto cA$.  Finally, the
 Eilenberg-Moore category $\cat{L}^E_c$ models intuitionistic strict
 logic.
 
