@@ -181,9 +181,34 @@ In addition, the category $\cat{L}_e$ has the following structural morphisms:
 \]
 However, notice that exchange is a first class citizen, and hence, is not tracked by a comonad.
 
+There are a number of additional models with similar features to the
+LC adjoint model.  Suppose $r_1,r_2 \in \{w,c\}$.  Then the set of
+additional models of the Lambek calculus with exchange and the
+of-course modality can be modeled by the compositions of structure
+defined as follows:
+\[
+\begin{array}{lll}
+  \cat{L}_{r_2} : K \dashv M : \cat{L}_{r_1} : H \dashv J : \cat{L}_{e} : F \dashv G : \cat{L}\\
+\end{array}
+\]
+Here we have decomposed $\cat{L}_{ewc}$ into an adjunction
+$\cat{L}_{r_2} : K \dashv M : \cat{L}_{r_1}$ where the Eilenberg-Moore
+category of the comonad induced by this adjunction is
+$\cat{L}_{r_1r_2}$, and thus, when this adjunction is composed with
+the adjunction $\cat{L}_{r_1} : H \dashv J : \cat{L}_{e} : F \dashv G
+: \cat{L}$ it yields a comonad whose Eilenberg-Moore category
+$\cat{L}_{er_1r_2}$ is isomorphic to $\cat{L}_{ewc}$.
+
+However, each of these models are in fact different. They each track
+different structural rules in different ways. The LC adjoint model
+induces only two comonads, but the models just introduced induces six
+different comonads.  Thus, depending what one wants to track and in
+which category determines which model is best.
+
+
 \textbf{Affine Logic.} Affine logic has applications in verification
 of security protocols \cite{Bugliesi:2015:ART:2807424.2743018}.
-composition of structure provide a means to combine intuitionistic
+Compositions of structure provide a means to combine intuitionistic
 linear logic with affine logic.
 \begin{definition}
   \label{def:LC-adjoint-structure}
@@ -243,17 +268,25 @@ of compositions of structure:
   \cat{L}_{ec} : F_2 \dashv G_2 : \cat{L}\\
 \end{array}
 \]
-The first composition of structure endows $\cat{L}$ with two
-comonads that track exchange and affine logic -- by composing the
-exchange comonad with the weakening comonad -- respectively.  The
-second adjunction adds in the comonad that tracks strict logic,
-because $\cat{L}_{ec}$ contains both exchange and contraction.
+The first composition of structure endows $\cat{L}$ with two comonads
+that track exchange and affine logic -- by composing the exchange
+comonad with the weakening comonad -- respectively.  The second
+adjunction adds in the comonad that tracks strict logic, because
+$\cat{L}_{ec}$ contains both exchange and contraction.  Again, there
+are a few other sets of compositions of structure that will also allow
+one to model this situation, which is best depends on ones needs.  The
+key point is that by combining multiple compositions of structure on
+the same base we increase the diversity of the kinds of resources that
+can be tracked.
 
+We have now arrived at a new model of resource-conscious logics based
+on compositions of structure.
 \begin{definition}
   \label{def:resource-adjoint-model}
-  Suppose $\cat{L}_0$ is a Lambek category which we will call the base
-  of the model.  Then \textbf{resource adjoint model} is a set of
-  composition of structures whose bases are all $\cat{L}_0$.
+  Suppose $\cat{L}_0$ is a Lambek category called the base of the
+  model.  Then a \textbf{resource adjoint model},
+  $\{\overleftarrow{\cat{L}_n : F_n \dashv G_n : \cat{L}_{n-1}}\}$,
+  is a set of compositions of structure whose bases are all $\cat{L}_0$.
 \end{definition}
 
 
