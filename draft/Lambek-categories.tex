@@ -12,8 +12,8 @@ Lambek categories are based on (non-symmetric) monoidal categories.
   $\seq : \cat{L} \times \cat{L} \mto \cat{L}$, called the tensor
   product, a distinguished object $I$ of $\cat{L}$ called the unit,
   and three natural isomorphisms $\lambda_A : I \seq A \mto A$,
-  $\rho_A : A \seq I \mto A$, and $\alpha_{A,B,C} : A \seq (B
-  \seq C) \mto (A \seq B) \seq C$ called the left and right
+  $\rho_A : A \seq I \mto A$, and $\alpha_{A,B,C} : (A \seq B)
+  \seq C \mto A \seq (B \seq C)$ called the left and right
   unitors and the associator respectively.  Finally, these are subject
   to the following coherence diagrams:
   \begin{mathpar}
@@ -67,7 +67,7 @@ A Lambek category adds closure to monoidal categories.
 An alternative name for Lambek categories is biclosed monoidal
 categories.
 
-If we add add a symmetry to a Lambek category then we will obtain a
+If we add a symmetry to a Lambek category then we will obtain a
 symmetric monoidal closed category.  The following two definitions and
 lemma capture this result.
 \begin{definition}
@@ -112,7 +112,7 @@ lemma capture this result.
   $- \otimes -$.
 \end{definition}
 We call a symmetric Lambek category a Lambek category with exchange,
-because the symmetric models the exchange rule.
+because the symmetry models the exchange rule.
 \begin{definition}
   \label{def:sym-monoidal-closed}
   A symmetric monoidal category $(\cat{L}, \otimes, I, \lambda, \rho,
