@@ -2,15 +2,17 @@ PDFLATEX = pdflatex
 BIBTEX = bibtex
 OTT = ott
 OTT_FLAGS := -tex_wrap false -tex_show_meta true -picky_multiple_parses false
-SKIM = skim_revert.sh
+SKIM := skim_revert.sh
+SKIMRevinPath := $(shell command -v $(SKIM) 2> /dev/null)
+PDF := main.pdf
 
 all: pdf
   # This is for my private machine.  It forces my PDF reader to reload.
-  # It should not run unless "skim_revert.sh" is in your PATH.
-  ifeq ($(SKIM), skim_revert.sh)
-	$(SKIM) $(CURDIR)/main.pdf
-	$(SKIM) $(CURDIR)/main.pdf
-	$(SKIM) $(CURDIR)/main.pdf
+  # It should not run unless "skim_revert.sh" is in your PATH
+  ifdef SKIMRevinPath
+	@$(SKIM) $(PDF) &>/dev/null
+	@$(SKIM) $(PDF) &>/dev/null
+	@$(SKIM) $(PDF) &>/dev/null
   endif
 
 pdf : main.pdf
@@ -19,11 +21,11 @@ quick : main.tex ref.bib Makefile
 	$(PDFLATEX) -jobname=main main.tex
         # This is for my private machine.  It forces my PDF reader to reload.
         # It should not run unless "skim_revert.sh" is in your PATH.
-ifeq ($(SKIM), skim_revert.sh)
-	$(SKIM) $(CURDIR)/main.pdf
-	$(SKIM) $(CURDIR)/main.pdf
-	$(SKIM) $(CURDIR)/main.pdf
-endif
+	ifdef SKIMRevinPath
+		@$(SKIM) $(PDF) &>/dev/null
+		@$(SKIM) $(PDF) &>/dev/null
+		@$(SKIM) $(PDF) &>/dev/null
+	endif
 
 lambek-exchange-ott.tex : lambek-exchange.tex
 	@$(OTT) $(OTT_FLAGS) -i Elle/Elle.ott -o Elle-inc.tex -tex_name_prefix Elle \
