@@ -27,13 +27,17 @@ quick : main.tex ref.bib Makefile
 		@$(SKIM) $(PDF) &>/dev/null
 	endif
 
+lambek-itself-ott.tex : lambek-itself.tex
+	@$(OTT) $(OTT_FLAGS) -i Elle/Elle.ott -o Elle-inc.tex -tex_name_prefix Elle \
+		-tex_filter lambek-itself.tex lambek-itself-ott.tex
+
 lambek-exchange-ott.tex : lambek-exchange.tex
 	@$(OTT) $(OTT_FLAGS) -i Elle/Elle.ott -o Elle-inc.tex -tex_name_prefix Elle \
 		-tex_filter lambek-exchange.tex lambek-exchange-ott.tex
 
 # Now this takes the full LaTex translation and compiles it using
 # pdflatex.
-main.pdf : main.tex ref.bib Makefile appendix.tex Lambek-categories.tex categorical-models.tex adjoint-models.tex categorical-models.tex resource-adjoint-logics.tex applications.tex lambek-exchange-ott.tex
+main.pdf : main.tex ref.bib Makefile appendix.tex Lambek-categories.tex categorical-models.tex adjoint-models.tex categorical-models.tex resource-adjoint-logics.tex applications.tex lambek-exchange-ott.tex lambek-itself-ott.tex
 	$(PDFLATEX) -jobname=main main.tex
 	$(BIBTEX) main
 	$(PDFLATEX) -jobname=main main.tex
