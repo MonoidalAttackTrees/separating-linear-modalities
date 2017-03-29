@@ -1,0 +1,25 @@
+The logic we present here will be the basis of all of the logics
+discussed in this section, and can also be seen as detailing the basic
+setup of an adjoint logic.  This logic will consist of a single
+syntactic adjunction where both sides of the adjunction are identical.
+Thus, the induced comonad by the adjunction will not add anything new.
+
+The syntax is defined in Figure~\ref{fig:LC-with-LC:syntax}.
+\begin{figure}
+  \begin{mdframed}
+    \[
+    \begin{array}{lll}
+      \text{(Source Formulas)} & [[A]],[[B]],[[C]] ::= [[Unit]] \mid [[A (x) B]] \mid [[A -> B]] \mid [[B <- A]]\\
+      \text{(Target Formulas)} & [[X]],[[Y]],[[Z]] ::= [[Unit]] \mid [[X (x) Y]] \mid [[X -> Y]] \mid [[Y <- X]]\\
+      \text{(Source and Target)} & [[T]] := [[A]] \mid [[X]]\\
+      \text{(Source Contexts)} & [[G]],[[D]] ::= [[.]] \mid [[x : A]] \mid [[G,D]]\\
+      \text{(Target Contexts)} & [[I]],[[P]] ::= [[.]] \mid [[x : X]] \mid [[I,P]]\\      
+      \text{(Source Terms)}    & [[s]] ::= \\
+      \text{(Target Terms)}    & [[t]] ::= \\
+      \text{(Patterns)}        & [[p]] ::= [[-]] \mid [[x]] \mid [[triv]] \mid [[p (x) p']] \mid [[F p]] \mid [[Gf p]]\\
+    \end{array}
+    \]
+  \end{mdframed}
+  \caption{Syntax for the Lambek Calculus with Itself}
+  \label{fig:LC-with-LC:syntax}
+\end{figure}
