@@ -172,7 +172,7 @@ the Eilenberg-Moore categories contain the required structure.
         \btriangle/->`=`->/[A`eA`A;h_A``\varepsilon_A]
         \efig
       \end{mathpar}
-      We first prove $\cal{L}^E_e$ is monoidal. The tensor product of $(A, h_A)$ and
+      We first prove $\cat{L}^E_e$ is monoidal. The tensor product of $(A, h_A)$ and
       $(B, h_B)$ is \\
       $(A\otimes B, \q{A,B}\circ(h_A\otimes h_B)): A\otimes B\mto e(A\otimes B)$ and the
       unit of the tensor product is $(I, \q{I}:I\mto eI)$. Obviously, they both satisfy the
@@ -257,11 +257,50 @@ the Eilenberg-Moore categories contain the required structure.
       Similarly, the coherence diagrams for symmetry commute. This concludes the proof that
       $\cat{L}^E_e$ is symmetric monoidal.
     \item \textbf{$\cat{L}^E_!$ is cartesian closed}: Similar with the proof that
-      $\cat{L}^E_e$ is symmetric monoidal, $\cat{L}^E_!$ is also symmetric monoidal, with the
-      unit being $(I,\q{I}:I\mto!I)$, the right unitor being $\hat\lambda:I\otimes A\mto A$,
-      the right unitor being $\hat\rho:A\otimes I\mto A$, and the associator being
+      $\cat{L}^E_e$ is symmetric monoidal, $\cat{L}^E_!$ is also symmetric monoidal, with
+      tensor product
+      $(A\otimes B, \q{A,B}\circ(h_A\otimes h_A:A\otimes B\mto ewc(A\otimes B))$, the unit
+      $(I,\q{I}:I\mto!I)$, the right unitor $\hat\lambda:I\otimes A\mto A$, the right unitor
+      $\hat\rho:A\otimes I\mto A$, and the associator
       $\hat\alpha:(A\otimes B)\otimes C\mto A\otimes(B\otimes C)$. \\
-      (NOT FINISHED)
+      We know there is a pair of adjoint functors $K\dashv L$ between $\cat{L}^E_{ewc}$ and
+      $\cat{L}_{ewc}$, where $L:\cat{L}_{ewc}\mto\cat{L}^E_{ewc}$ sends every object $A$ to
+      $(ewc A,\delta^{ewc}_A)$ and $K:\cat{L}^E_{ewc}\mto\cat{L}_{ewc}$ sends every object
+      $(A,h_A)$ to $A$. Thus,
+      \begin{center}
+      \begin{math}
+      \small
+      \begin{array}{lllll}
+        Hom_{\cat{L}^E_{ewc}}[(A\otimes B,h_{A\otimes B}), (ewc C,\delta^{ewc}_C)]
+        & \cong & Hom_{\cat{L}_{ewc}}[A\otimes B,C] & \text{By the adjunction }K\dashv L\\
+        & \cong & Hom_{\cat{L}_{ewc}}[A,B\lto C] & \cat{L}\text{ is a Lambek category}\\
+        & \cong & Hom_{\cat{L}^E_{ewc}}[(A,h_A),(ewc(B\lto C),\delta^{ewc}_{B\lto C})]    & \text{By the adjunction }K\dashv L
+      \end{array}
+      \end{math}
+      \end{center}
+      and
+      \begin{center}
+      \begin{math}
+      \small
+      \begin{array}{lllll}
+        Hom_{\cat{L}^E_{ewc}}[(A\otimes B,h_{A\otimes B}), (ewc C,\delta^{ewc}_C)]
+        & \cong & Hom_{\cat{L}^E_{ewc}}[(B\otimes A,h_{B\otimes A}), (ewc C,\delta^{ewc}_C)] & \cat{L}^E_{ewc}\text{ is symmetric monoidal} \\
+        & \cong & Hom_{\cat{L}_{ewc}}[B\otimes A,C] & \text{By the adjunction }K\dashv L\\
+        & \cong & Hom_{\cat{L}_{ewc}}[A,C\rto B] & \cat{L}\text{ is a Lambek category}\\
+        & \cong & Hom_{\cat{L}^E_{ewc}}[(A,h_A),(ewc(C\rto B),\delta^{ewc}_{C\rto B})]    & \text{By the adjunction }K\dashv L
+      \end{array}
+      \end{math}
+      \end{center}
+      Therefore, $Hom_{\cat{L}^E_{ewc}}[(A,h_A),(ewc(B\lto C),\delta^{ewc}_{B\lto C})]\cong Hom_{\cat{L}^E_{ewc}}[(A,h_A),(ewc(C\rto B),\delta^{ewc}_{C\rto B})]$. So $\cat{L}^E_{ewc}$ is
+      closed. \\
+      Finally, $\cat{L}^E_{cwe}$ is cartesian closed with the tensor product cartesian. The
+      projectsion are defined as
+      $\pi_1=\rho_A\circ(id_A\otimes\w{B}^E)\circ(id_A\otimes h_B):A\otimes B\mto A$ and
+      $\pi_2=\lambda_B\circ(\w{A}^E\otimes id_B)\circ(h_A\otimes id_B):A\otimes B\mto B$,
+      where $\w{}^E$ is the natural transformation lifted from the weakening structural
+      morphism in $\cat{L}_{ewc}$. \\
+      There, $\cat{L}^E_{ewc}$ is cartesian closed.
+      
   \end{itemize}
 \end{proof}
 \noindent
