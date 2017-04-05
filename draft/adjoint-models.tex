@@ -174,19 +174,19 @@ the Eilenberg-Moore categories contain the required structure.
       \end{mathpar}
       We first prove $\cat{L}^E_e$ is monoidal. The tensor product of $(A, h_A)$ and
       $(B, h_B)$ is \\
-      $(A\otimes B, \q{A,B}\circ(h_A\otimes h_B)): A\otimes B\mto e(A\otimes B)$ and the
+      $(A\otimes B, h_A\otimes h_B;\q{A,B}): A\otimes B\mto e(A\otimes B)$ and the
       unit of the tensor product is $(I, \q{I}:I\mto eI)$. Obviously, they both satisfy the
       action diagrams above. The left unitor is $\hat\lambda:I\otimes A\mto A$, which is the
       morphism $I\otimes A\mto eA$ in $\cat{L}$ defined as
-      $e\lambda_A\circ\q{I,A}\circ(\q{I}\otimes id_{eA})\circ(id_I\otimes h_A)$, where
-      $\lambda$ is the left unitor in $\cat{L}$. The right unitor is
-      $\hat\rho:A\otimes I\mto A$, which is the morphism $A\otimes I\mto A$ in $\cat{L}$
-      defined as $e\rho_A\circ\q{A,I}\circ(id_{eA}\otimes\q{I})\circ(h_A\otimes id_I)$,
-      where $\rho$ is the right unitor in $\cat{L}$. And the associator is
+      $id_I\otimes h_A;\q{I}\otimes id_{eA};\q{I,A};e\lambda_A$, where $\lambda$ is the
+      left unitor in $\cat{L}$. The right unitor is $\hat\rho:A\otimes I\mto A$, which is
+      the morphism $A\otimes I\mto A$ in $\cat{L}$ defined as
+      $h_A\otimes id_I;id_{eA}\otimes\q{I};\q{A,I};e\rho_A$, where $\rho$ is the right
+      unitor in $\cat{L}$. And the associator is
       $\hat\alpha:(A\otimes B)\otimes C\mto A\otimes (B\otimes C)$, which is the
       morphism $(A\otimes B)\otimes C\mto e(A\otimes(B\otimes C))$ in $\cat{L}$ defined
-      as $e\e{A,B}\circ\q{A,B}\circ(id_{eA}\otimes h_B)\circ(h_A\otimes id_B)$, where
-      $\alpha$ is the associator in $\cat{L}$.
+      as $h_A\otimes id_B;id_{eA}\otimes h_B;\q{A,B};e\e{A,B}$, where $\alpha$ is the
+      associator in $\cat{L}$.
       
       
       The left and
@@ -258,10 +258,9 @@ the Eilenberg-Moore categories contain the required structure.
       $\cat{L}^E_e$ is symmetric monoidal.
     \item \textbf{$\cat{L}^E_!$ is cartesian closed}: Similar with the proof that
       $\cat{L}^E_e$ is symmetric monoidal, $\cat{L}^E_!$ is also symmetric monoidal, with
-      tensor product
-      $(A\otimes B, \q{A,B}\circ(h_A\otimes h_A:A\otimes B\mto ewc(A\otimes B))$, the unit
-      $(I,\q{I}:I\mto!I)$, the right unitor $\hat\lambda:I\otimes A\mto A$, the right unitor
-      $\hat\rho:A\otimes I\mto A$, and the associator
+      tensor product $(A\otimes B,h_A\otimes h_B;\q{A,B}:A\otimes B\mto ewc(A\otimes B))$,
+      the unit $(I,\q{I}:I\mto!I)$, the left unitor $\hat\lambda:I\otimes A\mto A$, the
+      right unitor $\hat\rho:A\otimes I\mto A$, and the associator
       $\hat\alpha:(A\otimes B)\otimes C\mto A\otimes(B\otimes C)$. \\
       We know there is a pair of adjoint functors $K\dashv L$ between $\cat{L}^E_{ewc}$ and
       $\cat{L}_{ewc}$, where $L:\cat{L}_{ewc}\mto\cat{L}^E_{ewc}$ sends every object $A$ to
@@ -293,12 +292,13 @@ the Eilenberg-Moore categories contain the required structure.
       \end{center}
       Therefore, $Hom_{\cat{L}^E_{ewc}}[(A,h_A),(ewc(B\lto C),\delta^{ewc}_{B\lto C})]\cong Hom_{\cat{L}^E_{ewc}}[(A,h_A),(ewc(C\rto B),\delta^{ewc}_{C\rto B})]$. So $\cat{L}^E_{ewc}$ is
       closed. \\
-      Finally, $\cat{L}^E_{cwe}$ is cartesian closed with the tensor product cartesian. The
+      Finally, $\cat{L}^E_{cwe}$ is cartesian with the tensor product being cartesian. The
       projectsion are defined as
-      $\pi_1=\rho_A\circ(id_A\otimes\w{B}^E)\circ(id_A\otimes h_B):A\otimes B\mto A$ and
-      $\pi_2=\lambda_B\circ(\w{A}^E\otimes id_B)\circ(h_A\otimes id_B):A\otimes B\mto B$,
-      where $\w{}^E$ is the natural transformation lifted from the weakening structural
-      morphism in $\cat{L}_{ewc}$. \\
+      $\pi_1=id_A\otimes h_B;id_A\otimes\w{B}^E;\rho_A:A\otimes B\mto A$ and
+      $\pi_2=h_A\otimes id_B;\w{A}^E\otimes id_B;\lambda_B:A\otimes B\mto B$, where
+      $\w{}^E$ is the natural transformation lifted from the weakening structural morphism
+      in $\cat{L}_{ewc}$. And the terminal object is $(I,\q{I}:I\mto !I)$. The unique
+      morphism for any object $(A,h_A)$ to the terminal object is defined as $h_A;\w{A}^E$.\\
       There, $\cat{L}^E_{ewc}$ is cartesian closed.
       
   \end{itemize}
@@ -309,7 +309,7 @@ The previous result shows that $\cat{L}$ has the following structural morphisms:
 \begin{array}{lllllll}
   \e{A,B} : eA \seq eB \mto eB \seq eA & \quad & 
   \w{A} : !A \mto I & \quad &
-  \c{A} : !A \seq !A \mto !A\\
+  \c{A} : !A \mto !A \seq !A\\
 \end{array}
 \]
 In addition, the category $\cat{L}_e$ has the following structural morphisms:
@@ -317,7 +317,7 @@ In addition, the category $\cat{L}_e$ has the following structural morphisms:
 \begin{array}{llllll}
   \e{A,B} : A \otimes B \mto B \otimes A & \quad &
   \w{A} : !_eA \mto I & \quad &
-  \c{A} : !_eA \otimes !_eA \mto !_eA\\
+  \c{A} : !_eA \mto !_eA \otimes !_eA\\
 \end{array}
 \]
 However, notice that exchange is a first class citizen, and hence, is not tracked by a comonad.
