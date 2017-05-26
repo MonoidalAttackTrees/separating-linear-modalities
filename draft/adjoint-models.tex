@@ -154,154 +154,18 @@ the Eilenberg-Moore categories contain the required structure.
   $\cat{L}^E_!$ and $\cat{L}^E_{!_e}$ are cartesian closed.
 \end{corollary}
 \begin{proof}
-  \begin{itemize}
-    \item \textbf{$\cat{L}^E_{!_e}$ is cartesian closed}: The proof that $\cat{L}^E_{!_e}$
-      is cartesian closed follows from Benton~\cite{Benton:1994}, because $\cat{L}_e$ is
-      symmetric monoidal, and $\cat{L}_{ewc}$ is cartesian closed, and hence
-      $\cat{L}_{ewc} : H \dashv J : \cat{L}_e$ is a LNL model.
-    \item \textbf{$\cat{L}^E_e$ is symmetric monoidal}: The Eilenberg-Moore category,
-      $\cat{L}^E_e$, of the comonad $(e,\epsilon^e,\delta^e)$ has as objects all the
-      $e$-coalgebras $(A, h_A:A\mto eA)$, and as morphisms all the coalgebra morphisms
-      such that the following (action) diagrams commute:
-      \begin{mathpar}
-        \bfig
-        \square[A`eA`eA`e^2A;h_A`h_A`eh_A`\delta_A]    
-        \efig
-        \and
-        \bfig
-        \btriangle/->`=`->/[A`eA`A;h_A``\varepsilon_A]
-        \efig
-      \end{mathpar}
-      We first prove $\cat{L}^E_e$ is monoidal. The tensor product of $(A, h_A)$ and
-      $(B, h_B)$ is \\
-      $(A\otimes B, h_A\otimes h_B;\q{A,B}): A\otimes B\mto e(A\otimes B)$ and the
-      unit of the tensor product is $(I, \q{I}:I\mto eI)$. Obviously, they both satisfy the
-      action diagrams above. The left unitor is $\hat\lambda:I\otimes A\mto A$, which is the
-      morphism $I\otimes A\mto eA$ in $\cat{L}$ defined as
-      $id_I\otimes h_A;\q{I}\otimes id_{eA};\q{I,A};e\lambda_A$, where $\lambda$ is the
-      left unitor in $\cat{L}$. The right unitor is $\hat\rho:A\otimes I\mto A$, which is
-      the morphism $A\otimes I\mto A$ in $\cat{L}$ defined as
-      $h_A\otimes id_I;id_{eA}\otimes\q{I};\q{A,I};e\rho_A$, where $\rho$ is the right
-      unitor in $\cat{L}$. And the associator is
-      $\hat\alpha:(A\otimes B)\otimes C\mto A\otimes (B\otimes C)$, which is the
-      morphism $(A\otimes B)\otimes C\mto e(A\otimes(B\otimes C))$ in $\cat{L}$ defined
-      as $h_A\otimes id_B;id_{eA}\otimes h_B;\q{A,B};e\e{A,B}$, where $\alpha$ is the
-      associator in $\cat{L}$.
-      
-      
-      The left and
-      right unitors are $\lambda:I\otimes A\mto A$ and $\rho:A\otimes I\mto A$, and the
-      associator is $\alpha:(A\otimes B)\otimes C\mto A\otimes(B\otimes C)$. These left and
-      right unitors and the associator are coalgebra morphisms because the following
-      diagrams commute:
-      \begin{mathpar}
-        \bfig
-        \morphism<450,0>[I\otimes A`I\otimes eA;id_I\otimes h_A]
-        \morphism(450,0)<550,0>[I\otimes eA`eI\otimes eA;\q{I}\otimes id_{eA}]
-        \morphism(1000,0)<450,0>[eI\otimes eA`e(I\otimes A);\q{I,A}]
-        \morphism<0,-400>[I\otimes A`A;\lambda_A]
-        \morphism(1450,0)<0,-400>[e(I\otimes A)`eA;e\lambda_A]
-        \morphism(450,0)<1000,-400>[I\otimes eA`eA;\lambda_{eA}]
-        \morphism(0,-400)<1450,0>[A`eA;h_A]
-        \efig
-        \and
-        \bfig
-        \morphism<450,0>[A\otimes I`eA\otimes I;h_A\otimes id_I]
-        \morphism(450,0)<550,0>[eA\otimes I`eA\otimes eI;id_{eA}\otimes \q{I}]
-        \morphism(1000,0)<450,0>[eA\otimes eI`e(A\otimes I);\q{A,I}]
-        \morphism<0,-400>[A\otimes I`A;\rho_A]
-        \morphism(1450,0)<0,-400>[e(A\otimes I)`eA;e\rho_A]
-        \morphism(450,0)<1000,-400>[eA\otimes I`eA;\rho_{eA}]
-        \morphism(0,-400)<1450,0>[A`eA;h_A]
-        \efig
-        \and
-        \bfig
-        \square<900,400>[
-          (A\otimes B)\otimes C`
-          (eA\otimes eB)\otimes eC`
-          A\otimes(B\otimes C)`
-          eA\otimes(eB\otimes eC);
-          (h_A\otimes h_B)\otimes h_C`
-          \alpha_{A,B,C}`
-          \alpha_{eA,eB,eC}`
-          h_A\otimes(h_B\otimes h_C)]
-        \morphism(900,400)<900,0>[(eA\otimes eB)\otimes eC`e(A\otimes B)\otimes eC;\q{A,B}\otimes id_{eC}]
-        \morphism(900,0)<900,0>[eA\otimes(eB\otimes eC)`eA\otimes e(B\otimes C);id_{eA}\otimes\q{B,C}]
-        \square(1800,0)/->``->`->/<900,400>[
-          e(A\otimes B)\otimes eC`
-          e((A\otimes B)\otimes C)`
-          eA\otimes e(B\otimes C)`
-          e(A\otimes(B\otimes C));
-          \q{A\otimes B,C}``
-          e\alpha_{A,B,C}`
-          \q{A,B\otimes C}]
-        \efig
-      \end{mathpar}
-      Composition in $\cat{L}^E_e$ is the same as in $\cat{L}_e$, and thus, the monoidal
-      coherence diagrams hold in $\cat{L}^E_e$ as well. Thus, $\cat{L}^E_e$ is monoidal. We
-      now show that it is symmetric. \\
-      The symmetry is $\e{A,B}:A\otimes B\mto B\otimes A$, which is a coalgebra morphism
-      by the following commutative diagram:
-      \begin{mathpar}
-        \bfig
-        \square|allb|<600,400>[
-          A\otimes B`eA\otimes B`B\otimes A`eB\otimes A;
-          h_A\otimes id_B`\e{A,B}`\e{eA,B}`h_B\otimes id_A]
-        \morphism(600,400)<600,0>[eA\otimes B`eA\otimes eB;id_{eA}\otimes h_B]
-        \morphism(600,0)|b|<600,0>[eB\otimes A`eB\otimes eA;id_{eB}\otimes h_A]
-        \square(1200,0)<600,400>[
-          eA\otimes eB`e(A\otimes B)`eB\otimes eA`e(B\otimes A);
-          \q{A,B}`\e{eA,eB}`e\e{A,B}`\q{B,A}]
-        \efig
-      \end{mathpar}
-      Similarly, the coherence diagrams for symmetry commute. This concludes the proof that
-      $\cat{L}^E_e$ is symmetric monoidal.
-    \item \textbf{$\cat{L}^E_!$ is cartesian closed}: Similar with the proof that
-      $\cat{L}^E_e$ is symmetric monoidal, $\cat{L}^E_!$ is also symmetric monoidal, with
-      tensor product $(A\otimes B,h_A\otimes h_B;\q{A,B}:A\otimes B\mto ewc(A\otimes B))$,
-      the unit $(I,\q{I}:I\mto!I)$, the left unitor $\hat\lambda:I\otimes A\mto A$, the
-      right unitor $\hat\rho:A\otimes I\mto A$, and the associator
-      $\hat\alpha:(A\otimes B)\otimes C\mto A\otimes(B\otimes C)$. \\
-      We know there is a pair of adjoint functors $K\dashv L$ between $\cat{L}^E_{ewc}$ and
-      $\cat{L}_{ewc}$, where $L:\cat{L}_{ewc}\mto\cat{L}^E_{ewc}$ sends every object $A$ to
-      $(ewc A,\delta^{ewc}_A)$ and $K:\cat{L}^E_{ewc}\mto\cat{L}_{ewc}$ sends every object
-      $(A,h_A)$ to $A$. Thus,
-      \begin{center}
-      \begin{math}
-      \small
-      \begin{array}{lllll}
-        Hom_{\cat{L}^E_{ewc}}[(A\otimes B,h_{A\otimes B}), (ewc C,\delta^{ewc}_C)]
-        & \cong & Hom_{\cat{L}_{ewc}}[A\otimes B,C] & \text{By the adjunction }K\dashv L\\
-        & \cong & Hom_{\cat{L}_{ewc}}[A,B\lto C] & \cat{L}\text{ is a Lambek category}\\
-        & \cong & Hom_{\cat{L}^E_{ewc}}[(A,h_A),(ewc(B\lto C),\delta^{ewc}_{B\lto C})]    & \text{By the adjunction }K\dashv L
-      \end{array}
-      \end{math}
-      \end{center}
-      and
-      \begin{center}
-      \begin{math}
-      \small
-      \begin{array}{lllll}
-        Hom_{\cat{L}^E_{ewc}}[(A\otimes B,h_{A\otimes B}), (ewc C,\delta^{ewc}_C)]
-        & \cong & Hom_{\cat{L}^E_{ewc}}[(B\otimes A,h_{B\otimes A}), (ewc C,\delta^{ewc}_C)] & \cat{L}^E_{ewc}\text{ is symmetric monoidal} \\
-        & \cong & Hom_{\cat{L}_{ewc}}[B\otimes A,C] & \text{By the adjunction }K\dashv L\\
-        & \cong & Hom_{\cat{L}_{ewc}}[A,C\rto B] & \cat{L}\text{ is a Lambek category}\\
-        & \cong & Hom_{\cat{L}^E_{ewc}}[(A,h_A),(ewc(C\rto B),\delta^{ewc}_{C\rto B})]    & \text{By the adjunction }K\dashv L
-      \end{array}
-      \end{math}
-      \end{center}
-      Therefore, $Hom_{\cat{L}^E_{ewc}}[(A,h_A),(ewc(B\lto C),\delta^{ewc}_{B\lto C})]\cong Hom_{\cat{L}^E_{ewc}}[(A,h_A),(ewc(C\rto B),\delta^{ewc}_{C\rto B})]$. So $\cat{L}^E_{ewc}$ is
-      closed. \\
-      Finally, $\cat{L}^E_{cwe}$ is cartesian with the tensor product being cartesian. The
-      projectsion are defined as
-      $\pi_1=id_A\otimes h_B;id_A\otimes\w{B}^E;\rho_A:A\otimes B\mto A$ and
-      $\pi_2=h_A\otimes id_B;\w{A}^E\otimes id_B;\lambda_B:A\otimes B\mto B$, where
-      $\w{}^E$ is the natural transformation lifted from the weakening structural morphism
-      in $\cat{L}_{ewc}$. And the terminal object is $(I,\q{I}:I\mto !I)$. The unique
-      morphism for any object $(A,h_A)$ to the terminal object is defined as $h_A;\w{A}^E$.\\
-      There, $\cat{L}^E_{ewc}$ is cartesian closed.
-      
-  \end{itemize}
+  The proof that $\cat{L}^E_{!_e}$ is cartesian closed follows from
+  Benton~\cite{Benton:1994}, because $\cat{L}_e$ is symmetric
+  monoidal, and $\cat{L}_{ewc}$ is cartesian closed, and hence
+  $\cat{L}_{ewc} : H \dashv J : \cat{L}_e$ is a LNL model. \\
+  By Lemma~\ref{lemma:comonads_in_a_composition_of_structure}, $\cal{L}^E_{!_e}$ contains
+  the structural morphisms in $\cat{L}_e$ and $\cat{L}_{ewc}$ and $\cat{L}^E_!$ contains
+  the structural morphisms in $\cat{L}$, $\cat{L}_e$, and $\cat{L}_{ewc}$. Since
+  $\cat{L}^E_{!_e}$ is cartesian closed, so does $\cat{L}^E_!$. \\
+  Similarly, $\cat{L}^E_e$ contains the structural morphisms in $\cat{L}$ and
+  $\cat{L}_e$. So $\cat{L}^E_e$ is a Lambek category with with exchange, so it is
+  symmetric monoidal.
+  
 \end{proof}
 \noindent
 The previous result shows that $\cat{L}$ has the following structural morphisms:
@@ -309,7 +173,7 @@ The previous result shows that $\cat{L}$ has the following structural morphisms:
 \begin{array}{lllllll}
   \e{A,B} : eA \seq eB \mto eB \seq eA & \quad & 
   \w{A} : !A \mto I & \quad &
-  \c{A} : !A \mto !A \seq !A\\
+  \c{A} : !A \seq !A \mto !A\\
 \end{array}
 \]
 In addition, the category $\cat{L}_e$ has the following structural morphisms:
@@ -317,7 +181,7 @@ In addition, the category $\cat{L}_e$ has the following structural morphisms:
 \begin{array}{llllll}
   \e{A,B} : A \otimes B \mto B \otimes A & \quad &
   \w{A} : !_eA \mto I & \quad &
-  \c{A} : !_eA \mto !_eA \otimes !_eA\\
+  \c{A} : !_eA \otimes !_eA \mto !_eA\\
 \end{array}
 \]
 However, notice that exchange is a first class citizen, and hence, is not tracked by a comonad.
@@ -429,8 +293,6 @@ on compositions of structure.
   $\{\overleftarrow{\cat{L}_n : F_{n-1} \dashv G_{n-1} : \cat{L}_{n-1}}\}$,
   is a set of compositions of structure whose bases are all $\cat{L}_0$.
 \end{definition}
-
-
 This model not only subsumes previous models like LNL models -- and
 hence Linear Categories -- but also suggests new and interesting
 combinations of existing logics that have not been considered before.
